@@ -11,6 +11,7 @@ export default function LoginPage() {
                 <Image height={45} width={45}  src="https://app.3mtt.training/static/media/main.242b8b1ce339b38fd589.png" />
             </Link>
                <h1 className=' font-bold text-darkGreen '>Welcome to your Dashboard</h1>
+               <h1 className=' text-lightRed '>Pls Click on the logo to go to Dashboard</h1>
                 <div className="mt-5 space-y-2">
                     <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl text-lime">Log in to your account</h3>
                     <p className="">Don't have an account? <a href="javascript:void(0)" className="font-medium text-indigo-600 hover:text-indigo-500">Sign up</a></p>
