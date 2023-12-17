@@ -1,8 +1,8 @@
 "use client"
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
 
-// NavLink component
 const NavLink = ({ ...props }) => {
     const {
         children,
@@ -28,17 +28,16 @@ const NavLink = ({ ...props }) => {
 };
 
 // Title component
-const Title = ({ children }) => (
+const Title = ({ children }: { children: React.ReactNode }) => (
     <h3 className='pb-3 px-4 font-medium text-gray-800 md:px-8'>
         {children}
     </h3>
 );
 
-// Sections List
-const SectionsList = ({ items }) => (
+const SectionsList = ({ items }: { items: any }) => (
     <div className='text-gray-600 px-4 md:px-8'>
         <ul>
-            {items?.map((item, idx) => (
+            {items?.map((item: any, idx: number) => (
                 <li key={idx}>
                     <NavLink
                         href={item?.href}
@@ -89,7 +88,12 @@ const Sidebar = () => {
                 <div className="sticky top-0 space-y-8 bg-white">
                     <div className='h-20 flex items-center px-4 border-b md:px-8'>
                         <a href='javascript:void(0)' className='flex-none'>
-                            <img src="https://floatui.com/logo.svg" width={140} className="mx-auto" />
+                            <Image 
+                              src="https://floatui.com/logo.svg" 
+                              width={140} className="mx-auto" 
+                              alt="..."
+                              height={140}
+                            />
                         </a>
                     </div>
                     <div className='px-4 md:px-8'>

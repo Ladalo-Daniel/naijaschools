@@ -1,12 +1,12 @@
 "use client"
+
 import TopNavBar from './TopNavBar'
 import LeftSidebar from './LeftSidebar'
-import RightSideBar from './RightSideBar'
 import Footer from './Footer'
 import { usePathname } from 'next/navigation'
-// import { useEffect, useState } from 'react';
+import { Providers } from './Providers'
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ children }: { children: React.ReactNode}) {
   const path = usePathname()
 
   return (
@@ -23,9 +23,6 @@ export default function MainLayout({ children }) {
              </div>
            <Footer />
          </div>
-         {/* <div className='w-0 md:w-[10%]'>
-          <RightSideBar />
-         </div> */}
       </div>
     </>
   )

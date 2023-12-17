@@ -1,6 +1,5 @@
-import CommunityCards from '@/components/CommunityUI/CommunityCards'
-import MainLayout from '@/components/MainLayout'
-import React from 'react'
+import MainLayout from "@/components/MainLayout";
+import CommunityCards from "@/components/community/CommunityCards";
 
 export default function Community() {
   return (

@@ -1,5 +1,5 @@
-import { Card } from '@nextui-org/react'
-import { HiSquare3Stack3D } from "react-icons/hi2";
+import { StackIcon } from "@radix-ui/react-icons";
+import { Card, CardContent } from "../ui/card";
 
 export default function CoursesCards() {
   return (
@@ -7,18 +7,18 @@ export default function CoursesCards() {
       <Card className=' bg-white rounded-md flex flex-col gap-3 py-4 md:w-1/2 text-slate'>
          <h1 className=' p-4 text-darkSlate font-semibold'>My Training Provider</h1>
          <hr className=' text-gray' />
-         <div className=' flex items-center flex-col gap-3 p-3'>
-            <HiSquare3Stack3D className=' text-green text-9xl hover:opacity-90' />
+         <CardContent className=' flex items-center flex-col gap-3 p-3'>
+            <StackIcon className=' text-green text-9xl hover:opacity-90' />
             <p>You have no training provider assigned yet</p>
-         </div>
+         </CardContent>
       </Card>
       <Card className=' bg-white rounded-md flex flex-col gap-3 py-4 md:w-1/2 text-slate'>
          <h1 className=' p-4 text-darkSlate font-semibold'>My Courses</h1>
          <hr className=' text-gray' />
-         <div className=' flex items-center flex-col gap-3 p-3'>
-            <HiSquare3Stack3D className=' text-green text-9xl hover:opacity-90' />
+         <CardContent className=' flex items-center flex-col gap-3 p-3'>
+            <StackIcon className=' text-green text-9xl hover:opacity-90' />
             <p>You have no courses yet</p>
-         </div>
+         </CardContent>
       </Card>
     </div>
   )

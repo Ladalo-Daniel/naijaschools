@@ -1,5 +1,7 @@
 "use client"
-import { Image, Link } from '@nextui-org/react'
+
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export default function LoginPage() {
@@ -7,14 +9,18 @@ export default function LoginPage() {
     <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4">
         <div className="w-full space-y-6 text-gray-600 sm:max-w-md bg-white ring-1 ring-black p-4 shadow-2xl">
             <div className="text-center">
-            <Link href="/dashboard " className=' flex items-center justify-center mb-4'>
-                <Image height={45} width={45}  src="https://app.3mtt.training/static/media/main.242b8b1ce339b38fd589.png" />
+            <Link href="/dashboard " className='flex items-center justify-center mb-4'>
+                <Image 
+                  height={45} 
+                  width={45}
+                  alt=''  
+                  src="https://app.3mtt.training/static/media/main.242b8b1ce339b38fd589.png" />
             </Link>
                <h1 className=' font-bold text-darkGreen '>Welcome to your Dashboard</h1>
                <h1 className=' text-lightRed '>Pls Click on the logo to go to Dashboard</h1>
                 <div className="mt-5 space-y-2">
                     <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl text-lime">Log in to your account</h3>
-                    <p className="">Don't have an account? <a href="javascript:void(0)" className="font-medium text-indigo-600 hover:text-indigo-500">Sign up</a></p>
+                    <p className="">Don&quot;t have an account? <a href="javascript:void(0)" className="font-medium text-indigo-600 hover:text-indigo-500">Sign up</a></p>
                 </div>
             </div>
             <div className="bg-white shadow p-4 py-6 space-y-8 sm:p-6 sm:rounded-lg">

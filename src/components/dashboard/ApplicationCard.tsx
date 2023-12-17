@@ -1,6 +1,6 @@
-import { Card } from '@nextui-org/react'
-import { HiCheck } from "react-icons/hi2";
+import { Check} from 'lucide-react'
 import React from 'react'
+import { Card } from '../ui/card'
 
 export default function ApplicationCard() {
   return (
@@ -15,11 +15,11 @@ export default function ApplicationCard() {
          <p>Thank you for your cooperation, and enjoy your 3MTT journey.</p>
          <Card className=' flex items-center flex-row justify-between rounded-sm bg-lightSlate2 text-darkSlate p-2 md:p-5'>
             <h2 className=' text-sm md:text-lg font-medium'>Confirm your skill and technical level</h2>
-            <HiCheck className=' text-green text-2xl' />
+            <Check className='text-green text-2xl' />
          </Card>
          <Card className=' flex items-center flex-row justify-between rounded-sm bg-lightSlate2 text-darkSlate p-2 md:p-5'>
             <h2 className=' text-sm md:text-lg font-medium'>Take our questionnaire</h2>
-            <HiCheck className=' text-green text-2xl' />
+            <Check className=' text-green text-2xl' />
          </Card>
       </Card>
     </>
