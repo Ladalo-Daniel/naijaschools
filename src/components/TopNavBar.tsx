@@ -5,7 +5,7 @@ import MobileMenu from './MobileMenu'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Avatar } from '@radix-ui/react-avatar'
+import { Avatar } from './ui/avatar'
 // import {NotificationIcon} from "./NotificationIcon";
 
 
@@ -19,7 +19,7 @@ const TopNavBar = () => {
 
      return(
        <>
-        <nav className="bg-white bg-opacity-80 w-full p-2 md:p-5 md:w-[80%] top-0 z-50 h-20 fixed flex flex-row justify-between md:flex md:flex-row md:justify-between items-center ">
+        <nav className="bg-opacity-80 bg-secondary w-full p-2 md:p-5 md:w-[80%] top-0 z-50 h-20 fixed flex flex-row justify-between md:flex md:flex-row md:justify-between items-center ">
           <div className=" flex justify-between items-center gap-2  md:px-3">
             <Link href='/dashboard' className=' md:hidden'>
               <Image
@@ -29,7 +29,7 @@ const TopNavBar = () => {
                   alt="Float UI logo"
               />
             </Link>
-            <button className="text-gray-700 outline-none p-1 rounded-md focus:border-lightGreen focus:border md:hidden"
+            <button className="outline-none p-1 rounded-md focus:border-primary focus:border md:hidden"
                 onClick={() => setMobileMenu(!mobileMenu)}
             >
                 {
@@ -44,15 +44,14 @@ const TopNavBar = () => {
                     )
                 }
             </button>
-            <h1 className='hidden md:block leading-8 text-lg md:text-3xl text-black font-poppins'>{path.slice(1).charAt(0).toUpperCase() + path.slice(2)}</h1>
+            <h1 className='hidden md:block leading-8 text-lg md:text-3xl font-poppins'>{path.slice(1).charAt(0).toUpperCase() + path.slice(2)}</h1>
           </div>
           <div className=' flex flex-row gap-2 text-darkSlate items-center'>
             <Avatar>
               <Image
                 src="https://i.pravatar.cc/150?u=a04258a2462d826712d" 
-                className='' 
-                height={20} 
-                width={20}
+                className=''
+                fill
                 alt='photo'
               />
             </Avatar>

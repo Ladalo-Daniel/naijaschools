@@ -9,12 +9,8 @@ export const metadata: Metadata = {
 
 export default function Dashboard() {
   return (
-    <>
       <MainLayout>
-         <>
           <DashboardCards />
-         </>
       </MainLayout>
-    </>
   )
 }

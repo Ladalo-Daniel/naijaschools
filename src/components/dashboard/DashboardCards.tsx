@@ -12,7 +12,7 @@ export default function DashboardCards() {
     <section className=' p-2 md:p-5'>
        <div className=' flex flex-col gap-5'>
           <Card className='bg-green hover:opacity-90 flex flex-row items-center justify-between rounded-md'>
-            <h1 className=' text-white px-4 text-xs md:text-3xl lg:text-3xl md:p-7'>Hello <strong>Ladalo</strong>, <br /> Welcome to your naijaschools Dashboard</h1>
+            <h1 className='px-4 text-xs md:text-3xl lg:text-3xl md:p-7 text-primary'>Hello <strong>Ladalo</strong>, <br /> Welcome to your naijaschools Dashboard</h1>
             <CardContent className=' flex items-baseline pl-4'>
             <Image 
               height={350} 
@@ -23,8 +23,8 @@ export default function DashboardCards() {
               />
             </CardContent>
           </Card>
-          <Card className=' p-5 bg-lightRed hover:opacity-90 flex flex-row text-white rounded-md items-center font-poppins text-sm md:text-lg'>
-            <span className=' text-white mr-4 ring-white ring-2 rounded-full p-1 text-sm md:text-xl'>
+          <Card className=' p-5 bg-lightRed hover:opacity-90 flex flex-row rounded-md items-center font-poppins text-sm md:text-lg'>
+            <span className=' mr-4 ring-2 rounded-full p-1 text-sm md:text-xl'>
             <ChevronRightCircle />
             </span>
             <Link 
@@ -33,14 +33,14 @@ export default function DashboardCards() {
           </Card>
           <div className=' flex flex-col md:flex-row gap-2'>
             <Card className=' p-5 bg-darkGreen hover:opacity-90 md:w-1/2 flex flex-row items-center rounded-md text-whiteGreen gap-4'>
-              <span className=' md:text-2xl p-4 font-bold rounded-xl text-green bg-white'><LucideCheckCircle2 /></span>
+              <span className=' md:text-2xl p-4 font-bold rounded-xl text-green'><LucideCheckCircle2 /></span>
               <div className=' flex flex-col items-start'>
                 <span>Community ID</span>
                 <span className=' font-semibold'>FE/23/77645780</span>
               </div>
             </Card>
             <Card className=' p-5 bg-slate hover:opacity-90 md:w-1/2 flex flex-row items-center rounded-md text-whiteGreen gap-4 '>
-              <span className=' md:text-2xl p-4 font-bold rounded-xl text-green bg-white'><Star /></span>
+              <span className=' md:text-2xl p-4 font-bold rounded-xl text-green'><Star /></span>
               <div className=' flex flex-col items-start'>
                 <span>Your Institution</span>
                 <span className=' font-semibold'>University of Abuja</span>

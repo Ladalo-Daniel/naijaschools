@@ -39,9 +39,8 @@ export default function LeftSidebar() {
   const paths = usePathname();
 
   return(
-    <nav className=' w-0 md:w-[20%] bg-white  md:fixed text-slate h-full overflow-auto '>
-        {/* LOGO AND BAR */}
-        <div className="md:flex flex-row gap-x-6 items-center justify-center py-6 border-b-lightGreen border-b-1 hidden  ">
+    <nav className='w-0 md:w-[20%] md:fixed bg-secondary h-full overflow-auto'>
+        <div className="md:flex flex-row gap-x-6 items-center justify-center py-6 border-b-primary border-b-1  ">
             <Link href="/dashboard">
                 <Image 
                   height={45} 
@@ -51,7 +50,7 @@ export default function LeftSidebar() {
             </Link>
             <Button 
               onClick={() => setState(!state)}
-              className="text-gray-700 outline-none p-1 rounded-md focus:border-lightGreen focus:border hidden">
+              className="outline-none p-1 rounded-md focus:border-primary focus:border hidden">
               {
                 state ? (
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
@@ -67,21 +66,21 @@ export default function LeftSidebar() {
         </div>
         {/* NAVLINKS */}
         <div className=" flex flex-col gap-2 h-full mt-4 overflow-auto">
-           <div className=" flex flex-col gap-4 justify-center items-center text-slate font-poppins text-lg">
+           <div className=" flex flex-col gap-4 justify-center items-center font-poppins text-lg">
              {Navigation.map(item => (
-                <Link key={item.tooltip} href={item.Link} className={`${paths === item.Link ? "bg-green text-white" : "bg-white"} flex gap-4 shadow-lg hover:bg-lightGreen hover:text-white w-[90%] p-4 rounded-md`}>
+                <Link key={item.tooltip} href={item.Link} className={`${paths === item.Link ? "" : ""} flex gap-4 shadow-lg hover:bg-lightGreen hover:text-secondary w-[90%] p-4 rounded-md`}>
                     <Button>{paths === item.Link ? item.activeIcon : item.icon}</Button>
                     <span>{item.tooltip}</span>
                 </Link>
              ))}
            </div>
-           <Card className=" bg-lightPink w-[90%] flex flex-col gap-6 ml-4 rounded-md p-9 md:p-12 mt-2 ">
+           <Card className=" w-[90%] flex flex-col gap-6 ml-4 rounded-md p-9 md:p-12 mt-2 ">
               <CardHeader>
-                <CardTitle className=" font-bold text-lg text-gray">Your 3MTT Status</CardTitle>
+                <CardTitle className=" font-bold text-lg text-primary">Your 3MTT Status</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardTitle className=" text-lightGray">Your application is  complete and under review.</CardTitle>
-                <CardDescription className=" bg-yellow text-white font-poppins py-2 rounded-md text-center cursor-pointer hover:bg-opacity-80">
+                <CardTitle className="text-secondary-foreground">Your application is  complete and under review.</CardTitle>
+                <CardDescription className=" bg-yellow text-primary font-poppins py-2 rounded-md text-center cursor-pointer hover:bg-opacity-80">
                   Application <br /> Completed
                 </CardDescription>
               </CardContent>
@@ -96,7 +95,7 @@ export default function LeftSidebar() {
            </Link>
            </div>
            <div className=" px-9">
-             <p className=" text-gray"><strong>Ladalo</strong>&copy; 2023 All Rights Reserved.</p>
+             <p className=" text-foreground"><strong>Ladalo</strong>&copy; 2023 All Rights Reserved.</p>
            </div>
         </div>
     </nav>

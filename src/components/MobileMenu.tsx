@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 import { LayoutDashboardIcon, LucideLayoutGrid, User, User2, Users, Users2Icon } from "lucide-react";
 
 
-export default function MobileMenu({ state, setState }: { state: boolean, setState: () => void}) {
+export default function MobileMenu({ state, setState }: { state: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>}) {
 //   const [state, setState] = useState(false)
 const links = [
   {
@@ -37,20 +37,20 @@ const links = [
   const paths = usePathname();
 
   return(
-    <nav className=' w-[70%] z-20 md:w-[20%] bg-white  md:fixed text-slate h-full md:hidden fixed overflow-auto transition-all transition-left top-[10%] '>
+    <nav className=' w-[70%] z-20 md:w-[20%] md:fixed text-slate h-full md:hidden fixed overflow-auto transition-all transition-left top-[10%] '>
         <div className=" flex flex-col gap-1 h-full  overflow-auto mt-2">
            <div className=" flex flex-col gap-4 justify-center items-center text-slate font-poppins text-lg">
              {links.map((link, idx) => (
-                <Link href={link.Link} key={idx} className={`${paths === link.Link ? "bg-green text-white" : "bg-white"} flex gap-4 shadow-lg hover:bg-lightGreen hover:text-white w-[90%] p-4 rounded-md`}>
+                <Link href={link.Link} key={idx} className={`${paths === link.Link ? "" : ""} flex gap-4 shadow-lg hover:bg-lightGreen hover:text-white w-[90%] p-4 rounded-md`}>
                     <Button>{paths === link.Link ? link.activeIcon : link.icon}</Button>
                     <span>{link.tooltip}</span>
                 </Link>
              ))}
            </div>
            <Card className=" bg-lightPink w-[90%] flex flex-col gap-2 ml-4 rounded-md p-6 mt-2 ">
-              <h1 className=" font-bold text-lg text-gray">Your 3MTT Status</h1>
-              <p className=" text-lightGray">Your application is  complete and under review.</p>
-              <h4 className=" bg-yellow text-white font-poppins py-1 rounded-md text-center cursor-pointer hover:bg-opacity-80">Application <br /> Completed</h4>
+              <h1 className=" font-bold text-lg">Your 3MTT Status</h1>
+              <p className=" ">Your application is  complete and under review.</p>
+              <h4 className=" bg-yellow font-poppins py-1 rounded-md text-center cursor-pointer hover:bg-opacity-80">Application <br /> Completed</h4>
            </Card>
            <div className=" flex justify-center items-center mt-1">
            <Link href="/dashboard">

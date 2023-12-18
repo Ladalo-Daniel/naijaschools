@@ -5,8 +5,8 @@ import { Card } from '../ui/card'
 export default function ApplicationCard() {
   return (
     <>
-      <Card className=' bg-white text-gray flex flex-col gap-4 p-5 rounded-md font-poppins'>
-         <h1 className=' text-gray py-2 font-bold text-lg'>Application Status</h1>
+      <Card className='text-gray flex flex-col gap-4 p-5 rounded-md font-poppins'>
+         <h1 className=' text-gray py-2 font-bold text-lg text-primary'>Application Status</h1>
          <hr className=' text-gray' />
          <p>You are a part of our 3MTT Learning Community and will be in queue for future phases of the 3MTT training program.</p>
          <p>The learning community will provide you with self-paced resources that you can leverage on your learning journey. In the learning community, you will have companions on your learning journey through connections with other learners in your local government and state learning similar skills and the support of a dedicated community manager to guide you along the way.</p>
