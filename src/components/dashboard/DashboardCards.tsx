@@ -11,7 +11,7 @@ export default function DashboardCards() {
   return (
     <section className=' p-2 md:p-5'>
        <div className=' flex flex-col gap-5'>
-          <Card className=' bg-green hover:opacity-90 flex flex-row items-center justify-between rounded-md'>
+          <Card className='bg-green hover:opacity-90 flex flex-row items-center justify-between rounded-md'>
             <h1 className=' text-white px-4 text-xs md:text-3xl lg:text-3xl md:p-7'>Hello <strong>Ladalo</strong>, <br /> Welcome to your naijaschools Dashboard</h1>
             <CardContent className=' flex items-baseline pl-4'>
             <Image 
