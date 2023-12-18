@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { Button as NextButton } from '@nextui-org/button'
+import { Card as NextCard, CardHeader as NextCardHeader, CardBody as NextCardBody } from '@nextui-org/card'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 
 
@@ -48,7 +50,7 @@ export default function LeftSidebar() {
                   alt="profil"  
                   src="https://app.3mtt.training/static/media/main.242b8b1ce339b38fd589.png" />
             </Link>
-            <Button 
+            <NextButton 
               onClick={() => setState(!state)}
               className="outline-none p-1 rounded-md focus:border-primary focus:border hidden">
               {
@@ -62,7 +64,7 @@ export default function LeftSidebar() {
                     </svg>
                 )
               }
-            </Button>
+            </NextButton>
         </div>
         {/* NAVLINKS */}
         <div className=" flex flex-col gap-2 h-full mt-4 overflow-auto">
@@ -74,17 +76,17 @@ export default function LeftSidebar() {
                 </Link>
              ))}
            </div>
-           <Card className=" w-[90%] flex flex-col gap-6 ml-4 rounded-md p-9 md:p-12 mt-2 ">
-              <CardHeader>
-                <CardTitle className=" font-bold text-lg text-primary">Your 3MTT Status</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardTitle className="text-secondary-foreground">Your application is  complete and under review.</CardTitle>
-                <CardDescription className=" bg-yellow text-primary font-poppins py-2 rounded-md text-center cursor-pointer hover:bg-opacity-80">
+           <NextCard className=" w-[90%] flex flex-col gap-6 ml-4 rounded-md p-9 bg-inherit md:p-12 mt-2 ">
+              <NextCardHeader>
+                <h2 className=" font-bold text-lg text-primary">Your 3MTT Status</h2>
+              </NextCardHeader>
+              <NextCardBody>
+                <NextCardHeader className="text-secondary-foreground">Your application is  complete and under review.</NextCardHeader>
+                <p className=" bg-yellow text-primary font-poppins py-2 rounded-md text-center cursor-pointer hover:bg-opacity-80">
                   Application <br /> Completed
-                </CardDescription>
-              </CardContent>
-           </Card>
+                </p>
+              </NextCardBody>
+           </NextCard>
            <div className=" flex justify-center items-center mt-3 ">
            <Link href="/dashboard">
               <Image 
