@@ -84,7 +84,7 @@ export default function MobileMenu({ state, setState }) {
                 </Link>
              ))}
            </div>
-           <Card className=" bg-lightPink w-[90%] flex flex-col gap-2 ml-4 rounded-md p-6 mt-2 ">
+           <Card className=" bg-lightPink w-[90%] flex flex-col gap-2 ml-4 rounded-md p-12 mt-2 ">
               <h1 className=" font-bold text-lg text-gray">Your 3MTT Status</h1>
               <p className=" text-lightGray">Your application is  complete and under review.</p>
               <h4 className=" bg-yellow text-white font-poppins py-1 rounded-md text-center cursor-pointer hover:bg-opacity-80">Application <br /> Completed</h4>

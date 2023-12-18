@@ -63,7 +63,7 @@ export default () => {
     
      return(
        <>
-        <nav className="bg-white bg-opacity-80 w-full p-2 md:p-5 md:w-[80%] top-0 z-50 h-20 fixed flex flex-row justify-between md:flex md:flex-row md:justify-between items-center ">
+        <nav className="bg-white bg-opacity-90 w-full p-2 md:p-5 md:w-[80%] top-0 z-50 h-20 fixed flex flex-row justify-between md:flex md:flex-row md:justify-between items-center ">
           <div className=" flex justify-between items-center gap-2  md:px-3">
             <Link href='/dashboard' className=' md:hidden'>
               <Image
@@ -91,7 +91,7 @@ export default () => {
             </button>
             <h1 className='hidden md:block leading-8 text-lg md:text-3xl text-black font-poppins'>{path.slice(1).charAt(0).toUpperCase() + path.slice(2)}</h1>
           </div>
-          <div className=' flex flex-row gap-2 text-darkSlate items-center'>
+          <div className=' flex flex-row gap-2  text-darkSlate items-center'>
             <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" name='Ladalo' className='' height={20} width={20} />
             <span className=' text-slate md:text-xl'>Hi, Ladalo</span>
             {/* <Badge content="9+" shape="circle" color="danger" className=' text-lightRed'>

@@ -1,10 +1,14 @@
 import MainLayout from '@/components/MainLayout'
-import React from 'react'
+import ProfileCard from '@/components/ProfileUI/ProfileCard'
 
 export default function Profile() {
   return (
-    <MainLayout>
-      <div>Profile</div>
-    </MainLayout>
+    <>
+      <MainLayout>
+         <>
+          <ProfileCard />
+         </>
+      </MainLayout>
+    </>
   )
 }

@@ -1,17 +1,23 @@
 "use client"
 
-import { Button, Card, Image, Link } from "@nextui-org/react"
+import { Button, Card, Image, Link, useDisclosure } from "@nextui-org/react"
 import { useState } from "react"
 
 import { FaRegUser } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa6";
 import { PiUsersThree, PiUsersThreeFill } from "react-icons/pi";
+import { HiMiniTrophy, HiOutlineTrophy } from "react-icons/hi2";
 import {  BsGrid, BsGridFill } from "react-icons/bs";
 import { usePathname } from "next/navigation";
+import QuizModal from "./QuizUI/QuizModal";
 
 
 export default function LeftSidebar() {
   const [state, setState] = useState(false)
+  const [open, setOpen] = useState(false)
+  
+  // const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
   const Navigation = [
     {
       Link: "/dashboard",
@@ -27,6 +33,13 @@ export default function LeftSidebar() {
       tooltip: "Profile",
       navigateupName: "profile",
     },
+    // {
+    //   Link: "/quiz",
+    //   icon: <FaRegUser />,
+    //   activeIcon: <FaUser />,
+    //   tooltip: "Quiz",
+    //   navigateupName: "quiz",
+    // },
     {
       Link: "/community",
       icon: <PiUsersThree />,
@@ -80,10 +93,12 @@ export default function LeftSidebar() {
            <div className=" flex flex-col gap-4 justify-center items-center text-slate font-poppins text-lg">
              {Navigation.map((item, idx) => (
                 <Link id={idx} href={item.Link} className={`${paths === item.Link ? "bg-green text-white" : "bg-white"} flex gap-4 shadow-lg hover:bg-lightGreen hover:text-white w-[90%] p-4 rounded-md`}>
-                    <Button>{paths === item.Link ? item.activeIcon : item.icon}</Button>
+                    <span>{paths === item.Link ? item.activeIcon : item.icon}</span>
                     <span>{item.tooltip}</span>
                 </Link>
              ))}
+             
+             { <QuizModal open={open} setOpen={setOpen}/>}
            </div>
            <Card className=" bg-lightPink w-[90%] flex flex-col gap-6 ml-4 rounded-md p-9 md:p-12 mt-2 ">
               <h1 className=" font-bold text-lg text-gray">Your 3MTT Status</h1>
@@ -96,7 +111,7 @@ export default function LeftSidebar() {
            </Link>
            </div>
            <div className=" px-9">
-             <p className=" text-gray"><strong>Ladalo</strong> c2023 All Rights Reserved.</p>
+             <p className=" text-gray"><strong>Ladalo</strong> &copy; 2023 All Rights Reserved.</p>
            </div>
         </div>
     </nav>
