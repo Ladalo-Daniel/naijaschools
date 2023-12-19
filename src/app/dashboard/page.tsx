@@ -1,6 +1,4 @@
-import MainLayout from "@/components/MainLayout";
 import MaxWrapper from "@/components/MaxWrapper";
-import DashboardCards from "@/components/dashboard/DashboardCards";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 
