@@ -80,16 +80,16 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: #7f849b;
+    background: red;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #7f849b;
+    background: red;
     border-radius: 50px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #7f849b;
+    background: red;
   }
 
   .leftsidebar {

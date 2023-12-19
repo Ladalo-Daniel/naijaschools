@@ -8,7 +8,7 @@ import {NextUIProvider} from "@nextui-org/system";
 export function Providers({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}
     attribute="class"
-    defaultTheme="light"
+    defaultTheme="dark"
     enableSystem
     disableTransitionOnChange
   >
