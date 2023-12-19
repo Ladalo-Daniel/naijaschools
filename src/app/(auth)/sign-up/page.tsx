@@ -3,10 +3,10 @@ import AuthForm from "../auth-form";
 
 export default function Home() {
   return (
-    <div className="flex mx-auto justify-center items-center min-h-screen w-full">
+    <div className="flex mx-auto justify-center items-center min-h-screen w-full max-w-[500px] p-4">
       <Card className="p-8 flex flex-col gap-6">
-        <h1 className="text-2xl tracking-tight text-foreground">Welcome to naijaschools</h1>
-        <p className="text-muted-foreground font-inherit">
+        <h1 className="text-2xl tracking-tight text-foreground font-semibold text-primary">Welcome to naijaschools</h1>
+        <p className="text-muted-foreground font-inherit tracking-tight text-xs">
           Experience a whole new world of learning... <br />
           Now let us quickly sign you in with our magic link to get started.
         </p>
