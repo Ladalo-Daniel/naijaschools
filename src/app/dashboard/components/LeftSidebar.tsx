@@ -9,7 +9,7 @@ import React from 'react'
 const LeftSidebar = () => {
   const path = usePathname()
   return (
-    <nav className='leftsidebar dark:bg-secondary bg-background z-20 min-h-screen relative'>
+    <nav className='leftsidebar dark:bg-secondary bg-background z-20 min-h-screen relative border-r-gray-200 shadow-sm border'>
       <div className="fixed  h-full overflow-auto">
         <div className='flex flex-col gap-6 overflow-auto custom-scrollbar'>
           {side_bar_links.map(link => (
