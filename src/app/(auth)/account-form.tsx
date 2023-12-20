@@ -9,7 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Database } from '../database.types'
 import { Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-import { Button } from "@/components/ui/button"
+// import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -21,27 +21,44 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { ComboboxForm } from "../dashboard/components/Combobox"
+import { institutions } from "@/lib/constants"
+import { userFormSchema } from "@/lib/validators/user"
+import DatePicker from "../dashboard/components/date-picker"
+import { useGetProfile, useUpdateProfile } from "@/lib/react-query"
+import { Button } from "@nextui-org/button"
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
+export default function AccountForm({ session, isUpdate }: { session: Session | null, isUpdate?: boolean }) {
 
-export default function AccountForm({ session }: { session: Session | null }) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const user = session?.user
+  const supabase = createClientComponentClient<Database>()
+
+  const { mutateAsync: updateProfile, isPending: isUpdating } = useUpdateProfile()
+  const { data: profile, isPending } = useGetProfile(user?.id || "")
+  console.log(profile)
+
+  
+  
+  const form = useForm<z.infer<typeof userFormSchema>>({
+    resolver: zodResolver(userFormSchema),
     defaultValues: {
-      username: "",
+      username: profile?.data?.username || "",
+      dob: profile?.data?.dob || "",
+      institution: profile?.data?.institution || "",
+      bio: profile?.data?.bio || "",
+      email: user?.email,
     },
   })
- 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+
+  if (isPending) return <p>lo..........</p>
+  
+  async function onSubmit(values: z.infer<typeof userFormSchema>) {
+    updateProfile({...values, userId: user?.id || "", onboarded: true})
+    form.reset()
   }
 
   return (
-    <Form {...form}>
+      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
@@ -50,7 +67,7 @@ export default function AccountForm({ session }: { session: Session | null }) {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Username..." {...field} />
               </FormControl>
               <FormDescription>
                 This is your public display name.
@@ -59,22 +76,8 @@ export default function AccountForm({ session }: { session: Session | null }) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="institution"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Institution</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <ComboboxForm institutions={institutions} form={form} />
+        <DatePicker form={form}/>
         <FormField
           control={form.control}
           name="email"
@@ -82,18 +85,15 @@ export default function AccountForm({ session }: { session: Session | null }) {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="youremail@example.com..." disabled={true} {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name="textarea"
+          name="bio"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Bio</FormLabel>
@@ -107,7 +107,7 @@ export default function AccountForm({ session }: { session: Session | null }) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button isLoading={isPending || isUpdating} className="" type="submit" variant="ghost" color="success">{isUpdate ? "Update" : "Submit"}</Button>
       </form>
     </Form>
   )

@@ -3,6 +3,7 @@ import LeftSidebar from './components/LeftSidebar'
 import TopNavbar from './components/TopNavbar'
 
 const Layout = ({ children }: { children: React.ReactNode }): React.JSX.Element => {
+  // await supabase
   return (
     <div className='w-full bg-dark-1 md:flex relative'>
       <TopNavbar />

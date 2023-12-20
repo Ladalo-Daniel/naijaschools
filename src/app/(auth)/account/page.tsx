@@ -12,9 +12,12 @@ export default async function Account() {
   } = await supabase.auth.getSession()
 
   return <MaxWrapper noOverflow className='flex flex-col gap-3 max-w-5xl'>
-    <div className='space-y-5'>
+    <div className='max-w-[600px] mx-auto'>
+
+    <div className='space-y-5 mb-4 mt-2'>
       <h2 className="text-3xl font-medium text-primary">Complete your profile so we can serve you better.</h2>
     </div>
     <AccountForm session={session} />
+    </div>
   </MaxWrapper>
 }
