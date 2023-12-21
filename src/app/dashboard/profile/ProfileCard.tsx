@@ -13,14 +13,31 @@ const ProfileCard = async () => {
         <div className='flex flex-col gap-2 md:gap-3'>
             <Avatar src='' name={profile?.data?.username} size='lg' />
             <Separator className='my-2'/>
-            <Card>
-                <CardHeader>
-                    <CardTitle>{profile?.data?.email}</CardTitle>
-                </CardHeader>
-                <CardBody>
+            <Card className='p-4'>
+                <CardBody className='flex flex-col gap-3'>
                     <CardContent className=''>
-                    <h2 className='font-bold'>Username</h2>
+                    <h2 className='font-semibold'>Email</h2>
+                    <p className='text'>{profile?.data?.email}</p>
+                    </CardContent>
+                    <CardContent className=''>
+                    <h2 className='font-semibold'>Username</h2>
                     <p className='text'>{profile?.data?.username}</p>
+                    </CardContent>
+                    <CardContent className=''>
+                    <h2 className='font-semibold'>Biography</h2>
+                    <p className='text'>{profile?.data?.bio || "-"}</p>
+                    </CardContent>
+                    <CardContent className=''>
+                    <h2 className='font-semibold'>Community ID</h2>
+                    <p className='text'>{profile?.data?.community_id || "-"}</p>
+                    </CardContent>
+                    <CardContent className=''>
+                    <h2 className='font-semibold'>D. O. B.</h2>
+                    <p className='text'>{format(new Date(profile?.data?.dob),"yyyy-mm-dd") || "-"}</p>
+                    </CardContent>
+                    <CardContent className=''>
+                    <h2 className='font-semibold'>Institution</h2>
+                    <p className='text'>{profile?.data?.institution || "-"}</p>
                     </CardContent>
                 </CardBody>
             </Card>
