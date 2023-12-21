@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 
 export default async function Dashboard({ children }: { children: ReactNode}) {
   const session = await getUserSession()
-  console.log(session)
   return (
       <>
       <MaxWrapper className="bg-background">

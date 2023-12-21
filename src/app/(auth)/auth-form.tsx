@@ -8,7 +8,6 @@ import { buttonVariants } from '@/components/ui/button'
 
 export default function AuthForm() {
   const supabase = createClientComponentClient()
-  console.log(supabase.auth.getSession())
 
   return (
     <Auth

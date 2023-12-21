@@ -1,7 +1,9 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { getUserSession } from "./session"
+import { revalidatePath } from "next/cache"
 
 export const supabaseClient = createClientComponentClient()
+export const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 
 export async function getUser() {
   const {data: session} = await supabaseClient.auth.getSession()
@@ -15,7 +17,7 @@ export async function getUser() {
   return data?.user
 }
 
-export const getProfile = async ({ userId }: { userId: string }) => {
+export const getProfile = async () => {
   const session = await getUserSession()
     try {
 
@@ -25,15 +27,12 @@ export const getProfile = async ({ userId }: { userId: string }) => {
         .eq('id', session?.user.id)
         .single()
 
-        // console.log(data)
-
       if (error && status !== 406) {
         throw error
       }
 
       return { data, error }
     } catch (error) {
-      // return { data: null, error }
     }
 }
 
@@ -41,17 +40,44 @@ export async function updateProfile({
     userId,
     ...rest
   }: {
-    userId: string
+    userId: string,
+    avatar?: File
   }) {
     try {
+      
       const { error } = await supabaseClient.from('users').upsert({
         id: userId,
-        ...rest
-        // updated_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        onboarded: true,
+        community_id: `nsch_${userId.slice(0, 7)}` ,
+        ...rest,
       })
+
       if (error) throw error
-      // alert('Profile updated!')
+
     } catch (error) {
-      // alert('Error updating the data!')
+      // lalal
     } 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            // const data = await getUserSession()
+        
+            // let fileName = `avatar-${data?.user?.id}-${Math.random()}`
+          
+            // const {error: storageError} = await supabaseClient.storage
+            //   .from('avatars')
+            //   .upload(fileName, avatar)
+          
+            // if (storageError) throw new Error(storageError.message)
