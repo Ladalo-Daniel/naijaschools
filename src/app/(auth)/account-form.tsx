@@ -5,11 +5,8 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import React from 'react'
-import { useCallback, useEffect, useState } from 'react'
-import { Database } from '../database.types'
-import { Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Session } from '@supabase/auth-helpers-nextjs'
 
-// import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -25,19 +22,17 @@ import { ComboboxForm } from "../dashboard/components/Combobox"
 import { institutions } from "@/lib/constants"
 import { userFormSchema } from "@/lib/validators/user"
 import DatePicker from "../dashboard/components/date-picker"
-import { useGetProfile, useUpdateProfile } from "@/lib/react-query"
+import { useUpdateProfile } from "@/lib/react-query"
 import { Button } from "@nextui-org/button"
+import { redirect, useRouter } from "next/navigation"
+import { SheetClose } from "@/components/ui/sheet"
 
-export default function AccountForm({ session, isUpdate }: { session: Session | null, isUpdate?: boolean }) {
+export default function AccountForm({ session, isUpdate, profile, isDashboard }: { session: Session | null, isUpdate?: boolean, profile: any, isDashboard?: boolean }) {
 
   const user = session?.user
-  const supabase = createClientComponentClient<Database>()
-
   const { mutateAsync: updateProfile, isPending: isUpdating } = useUpdateProfile()
-  const { data: profile, isPending } = useGetProfile(user?.id || "")
-  console.log(profile)
+  const router = useRouter()
 
-  
   
   const form = useForm<z.infer<typeof userFormSchema>>({
     resolver: zodResolver(userFormSchema),
@@ -47,15 +42,23 @@ export default function AccountForm({ session, isUpdate }: { session: Session | 
       institution: profile?.data?.institution || "",
       bio: profile?.data?.bio || "",
       email: user?.email,
+      // full_name: profile?.data?.full_name || "",
     },
   })
-
-  if (isPending) return <p>lo..........</p>
   
   async function onSubmit(values: z.infer<typeof userFormSchema>) {
-    updateProfile({...values, userId: user?.id || "", onboarded: true})
-    form.reset()
+    // alert(JSON.stringify(values, null, 1))
+    updateProfile({...values, userId: user?.id || "", onboarded: true}, {
+      onSuccess: () => {
+        isDashboard ? router.refresh() : router.push("/dashboard")
+      },
+      onSettled: () => {
+        form.reset()
+      }
+    })
   }
+
+  form.watch()
 
   return (
       <Form {...form}>
@@ -77,6 +80,19 @@ export default function AccountForm({ session, isUpdate }: { session: Session | 
           )}
         />
         <ComboboxForm institutions={institutions} form={form} />
+        {/* <FormField
+          control={form.control}
+          name="full_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Full Name</FormLabel>
+              <FormControl>
+                <Input placeholder="..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        /> */}
         <DatePicker form={form}/>
         <FormField
           control={form.control}
@@ -107,7 +123,9 @@ export default function AccountForm({ session, isUpdate }: { session: Session | 
             </FormItem>
           )}
         />
-        <Button isLoading={isPending || isUpdating} className="" type="submit" variant="ghost" color="success">{isUpdate ? "Update" : "Submit"}</Button>
+        <SheetClose>
+          <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
+        </SheetClose>
       </form>
     </Form>
   )

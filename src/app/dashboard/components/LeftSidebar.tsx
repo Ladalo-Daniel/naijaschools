@@ -10,7 +10,7 @@ import React from 'react'
 const LeftSidebar = () => {
   const path = usePathname()
   return (
-    <nav className='leftsidebar dark:bg-secondary bg-background z-20 min-h-screen relative'>
+    <nav className='leftsidebar dark:bg-secondary bg-background shadow-sm z-20 min-h-screen border border-r-gray-100 relative'>
       <div className="fixed h-full overflow-auto flex flex-col gap-4 left-0 min-w-[250px]">
       <Link href={'/'} className={''}>
         <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />

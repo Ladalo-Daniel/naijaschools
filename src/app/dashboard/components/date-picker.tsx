@@ -41,8 +41,8 @@ const DatePicker = ({ form }: { form: UseFormReturn<z.infer<typeof userFormSchem
                         !field.value && "text-muted-foreground"
                       )}
                     >
-                      {field?.value ? (
-                        format(field?.value, "PPP")
+                      {field.value ? (
+                        format(new Date(field.value), "PPP")
                       ) : (
                         <span>Pick a date</span>
                       )}

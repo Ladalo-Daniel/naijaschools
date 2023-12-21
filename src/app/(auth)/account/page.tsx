@@ -1,15 +1,13 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { Database } from '../database.types'
 import AccountForm from '../account-form'
 import MaxWrapper from '@/components/MaxWrapper'
+import { getUserSession } from '@/supabase/session'
+import { getProfile } from '@/supabase'
+import { redirect } from 'next/navigation'
 
 export default async function Account() {
-  const supabase = createServerComponentClient<Database>({ cookies })
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+  const session = await getUserSession()
+  const profile = await getProfile()
+  if (profile?.data.onboarded) redirect("/dashboard")
 
   return <MaxWrapper noOverflow className='flex flex-col gap-3 max-w-5xl'>
     <div className='max-w-[600px] mx-auto'>
@@ -17,7 +15,7 @@ export default async function Account() {
     <div className='space-y-5 mb-4 mt-2'>
       <h2 className="text-3xl font-medium text-primary">Complete your profile so we can serve you better.</h2>
     </div>
-    <AccountForm session={session} />
+    <AccountForm session={session} profile={profile} />
     </div>
   </MaxWrapper>
 }
