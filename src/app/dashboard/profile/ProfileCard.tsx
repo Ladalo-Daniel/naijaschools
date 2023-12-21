@@ -19,8 +19,8 @@ const ProfileCard = async () => {
                 </CardHeader>
                 <CardBody>
                     <CardContent className=''>
-                    <p className='font-bold'>Username</p>
-                    <h2 className='text'>{profile?.data?.username}</h2>
+                    <h2 className='font-bold'>Username</h2>
+                    <p className='text'>{profile?.data?.username}</p>
                     </CardContent>
                 </CardBody>
             </Card>
