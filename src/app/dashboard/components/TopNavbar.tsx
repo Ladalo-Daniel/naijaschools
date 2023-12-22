@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Avatar } from '@nextui-org/avatar'
 import MobileSidebar from './MobileSidebar'
-import { getProfile } from '@/supabase'
+import { getProfile } from '@/supabase/user'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
@@ -17,7 +17,7 @@ const TopNavbar = async () => {
       <MobileSidebar />
 
       <div className='flex items-center gap-3'>
-        <Avatar src={profile?.data?.image_url} name={profile?.data?.username} color='primary' />
+        <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
         <Button variant='faded' className='hidden' color='primary'>Logout</Button>
         <Button variant='faded' className='hidden' color='primary'>Admin</Button>
       </div>

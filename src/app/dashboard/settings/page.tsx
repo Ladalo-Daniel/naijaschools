@@ -1,10 +1,19 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
+import { Settings2Icon } from 'lucide-react'
+import { getProfile } from '@/supabase/user'
+import Settings from './Settings'
 
-const page = () => {
+const SettingsPage = async () => {
+  const profile = await getProfile()
   return (
-    <MaxWrapper>page</MaxWrapper>
+    <MaxWrapper className='flex-1'>
+      <h2 className='text-3xl space-y-4 flex items-center gap-3'><Settings2Icon /> Settings</h2>
+      <div className="flex flex-col gap-3">
+        <Settings profile={profile?.data as any}/>
+      </div>
+    </MaxWrapper>
   )
 }
 
-export default page
+export default SettingsPage

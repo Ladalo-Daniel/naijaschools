@@ -8,5 +8,5 @@ export const userFormSchema = z.object({
   bio: z.string().optional(),
   institution: z.string(),
   dob: z.any().optional(),
-  // full_name: z.string().min(2, {message: "Your full name is required."}).optional(),
+  avatar: z.any().optional()
 })

@@ -13,8 +13,8 @@ import {
 import AccountForm from '@/app/(auth)/account-form'
 import { Pencil } from 'lucide-react'
 import { getUserSession } from '@/supabase/session'
-import { getProfile } from '@/supabase'
 import ProfileCard from './ProfileCard'
+import { getProfile } from '@/supabase/user'
 
 export default async function Profile() {
   const session = await getUserSession()
@@ -38,7 +38,7 @@ export default async function Profile() {
             Make changes to your profile here. Click save when {"you're"} done.
           </SheetDescription>
         </SheetHeader>
-        <AccountForm session={session} isUpdate isDashboard profile={profile} />
+        <AccountForm session={session} isUpdate isDashboard profile={profile?.data as any} />
       </SheetContent>
       </Sheet>}
     </div>
