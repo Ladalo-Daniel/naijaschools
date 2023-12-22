@@ -4,12 +4,16 @@ import Link from 'next/link'
 import React from 'react'
 import { Avatar } from '@nextui-org/avatar'
 import { buttonVariants } from './ui/button'
+import { cn } from '@/lib/utils'
 
-const AuthTopNav = () => {
+const AuthTopNav = ({ isHome }: { isHome?: boolean}) => {
   return (
-    <nav className='bg-gray-200 backdrop-blur-md bg-transparent px-2 flex md:px-10 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-10 h-14 border-b border-r-gray-600'>
+    <nav className={cn('bg-gray-100 backdrop-blur-md bg-transparent px-2 md:px-16 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-10 h-16 border-b border-r-gray-600', {
+      "flex bg-white dark:bg-black": isHome,
+      "hidden": !isHome
+    })}>
       <Link href={'/'} className={''}>
-        <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
+        <Image src={'/images/logt2.png'} width={100} height={100} alt="logo" />
       </Link>
       <div className='flex items-center gap-3'>
         {/* <Avatar src='/images/human.png' isBordered hidden color='primary' /> */}

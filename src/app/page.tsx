@@ -1,11 +1,12 @@
 import AuthTopNav from "@/components/AuthTopNav";
+import Section1 from "@/components/home/section1";
 
 export default function Home() {
   return (
     <>
-    {/* <AuthTopNav /> */}
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h2>Home Page</h2>
+    <AuthTopNav isHome />
+    <main className="flex gap-9 min-h-screen flex-col py-24 px-4 md:px-20 bg-slate-100 dark:bg-zinc-900">
+      <Section1 />
     </main>
     </>
   )

@@ -25,7 +25,6 @@ import DatePicker from "../dashboard/components/date-picker"
 import { useUpdateProfile } from "@/lib/react-query"
 import { Button } from "@nextui-org/button"
 import { redirect, useRouter } from "next/navigation"
-import { SheetClose } from "@/components/ui/sheet"
 
 export default function AccountForm({ session, isUpdate, profile, isDashboard }: { session: Session | null, isUpdate?: boolean, profile: any, isDashboard?: boolean }) {
 
@@ -42,12 +41,10 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
       institution: profile?.data?.institution || "",
       bio: profile?.data?.bio || "",
       email: user?.email,
-      // full_name: profile?.data?.full_name || "",
     },
   })
   
   async function onSubmit(values: z.infer<typeof userFormSchema>) {
-    // alert(JSON.stringify(values, null, 1))
     updateProfile({...values, userId: user?.id || "", onboarded: true}, {
       onSuccess: () => {
         isDashboard ? router.refresh() : router.push("/dashboard")
@@ -123,9 +120,7 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
             </FormItem>
           )}
         />
-        <SheetClose>
           <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
-        </SheetClose>
       </form>
     </Form>
   )

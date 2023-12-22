@@ -101,3 +101,11 @@
   }
 }
 
+
+.text-height {
+  line-height: 1.5; /* Set the line height to your desired value */
+}
+.text-height-sm {
+  line-height: 1.4; /* Set the line height to your desired value */
+}
+

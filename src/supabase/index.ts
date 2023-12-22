@@ -1,6 +1,5 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { getUserSession } from "./session"
-import { revalidatePath } from "next/cache"
 
 export const supabaseClient = createClientComponentClient()
 export const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
