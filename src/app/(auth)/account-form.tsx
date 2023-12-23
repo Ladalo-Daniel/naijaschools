@@ -24,15 +24,11 @@ import { userFormSchema } from "@/lib/validators/user"
 import DatePicker from "../dashboard/components/date-picker"
 import { useUpdateProfile } from "@/lib/react-query"
 import { Button } from "@nextui-org/button"
-<<<<<<< HEAD
-import { redirect, useRouter } from "next/navigation"
-=======
 import { useRouter } from "next/navigation"
 import { SheetClose } from "@/components/ui/sheet"
 import { Database } from "../../types/supabase"
 import FileUploader from "@/components/shared/FileUploader"
 import { toast } from "sonner"
->>>>>>> cdaa9bffcd07c1652b13d7747e3a8ebede200163
 
 export default function AccountForm({ session, isUpdate, profile, isDashboard }: { 
   session: Session | null, 
@@ -54,20 +50,13 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
       institution: profile?.institution || "",
       bio: profile?.bio || "",
       email: user?.email,
-<<<<<<< HEAD
-=======
       avatar: profile?.image_url || "",
->>>>>>> cdaa9bffcd07c1652b13d7747e3a8ebede200163
     },
   })
 
   
   async function onSubmit(values: z.infer<typeof userFormSchema>) {
-<<<<<<< HEAD
-    updateProfile({...values, userId: user?.id || "", onboarded: true}, {
-=======
     updateProfile({...values, userId: user?.id || "", avatar: values.avatar, onboarded: true}, {
->>>>>>> cdaa9bffcd07c1652b13d7747e3a8ebede200163
       onSuccess: () => {
         isDashboard ? router.refresh() : router.push("/dashboard")
       },
@@ -155,11 +144,7 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
               <FormMessage />
             </FormItem>
           )}
-        />
-<<<<<<< HEAD
-=======
-        <SheetClose asChild>
->>>>>>> cdaa9bffcd07c1652b13d7747e3a8ebede200163
+        />de200163
           <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
       </form>
     </Form>

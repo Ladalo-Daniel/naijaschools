@@ -147,7 +147,6 @@
   }
 }
 
-<<<<<<< HEAD
 
 .text-height {
   line-height: 1.5; /* Set the line height to your desired value */
@@ -156,8 +155,6 @@
   line-height: 1.4; /* Set the line height to your desired value */
 }
 
-=======
 .bg-gradient-dark {
   background-image: radial-gradient(76.33% 76.59% at 50.15% 6.06%, #1A1A1A 0%, rgba(26, 26, 26, 0.38) 100%);
 }
->>>>>>> cdaa9bffcd07c1652b13d7747e3a8ebede200163
