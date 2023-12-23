@@ -1,10 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { getProfile } from '@/supabase/user'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Database } from '@/types/supabase'
-import { Avatar } from '@nextui-org/avatar'
 import { format } from 'date-fns'
-import { BookOpenText, BuildingIcon, CalendarDaysIcon, MailIcon, UserRound, Users } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
@@ -26,6 +24,7 @@ const ProfileCard = async ({ profile }: { profile: Database['public']['Tables'][
                   alt={profile?.username!} 
                   width={1000}
                   height={1000}
+                //   onLoad={() => <Skeleton className='w-40 h-40 rounded-full' />} // Client based
                   className='w-40 h-40 rounded-full object-cover'
                 />
               </div>

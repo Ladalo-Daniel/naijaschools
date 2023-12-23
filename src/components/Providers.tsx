@@ -5,6 +5,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { type ThemeProviderProps } from "next-themes/dist/types"
 import {NextUIProvider} from "@nextui-org/system";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from "./ui/sonner";
 
 export function Providers({ children, ...props }: ThemeProviderProps) {
 
@@ -20,6 +21,7 @@ export function Providers({ children, ...props }: ThemeProviderProps) {
 
     <NextUIProvider>
       {children}
+      <Toaster richColors duration={6000} position='top-right' theme='system' />
     </NextUIProvider>
     </QueryClientProvider>
   </NextThemesProvider>
