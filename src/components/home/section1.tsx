@@ -5,7 +5,7 @@ import ButtonGroup from './homebutton'
 
 export default function Section1() {
   return (
-    <section className=' flex flex-col gap-7 md:flex-row md:justify-between md:items-center'>
+    <section className=' flex flex-col gap-7 md:flex-row md:justify-between md:items-center px-4 md:px-20'>
         {/* ========LEFT_CONTENT======== */}
         <div className=' md:w-1/2 flex flex-col gap-7 md:gap-12'>
             <SlideUp>
@@ -16,7 +16,7 @@ export default function Section1() {
             </SlideUp>
             <SlideUp>
               <p className=' text-gray-800 dark:text-slate-400'>
-              We are Shaping the educational system of Nigerian Students by equipping them with the neccessary knowledge to help them have fun while studying and to take advantage of AI to easily get the best knowledge. <br />
+              We are Shaping the educational system of Nigerian Students by equipping them with the neccessary knowledge to help them have fun while studying and to take advantage of AI to easily get the best knowledge. <br /><br />
               This also Helps them connect easily with other students from different Institutions hence forstering community meetup. 
               </p>
             </SlideUp>

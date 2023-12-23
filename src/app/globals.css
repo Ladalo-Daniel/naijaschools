@@ -158,3 +158,16 @@
 .bg-gradient-dark {
   background-image: radial-gradient(76.33% 76.59% at 50.15% 6.06%, #1A1A1A 0%, rgba(26, 26, 26, 0.38) 100%);
 }
+
+
+@keyframes spinner-spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+.animate-spinner {
+  animation: spinner-spin 9s linear infinite;
+}
