@@ -11,7 +11,8 @@ export function Providers({ children, ...props }: ThemeProviderProps) {
 
   const queryClient  = new QueryClient()
   
-  return <NextThemesProvider {...props}
+  return (
+  <NextThemesProvider {...props}
     attribute="class"
     defaultTheme="light"
     enableSystem
@@ -25,4 +26,5 @@ export function Providers({ children, ...props }: ThemeProviderProps) {
     </NextUIProvider>
     </QueryClientProvider>
   </NextThemesProvider>
+  )
 }

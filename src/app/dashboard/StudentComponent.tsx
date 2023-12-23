@@ -14,7 +14,7 @@ const StudentComponent = () => {
         })} >Courses</Link>
         <Link href={'/dashboard/s/quizzes'} className={buttonVariants({
           variant: "secondary",
-          className: "transition-all"
+          className: "transition-all bg-background"
         })} >Quizzes</Link>
       </div>
       <h2 className="text-2xl pt-4 pb-2">Overview</h2>
@@ -37,15 +37,15 @@ const StudentComponent = () => {
                 <ChevronRight className='text-muted-foreground' size={20} />
             </Link>
         </Card>
-        <Link href={'/dashboard/s/history'} className='p-6 h-44 border group rounded-md w-auto hover:transition-all hover:opacity-50 cursor-pointer'>
-            <div className='flex justify-between w-72'>
+        <Card className='p-6 h-44 border group rounded-md w-auto hover:transition-all hover:opacity-50 cursor-pointer'>
+            <Link href={'/dashboard/s/history'} className='flex justify-between w-72'>
                 <div className='flex flex-col gap-2 flex-1'>
                   <HistoryIcon size={15}  />
                   <p className='font-semibold text-sm'>History</p>
                 </div>
                 <ChevronRight className='text-muted-foreground' size={20} />
-            </div>
-        </Link>
+            </Link>
+        </Card>
         <Card className='p-6 h-44 border group rounded-md w-auto hover:transition-all hover:opacity-50 cursor-pointer'>
             <Link href={'/dashboard/s/ai'} className='flex justify-between w-72'>
                 <div className='flex flex-col gap-2 flex-1'>

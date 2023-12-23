@@ -4,8 +4,7 @@ import { Separator } from '@/components/ui/separator'
 import { Database } from '@/types/supabase'
 import UpdateSettingsForm from './UpdateSettingsForm'
 import { ThemeToggle } from './ThemeToggle'
-import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { ArrowRightIcon } from 'lucide-react'
 
 const Settings = ({ profile }: { profile: Database['public']['Tables']['users']['Row']}) => {

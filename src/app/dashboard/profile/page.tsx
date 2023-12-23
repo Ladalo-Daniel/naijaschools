@@ -15,6 +15,7 @@ import { Pencil, User2Icon } from 'lucide-react'
 import { getUserSession } from '@/supabase/session'
 import ProfileCard from './ProfileCard'
 import { getProfile } from '@/supabase/user'
+import { getInstitutions } from '@/supabase/institutions'
 
 export default async function Profile() {
   const session = await getUserSession()
@@ -38,7 +39,7 @@ export default async function Profile() {
             Make changes to your profile here. Click save when {"you're"} done.
           </SheetDescription>
         </SheetHeader>
-        <AccountForm session={session} isUpdate isDashboard profile={profile?.data as any} />
+        <AccountForm session={session} isUpdate isDashboard profile={profile?.data as any} institutions={await getInstitutions() as any} />
       </SheetContent>
       </Sheet>}
     </div>

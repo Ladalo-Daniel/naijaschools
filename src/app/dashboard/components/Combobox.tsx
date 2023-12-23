@@ -28,12 +28,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { userFormSchema } from "@/lib/validators/user"
+import { Database } from "@/types/supabase"
 
 export function ComboboxForm({ institutions, form }: {
-    institutions: {
-        label: string,
-        value: string,
-    }[],
+    institutions: Database['public']['Tables']['institutions']['Row'][],
     form: UseFormReturn<z.infer<typeof userFormSchema>>,
 }) {
 
@@ -52,13 +51,13 @@ export function ComboboxForm({ institutions, form }: {
                       role="combobox"
                       className={cn(
                         "w-full justify-between",
-                        !field.value && "text-muted-foreground"
+                        !field?.value && "text-muted-foreground"
                       )}
                     >
                       {field.value
-                        ? institutions.find(
-                            (institution) => institution.value === field.value
-                          )?.label
+                        ? institutions?.find(
+                            (institution) => institution?.name === field?.value
+                          )?.name
                         : "Select institution"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -74,17 +73,17 @@ export function ComboboxForm({ institutions, form }: {
                     <CommandGroup>
                       {institutions.map((institution) => (
                         <CommandItem
-                          value={institution.label}
-                          key={institution.value}
+                          value={institution.name}
+                          key={institution.id}
                           onSelect={() => {
-                            form.setValue("institution", institution.value)
+                            form.setValue("institution", institution.name)
                           }}
                         >
-                          {institution.label}
+                          {institution.name}
                           <CheckIcon
                             className={cn(
                               "ml-auto h-4 w-4",
-                              institution.value === field.value
+                              institution.name === field.name
                                 ? "opacity-100"
                                 : "opacity-0"
                             )}

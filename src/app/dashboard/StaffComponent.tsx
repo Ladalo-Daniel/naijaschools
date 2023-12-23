@@ -4,13 +4,13 @@ import { ChevronRight, User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const AdminComponent = () => {
+const StaffComponent = () => {
   return (
     <section className='flex flex-col gap-3'>
       <div className='flex flex-wrap gap-4'>
-        <Link href={'/dashboard/teacher'} className={buttonVariants({
+        <Link href={'/dashboard/courses'} className={buttonVariants({
           className: "transition-all"
-        })} >Teachers</Link>
+        })} >Courses</Link>
         <Link href={'/dashboard/students'} className={buttonVariants({
           variant: "secondary",
           className: "transition-all bg-background"
@@ -18,15 +18,6 @@ const AdminComponent = () => {
       </div>
       <h2 className="text-2xl pt-4 pb-2">Overview</h2>
       <div className='flex flex-wrap gap-4 w-auto py-5 md:flex-row max-xs:flex-col '>
-        <Card className='p-6 h-44 border group rounded-md w-auto hover:transition-all hover:opacity-50 cursor-pointer'>
-            <Link href={'/dashboard/teachers'} className='flex justify-between w-72'>
-                <div className='flex flex-col gap-2 flex-1'>
-                  <User size={15}  />
-                  <p className='font-semibold text-sm'>Teachers</p>
-                </div>
-                <ChevronRight className='text-muted-foreground' size={20} />
-            </Link>
-        </Card>
         <Card className='p-6 h-44 border group rounded-md w-auto hover:transition-all hover:opacity-50 cursor-pointer'>
             <Link href={'/dashboard/students'} className='flex justify-between w-72'>
                 <div className='flex flex-col gap-2 flex-1'>
@@ -59,4 +50,4 @@ const AdminComponent = () => {
   )
 }
 
-export default AdminComponent
+export default StaffComponent

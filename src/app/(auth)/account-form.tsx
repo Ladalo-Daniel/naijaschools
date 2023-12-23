@@ -30,17 +30,17 @@ import { Database } from "../../types/supabase"
 import FileUploader from "@/components/shared/FileUploader"
 import { toast } from "sonner"
 
-export default function AccountForm({ session, isUpdate, profile, isDashboard }: { 
+export default function AccountForm({ session, isUpdate, profile, isDashboard, institutions }: { 
   session: Session | null, 
   isUpdate?: boolean, 
   profile: Database['public']['Tables']['users']['Update'], 
-  isDashboard?: boolean 
+  isDashboard?: boolean,
+  institutions:  Database['public']['Tables']['institutions']['Row'],
 }) {
 
   const user = session?.user
   const { mutateAsync: updateProfile, isPending: isUpdating } = useUpdateProfile()
   const router = useRouter()
-
   
   const form = useForm<z.infer<typeof userFormSchema>>({
     resolver: zodResolver(userFormSchema),
@@ -101,7 +101,7 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
             </FormItem>
           )}
         />
-        <ComboboxForm institutions={institutions} form={form} />
+        <ComboboxForm institutions={institutions as any} form={form} />
         <DatePicker form={form}/>
         <FormField
           control={form.control}
@@ -132,7 +132,13 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
             </FormItem>
           )}
         />
-          <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
+          {!isDashboard && <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>}
+          {
+          isDashboard && 
+          <SheetClose asChild>
+            <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
+          </SheetClose>
+          }
       </form>
     </Form>
   )

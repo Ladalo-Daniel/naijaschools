@@ -1,3 +1,4 @@
+import { getInstitutions } from '@/supabase/institutions'
 import AccountForm from '../account-form'
 import MaxWrapper from '@/components/MaxWrapper'
 import { getUserSession } from '@/supabase/session'
@@ -16,7 +17,7 @@ export default async function Account() {
     <div className='space-y-5 mb-4 mt-2'>
       <h2 className="text-3xl font-medium text-primary">Complete your profile so we can serve you better.</h2>
     </div>
-    <AccountForm session={session} profile={profile?.data as any} />
+    <AccountForm session={session} profile={profile?.data as any} institutions={await getInstitutions() as any}/>
     </div>
   </MaxWrapper>
 }

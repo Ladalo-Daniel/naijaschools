@@ -21,6 +21,7 @@
     "@nextui-org/theme": "^2.1.17",
     "@nextui-org/tooltip": "^2.0.29",
     "@nextui-org/user": "^2.0.25",
+    "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
@@ -53,6 +54,7 @@
     "sonner": "^1.2.4",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.8.0",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },

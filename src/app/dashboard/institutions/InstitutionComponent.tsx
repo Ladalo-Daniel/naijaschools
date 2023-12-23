@@ -1,8 +1,11 @@
 import React from 'react'
+import AddInstitutionForm from './AddInstitutionForm'
 
 const InstitutionComponent = () => {
   return (
-    <div>InstitutionComponent</div>
+    <div>
+      <AddInstitutionForm />
+    </div>
   )
 }
 
