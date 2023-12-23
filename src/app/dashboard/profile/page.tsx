@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import AccountForm from '@/app/(auth)/account-form'
-import { Pencil } from 'lucide-react'
+import { Pencil, User2Icon } from 'lucide-react'
 import { getUserSession } from '@/supabase/session'
 import ProfileCard from './ProfileCard'
 import { getProfile } from '@/supabase/user'
@@ -20,11 +20,11 @@ export default async function Profile() {
   const session = await getUserSession()
   const profile = await getProfile()
 
-  return <MaxWrapper className='gap-3 max-w-5xl bg-background'>
+  return <MaxWrapper className='gap-3 max-w-5xl'>
     <div className=''>
     <div className='flex items-center flex-row justify-between flex-1'>
     <div>
-      <h2 className="text-2xl font-medium text-primary">Your profile.</h2>
+      <h2 className='text-3xl space-y-4 flex items-center gap-3'><User2Icon /> Profile</h2>
     </div>
       
     {session?.user?.id === profile?.data?.id && <Sheet>
@@ -42,7 +42,7 @@ export default async function Profile() {
       </SheetContent>
       </Sheet>}
     </div>
-    <ProfileCard />
+    <ProfileCard profile={profile?.data as any} />
     </div>
 
   </MaxWrapper>

@@ -8,7 +8,7 @@ import { z } from 'zod'
 const schema = z.object({
   first_name: z.string({
     invalid_type_error: 'Provide a valid name',
-  }),
+  }).min(1, { message: "First Name should exceed at least one character"}),
   last_name: z.string({
     invalid_type_error: 'Provide a valid name',
   }),
@@ -23,12 +23,14 @@ export default async function updatePartialProfile(prevState: any, formData: For
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
+      message: "Bad data submitted",
+      success: false
     }
   }
 
   const session = await getUserSession()
  
-  const { error, data } = await supabaseClient.from('users')
+  const { error } = await supabaseClient.from('users')
   .upsert({
     id: session?.user?.id!,
     updated_at: new Date().toISOString(),

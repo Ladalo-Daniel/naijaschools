@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import updatePartialProfile from './UpdateSettings'
 import { Database } from '@/types/supabase'
 import { CardDescription} from '@/components/ui/card'
@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { SaveButton } from './SaveSettingsButton'
 import { useFormState } from 'react-dom'
 import { cn } from '@/lib/utils'
+import { toast } from "sonner"
 
 const initialState = {
     message: "",
@@ -16,6 +17,13 @@ const initialState = {
 
 const UpdateSettingsForm = ({ profile }: { profile: Database['public']['Tables']['users']['Row']}) => {
   const [state, formAction] = useFormState(updatePartialProfile, initialState)
+
+  useEffect(() => {
+    if (state?.message) {
+      state?.success ? toast.success("Awwn, Tada! Your update was successful! Your profile is now in sync.") : 
+      toast.error("Sorry, we could not update your profile by this time, but don't fret, let's give it another shot!")
+    }
+  }, [state])
 
   return (
     <form className='flex flex-col gap-3' action={formAction}>
@@ -30,12 +38,6 @@ const UpdateSettingsForm = ({ profile }: { profile: Database['public']['Tables']
         <CardDescription className='flex justify-end md:items-center md:flex-row flex-col gap-2'>
             <SaveButton />
         </CardDescription>
-        {state.message && <CardDescription aria-live="polite" className={cn('flex p-4 mt-2 mb-2 rounded-sm shadow justify-between md:items-center md:flex-row flex-col gap-2', {
-            "bg-rose-100 text-rose-800": !state.success,
-            "bg-green-100 text-green-800": state.success
-        })}>
-          {state?.message}
-        </CardDescription>}
     </form>
   )
 }

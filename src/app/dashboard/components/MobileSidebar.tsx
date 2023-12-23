@@ -17,10 +17,10 @@ const MobileSidebar = () => {
       <SheetTrigger asChild>
         <ShadButton variant={'ghost'} className='flex items-center gap-2 md:hidden'><Menu size={20} /></ShadButton>
       </SheetTrigger>
-      <SheetContent className='md:hidden min-h-screen overflow-auto' side={'left'}>
-        <SheetHeader className='flex flex-col flex-1 items-start'>
+      <SheetContent className='md:hidden min-h-screen overflow-auto mt-0 pt-0' side={'left'}>
+        <SheetHeader className='flex flex-col flex-1 items-start pt-0 mt-0'>
           <SheetTitle>
-          <Link href={'/'} className={'md:hidden p-2'}>
+          <Link href={'/'} className={'md:hidden'}>
             <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
           </Link>
           </SheetTitle>
