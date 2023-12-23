@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 }
 
 export default async function Dashboard({ children }: { children: ReactNode}) {
-  // const session = await getUserSession()
-  // const profile = await getProfile()
+  const session = await getUserSession()
+  const profile = await getProfile()
   return (
       <>
-      <MaxWrapper className="bg-background">
+      <MaxWrapper className="bg-background max-w-7xl">
         <div className="md:py-5 py-2">
-          {/* <DashboardComponent /> */}
+          <DashboardComponent />
         </div>
       </MaxWrapper>
       </>
