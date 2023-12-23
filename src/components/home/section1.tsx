@@ -15,7 +15,7 @@ export default function Section1() {
               </h2>
             </SlideUp>
             <SlideUp>
-              <p className=' text-gray-800'>
+              <p className=' text-gray-800 dark:text-slate-400'>
               We are Shaping the educational system of Nigerian Students by equipping them with the neccessary knowledge to help them have fun while studying and to take advantage of AI to easily get the best knowledge. <br />
               This also Helps them connect easily with other students from different Institutions hence forstering community meetup. 
               </p>

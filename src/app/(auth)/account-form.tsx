@@ -56,7 +56,10 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
 
   
   async function onSubmit(values: z.infer<typeof userFormSchema>) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     updateProfile({...values, userId: user?.id || "", avatar: values.avatar, onboarded: true}, {
       onSuccess: () => {
         isDashboard ? router.refresh() : router.push("/dashboard")
@@ -132,7 +135,11 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard }:
               <FormMessage />
             </FormItem>
           )}
+<<<<<<< HEAD
         />
+=======
+        />de200163
+>>>>>>> main
           <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
       </form>
     </Form>

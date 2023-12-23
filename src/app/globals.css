@@ -146,6 +146,14 @@
     @apply flex flex-col flex-1 gap-10 overflow-y-scroll py-20 px-5 md:px-8 lg:px-14 custom-scrollbar;
   }
 }
+
+.text-height {
+  line-height: 1.5; /* Set the line height to your desired value */
+}
+.text-height-sm {
+  line-height: 1.4; /* Set the line height to your desired value */
+}
+
 .bg-gradient-dark {
   background-image: radial-gradient(76.33% 76.59% at 50.15% 6.06%, #1A1A1A 0%, rgba(26, 26, 26, 0.38) 100%);
 }
