@@ -8,28 +8,28 @@ import { SelectCourse } from "./SelectCourse"
 import UpsertCourse from "./courses.actions"
 import { SaveButton } from "./SaveCourseButton"
 import { Course } from "@/supabase/courses"
-import { useGetInstitutions } from "@/lib/react-query"
 import React from "react"
 import { cn } from "@/lib/utils"
+import { InstitutionList } from "@/supabase/institutions"
 
 const initialState = {
     message: "",
     success: false
 }  
 
-export default function CourseForm({ className, setOpen, course, toggleOpen }: { 
+export default function CourseForm({ className, setOpen, course, institutions }: { 
     className?: string, setOpen: React.Dispatch<React.SetStateAction<boolean>>, 
     course?: Course,
+    institutions?: InstitutionList,
     toggleOpen?: (id: number) => void 
   }) {
   const [state, formAction] = useFormState(UpsertCourse, initialState)
-  const { data: institutions, isPending } = useGetInstitutions()
+  // const { data: institutions, isPending } = useGetInstitutions()
 
   React.useEffect(() => {
     if (state?.message && state?.success) {
       toast.success(state?.message)
       setOpen(false)
-      toggleOpen?.(course?.id as number)
     } else if (state?.message && !state?.success) {
      toast.error(state?.message)
     }
@@ -38,7 +38,7 @@ export default function CourseForm({ className, setOpen, course, toggleOpen }: {
   return (
     <form className={cn("grid items-start gap-4", className)} action={formAction}>
       <div className="grid gap-2">
-        <SelectCourse institutions={institutions as any} institution_id={course?.institution as number} />
+        <SelectCourse institutions={institutions as InstitutionList} institution_id={course?.institution as number} />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="name">Course Name</Label>
@@ -58,7 +58,7 @@ export default function CourseForm({ className, setOpen, course, toggleOpen }: {
       </div>
       <div className="grid gap-2">
         <Label htmlFor="description">Description</Label>
-        <Input id="description" type="number" name="description" defaultValue={course?.description || ""} placeholder="description..." required/>
+        <Input id="description" name="description" defaultValue={course?.description || ""} placeholder="description..."/>
       </div>
       <input type="hidden" name="upsert_id" value={course?.id || undefined} />
       <SaveButton />

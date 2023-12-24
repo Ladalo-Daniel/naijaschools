@@ -7,7 +7,7 @@ import CourseTable from './CourseTable'
 const CoursesPage = async () => {
   const courses = await getCourses()
   return (
-    <MaxWrapper className='max-w-7x flex-1'>
+    <MaxWrapper className='max-w-7x flex-1 bg-background'>
         <h2 className="text-2xl py-2">Courses</h2>
         <div className='flex flex-col gap-4'>
             <CourseComponent />

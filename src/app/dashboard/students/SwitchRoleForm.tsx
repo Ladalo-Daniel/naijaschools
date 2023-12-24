@@ -47,7 +47,7 @@ export default function SwitchForm({ makeAdmin, userId, isPending, profile, setO
         }
       })
     }
-   
+   form.watch()
     return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">

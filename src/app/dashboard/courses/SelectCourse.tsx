@@ -11,15 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Database } from "@/types/supabase"
+import { InstitutionList } from "@/supabase/institutions"
 
 export function SelectCourse({ institutions, institution_id }: {
-    institutions: Database['public']['Tables']['institutions']['Row'][],
+    institutions: InstitutionList,
     institution_id: number
 }) {
   return (
-    <Select name="institution" required defaultValue={"institutions[institution_id]?.name || ''"}>
-      <SelectTrigger className="w-[280px]">
+    <Select name="institution" required defaultValue={institution_id as any}>
+      <SelectTrigger className="w-[300px]">
         <SelectValue placeholder="Select an Institution for this Course" />
       </SelectTrigger>
       <SelectContent>

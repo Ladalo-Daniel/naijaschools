@@ -1,11 +1,12 @@
 import React from 'react'
-import CourseTable from './CourseTable'
 import AddCourseForm from './AddCourseForm'
+import { InstitutionList, getInstitutions } from '@/supabase/institutions'
 
-const CourseComponent = () => {
+const CourseComponent = async () => {
+  const institutions = await getInstitutions()
   return (
     <div className=''>
-        <AddCourseForm />
+        <AddCourseForm institutions={institutions as InstitutionList}/>
     </div>
   )
 }

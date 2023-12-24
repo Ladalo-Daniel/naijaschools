@@ -7,15 +7,15 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
  
 const schema = z.object({
-  institution: z.number(),
+  institution: z.string(),
   name: z.string({
     invalid_type_error: 'Provide a valid course name',
   }).min(1, { message: "Let me not just say anything! Which course has only 1 character as it's name?"}),
   code: z.string({
     invalid_type_error: 'Provide a valid course code ',
   }),
-  question_number: z.number().optional(),
-  total_marks: z.number().optional(),
+  question_number: z.string().optional(),
+  total_marks: z.string().optional(),
   description: z.string().optional(),
   upsert_id: z.string().optional()
 })
@@ -48,10 +48,10 @@ export default async function UpsertCourse(prevState: any, formData: FormData) {
     success: false
   }
 
-  if (validatedFields.data.upsert_id) {
+  if (validatedFields.data?.upsert_id) {
     const { error } = await supabaseClient.from('courses')
     .upsert({
-      id: parseInt(validatedFields.data.upsert_id),
+      id: parseInt(validatedFields?.data?.upsert_id),
       name: validatedFields.data.name.trim(),
       description: validatedFields?.data?.description?.trim() || "",
       question_number: validatedFields.data.question_number,
