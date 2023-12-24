@@ -4,7 +4,7 @@ import { ChevronRight, User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const StaffComponent = () => {
+const StaffDashBoardComponent = () => {
   return (
     <section className='flex flex-col gap-3'>
       <div className='flex flex-wrap gap-4'>
@@ -50,4 +50,4 @@ const StaffComponent = () => {
   )
 }
 
-export default StaffComponent
+export default StaffDashBoardComponent

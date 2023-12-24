@@ -1,5 +1,7 @@
+import { revalidatePath } from "next/cache"
 import { supabaseClient, supabaseUrl } from "."
 import { getUserSession } from "./session"
+import { toast } from "sonner"
 
 export async function getUser() {
     const {data: session} = await supabaseClient.auth.getSession()
@@ -78,19 +80,55 @@ export async function updateProfile({
     } 
 }
 
+export async function makeAdmin({ role, userId }: { role: string, userId: string }) {
+    
+    const { data, error } = await supabaseClient
+        .from('users')
+        .update({ "role":  role})
+        .eq('id', userId)
+        .select()
 
-// export const changes = supabaseClient
-// .channel('table-db-changes')
-// .on(
-//     'postgres_changes',
-//     {
-//     event: '*',
-//     schema: 'public',
-//     table: 'users',
-//     },
-//     (payload) => console.log(payload)
-// )
-// .subscribe()
-  
-  
+        if (error) {
+            console.error(error)
+            return { data: null, error }
+        }
+
+    return { data, error }
+}
+
+export async function getProfileById(userId: string) {
+    const { data, error } = await supabaseClient
+        .from('users')
+        .select()
+        .eq('id', userId)
+        .single()
+
+        if (error) {
+            console.error(error)
+            return { data: null, error }
+        }
+
+    return { data, error }
+}
+
+
+// export async function doRealTime() {
+//     const changes = supabaseClient
+//     .channel('table-db-changes')
+//     .on(
+//         'postgres_changes',
+//         {
+//         event: '*',
+//         schema: 'public',
+//         table: 'users',
+//         },
+//         (payload) => {
+//             console.log(payload)
+//             toast("Wow! Realtime!")
+//         }
+//     )
+//     .subscribe()
+// }
+
+// doRealTime()
   

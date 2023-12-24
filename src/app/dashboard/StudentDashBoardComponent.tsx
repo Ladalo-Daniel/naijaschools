@@ -5,7 +5,7 @@ import { BookPlusIcon, ChevronRight, HistoryIcon, SparklesIcon, User } from 'luc
 import Link from 'next/link'
 import React from 'react'
 
-const StudentComponent = () => {
+const StudentDashBoardComponent = () => {
   return (
     <section className='flex flex-col gap-3'>
       <div className='flex flex-wrap gap-4'>
@@ -60,4 +60,4 @@ const StudentComponent = () => {
   )
 }
 
-export default StudentComponent
+export default StudentDashBoardComponent
