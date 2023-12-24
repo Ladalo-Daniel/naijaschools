@@ -171,3 +171,16 @@
 .animate-spinner {
   animation: spinner-spin 9s linear infinite;
 }
+
+
+.is-highlighted-style{
+  transform: translateZ(-10000px);
+  transform: scaleZ(-10000px);
+  transform: translateY(-5px);
+  color: rebeccapurple;
+}
+.is-not-highlighted{
+  transform: translateZ(10000px);
+  transform: scaleZ(10000px);
+
+}

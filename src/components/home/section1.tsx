@@ -26,7 +26,7 @@ export default function Section1() {
         </div>
         {/* ========IMAGE======== */}
         <SlideUp>
-        <div className='bg-green-700 dark:bg-green-900 dark:bg-opacity-40 rounded-lg h-[350px] md:h-[500px] w-[90vw] md:w-[400px] p-5 hover:opacity-90 hover:transition-all'>
+        <div className='bg-green-700 dark:bg-green-900 dark:bg-opacity-40 rounded-lg h-[500px] md:h-[500px] w-[90vw] md:w-[400px] p-5 hover:opacity-90 hover:transition-all'>
             <div className=' absolute bg-lime-200 dark:bg-red-100 h-14 w-14 rounded-full top-[-11px] right-[-11px]'></div>
             <div className=' absolute bg-lime-200 dark:bg-red-100 h-14 w-14 rounded-full bottom-[-11px] left-[-11px]'></div>
             <Image 

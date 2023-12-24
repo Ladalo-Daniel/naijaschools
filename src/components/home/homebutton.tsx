@@ -44,7 +44,7 @@ export default function ButtonGroup() {
   }, [isVisible]);
 
   return (
-    <div className='flex flex-col gap-9'>
+    <div className='flex flex-col gap-9 m-1'>
       <div className='flex items-center gap-3 md:gap-9'>
         <Button variant='faded' className={buttonVariants({ variant: 'link' })} color='primary'>
           Contact us
