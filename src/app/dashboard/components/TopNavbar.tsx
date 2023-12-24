@@ -1,10 +1,11 @@
-import { Button } from '@nextui-org/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Avatar } from '@nextui-org/avatar'
 import MobileSidebar from './MobileSidebar'
-import { getProfile } from '@/supabase/user'
+import { User, getProfile } from '@/supabase/user'
+import { DoubleArrowRightIcon } from '@radix-ui/react-icons'
+import { Button } from '@/components/ui/button'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
@@ -14,12 +15,15 @@ const TopNavbar = async () => {
         <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
       </Link>
 
-      <MobileSidebar />
+      <MobileSidebar profile={profile?.data as User} />
 
       <div className='flex items-center gap-3'>
-        <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
-        <Button variant='faded' className='hidden' color='primary'>Logout</Button>
-        <Button variant='faded' className='hidden' color='primary'>Admin</Button>
+        <Link href={'/dashboard/profile'}>
+          <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
+        </Link>
+        <form action={'/auth/signout'} method='post' className='hidden md:block'>
+          <Button className={'mr-2'} variant={'ghost'} size={'sm'} type='submit'>Sign Out <DoubleArrowRightIcon height={15} width={15} className=''/></Button>
+        </form>
       </div>
     </nav>
   )

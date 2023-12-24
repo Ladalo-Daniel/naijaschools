@@ -10,17 +10,17 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
-import { Database } from '@/types/supabase'
 import { Button } from '@nextui-org/button'
-import { Edit2, Trash2 } from 'lucide-react'
+import { Edit2 } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { InstitutionForm } from './AddInstitutionForm'
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'
-import DeleteInstitution from './DeleteInstitution'
+import DeleteCourse from './DeleteCourse'
+import { CourseList } from '@/supabase/courses'
+import CourseForm from './CourseForm'
 
 
-const InstitutionTable = ({ institutions }: {institutions: Database['public']['Tables']['institutions']['Row'][]}) => {
+const CourseTable = ({ courses }: {courses: CourseList}) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const [openStates, setOpenStates] = React.useState<{ [key: number]: boolean }>({})
@@ -38,20 +38,27 @@ const InstitutionTable = ({ institutions }: {institutions: Database['public']['T
       <TableHeader>
         <TableRow>
           <TableHead className="w-[50px]">S/N</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Desc</TableHead>
-          <TableHead className="">Actions</TableHead>
+            <TableCell>Name</TableCell>
+            <TableCell>Code</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Question_number</TableCell>
+            <TableCell>Total_marks</TableCell>
+            <TableCell>Institution</TableCell>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {institutions.map((i, j) => (
+        {courses.map((i, j) => (
           <TableRow key={j}>
             <TableCell className="font-medium">{j+1}</TableCell>
             <TableCell>{i.name}</TableCell>
+            <TableCell>{i.code}</TableCell>
             <TableCell>{i.description}</TableCell>
+            <TableCell>{i.question_number}</TableCell>
+            <TableCell>{i.total_marks}</TableCell>
+            <TableCell>{i.institution}</TableCell>
             <TableCell className="text-right flex items-center gap-2">
 
-              <DeleteInstitution institution={i}/>
+              <DeleteCourse course={i}/>
 
                  <Dialog open={openStates[i.id]} onOpenChange={() => toggleOpen(i.id)}>
                   { isDesktop &&
@@ -63,7 +70,7 @@ const InstitutionTable = ({ institutions }: {institutions: Database['public']['T
                         <DialogHeader>
                         <DialogTitle>Edit Institution</DialogTitle>
                         </DialogHeader>
-                        <InstitutionForm setOpen={setOpen} institution={i as any}/>
+                        <CourseForm setOpen={setOpen} course={i as any}/>
                     </DialogContent>
                   </>}
                 </Dialog>
@@ -76,7 +83,7 @@ const InstitutionTable = ({ institutions }: {institutions: Database['public']['T
                         <DrawerHeader className="text-left">
                         <DrawerTitle>Edit Institution</DrawerTitle>
                         </DrawerHeader>
-                        <InstitutionForm className="px-4" institution={i as any} setOpen={setOpen} />
+                        <CourseForm className="px-4" course={i as any} setOpen={setOpen} />
                         <DrawerFooter className="pt-2">
                         <DrawerClose asChild>
                             <Button variant="ghost">Cancel</Button>
@@ -93,5 +100,4 @@ const InstitutionTable = ({ institutions }: {institutions: Database['public']['T
   )
 }
 
-export default InstitutionTable
-
+export default CourseTable

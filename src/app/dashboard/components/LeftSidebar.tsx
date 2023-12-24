@@ -2,12 +2,13 @@
 
 import { side_bar_links } from '@/lib/utility'
 import { cn } from '@/lib/utils'
+import { User } from '@/supabase/user'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-const LeftSidebar = () => {
+const LeftSidebar = ({ profile }: { profile?: User }) => {
   const path = usePathname()
   return (
     <nav className='leftsidebar dark:bg-secondary bg-background shadow-sm z-20 min-h-screen border border-r-gray-100 dark:border-r-gray-800 relative'>
@@ -19,6 +20,7 @@ const LeftSidebar = () => {
           {side_bar_links.map(link => (
             <Link key={link.tooltip} href={link.href} className={cn("flex items-center hover:bg-gray-500 hover:text-gray-50 transition-all gap-2 p-2 rounded-md", {
               "bg-primary text-green-50 shadow-sm transition-all": path === link.href,
+              "hidden": !(profile?.role === "admin" || profile?.role === "staff") && link.hidden,
             })}>
               {link.icon}
               <span>{link.tooltip}</span>

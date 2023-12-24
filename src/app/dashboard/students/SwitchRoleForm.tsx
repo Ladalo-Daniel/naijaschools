@@ -13,13 +13,12 @@ import {
   FormLabel,
 } from "@/components/ui/form"
 import { Switch } from "@/components/ui/switch"
-import { useMakeAdmin } from '@/lib/react-query'
-import { Database } from '@/types/supabase'
-import Image from 'next/image'
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { User } from "@/supabase/user"
  
 const FormSchema = z.object({
-  make_admin: z.boolean().default(false).optional(),
+  make_admin: z.boolean().optional(),
   make_staff: z.boolean(),
 })
 
@@ -27,7 +26,7 @@ export default function SwitchForm({ makeAdmin, userId, isPending, profile, setO
     makeAdmin: any, 
     userId: string,
     isPending?: boolean,
-    profile?: Database['public']['Tables']['users']['Row'],
+    profile?: User,
     setOpen?: React.Dispatch<React.SetStateAction<boolean>> 
 }) {
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -59,7 +58,9 @@ export default function SwitchForm({ makeAdmin, userId, isPending, profile, setO
                 control={form.control}
                 name="make_staff"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                  <FormItem className={cn("flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm", {
+                    "border-2 border-primary": field.value
+                  })}>
                     <div className="space-y-0.5">
                       <FormLabel>Staff</FormLabel>
                       <FormDescription>
@@ -81,7 +82,9 @@ export default function SwitchForm({ makeAdmin, userId, isPending, profile, setO
                 control={form.control}
                 name="make_admin"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                  <FormItem className={cn("flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm", {
+                    "border-2 border-primary": field.value
+                  })}>
                     <div className="space-y-0.5">
                       <FormLabel>Admin</FormLabel>
                       <FormDescription>

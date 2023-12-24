@@ -1,25 +1,15 @@
 import React from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { StudentList } from '@/supabase/students'
 import { format } from 'date-fns'
 import { LucideEye } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-  } from "@/components/ui/pagination"
 import AdminStudentDetailView from '../students/AdminStudentDetailView'
-import { getProfile } from '@/supabase/user'
-  
+import { UserList, getProfile } from '@/supabase/user'
 
-const StudentsList = async ({ students }: { students: StudentList}) => {
+
+const TableList = async ({ table, role }: { table: UserList, role?: "students" | "teachers" }) => {
     const profile = await getProfile()
   return (
     <div className='w-auto overflow-auto'>
@@ -39,28 +29,28 @@ const StudentsList = async ({ students }: { students: StudentList}) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {students?.map((student, index) => (
+                {table?.map((row, index) => (
                 <TableRow key={index} className='py-5'>
                     <TableCell className="font-medium">{index+1}</TableCell>
                     <TableCell className='w-20'>
                         <Image 
                             quality={100}
-                            alt={student?.username!}
-                            src={student.image_url || '/icons/profile-placeholder.svg'}
+                            alt={row?.username!}
+                            src={row.image_url || '/icons/profile-placeholder.svg'}
                             width={300}
                             height={300}
                             className='w-12 h-12 max-w-xs:h-8 max-w-xs:w-8 object-cover rounded-full'
                         />
                     </TableCell>
-                    <TableCell >{student.first_name || "-"} {student.last_name || "-"}</TableCell>
-                    <TableCell >{student.username || "-"}</TableCell>
-                    <TableCell >{student.email!}</TableCell>
-                    <TableCell >{student.institution || '-'}</TableCell>
-                    <TableCell >{student.community_id!}</TableCell>
-                    <TableCell >{format(new Date(student?.dob!), "yyyy-mm-dd") || "-"}</TableCell>
+                    <TableCell >{row.first_name || "-"} {row.last_name || "-"}</TableCell>
+                    <TableCell >{row.username || "-"}</TableCell>
+                    <TableCell >{row.email!}</TableCell>
+                    <TableCell >{row.institution || '-'}</TableCell>
+                    <TableCell >{row.community_id!}</TableCell>
+                    <TableCell >{format(new Date(row?.dob!), "yyyy-mm-dd") || "-"}</TableCell>
                     <TableCell >
                         
-                        {profile?.data?.role === "admin" && <Link href={`/dashboard/students?id=${student?.id}`}>
+                        {profile?.data?.role === "admin" && <Link href={`/dashboard/${role}?id=${row?.id}`}>
                             <LucideEye size={20} color='dodgerblue' />
                         </Link>}
                     </TableCell>
@@ -71,26 +61,10 @@ const StudentsList = async ({ students }: { students: StudentList}) => {
         {profile?.data?.role === "admin" &&
             <AdminStudentDetailView />
         }
+        {/** TODO: Pagination */}
     </div>
   )
 }
 
-export default StudentsList
+export default TableList
 
-
-{/* <Pagination>
-    <PaginationContent>
-        <PaginationItem>
-        <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-        <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-        <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-        <PaginationNext href="#" />
-        </PaginationItem>
-    </PaginationContent>
-</Pagination> */}

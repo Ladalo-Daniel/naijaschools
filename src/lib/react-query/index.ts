@@ -3,6 +3,7 @@ import { QUERY_KEYS } from "./utils";
 import { toast } from "sonner";
 import { getProfile, getProfileById, makeAdmin, updateProfile } from "@/supabase/user";
 import { useRouter } from "next/navigation";
+import { getInstitutions } from "@/supabase/institutions";
 
 export const useGetProfile = () => {
     return useQuery({
@@ -53,6 +54,13 @@ export const useGetProfileById = (userId: string) => {
     return useQuery({
         queryKey: [QUERY_KEYS.get_user_profile, userId],
         queryFn: () => getProfileById(userId)
+    })
+}
+
+export const useGetInstitutions = () => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_institutions],
+        queryFn: getInstitutions
     })
 }
 

@@ -1,7 +1,10 @@
-import { revalidatePath } from "next/cache"
+import { Database } from "@/types/supabase"
 import { supabaseClient, supabaseUrl } from "."
 import { getUserSession } from "./session"
 import { toast } from "sonner"
+
+export type UserList = Database['public']['Tables']['users']['Row'][]
+export type User = Database['public']['Tables']['users']['Row']
 
 export async function getUser() {
     const {data: session} = await supabaseClient.auth.getSession()

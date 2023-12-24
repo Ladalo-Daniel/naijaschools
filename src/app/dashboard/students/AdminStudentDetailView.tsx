@@ -16,8 +16,8 @@ import {
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import SwitchForm from './SwitchRoleForm'
-import { Database } from '@/types/supabase'
 import { useGetProfileById, useMakeAdmin } from '@/lib/react-query'
+import { User } from '@/supabase/user'
   
 
 const AdminStudentDetailView = () => {
@@ -31,7 +31,7 @@ const AdminStudentDetailView = () => {
         setOpen(Boolean(id))
     }, [id])
     
-    const { data: profile } = useGetProfileById(id ?? "")
+    const { data: profile } = useGetProfileById(id || "")
 
     if (!id) {
         return <></>
@@ -50,7 +50,7 @@ const AdminStudentDetailView = () => {
             <div className="flex items-center justify-center space-x-2">
             </div>
             <div className="mt-3 h-[240px]">
-              <SwitchForm makeAdmin={makeAdmin} setOpen={setOpen} profile={profile?.data as any} userId={id} isPending={isPending} />
+              <SwitchForm makeAdmin={makeAdmin} setOpen={setOpen} profile={profile?.data as User} userId={id} isPending={isPending} />
             </div>
           </div>
           <DrawerFooter className='my-6 py-6'>
