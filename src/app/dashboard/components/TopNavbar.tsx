@@ -4,8 +4,8 @@ import React from 'react'
 import { Avatar } from '@nextui-org/avatar'
 import MobileSidebar from './MobileSidebar'
 import { User, getProfile } from '@/supabase/user'
-import { DoubleArrowRightIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
@@ -22,7 +22,10 @@ const TopNavbar = async () => {
           <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
         </Link>
         <form action={'/auth/signout'} method='post' className='hidden md:block'>
-          <Button className={'mr-2'} variant={'ghost'} size={'sm'} type='submit'>Sign Out <DoubleArrowRightIcon height={15} width={15} className=''/></Button>
+          <Button className={'items-center flex  gap-2'} variant={'ghost'} size={'sm'} type='submit'>
+            <span>Sign Out</span>
+            <ArrowRight size={15} className=''/>
+          </Button>
         </form>
       </div>
     </nav>

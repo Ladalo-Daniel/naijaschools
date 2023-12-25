@@ -1,8 +1,6 @@
-import MaxWrapper from "@/components/MaxWrapper";
-import { getUserSession } from "@/supabase/session";
-import { getProfile } from "@/supabase/user";
+import MaxWrapper from "@/components/MaxWrapper"
 import { Metadata } from "next";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import DashboardComponent from "./DashboardComponent";
 
 export const metadata: Metadata = {
@@ -11,15 +9,11 @@ export const metadata: Metadata = {
 }
 
 export default async function Dashboard({ children }: { children: ReactNode}) {
-  const session = await getUserSession()
-  const profile = await getProfile()
   return (
-      <>
       <MaxWrapper className="bg-background max-w-7xl">
         <div className="md:py-5 py-2">
           <DashboardComponent />
         </div>
       </MaxWrapper>
-      </>
   )
 }

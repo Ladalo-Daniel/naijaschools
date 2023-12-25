@@ -16,11 +16,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'
 import DeleteCourse from './DeleteCourse'
-import { CourseList } from '@/supabase/courses'
+import { Course, CourseList } from '@/supabase/courses'
 import CourseForm from './CourseForm'
+import { InstitutionList } from '@/supabase/institutions'
 
 
-const CourseTable = ({ courses }: {courses: CourseList}) => {
+const CourseTable = ({ courses, institutions }: {courses: CourseList, institutions: InstitutionList}) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const [openStates, setOpenStates] = React.useState<{ [key: number]: boolean }>({})
@@ -44,6 +45,7 @@ const CourseTable = ({ courses }: {courses: CourseList}) => {
             <TableCell>Question_number</TableCell>
             <TableCell>Total_marks</TableCell>
             <TableCell>Institution</TableCell>
+            <TableCell>Actions</TableCell>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -55,7 +57,7 @@ const CourseTable = ({ courses }: {courses: CourseList}) => {
             <TableCell>{i.description}</TableCell>
             <TableCell>{i.question_number}</TableCell>
             <TableCell>{i.total_marks}</TableCell>
-            <TableCell>{i.institution}</TableCell>
+            <TableCell>{institutions.find(idx => idx.id === i.institution)?.name}</TableCell>
             <TableCell className="text-right flex items-center gap-2">
 
               <DeleteCourse course={i}/>
@@ -66,11 +68,11 @@ const CourseTable = ({ courses }: {courses: CourseList}) => {
                     <DialogTrigger asChild>
                       <Button isIconOnly className='bg-transparent'><Edit2 size={15} color='blue' /></Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px]">
+                    <DialogContent className="sm:max-w-[600px]">
                         <DialogHeader>
-                        <DialogTitle>Edit Institution</DialogTitle>
+                        <DialogTitle>Edit Course</DialogTitle>
                         </DialogHeader>
-                        <CourseForm setOpen={setOpen} course={i as any}/>
+                        <CourseForm setOpen={setOpen} course={i as Course} toggleOpen={() => toggleOpen(i.id)} institutions={institutions}/>
                     </DialogContent>
                   </>}
                 </Dialog>
@@ -81,9 +83,9 @@ const CourseTable = ({ courses }: {courses: CourseList}) => {
                     </DrawerTrigger>
                     <DrawerContent>
                         <DrawerHeader className="text-left">
-                        <DrawerTitle>Edit Institution</DrawerTitle>
+                        <DrawerTitle>Edit Course</DrawerTitle>
                         </DrawerHeader>
-                        <CourseForm className="px-4" course={i as any} setOpen={setOpen} />
+                        <CourseForm className="px-4" course={i as any} setOpen={setOpen} toggleOpen={() => toggleOpen(i.id)} institutions={institutions as InstitutionList}/>
                         <DrawerFooter className="pt-2">
                         <DrawerClose asChild>
                             <Button variant="ghost">Cancel</Button>

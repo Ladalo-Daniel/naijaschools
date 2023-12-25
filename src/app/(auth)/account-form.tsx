@@ -19,7 +19,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ComboboxForm } from "../dashboard/components/Combobox"
-import { institutions } from "@/lib/constants"
 import { userFormSchema } from "@/lib/validators/user"
 import DatePicker from "../dashboard/components/date-picker"
 import { useUpdateProfile } from "@/lib/react-query"
@@ -49,6 +48,8 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
       dob: profile?.dob || "",
       institution: profile?.institution || "",
       bio: profile?.bio || "",
+      first_name: profile?.first_name || "",
+      last_name: profile?.last_name || "",
       email: user?.email,
       avatar: profile?.image_url || "",
     },
@@ -97,6 +98,32 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
               <FormDescription>
                 This is your public display name.
               </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="first_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>First Name</FormLabel>
+              <FormControl>
+                <Input placeholder="first name..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="last_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Last Name</FormLabel>
+              <FormControl>
+                <Input placeholder="last name..." {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

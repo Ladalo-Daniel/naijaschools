@@ -2,7 +2,6 @@
 
 import {
     AlertDialog,
-    AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
@@ -11,15 +10,14 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
-import { buttonVariants } from "@/components/ui/button"
-import { Database } from "@/types/supabase"
-import { Button } from "@nextui-org/button"
-import { Loader2, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import React from "react"
 import { toast } from "sonner"
-import { useFormStatus, useFormState } from "react-dom"
-import { deleteCourse } from "./courses.actions"
+import { useFormState } from "react-dom"
 import DeleteButton from "../components/DeleteButton"
+import { deleteUser } from "./students.actions"
+import { User } from "@/supabase/user"
+import { Button } from "@/components/ui/button"
 
 
 const initialState = {
@@ -28,9 +26,8 @@ const initialState = {
     pending: false
 }  
   
-export default function DeleteCourse({ course }: { course: Database['public']['Tables']['courses']['Row'] }) {
-    const [state, formAction] = useFormState(deleteCourse, initialState)
-    const { pending } = useFormStatus()
+export default function DeleteUser({ profile }: { profile: User }) {
+    const [state, formAction] = useFormState(deleteUser, initialState)
     const [open, setOpen] = React.useState(false)
 
     React.useEffect(() => {
@@ -45,21 +42,21 @@ export default function DeleteCourse({ course }: { course: Database['public']['T
     return (
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger asChild>
-          <Button isIconOnly className='bg-transparent'><Trash2 size={15} color='red' /></Button>
+          <Button variant={'destructive'} className='gap-2'><Trash2 size={15} color='red' /> Delete this User</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
             <form action={formAction}>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you absolutely sure you want to delete <b>{course?.name}</b>?</AlertDialogTitle>
+                    <AlertDialogTitle>Are you absolutely sure you want to delete the user <b>{profile?.username}</b>?</AlertDialogTitle>
                     <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete this course and remove it&#39;s data from our servers.
+                    This action cannot be undone. This will permanently delete this User and remove his/her data from our servers.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <DeleteButton />
                 </AlertDialogFooter>
-                <input type="hidden" name="id" value={course?.id!}/>
+                <input type="hidden" name="id" value={profile?.id!}/>
             </form>
         </AlertDialogContent>
       </AlertDialog>

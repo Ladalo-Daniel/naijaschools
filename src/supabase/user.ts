@@ -1,3 +1,5 @@
+'use server'
+
 import { Database } from "@/types/supabase"
 import { supabaseClient, supabaseUrl } from "."
 import { getUserSession } from "./session"
@@ -113,6 +115,27 @@ export async function getProfileById(userId: string) {
 
     return { data, error }
 }
+
+export async function deleteProfileById(userId: string) {
+    
+    const { error: b_error } = await supabaseClient.from('auth.users').delete().eq("id", userId)
+    
+    if (b_error) return { error: b_error }
+    
+    const { data, error } = await supabaseClient
+        .from('users')
+        .delete()
+        .eq('id', userId)
+    
+        if (error) {
+            console.error(error)
+            return { data: null, error }
+        }
+
+    return { data, error }
+}
+
+
 
 
 // export async function doRealTime() {

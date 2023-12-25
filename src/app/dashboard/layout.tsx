@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import LeftSidebar from './components/LeftSidebar'
 import TopNavbar from './components/TopNavbar'
 import { User, getProfile } from '@/supabase/user'
+import Loading from './loading'
 
 const Layout = async ({ children }: { children: React.ReactNode }): Promise<React.JSX.Element> => {
   const profile = await getProfile()
   return (
+    <Suspense fallback={<Loading />}>
     <div className='w-full bg-dark-1 md:flex relative'>
       <TopNavbar />
       <LeftSidebar profile={profile?.data as User} />
@@ -13,6 +15,7 @@ const Layout = async ({ children }: { children: React.ReactNode }): Promise<Reac
         { children }
       </main>
     </div>
+    </Suspense>
   )
 }
 

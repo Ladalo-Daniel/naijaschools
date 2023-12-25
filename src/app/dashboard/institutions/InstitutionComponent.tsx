@@ -1,10 +1,10 @@
 import React from 'react'
-import AddCourseForm from '../courses/AddCourseForm'
+import AddInstitutionForm from './AddInstitutionForm'
 
 const InstitutionComponent = () => {
   return (
     <div>
-      <AddCourseForm />
+      <AddInstitutionForm />
     </div>
   )
 }

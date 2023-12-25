@@ -2,7 +2,6 @@
 
 import {
     AlertDialog,
-    AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
@@ -11,14 +10,14 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
-import { buttonVariants } from "@/components/ui/button"
-import { Database } from "@/types/supabase"
 import { Button } from "@nextui-org/button"
-import { Loader2, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import { deleteInstitution } from "./institution.actions"
 import React from "react"
 import { toast } from "sonner"
-import { useFormStatus, useFormState } from "react-dom"
+import { useFormState } from "react-dom"
+import DeleteButton from "../components/DeleteButton"
+import { Institution } from "@/supabase/institutions"
 
 
 const initialState = {
@@ -27,9 +26,8 @@ const initialState = {
     pending: false
 }  
   
-export default function DeleteInstitution({ institution }: { institution: Database['public']['Tables']['institutions']['Row'] }) {
+export default function DeleteInstitution({ institution }: { institution: Institution}) {
     const [state, formAction] = useFormState(deleteInstitution, initialState)
-    const { pending } = useFormStatus()
     const [open, setOpen] = React.useState(false)
 
     React.useEffect(() => {
@@ -56,10 +54,7 @@ export default function DeleteInstitution({ institution }: { institution: Databa
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction type="submit" className={buttonVariants({
-                        variant: "destructive",
-                        className: "flex items-center gap-2"
-                    })}>{state.pending ? "Deleting..." : "Continue"} {pending && <Loader2 className="animate-spin" />}</AlertDialogAction>
+                    <DeleteButton />
                 </AlertDialogFooter>
                 <input type="hidden" name="id" value={institution?.id!}/>
             </form>

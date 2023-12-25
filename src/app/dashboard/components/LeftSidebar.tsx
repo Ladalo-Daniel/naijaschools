@@ -12,7 +12,7 @@ const LeftSidebar = ({ profile }: { profile?: User }) => {
   const path = usePathname()
   return (
     <nav className='leftsidebar dark:bg-secondary bg-background shadow-sm z-20 min-h-screen border border-r-gray-100 dark:border-r-gray-800 relative'>
-      <div className="fixed h-full overflow-auto flex flex-col gap-4 min-h-screen left-0 min-w-[250px]">
+      <div className="fixed h-full overflow-auto dark:bg-secondary bg-background flex flex-col gap-4 min-h-screen left-0 min-w-[250px]">
       <Link href={'/'} className={''}>
         <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
       </Link>

@@ -11,25 +11,27 @@ import { Course } from "@/supabase/courses"
 import React from "react"
 import { cn } from "@/lib/utils"
 import { InstitutionList } from "@/supabase/institutions"
+import { Textarea } from "@/components/ui/textarea"
 
 const initialState = {
+    errors: {},
     message: "",
     success: false
 }  
 
-export default function CourseForm({ className, setOpen, course, institutions }: { 
+export default function CourseForm({ className, setOpen, course, institutions, toggleOpen }: { 
     className?: string, setOpen: React.Dispatch<React.SetStateAction<boolean>>, 
     course?: Course,
     institutions?: InstitutionList,
     toggleOpen?: (id: number) => void 
   }) {
   const [state, formAction] = useFormState(UpsertCourse, initialState)
-  // const { data: institutions, isPending } = useGetInstitutions()
 
   React.useEffect(() => {
     if (state?.message && state?.success) {
       toast.success(state?.message)
-      setOpen(false)
+      setOpen?.(false)
+      toggleOpen?.(course?.id as number)
     } else if (state?.message && !state?.success) {
      toast.error(state?.message)
     }
@@ -38,7 +40,7 @@ export default function CourseForm({ className, setOpen, course, institutions }:
   return (
     <form className={cn("grid items-start gap-4", className)} action={formAction}>
       <div className="grid gap-2">
-        <SelectCourse institutions={institutions as InstitutionList} institution_id={course?.institution as number} />
+        <SelectCourse institutions={institutions as InstitutionList} institution_name={course?.name || ""} institution_id={course?.institution as number} />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="name">Course Name</Label>
@@ -58,7 +60,7 @@ export default function CourseForm({ className, setOpen, course, institutions }:
       </div>
       <div className="grid gap-2">
         <Label htmlFor="description">Description</Label>
-        <Input id="description" name="description" defaultValue={course?.description || ""} placeholder="description..."/>
+        <Textarea id="description" name="description" defaultValue={course?.description || ""} placeholder="description..."/>
       </div>
       <input type="hidden" name="upsert_id" value={course?.id || undefined} />
       <SaveButton />

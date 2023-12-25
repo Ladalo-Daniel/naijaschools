@@ -30,11 +30,12 @@ export default async function UpsertCourse(prevState: any, formData: FormData) {
     description: formData.get('description'),
     upsert_id: formData.get("upsert_id")
   })
- 
+  
   if (!validatedFields.success) {
+    console.log(validatedFields.error.flatten().fieldErrors)
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Bad data submitted",
+      message: "We could not validate the data you entered into by this time. Please input the right data and try again.",
       success: false
     }
   }
@@ -51,6 +52,7 @@ export default async function UpsertCourse(prevState: any, formData: FormData) {
   if (validatedFields.data?.upsert_id) {
     const { error } = await supabaseClient.from('courses')
     .upsert({
+      // @ts-ignore
       id: parseInt(validatedFields?.data?.upsert_id),
       name: validatedFields.data.name.trim(),
       description: validatedFields?.data?.description?.trim() || "",
@@ -77,6 +79,7 @@ export default async function UpsertCourse(prevState: any, formData: FormData) {
  
   const { error } = await supabaseClient.from('courses')
   .upsert({
+    // @ts-ignore
     name: validatedFields.data.name.trim(),
     description: validatedFields?.data?.description?.trim() || "",
     question_number: validatedFields.data.question_number,

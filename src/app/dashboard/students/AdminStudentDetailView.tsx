@@ -11,7 +11,6 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-    DrawerTrigger,
   } from "@/components/ui/drawer"
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
@@ -26,12 +25,12 @@ const AdminStudentDetailView = () => {
 
     const [open, setOpen] = React.useState<boolean>(Boolean(id))
     const { mutate: makeAdmin, isPending } = useMakeAdmin()
-    
+    const { data: profile } = useGetProfileById(id || "")
+        
     useEffect(() => {
         setOpen(Boolean(id))
-    }, [id])
-    
-    const { data: profile } = useGetProfileById(id || "")
+      }, [id])
+      
 
     if (!id) {
         return <></>

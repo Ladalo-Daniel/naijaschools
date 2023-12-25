@@ -8,5 +8,7 @@ export const userFormSchema = z.object({
   bio: z.string().optional(),
   institution: z.string(),
   dob: z.any().optional(),
-  avatar: z.any().optional()
+  avatar: z.any().optional(),
+  first_name: z.string().optional(),
+  last_name: z.string().optional()
 })

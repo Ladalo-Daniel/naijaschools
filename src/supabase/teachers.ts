@@ -1,3 +1,5 @@
+'use server'
+
 import { Database } from "@/types/supabase";
 import { supabaseClient } from ".";
 

@@ -63,7 +63,7 @@ const InstitutionTable = ({ institutions }: {institutions: Database['public']['T
                         <DialogHeader>
                         <DialogTitle>Edit Institution</DialogTitle>
                         </DialogHeader>
-                        <InstitutionForm setOpen={setOpen} institution={i as any}/>
+                        <InstitutionForm setOpen={setOpen} toggleOpen={() => toggleOpen(i.id)} institution={i as any}/>
                     </DialogContent>
                   </>}
                 </Dialog>
@@ -76,7 +76,7 @@ const InstitutionTable = ({ institutions }: {institutions: Database['public']['T
                         <DrawerHeader className="text-left">
                         <DrawerTitle>Edit Institution</DrawerTitle>
                         </DrawerHeader>
-                        <InstitutionForm className="px-4" institution={i as any} setOpen={setOpen} />
+                        <InstitutionForm className="px-4" institution={i as any} toggleOpen={() => toggleOpen(i.id)} setOpen={setOpen} />
                         <DrawerFooter className="pt-2">
                         <DrawerClose asChild>
                             <Button variant="ghost">Cancel</Button>
