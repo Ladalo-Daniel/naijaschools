@@ -43,7 +43,7 @@ const QuestionTable = ({ questions, courses, institutions }: {questions: Questio
       <TableBody>
         {questions.map((i, j) => (
           <TableRow key={j}>
-            <TableHead className='text-primary'>{j}.</TableHead>
+            <TableHead className='text-primary'>{j+1}.</TableHead>
             <TableHead>{courses?.find(old => old?.id === i.course_id!)?.name}</TableHead>
             <TableHead>{i.question}</TableHead>
             <TableHead>{i.option1}</TableHead>
@@ -52,11 +52,11 @@ const QuestionTable = ({ questions, courses, institutions }: {questions: Questio
             <TableHead>{i.option4}</TableHead>
             <TableHead className='text-primary'>{i.answer}</TableHead>
             <TableHead>{i.explanation || "-"}</TableHead>
-            <TableHead>Total Mark</TableHead>
+            <TableHead>{i.marks}</TableHead>
             <TableCell className="flex items-center gap-2">
 
               <DeleteQuestion question={i}/>
-              <Link href={`/dashboard/questions/edit/${i.id}?institution=${courses?.find(old => old?.id === i.course_id!)?.institution}`} className={cn('bg-transparent', buttonVariants({
+              <Link href={`/dashboard/questions/edit/${i.id}`} className={cn('bg-transparent', buttonVariants({
                 variant: "link"
               }))}><Edit2 size={15} /></Link>
 

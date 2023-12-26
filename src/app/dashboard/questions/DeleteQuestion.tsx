@@ -18,6 +18,7 @@ import { toast } from "sonner"
 import { useFormState } from "react-dom"
 import DeleteButton from "../components/DeleteButton"
 import { Question } from "@/supabase/questions"
+import { useRouter } from "next/navigation"
 
 
 const initialState = {
@@ -29,11 +30,13 @@ const initialState = {
 export default function Deletequestion({ question }: { question: Question}) {
     const [state, formAction] = useFormState(deleteQuestion, initialState)
     const [open, setOpen] = React.useState(false)
+    const router = useRouter()
 
     React.useEffect(() => {
         if (state?.message && state?.success) {
         toast.success(state?.message)
         setOpen(false)
+        router.refresh()
         } else if (state?.message && !state?.success) {
         toast.error(state?.message)
         }

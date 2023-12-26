@@ -15,7 +15,7 @@ export async function deleteQuestion(prevState: any, formData: FormData) {
         pending: false
       }
   
-    revalidatePath('/dashboard/questions')
+    // revalidatePath('/dashboard/questions')
   
     return {
       message: 'Success! Question has been deleted.',

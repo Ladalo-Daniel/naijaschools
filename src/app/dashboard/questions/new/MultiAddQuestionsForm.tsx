@@ -58,6 +58,8 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
     .map(key => selectedOptions[key])
     .find(value => value !== null);
 
+    console.log(selectedOptions[firstNonNullOption])
+
     function onSubmit(values: z.infer<typeof QuestionSchema>) {
         if (!firstNonNullOption) {
             toast.warning("You have not selected any option as an answer yet!")

@@ -24,7 +24,7 @@ export function SelectCourse({ courses, question, course_id }: {
     course_id?: number
 
 }) {
-    const [courseId, setCourseId] = React.useState(course_id || 0)
+    const [courseId, setCourseId] = React.useState(question?.course_id || 0)
 
   return (
     <React.Suspense fallback={<SelectCourseSkeleton />}>
