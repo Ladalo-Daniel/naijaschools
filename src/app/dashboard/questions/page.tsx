@@ -8,7 +8,7 @@ const QuestionPage = async () => {
     const profile = await getProfile()
     if (!(profile?.data?.role === "admin" || profile?.data?.role === "staff")) redirect('/dashboard')
   return (
-    <MaxWrapper className='bg-background max-w-7xl flex-1'>
+    <MaxWrapper className='bg-background max-w-max flex-1'>
         <h2 className="text-2xl py-2">
             Questions Overview
         </h2>

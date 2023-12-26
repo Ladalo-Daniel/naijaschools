@@ -1,9 +1,10 @@
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "./utils";
 import { toast } from "sonner";
 import { getProfile, getProfileById, makeAdmin, updateProfile } from "@/supabase/user";
 import { useRouter } from "next/navigation";
-import { getInstitutions } from "@/supabase/institutions";
+import { getInstitutions } from "@/supabase/institutions"
+import { Question, createQuestion, getQuestionById } from "@/supabase/questions";
 
 export const useGetProfile = () => {
     return useQuery({
@@ -61,6 +62,32 @@ export const useGetInstitutions = () => {
     return useQuery({
         queryKey: [QUERY_KEYS.get_institutions],
         queryFn: getInstitutions
+    })
+}
+
+export const useCreateQuestion = () => {
+    const queryClient = useQueryClient()
+    const router = useRouter()
+    return useMutation({
+        mutationFn: (question: Question ) => createQuestion(question),
+        mutationKey: [QUERY_KEYS.create_question],
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.get_user_profile]
+            })
+            toast.success("Question created successfully.")
+            router.refresh()
+        },
+        onError: ({message}) => {
+            toast.error(message)
+        } 
+    })
+}
+
+export const useGetQuestionById = (id: string) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_questions, id],
+        queryFn: () => getQuestionById(id),
     })
 }
 

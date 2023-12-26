@@ -28,7 +28,7 @@ export default function SelectInstitution({ institutions, institution_id, instit
 
   return (
     <Select name="institution" required defaultValue={institution_id as any} onValueChange={v => setInstitution(v)}>
-      <SelectTrigger className="w-[300px]">
+      <SelectTrigger className="w-full md:w-[300px]">
         <SelectValue placeholder={"Select an institution for this course."} />
       </SelectTrigger>
       <SelectContent>
