@@ -10,7 +10,7 @@ import { useSearchParams } from 'next/navigation'
 const NewQuestionComponent = ({ institutions, courses }: { institutions: InstitutionList, courses: CourseList}) => {
     const searchParams = useSearchParams()
     const institutionId = searchParams.get("institution")
-    const filteredCourses = courses.filter(old => old.institution == institutionId)
+    const filteredCourses = courses.filter(old => old.institution === parseInt(institutionId as string))
   return (
     <div>
         <section className='flex flex-col justify-between gap-5'>
