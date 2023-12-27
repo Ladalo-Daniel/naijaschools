@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Dashboard | Welcome"
 }
 
-export default async function Dashboard({ children }: { children: ReactNode}) {
+export default function Dashboard({ children }: { children: ReactNode}) {
   return (
       <MaxWrapper className="bg-background max-w-7xl">
         <div className="md:py-5 py-2">
