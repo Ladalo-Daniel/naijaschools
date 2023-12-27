@@ -17,8 +17,8 @@ const AuthTopNav = ({ isHome }: { isHome?: boolean}) => {
       </Link>
       <div className='flex items-center gap-3'>
         {/* <Avatar src='/images/human.png' isBordered hidden color='primary' /> */}
-        <Button variant='faded' className={buttonVariants({variant: "link"})} color='primary'>Log In</Button>
-        <Button variant='faded' className='' color='danger'>Log Out</Button>
+        <Link className={buttonVariants({variant: "link"})} href={'/sign-up'} color='primary'>Log In</Link>
+        {/* <Button variant='faded' className='' color='danger'>Log Out</Button> */}
       </div>
     </nav>
   )

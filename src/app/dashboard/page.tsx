@@ -1,6 +1,6 @@
 import MaxWrapper from "@/components/MaxWrapper"
 import { Metadata } from "next";
-import { ReactNode, Suspense } from "react";
+import { Suspense } from "react";
 import DashboardComponent from "./DashboardComponent";
 import DashboardSkeleton from "./components/skeletons/DashboardSkeleton";
 
