@@ -46,7 +46,7 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
     defaultValues: {
       username: profile?.username || "",
       dob: profile?.dob || "",
-      institution: profile?.institution || "",
+      institution: parseInt(profile?.institution!),
       bio: profile?.bio || "",
       first_name: profile?.first_name || "",
       last_name: profile?.last_name || "",
