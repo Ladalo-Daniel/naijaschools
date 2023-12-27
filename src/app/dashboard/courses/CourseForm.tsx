@@ -30,7 +30,7 @@ export default function CourseForm({ className, setOpen, course, institutions, t
   React.useEffect(() => {
     if (state?.message && state?.success) {
       toast.success(state?.message)
-      setOpen?.(false)
+      // setOpen?.(false)
       toggleOpen?.(course?.id as number)
     } else if (state?.message && !state?.success) {
      toast.error(state?.message)

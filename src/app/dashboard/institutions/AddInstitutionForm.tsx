@@ -30,8 +30,8 @@ import { SaveButton } from "./SaveInstitutionButton"
 import { useFormState } from "react-dom"
 import { toast } from "sonner"
 import UpsertInstitution from "./institution.actions"
-import { Database } from "@/types/supabase"
 import { Textarea } from "@/components/ui/textarea"
+import { Institution } from "@/supabase/institutions"
 
 export default function AddInstitutionForm() {
   const [open, setOpen] = React.useState(false)
@@ -86,7 +86,7 @@ const initialState = {
 
 export function InstitutionForm({ className, setOpen, institution, toggleOpen }: { 
     className?: string, setOpen: React.Dispatch<React.SetStateAction<boolean>>, 
-    institution?: Database['public']['Tables']['institutions']['Row'],
+    institution?: Institution,
     toggleOpen?: (id: number) => void 
   }) {
   const [state, formAction] = useFormState(UpsertInstitution, initialState)

@@ -56,7 +56,7 @@ export function ComboboxForm({ institutions, form }: {
                     >
                       {field.value
                         ? institutions?.find(
-                            (institution) => institution?.name === field?.value
+                            (institution) => institution?.id === field?.value
                           )?.name
                         : "Select institution"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -73,10 +73,10 @@ export function ComboboxForm({ institutions, form }: {
                     <CommandGroup>
                       {institutions.map((institution) => (
                         <CommandItem
-                          value={institution.name}
+                          value={institution.id.toString()}
                           key={institution.id}
                           onSelect={() => {
-                            form.setValue("institution", institution.name)
+                            form.setValue("institution", institution.id)
                           }}
                         >
                           {institution.name}
@@ -95,7 +95,7 @@ export function ComboboxForm({ institutions, form }: {
                 </PopoverContent>
               </Popover>
               <FormDescription>
-                This is the institution that will be used in the dashboard.
+                This is the institution that will be used in the dashboard and for filtering courses tailored to your taste.
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -1,12 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Database } from '@/types/supabase'
+import { getInstitutions } from '@/supabase/institutions'
+import { User } from '@/supabase/user'
 import { format } from 'date-fns'
 import Image from 'next/image'
 import React from 'react'
 
-const ProfileCard = async ({ profile }: { profile: Database['public']['Tables']['users']['Row']}) => {
+const ProfileCard = async ({ profile }: { profile: User}) => {
+    const institutions = await getInstitutions()
+
+    const institutionName = institutions?.find(institution => institution.id === parseInt(profile.institution!))?.name
   return (
     <div className='py-6'>
       <div className='flex flex-col gap-3 shadow-sm'>
@@ -51,7 +54,25 @@ const ProfileCard = async ({ profile }: { profile: Database['public']['Tables'][
         <Card className='p-2 dark:bg-secondary border bg-background'>
             <CardHeader className='my-4'>
                 <CardTitle>
-                    Personal Information
+                    Personalized Information
+                    <Separator className='dark:bg-zinc-700 mt-2' />
+                </CardTitle>
+            </CardHeader>
+            <CardContent className='flex flex-col gap-3'>
+                <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
+                    <span className='font-semibold flex-1'>First Name:</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.first_name! || '-'}</span>
+                </CardDescription>
+                <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
+                    <span className='font-semibold flex-1'>Last Name:</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.last_name! || '-'}</span>
+                </CardDescription>
+            </CardContent>
+        </Card>
+        <Card className='p-2 dark:bg-secondary border bg-background'>
+            <CardHeader className='my-4'>
+                <CardTitle>
+                    About
                     <Separator className='dark:bg-zinc-700 mt-2' />
                 </CardTitle>
             </CardHeader>
@@ -80,7 +101,7 @@ const ProfileCard = async ({ profile }: { profile: Database['public']['Tables'][
                 </CardDescription>
                 <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
                     <span className='font-semibold flex-1'>Institution:</span>
-                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.institution as string || "-"}</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{institutionName || "-"}</span>
                 </CardDescription>
             </CardContent>
         </Card>

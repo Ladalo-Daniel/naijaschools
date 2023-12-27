@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getUser()
 
   if (user?.id && req.nextUrl.pathname === '/sign-up') {
-    if (profile?.data?.onboarded === true ) return NextResponse.redirect(new URL('/dashboard', req.url))
+    if (profile?.data?.onboarded === true && user?.id ) return NextResponse.redirect(new URL('/dashboard', req.url))
     return NextResponse.redirect(new URL('/account', req.url))
   }
 

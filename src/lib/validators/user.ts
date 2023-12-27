@@ -6,7 +6,7 @@ export const userFormSchema = z.object({
   }),
   email: z.string().email("You have to provide a valid email address").readonly(),
   bio: z.string().optional(),
-  institution: z.string(),
+  institution: z.number(),
   dob: z.any().optional(),
   avatar: z.any().optional(),
   first_name: z.string().optional(),
