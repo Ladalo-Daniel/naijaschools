@@ -5,17 +5,34 @@ export type QuestionList = Database['public']['Tables']['questions']['Row'][]
 export type Question = Database['public']['Tables']['questions']['Row']
 
 export async function createQuestion(question: Question) {
-    const { data, error } = await supabaseClient
-    .from('questions')
-    .upsert(question)
-    .select()
+    const {id} = question
 
-    if (error) {
-        console.error(error)
-        throw error
-    }
+    if (id) {
+        const { data, error } = await supabaseClient
+        .from('questions')
+        .upsert(question)
+        .eq("id", id)
+        .select()
 
-    return { data, error }
+        if (error) {
+            console.error(error)
+            throw error
+        }
+
+        return { data, error }
+        }
+
+        const { data, error } = await supabaseClient
+        .from('questions')
+        .upsert(question)
+        .select()
+
+        if (error) {
+            console.error(error)
+            throw error
+        }
+
+        return { data, error }
 }
 
 export async function getQuestions() {
@@ -30,6 +47,7 @@ export async function getQuestionById(id:string) {
     const { data, error } = await supabaseClient.from('questions')
     .select()
     .eq("id", id)
+    .single()
 
     if (error) throw error
 

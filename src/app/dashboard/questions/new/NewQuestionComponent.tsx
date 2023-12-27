@@ -14,9 +14,9 @@ const NewQuestionComponent = ({ institutions, courses, question }: { institution
     const institutionId = searchParams.get("institution")
     const filteredCourses = courses.filter(old => old.institution == institutionId)
   return (
-    <div>
-        <section className='flex flex-col justify-between gap-5 overflow-auto'>
-            {!question && <SelectInstitution institutions={institutions as InstitutionList} />}
+    <div className='flex flex-col gap-3'>
+        <section className='gap-5 overflow-auto flex-1 flex-col justify-start'>
+            {!question && <SelectInstitution institutions={institutions as InstitutionList} question={question} institution_id={institutionId as any} />}
             {
                 (institutionId || question) && <Suspense fallback={<SelectCourseSkeleton />}>
                     <SelectCourse courses={filteredCourses as CourseList} question={question} course_id={question?.course_id as number}/>

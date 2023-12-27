@@ -75,7 +75,6 @@ export const useCreateQuestion = () => {
             queryClient.invalidateQueries({
                 queryKey: [QUERY_KEYS.get_user_profile]
             })
-            toast.success("Question created successfully.")
             router.refresh()
         },
         onError: ({message}) => {

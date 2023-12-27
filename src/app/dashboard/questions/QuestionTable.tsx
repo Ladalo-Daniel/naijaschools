@@ -28,6 +28,8 @@ const QuestionTable = ({ questions, courses, institutions }: {questions: Questio
       <TableHeader>
         <TableRow>
           <TableHead className="w-[50px]">S/N</TableHead>
+          <TableHead>Institution</TableHead>
+          <TableHead>Code</TableHead>
           <TableHead>Course</TableHead>
           <TableHead>Question</TableHead>
           <TableHead>Option 1</TableHead>
@@ -44,6 +46,8 @@ const QuestionTable = ({ questions, courses, institutions }: {questions: Questio
         {questions.map((i, j) => (
           <TableRow key={j}>
             <TableHead className='text-primary'>{j+1}.</TableHead>
+            <TableHead>{institutions?.find(old => old?.id === courses?.find(_old => _old?.id === i.course_id!)?.institution)?.name}</TableHead>
+            <TableHead>{courses?.find(old => old?.id === i.course_id!)?.code}</TableHead>
             <TableHead>{courses?.find(old => old?.id === i.course_id!)?.name}</TableHead>
             <TableHead>{i.question}</TableHead>
             <TableHead>{i.option1}</TableHead>

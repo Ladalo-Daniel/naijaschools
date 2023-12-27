@@ -1,7 +1,6 @@
 // "use server"
 
 import { supabaseClient } from "@/supabase"
-import { revalidatePath } from "next/cache"
 
 export async function deleteQuestion(prevState: any, formData: FormData) {
     const { error } = await supabaseClient.from("questions")
@@ -14,9 +13,7 @@ export async function deleteQuestion(prevState: any, formData: FormData) {
         success: false,
         pending: false
       }
-  
-    // revalidatePath('/dashboard/questions')
-  
+    
     return {
       message: 'Success! Question has been deleted.',
       success: true,

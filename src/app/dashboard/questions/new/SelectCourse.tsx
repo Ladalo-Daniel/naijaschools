@@ -15,7 +15,6 @@ import { CourseList } from "@/supabase/courses"
 import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import MultiAddQuestionsForm from "./MultiAddQuestionsForm"
-import SelectCourseSkeleton from "../../components/skeletons/SelectCourseSkeleton"
 import { Question } from "@/supabase/questions"
 
 export function SelectCourse({ courses, question, course_id }: {
@@ -24,11 +23,11 @@ export function SelectCourse({ courses, question, course_id }: {
     course_id?: number
 
 }) {
-    const [courseId, setCourseId] = React.useState(question?.course_id || 0)
+  const [courseId, setCourseId] = React.useState(question?.course_id || 0)
 
   return (
-    <React.Suspense fallback={<SelectCourseSkeleton />}>
-    <Select name="course" required defaultValue={courseId as any} onValueChange={v => setCourseId(parseInt(v))}>
+    <section className="flex flex-col gap-3 flex-1">
+    {!question?.id && <Select name="course" required defaultValue={courseId as any || ""} onValueChange={v => setCourseId(parseInt(v))}>
       <SelectTrigger className="md:w-[300px] w-full">
         <SelectValue placeholder={"Select a course for these Questions."} />
       </SelectTrigger>
@@ -50,8 +49,8 @@ export function SelectCourse({ courses, question, course_id }: {
         }
 
       </SelectContent>
-    </Select>
+    </Select>}
     <MultiAddQuestionsForm course_id={courseId} question={question} />
-    </React.Suspense>
+    </section>
   )
 }

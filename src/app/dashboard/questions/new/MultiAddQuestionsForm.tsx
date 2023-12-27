@@ -38,7 +38,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
         },
       }) 
 
-      const { mutate: createQuestion, isPending } = useCreateQuestion()
+      const { mutate: createQuestion, isPending, isError } = useCreateQuestion()
 
       const [selectedOptions, setSelectedOptions] = useState<Record<string, string | null>>({
         option1: null,
@@ -47,10 +47,10 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
         option4: null,
     });
 
-    const handleSwitchToggle = (fieldName: string, index: string) => {
+    const handleSwitchToggle = (fieldName: string, value: string) => {
         setSelectedOptions((prevSelectedOptions) => ({
             ...prevSelectedOptions,
-            [fieldName]: prevSelectedOptions[fieldName] === index ? null : index,
+            [fieldName]: prevSelectedOptions[fieldName] === value ? null : value,
         }));
     };
 
@@ -58,14 +58,15 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
     .map(key => selectedOptions[key])
     .find(value => value !== null);
 
-    console.log(selectedOptions[firstNonNullOption])
-
     function onSubmit(values: z.infer<typeof QuestionSchema>) {
         if (!firstNonNullOption) {
             toast.warning("You have not selected any option as an answer yet!")
             return 
         }
-        createQuestion({...values, course_id: course_id, answer: firstNonNullOption} as any, {
+        createQuestion({...values, course_id: course_id, answer: firstNonNullOption, id: question?.id } as any, {
+            onSuccess: () => {
+                question?.id ? toast.success("Question updated successfully."): toast.success("Question created successfully.")
+            },
             onSettled: () => {
                 form.reset()
                 setSelectedOptions({
@@ -114,9 +115,10 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormMessage />
                             </FormItem>
                             <Switch
-                              checked={selectedOptions.option1 === 'option1'}
-                              onCheckedChange={() => handleSwitchToggle('option1', 'option1')}
-                              disabled={selectedOptions.option1 !== null && selectedOptions.option1 !== 'option1'}
+                              checked={(selectedOptions.option1 === field.value)}
+                              defaultChecked={field.value === question?.answer}
+                              onCheckedChange={() => handleSwitchToggle('option1', field.value)}
+                              disabled={selectedOptions.option1 !== null && selectedOptions.option1 !== field.value}
                               aria-readonly
                             />
                         </div>
@@ -135,9 +137,10 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormMessage />
                             </FormItem>
                             <Switch
-                                checked={selectedOptions.option2 === 'option2'}
-                                onCheckedChange={() => handleSwitchToggle('option2', 'option2')}
-                                disabled={selectedOptions.option2 !== null && selectedOptions.option2 !== 'option2'}
+                                checked={(selectedOptions.option2 === field.value)}
+                                onCheckedChange={() => handleSwitchToggle('option2', field.value)}
+                                defaultChecked={field.value === question?.answer}
+                                disabled={selectedOptions.option2 !== null && selectedOptions.option2 !== field.value}
                                 aria-readonly
                             />
                         </div>
@@ -156,9 +159,10 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormMessage />
                             </FormItem>
                             <Switch
-                              checked={selectedOptions.option3 === 'option3'}
-                              onCheckedChange={() => handleSwitchToggle('option3', 'option3')}
-                              disabled={selectedOptions.option3 !== null && selectedOptions.option3 !== 'option3'}
+                              checked={(selectedOptions.option3 === field.value)}
+                              onCheckedChange={() => handleSwitchToggle('option3', field.value)}
+                              defaultChecked={field.value === question?.answer}
+                              disabled={selectedOptions.option3 !== null && selectedOptions.option3 !== field.value}
                               aria-readonly
                             />
                         </div>
@@ -177,9 +181,10 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormMessage />
                             </FormItem>
                             <Switch
-                              checked={selectedOptions.option4 === 'option4'}
-                              onCheckedChange={() => handleSwitchToggle('option4', 'option4')}
-                              disabled={selectedOptions.option4 !== null && selectedOptions.option4 !== 'option4'}
+                              checked={(selectedOptions.option4 === field.value)}
+                              defaultChecked={field.value === question?.answer}
+                              onCheckedChange={() => handleSwitchToggle('option4', field.value)}
+                              disabled={selectedOptions.option4 !== null && selectedOptions.option4 !== field.value}
                               aria-readonly
                             />
                         </div>
@@ -198,12 +203,12 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                         </FormItem>
                     )}
                     />
-                    <div className='flex gap-3 flex-wrap'>
+                    {!question?.id && <div className='flex gap-3 flex-wrap'>
                         <Button type="submit">{isPending ? "Saving...": "Save"} {isPending && <Loader2 className='animate-spin' size={15}/>}</Button>
                         <Button variant={'outline'} type="submit">{isPending ? "Saving...": "Save and Add Another"} {isPending && <Loader2 className='animate-spin' size={15} />}</Button>
                         <Button variant={'secondary'}
                             onClick={() => {
-                                (!isPending || !firstNonNullOption) && router.push('/dashboard/questions')
+                                (!isPending || !firstNonNullOption || !isError) && router.push('/dashboard/questions')
                             }} 
                             type="submit">{isPending ? "Saving...": "Save and exit"} {isPending && <Loader2 className='animate-spin ml-1' size={15} />}</Button>
                         <Button variant={'destructive'} type="button" onClick={() => {
@@ -215,7 +220,15 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                                     option4: null,
                                 })
                             }}>Reset</Button>
-                    </div>
+                    </div>}
+                    {question?.id && <div className='flex gap-3 flex-wrap'>
+                        <Button type="submit">{isPending ? "Updating...": "Update"} {isPending && <Loader2 className='animate-spin' size={15}/>}</Button>
+                        <Button variant={'secondary'}
+                            onClick={() => {
+                                (!isPending || !firstNonNullOption || !isError) && router.push('/dashboard/questions')
+                            }} 
+                            type="submit">{isPending ? "Updating...": "Update and quit"} {isPending && <Loader2 className='animate-spin ml-1' size={15} />}</Button>
+                    </div>}
                 </form>
             </Form>
         </section>
