@@ -50,7 +50,7 @@ export default function Deletequestion({ question }: { question: Question}) {
         <AlertDialogContent>
             <form action={formAction}>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you absolutely sure you want to delete <b>"{question?.question}"</b>?</AlertDialogTitle>
+                    <AlertDialogTitle>Are you absolutely sure you want to delete <b>&quot;{question?.question}&quot;</b>?</AlertDialogTitle>
                     <AlertDialogDescription>
                     This action cannot be undone. This will permanently delete this question and remove it&#39;s data from our servers.
                     </AlertDialogDescription>

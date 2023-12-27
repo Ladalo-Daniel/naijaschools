@@ -13,7 +13,7 @@ const StudentsCoursesComponent = ({ profile, courses, institutions }: { profile:
 
     if (userCourses?.length === 0) {
         return <div className='p-4 border shadow rounded-md py-6'>
-            <p>Your Institution <b>"{institutionName}"</b> does not have registered courses yet. Check again later or edit your institution to the appropriate one <Link href={'/dashboard/profile'} className='text-primary hover:underline transition-all'>here</Link>.</p>
+            <p>Your Institution <b>&quot;{institutionName}&quot;</b> does not have registered courses yet. Check again later or edit your institution to the appropriate one <Link href={'/dashboard/profile'} className='text-primary hover:underline transition-all'>here</Link>.</p>
         </div>
     }
   return (
@@ -25,7 +25,7 @@ const StudentsCoursesComponent = ({ profile, courses, institutions }: { profile:
         <section className='flex flex-wrap gap-4'>
         {
             userCourses?.map(course => (
-                <Card className='bg-gradient w-68 h-40 max-w-[300px] max-sm:w-full'>
+                <Card className='bg-gradient w-68 h-40 max-w-[300px] max-sm:w-full' key={course?.id}>
                     <CardHeader>
                         <CardTitle className='text-primary'>
                             {course.name}
