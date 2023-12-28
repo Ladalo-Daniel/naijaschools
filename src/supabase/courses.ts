@@ -20,3 +20,15 @@ export const getCoursesByQuery = async (column: "code" | "description" | "id" | 
 
     return {data, error, count}
 }
+
+export async function getCourseById(id:string) {
+    const { data, error } = await supabaseClient.from('courses')
+    .select()
+    .eq("id", id)
+    .single()
+
+    if (error) throw error
+
+    return { data, error }
+}
+

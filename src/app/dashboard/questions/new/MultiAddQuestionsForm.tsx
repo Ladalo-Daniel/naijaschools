@@ -1,3 +1,5 @@
+'use client'
+
 import { QuestionSchema } from '@/lib/validators/questions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -21,7 +23,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'sonner'
 import { Question } from '@/supabase/questions'
 
-const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, question?: Question }) => {
+const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, question?: Question, paramsId?: string | number }) => {
 
     const router = useRouter()
     const searchParams = useSearchParams()
@@ -42,28 +44,32 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
 
       const { mutate: createQuestion, isPending, isError } = useCreateQuestion()
 
-      const [selectedOptions, setSelectedOptions] = useState<Record<string, string | null | undefined>>({
-        option1: question?.answer === question?.option1 ? question?.answer : null,
-        option2: question?.answer === question?.option2 ? question?.answer : null,
-        option3: question?.answer === question?.option3 ? question?.answer : null,
-        option4: question?.answer === question?.option4 ? question?.answer : null,
-      });      
-
-    const nonNullValuesCount = Object.values(selectedOptions).filter(value => value !== null).length;
-    
-    const handleSwitchToggle = (fieldName: string, value: string) => {
-        setSelectedOptions((prevSelectedOptions) => ({
-            ...prevSelectedOptions,
-            [fieldName]: prevSelectedOptions[fieldName] === value ? null : value,
-        }));
-    };
-
+      /**
+       * I am sorry if you don't understand what is going on here.
+       * Essentially, I am converting @undefined to @null data types
+       */
+      const [selectedOptions, setSelectedOptions] = useState<Record<string, string | null>>({
+        option1: question?.answer === question?.option1 ? question?.answer === undefined ? null : question.answer : null,
+        option2: question?.answer === question?.option2 ? question?.answer === undefined ? null : question.answer : null,
+        option3: question?.answer === question?.option3 ? question?.answer === undefined ? null : question.answer : null,
+        option4: question?.answer === question?.option4 ? question?.answer === undefined ? null : question.answer : null,
+      });
+            
+      const nonNullValuesCount = Object.values(selectedOptions).filter(value => value !== null).length;
+      
+      const handleSwitchToggle = (fieldName: string, value: string) => {
+          setSelectedOptions((prevSelectedOptions) => ({
+              ...prevSelectedOptions,
+              [fieldName]: prevSelectedOptions[fieldName] === value ? null : value,
+            }));
+        };
+        
     const firstNonNullOption = Object.keys(selectedOptions)
-    .map(key => selectedOptions[key])
-    .find(value => value !== null);
+        .map(key => selectedOptions[key])
+        .find(value => value !== null);
     
     type buttonPendingType = 'default' | 'basic' | 'exit' | 'reset'
-
+    
     const [buttonType, setButtonType] = useState<buttonPendingType>('default')
 
     const handleButtonType = (buttonType: buttonPendingType) => {
@@ -80,7 +86,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
             if (!firstNonNullOption) return
             if (nonNullValuesCount > 1) return
 
-            !(isPending && isError && navigator.onLine) ? router.push('/dashboard/questions'): null
+            !(isPending && isError && navigator.onLine) ? router.push(`/dashboard/institutions/${institution}/courses/${course_id}`): null
         }
         
         if (buttonType === 'reset') {
@@ -110,16 +116,16 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
         createQuestion({...values, course_id: course_id, answer: firstNonNullOption, id: question?.id } as any, {
             onSuccess: () => {
                 question?.id ? toast.success("Question updated successfully."): toast.success("Question created successfully.")
-                return router.refresh()
-            },
-            onSettled: () => {
-                form.reset()
-                buttonType === 'default' ? null : setSelectedOptions({
+                setSelectedOptions({
                     option1: null,
                     option2: null,
                     option3: null,
                     option4: null,
                 })
+                return router.refresh()
+            },
+            onSettled: () => {
+                form.reset()
             }
         })
     }
@@ -129,7 +135,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
       useEffect(() => {
         if (!course_id) {
             toast.info("You have not selected a course yet!", {
-                description: "Select a course from the options above to continue with adding questions. Don't worry, it won't take time.",
+                description: "Select a course from the options below to continue with adding questions. Don't worry, it won't take time.",
                 action: {
                     label: "Dismiss",
                     onClick: () => {},
@@ -139,30 +145,38 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
       }, [institution])
 
       useEffect(() => {
-        if (!navigator.onLine) {
-            toast.warning("You are currently offline and your changes may not be Saved!")
-          }
+        try
+            {
+                if (!navigator.onLine) {
+                toast.warning("You are currently offline and your changes may not be Saved!")
+            }
+            }
+        catch(error) {
+            console.error(error)
+        }
       }, [navigator.onLine])
 
-      if (!course_id) return
+      if (!course_id && !institution) return
       
     return (
         <section className='flex flex-col gap-3 overflow-auto'>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 overflow-auto">
-                    <FormField
-                    control={form.control}
-                    name="question"
-                    render={({ field }) => (
-                            <FormItem>
-                            <FormLabel className='text-primary'>Question</FormLabel>
-                            <FormControl>
-                                <Textarea placeholder="question ..." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                            </FormItem>
-                    )}
-                    />
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 px-1 overflow-auto">
+                    <div>
+                        <FormField
+                        control={form.control}
+                        name="question"
+                        render={({ field }) => (
+                                <FormItem>
+                                <FormLabel className='text-primary'>Question</FormLabel>
+                                <FormControl>
+                                    <Textarea className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm' placeholder="question ..." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                                </FormItem>
+                        )}
+                        />
+                    </div>
                     <FormField
                     control={form.control}
                     name="option1"
@@ -178,7 +192,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <Switch
                               checked={(selectedOptions.option1 === field.value)}
                               defaultChecked={field.value === question?.answer}
-                              onCheckedChange={() => handleSwitchToggle('option1', field.value)}
+                              onCheckedChange={() => handleSwitchToggle('option1', field.value ?? null)}
                               disabled={!!selectedOptions.option1 &&
                                 selectedOptions.option1 !== field.value}
                               aria-readonly
@@ -200,7 +214,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             </FormItem>
                             <Switch
                                 checked={(selectedOptions.option2 === field.value)}
-                                onCheckedChange={() => handleSwitchToggle('option2', field.value)}
+                                onCheckedChange={() => handleSwitchToggle('option2', field.value ?? null)}
                                 defaultChecked={field.value === question?.answer}
                                 disabled={!!selectedOptions.option2 &&
                                     selectedOptions.option2 !== field.value}
@@ -223,7 +237,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             </FormItem>
                             <Switch
                               checked={(selectedOptions.option3 === field.value)}
-                              onCheckedChange={() => handleSwitchToggle('option3', field.value)}
+                              onCheckedChange={() => handleSwitchToggle('option3', field.value ?? null)}
                               defaultChecked={field.value === question?.answer}
                               disabled={!!selectedOptions.option3 &&
                                 selectedOptions.option3 !== field.value}
@@ -247,7 +261,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <Switch
                               checked={(selectedOptions.option4 === field.value)}
                               defaultChecked={field.value === question?.answer}
-                              onCheckedChange={() => handleSwitchToggle('option4', field.value)}
+                              onCheckedChange={() => handleSwitchToggle('option4', field.value ?? null)}
                               disabled={!!selectedOptions.option4 &&
                                 selectedOptions.option4 !== field.value}
                               aria-readonly
@@ -302,3 +316,4 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
 }
 
 export default MultiAddQuestionsForm
+

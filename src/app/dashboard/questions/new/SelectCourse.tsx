@@ -16,14 +16,17 @@ import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import MultiAddQuestionsForm from "./MultiAddQuestionsForm"
 import { Question } from "@/supabase/questions"
+import { useSearchParams } from "next/navigation"
 
 export function SelectCourse({ courses, question, course_id }: {
     courses: CourseList,
     question?: Question,
-    course_id?: number
+    course_id?: number,
 
 }) {
-  const [courseId, setCourseId] = React.useState(question?.course_id || 0)
+  const searchParams = useSearchParams()
+  const institutionId = searchParams.get('institutions' ?? "")
+  const [courseId, setCourseId] = React.useState<number>(question?.course_id || courses.find(course => course.institution === parseInt(institutionId as string))?.id || 0)
 
   return (
     <section className="flex flex-col gap-3 flex-1 mt-3">

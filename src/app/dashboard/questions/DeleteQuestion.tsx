@@ -45,7 +45,7 @@ export default function Deletequestion({ question }: { question: Question}) {
     return (
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger asChild>
-          <Button isIconOnly className='bg-transparent'><Trash2 size={15} color='red' /></Button>
+          <Button isIconOnly className='bg-transparent'><Trash2 size={15} className="text-rose-500" /></Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
             <form action={formAction}>

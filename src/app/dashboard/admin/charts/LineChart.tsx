@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@nextui-org/card";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -55,7 +56,7 @@ const LineChart = ({ data, labels }: { data: number[], labels: string[] }) => {
         toastDatasetAtEvent(getDatasetAtEvent(chart, event))
       };
     return (
-      <div className="h-[500px] max-w-[1400px] flex-1">
+      <Card className="h-[500px] max-w-[1400px] flex-1 p-6">
         <Line
           data={{
             labels: labels,
@@ -72,7 +73,7 @@ const LineChart = ({ data, labels }: { data: number[], labels: string[] }) => {
           ref={chartRef as any}
           onClick={onClick}
         />
-      </div>
+      </Card>
     );
   };
 

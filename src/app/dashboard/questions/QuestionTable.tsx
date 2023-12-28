@@ -60,7 +60,7 @@ const QuestionTable = ({ questions, courses, institutions }: {questions: Questio
             <TableCell className="flex items-center gap-2">
 
               <DeleteQuestion question={i}/>
-              <Link href={`/dashboard/questions/edit/${i.id}`} className={cn('bg-transparent', buttonVariants({
+              <Link href={`/dashboard/questions/edit/${i.id}`} className={cn('bg-transparent text-primary', buttonVariants({
                 variant: "link"
               }))}><Edit2 size={15} /></Link>
 

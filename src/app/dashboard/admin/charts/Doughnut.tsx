@@ -3,12 +3,13 @@
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { Card } from '@nextui-org/card';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function DoughnutChart({ data, labels }: { data: number[], labels: string[]}) {
   return (
-    <div className='h-[500px] max-w-[1400px] flex-1'>
+    <Card className='h-[500px] max-w-[1400px] flex-1 p-6'>
         <Doughnut 
             data={{
                 labels: labels,
@@ -31,6 +32,6 @@ export function DoughnutChart({ data, labels }: { data: number[], labels: string
                 ],
               }} 
         />
-    </div>
+    </Card>
   )
 }

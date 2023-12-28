@@ -57,3 +57,13 @@ export async function getQuestionById(id:string) {
 
     return { data, error }
 }
+
+export async function getQuestionsByQuery(column: 'course_id' | 'id' | 'question', row: string | number, range?: number) {
+    const { data, error, count } = await supabaseClient.from('questions')
+    .select()
+    .eq(column, row)
+
+    if (error) throw error
+
+    return { data, error, count }
+}

@@ -9,12 +9,12 @@ import { useSearchParams } from 'next/navigation'
 import SelectCourseSkeleton from '../../components/skeletons/SelectCourseSkeleton'
 import { Question } from '@/supabase/questions'
 
-const NewQuestionComponent = ({ institutions, courses, question }: { institutions: InstitutionList, courses: CourseList, question?: Question}) => {
+const NewQuestionComponent = ({ institutions, courses, question  }: { institutions: InstitutionList, courses: CourseList, question?: Question }) => {
     const searchParams = useSearchParams()
     const institutionId = searchParams.get("institution")
     const filteredCourses = courses.filter(old => old.institution === parseInt(institutionId as string))
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-3 flex-1'>
         <section className='gap-5 overflow-auto flex-1 flex-col justify-start'>
             {!question && <SelectInstitution institutions={institutions as InstitutionList} question={question} institution_id={institutionId as any} />}
             {

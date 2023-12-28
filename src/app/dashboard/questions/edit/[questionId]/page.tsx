@@ -12,7 +12,7 @@ const QuestionEditPage = async ({ params }: { params: any}) => {
     const courses = await getCourses()
     const {data: institutions} = await getInstitutions()
   return (
-    <MaxWrapper className='bg-backround flex-1'>
+    <MaxWrapper className='bg-card dark:bg-background flex-1'>
       <BackButton />
         <h2 className="text-2xl py-2">Edit Question</h2>
         <section className='flex flex-col gap-3'>

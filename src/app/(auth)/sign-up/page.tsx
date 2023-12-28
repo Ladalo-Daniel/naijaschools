@@ -7,7 +7,11 @@ export default async function Home() {
   const session = await getUserSession()
   if (session?.user) redirect("/dashboard")
   return (
-    <div className="flex mx-auto justify-center items-center min-h-screen w-full max-w-[500px] p-4">
+    <div className="flex mx-auto justify-center items-center min-h-screen w-full max-w-[500px] p-4"
+      style={{
+        
+      }}
+    >
       <Card className="p-8 flex flex-col gap-6">
         <h1 className="text-2xl tracking-tight font-semibold text-primary">Welcome to naijaschools</h1>
         <p className="text-muted-foreground font-inherit tracking-tight text-xs">

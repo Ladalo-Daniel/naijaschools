@@ -13,8 +13,8 @@ const QuestionEditComponent = ({courses, institutions, id}: {
 }) => {
     const { data: question } = useGetQuestionById(id || "")
   return (
-    <div>
-        <NewQuestionComponent courses={courses as CourseList} institutions={institutions as InstitutionList} question={question?.data as any}/>
+    <div className=''>
+        <NewQuestionComponent courses={courses as CourseList} institutions={institutions as InstitutionList} question={question?.data as any} />
     </div>
   )
 } 

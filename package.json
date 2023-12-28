@@ -21,6 +21,7 @@
     "@nextui-org/theme": "^2.1.17",
     "@nextui-org/tooltip": "^2.0.29",
     "@nextui-org/user": "^2.0.25",
+    "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
