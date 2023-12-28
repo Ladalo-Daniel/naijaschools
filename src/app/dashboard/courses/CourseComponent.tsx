@@ -5,7 +5,7 @@ import CourseTable from './CourseTable'
 import { CourseList, getCourses } from '@/supabase/courses'
 
 const CourseComponent = async () => {
-  const institutions = await getInstitutions()
+  const {data: institutions} = await getInstitutions()
   const courses = await getCourses()
   return (
     <div className=''>

@@ -5,6 +5,7 @@ import { getProfile } from '@/supabase/user'
 import { redirect } from 'next/navigation'
 import InstitutionTable from './InstitutionTable'
 import { supabaseClient } from '@/supabase'
+import BackButton from '@/components/shared/BackButton'
 
 const InstitutionsPage = async () => {
     const profile = await getProfile()
@@ -17,6 +18,7 @@ const InstitutionsPage = async () => {
 
   return (
     <MaxWrapper className='bg-background max-w-7xl'>
+        <BackButton />
         <h2 className="text-2xl py-4 pb-2">Institutions</h2>
         <section className='flex flex-col gap-3'>
             <InstitutionComponent />

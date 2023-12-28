@@ -26,7 +26,7 @@ export function SelectCourse({ courses, question, course_id }: {
   const [courseId, setCourseId] = React.useState(question?.course_id || 0)
 
   return (
-    <section className="flex flex-col gap-3 flex-1">
+    <section className="flex flex-col gap-3 flex-1 mt-3">
     {!question?.id && <Select name="course" required defaultValue={courseId as any || ""} onValueChange={v => setCourseId(parseInt(v))}>
       <SelectTrigger className="md:w-[300px] w-full">
         <SelectValue placeholder={"Select a course for these Questions."} />
