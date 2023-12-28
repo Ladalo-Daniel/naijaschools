@@ -7,7 +7,7 @@ import Image from 'next/image'
 import React from 'react'
 
 const ProfileCard = async ({ profile }: { profile: User}) => {
-    const institutions = await getInstitutions()
+    const {data: institutions} = await getInstitutions()
 
     const institutionName = institutions?.find(institution => institution.id === parseInt(profile.institution!))?.name
   return (

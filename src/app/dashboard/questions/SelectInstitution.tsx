@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { InstitutionList } from "@/supabase/institutions"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Question } from "@/supabase/questions"
 
 export default function SelectInstitution({ institutions, institution_id, question }: {
@@ -23,13 +23,16 @@ export default function SelectInstitution({ institutions, institution_id, questi
 }) {
   const [institution, setInstitution] = React.useState('')
   const router = useRouter()
+  const searchParams = useSearchParams()
   
   React.useEffect(() => {
-    if (!question?.id) router.push(`?institution=${institution}`)
-  }, [institution])
+    if (!(question?.id)) {
+      router.push(`?institution=${institution}`)
+    }
+  }, [institution, router])
 
   return (
-    <Select name="institution" required defaultValue={institution_id as any} onValueChange={v => setInstitution(v)}>
+    <Select name="institution" required defaultValue={institution_id?.toString() || ""} onValueChange={v => setInstitution(v)}>
       <SelectTrigger className="w-full md:w-[300px]">
         <SelectValue placeholder={"Select an institution for this course."} />
       </SelectTrigger>

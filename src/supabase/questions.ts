@@ -38,6 +38,10 @@ export async function createQuestion(question: Question) {
 export async function getQuestions() {
     const { data, error } = await supabaseClient.from("questions")
     .select()
+    .order('created_at', {
+        ascending: false
+    })
+    .range(0, 30)
 
     if (error) throw error
     return { data, error }

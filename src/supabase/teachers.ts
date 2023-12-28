@@ -9,7 +9,7 @@ export type Teacher = Database['public']['Tables']['users']['Row']
 export async function getTeachers(range?: number) {
     const { error, data } = await supabaseClient.from('users')
       .select('*')
-      .eq("role", "staff")
+      .neq("role", "user")
 
       if (error) {
         console.error(error)

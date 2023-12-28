@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Dashboard() {
   return (
-      <MaxWrapper className="bg-background max-w-7xl">
+      <MaxWrapper className="bg-background max-w-max">
         <div className="md:py-5 py-2">
           <Suspense fallback={<DashboardSkeleton />}>
             <DashboardComponent />

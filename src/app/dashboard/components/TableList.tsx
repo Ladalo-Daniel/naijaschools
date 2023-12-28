@@ -18,7 +18,7 @@ const TableList = async ({ table, role }: { table: UserList, role?: "students" |
             <TableHeader>
                 <TableRow>
                     <TableHead className="w-[50px]">S/N</TableHead>
-                    <TableHead className='w-20'>Image</TableHead>
+                    <TableHead className='w-20'>Profile_Picture</TableHead>
                     <TableHead >FullName</TableHead>
                     <TableHead >Username</TableHead>
                     <TableHead >Email</TableHead>

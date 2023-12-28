@@ -4,14 +4,16 @@ import { CourseList, getCourses } from '@/supabase/courses'
 import { InstitutionList, getInstitutions } from '@/supabase/institutions'
 import QuestionEditComponent from './QuestionEditComponent'
 import Loading from '@/app/dashboard/loading'
+import BackButton from '@/components/shared/BackButton'
 
 const QuestionEditPage = async ({ params }: { params: any}) => {
   const id = params?.questionId as any
 
     const courses = await getCourses()
-    const institutions = await getInstitutions()
+    const {data: institutions} = await getInstitutions()
   return (
     <MaxWrapper className='bg-backround flex-1'>
+      <BackButton />
         <h2 className="text-2xl py-2">Edit Question</h2>
         <section className='flex flex-col gap-3'>
             <Suspense fallback={<Loading />}>

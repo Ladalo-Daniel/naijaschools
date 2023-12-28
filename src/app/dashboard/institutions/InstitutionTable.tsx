@@ -11,13 +11,14 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { Button } from '@nextui-org/button'
-import { Edit2 } from 'lucide-react'
+import { Edit2, EyeIcon } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { InstitutionForm } from './AddInstitutionForm'
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'
 import DeleteInstitution from './DeleteInstitution'
 import { InstitutionList } from '@/supabase/institutions'
+import Link from 'next/link'
 
 
 const InstitutionTable = ({ institutions }: {institutions: InstitutionList}) => {
@@ -85,6 +86,7 @@ const InstitutionTable = ({ institutions }: {institutions: InstitutionList}) => 
                     </DrawerContent>
                     </Drawer>}
 
+                    <Button as={Link} href={`/dashboard/institutions/${i.id}`} isIconOnly className='bg-transparent'><EyeIcon size={15} className='text-primary' /></Button>
             </TableCell>
           </TableRow>
         ))}

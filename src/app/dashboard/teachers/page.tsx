@@ -3,6 +3,7 @@ import { getProfile } from '@/supabase/user'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import TeacherComponent from './TeacherComponent'
+import BackButton from '@/components/shared/BackButton'
 
 const TeachersPage = async () => {
     const profile = await getProfile()
@@ -12,6 +13,7 @@ const TeachersPage = async () => {
 
   return (
     <MaxWrapper className='max-w-7xl flex-1 bg-background'>
+      <BackButton/>
         <h2 className="text-2xl py-3">Teachers</h2>
         <div className='flex flex-col gap-3'>
             <TeacherComponent />

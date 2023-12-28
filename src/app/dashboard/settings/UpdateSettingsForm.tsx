@@ -29,11 +29,11 @@ const UpdateSettingsForm = ({ profile }: { profile: Database['public']['Tables']
     <form className='flex flex-col gap-3' action={formAction}>
         <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
             <span className='font-semibold flex-1'>First Name:</span>
-            <Input name='first_name' required className='rounded-md border flex-1 dark:border-zinc-700 shadow' defaultValue={profile.first_name || ""}/>
+            <Input name='first_name' required className='rounded-md border p-3.5 flex-1 dark:border-zinc-700 shadow' defaultValue={profile.first_name || ""}/>
         </CardDescription>
         <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
             <span className='font-semibold flex-1'>Last Name:</span>
-            <Input name='last_name' required className='rounded-md border flex-1 dark:border-zinc-700 shadow' defaultValue={profile.last_name || ""}/>
+            <Input name='last_name' required className='rounded-md border p-3.5 flex-1 dark:border-zinc-700 shadow' defaultValue={profile.last_name || ""}/>
         </CardDescription>
         <CardDescription className='flex justify-end md:items-center md:flex-row flex-col gap-2'>
             <SaveButton />

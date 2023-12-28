@@ -7,7 +7,7 @@ import StaffDashBoardComponent from './StaffDashBoardComponent'
 const DashboardComponent = async () => {
   const profile = await getProfile()
   return (
-    <div className='flex flex-col gap-3 md:px-4 max-w-xs:px-8 px-16'>
+    <div className='flex flex-col gap-3 md:px-8 max-sm:w-full px-3'>
         {
             profile?.data?.role === "admin" && <AdminComponent />
         }
