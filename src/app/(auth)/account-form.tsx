@@ -25,16 +25,17 @@ import { useUpdateProfile } from "@/lib/react-query"
 import { Button } from "@nextui-org/button"
 import { useRouter } from "next/navigation"
 import { SheetClose } from "@/components/ui/sheet"
-import { Database } from "../../types/supabase"
 import FileUploader from "@/components/shared/FileUploader"
 import { toast } from "sonner"
+import { User } from "@/supabase/user"
+import { InstitutionList } from "@/supabase/institutions"
 
 export default function AccountForm({ session, isUpdate, profile, isDashboard, institutions }: { 
   session: Session | null, 
   isUpdate?: boolean, 
-  profile: Database['public']['Tables']['users']['Update'], 
+  profile: User, 
   isDashboard?: boolean,
-  institutions:  Database['public']['Tables']['institutions']['Row'],
+  institutions:  InstitutionList,
 }) {
 
   const user = session?.user

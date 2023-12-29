@@ -24,30 +24,31 @@ export default function SelectInstitution({ institutions, institution_id, questi
   const [institution, setInstitution] = React.useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
-  
-  React.useEffect(() => {
-    if (!(question?.id)) {
-      router.push(`?institution=${institution}`)
-    }
-  }, [institution, router])
+
+  const handleValueChange = (value: string) => {
+    setInstitution(value)
+    if (value) router.push(`?institution=${institution}`)
+  } 
 
   return (
-    <Select name="institution" required defaultValue={institution_id?.toString() || ""} onValueChange={v => setInstitution(v)}>
-      <SelectTrigger className="w-full md:w-[300px]">
-        <SelectValue placeholder={"Select an institution for this course."} />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Institutions</SelectLabel>
-          {
-            institutions?.map(institution => (
-                <SelectItem value={institution?.id?.toString()} key={institution.id}>
-                    {institution.name}
-                </SelectItem>
-            ))
-          }
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="px-2">
+      <Select name="institution" required defaultValue={institution_id?.toString() || ""} onValueChange={v => handleValueChange(v)}>
+        <SelectTrigger className="w-full md:w-[300px]">
+          <SelectValue placeholder={"Select an institution for this course."} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Institutions</SelectLabel>
+            {
+              institutions?.map(institution => (
+                  <SelectItem value={institution?.id?.toString()} key={institution.id}>
+                      {institution.name}
+                  </SelectItem>
+              ))
+            }
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   )
 }

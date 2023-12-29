@@ -28,17 +28,17 @@ export const side_bar_links: {
       tooltip: "Profile",
     },
     {
+      href: "/dashboard/institutions",
+      icon: <Building2 size={18} />,
+      activeIcon: <Building2 size={18} />,
+      tooltip: "Institutions",
+      hidden: true,
+    },
+    {
       href: "/dashboard/courses",
       icon: <BookIcon size={18} />,
       activeIcon: <BookIcon size={18} />,
       tooltip: "Courses",
-      hidden: true
-    },
-    {
-      href: "/dashboard/questions",
-      icon: <QuestionMarkIcon width={18} />,
-      activeIcon: <QuestionMarkIcon width={18} />,
-      tooltip: "Questions",
       hidden: true
     },
     {
@@ -62,11 +62,11 @@ export const side_bar_links: {
       hidden: true,
     },
     {
-      href: "/dashboard/institutions",
-      icon: <Building2 size={18} />,
-      activeIcon: <Building2 size={18} />,
-      tooltip: "Institutions",
-      hidden: true,
+      href: "/dashboard/questions",
+      icon: <QuestionMarkIcon width={18} />,
+      activeIcon: <QuestionMarkIcon width={18} />,
+      tooltip: "Questions",
+      hidden: true
     },
     {
       href: "/dashboard/community",

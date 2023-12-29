@@ -26,20 +26,24 @@ export function SelectCourse({ courses, question, course_id }: {
 }) {
   const searchParams = useSearchParams()
   const institutionId = searchParams.get('institutions' ?? "")
-  const [courseId, setCourseId] = React.useState<number>(question?.course_id || courses.find(course => course.institution === parseInt(institutionId as string))?.id || 0)
+  
+  const [courseId, setCourseId] = React.useState<number>(question?.course_id || courses.find(course => course.institution === parseInt(institutionId as string))?.id || parseInt(searchParams.get('course') as string) || 0)
+
+  const courseName = courses.find(course => course.id === courseId)?.name || ""
 
   return (
-    <section className="flex flex-col gap-3 flex-1 mt-3">
-    {!question?.id && <Select name="course" required defaultValue={courseId as any || ""} onValueChange={v => setCourseId(parseInt(v))}>
-      <SelectTrigger className="md:w-[300px] w-full">
+    <section className="flex flex-col gap-3 flex-1 mt-3 px-2">
+    {!question?.id && <Select name="course" required defaultValue={courseName} onValueChange={v => setCourseId(parseInt(v))}>
+      <SelectTrigger className="md:w-[300px] w-full relative items-start justify-start flex">
         <SelectValue placeholder={"Select a course for these Questions."} />
+       {courseName && <SelectValue className="text-left text-primary flex justify-start">{courseName}</SelectValue>}
       </SelectTrigger>
       <SelectContent>
         {courses?.length ? <SelectGroup>
           <SelectLabel>Courses</SelectLabel>
           {
             courses?.map(course => (
-                <SelectItem value={course?.id?.toString()} key={course.id}>
+                <SelectItem value={course?.id?.toString() || courseId.toString()} key={course.id}>
                     {course.name}
                 </SelectItem>
             ))

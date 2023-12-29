@@ -9,7 +9,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function DoughnutChart({ data, labels }: { data: number[], labels: string[]}) {
   return (
-    <Card className='h-[500px] max-w-[1400px] flex-1 p-6'>
+    <Card className='h-[500px] max-w-[1400px] max-sm:w-full flex-1 p-6'>
         <Doughnut 
             data={{
                 labels: labels,

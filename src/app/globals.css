@@ -142,11 +142,21 @@
 
   .leftsidebar {
     @apply hidden md:flex px-6 pb-10 flex-col justify-between min-w-[270px] overflow-auto;
-  }
 
+  }
+  
   .common-container {
     @apply flex flex-col flex-1 gap-10 overflow-y-scroll py-20 px-5 md:px-8 lg:px-14 custom-scrollbar;
   }
+}
+
+@keyframes pulse {
+  50% {
+      opacity: .5;
+  }
+}
+.hover\:animate-pulse-plus:hover {
+    animation: pulse 16s cubic-bezier(0.7, 0.6, 0.8, 1) infinite;
 }
 
 .text-height {

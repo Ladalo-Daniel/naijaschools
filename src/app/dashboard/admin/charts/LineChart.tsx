@@ -56,7 +56,7 @@ const LineChart = ({ data, labels }: { data: number[], labels: string[] }) => {
         toastDatasetAtEvent(getDatasetAtEvent(chart, event))
       };
     return (
-      <Card className="h-[500px] max-w-[1400px] flex-1 p-6">
+      <Card className="h-[500px] max-w-[1400px] max-sm:w-full flex-1 p-6">
         <Line
           data={{
             labels: labels,

@@ -29,10 +29,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { userFormSchema } from "@/lib/validators/user"
-import { Database } from "@/types/supabase"
+import { InstitutionList } from "@/supabase/institutions"
 
 export function ComboboxForm({ institutions, form }: {
-    institutions: Database['public']['Tables']['institutions']['Row'][],
+    institutions: InstitutionList,
     form: UseFormReturn<z.infer<typeof userFormSchema>>,
 }) {
 

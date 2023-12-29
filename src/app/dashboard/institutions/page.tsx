@@ -19,7 +19,7 @@ const InstitutionsPage = async () => {
   return (
     <MaxWrapper className='bg-background max-w-7xl'>
         <BackButton />
-        <h2 className="text-2xl py-4 pb-2">Institutions</h2>
+        <h2 className="text-2xl py-2">Institutions</h2>
         <section className='flex flex-col gap-3'>
             <InstitutionComponent />
             <InstitutionTable institutions={institutions.data as any} />

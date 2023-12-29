@@ -27,8 +27,9 @@ import CourseForm from "./CourseForm"
 import { PlusIcon } from "lucide-react"
 import { InstitutionList } from "@/supabase/institutions"
 
-export default function AddCourseForm({ institutions }: {
-  institutions: InstitutionList
+export default function AddCourseForm({ institutions, institutionId }: {
+  institutions: InstitutionList,
+  institutionId?: string 
 }) {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -46,7 +47,7 @@ export default function AddCourseForm({ institutions }: {
               Add a course and Click save when {"you're"} done.
             </DialogDescription>
           </DialogHeader>
-          <CourseForm setOpen={setOpen} institutions={institutions}/>
+          <CourseForm setOpen={setOpen} institutions={institutions} institutionId={institutionId}/>
         </DialogContent>
       </Dialog>
     )
@@ -64,7 +65,7 @@ export default function AddCourseForm({ institutions }: {
             Add a new course here and click save when {"you're"} done.
           </DrawerDescription>
         </DrawerHeader>
-        <CourseForm className="px-4" setOpen={setOpen} institutions={institutions as InstitutionList}/>
+        <CourseForm className="px-4" setOpen={setOpen} institutions={institutions as InstitutionList} institutionId={institutionId}/>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>

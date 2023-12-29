@@ -5,7 +5,7 @@ import DashboardComponent from "./DashboardComponent";
 import DashboardSkeleton from "./components/skeletons/DashboardSkeleton";
 
 export const metadata: Metadata = {
-  title: "dashboard",
+  title: "Dashboard",
   description: "Dashboard | Welcome"
 }
 

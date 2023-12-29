@@ -22,3 +22,4 @@ export const getInstitutionById = async (institutionId: string) => {
     if (error) throw error
     return {data, count, error}
 }
+

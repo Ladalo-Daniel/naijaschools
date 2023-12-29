@@ -6,6 +6,7 @@ import MobileSidebar from './MobileSidebar'
 import { User, getProfile } from '@/supabase/user'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import MobileActions from './MobileActions'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
@@ -18,15 +19,18 @@ const TopNavbar = async () => {
       <MobileSidebar profile={profile?.data as User} />
 
       <div className='flex items-center gap-3'>
-        <Link href={'/dashboard/profile'}>
+        <Link href={'/dashboard/profile'} className='hidden md:block'>
           <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
         </Link>
         <form action={'/auth/signout'} method='post' className='hidden md:block'>
-          <Button className={'items-center flex  gap-2'} variant={'ghost'} size={'sm'} type='submit'>
+          <Button className={'items-center flex  gap-2'} variant={'outline'} size={'sm'} type='submit'>
             <span>Sign Out</span>
-            <ArrowRight size={15} className=''/>
+            <ArrowRight size={15} className='text-rose-500'/>
           </Button>
         </form>
+
+        {/** ======= Mobile ====== */}
+        <MobileActions profile={profile?.data as User} />
       </div>
     </nav>
   )

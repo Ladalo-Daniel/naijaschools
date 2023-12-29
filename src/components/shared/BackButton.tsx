@@ -14,7 +14,7 @@ const BackButton = () => {
     <div className='my-2'>
       <Button 
         className='bg-transparent flex gap-1 md:gap-2.5' 
-        variant={'ghost'}
+        variant={'outline'}
         onClick={() => window?.history?.back()}
       >
       <ArrowLeft size={15} />

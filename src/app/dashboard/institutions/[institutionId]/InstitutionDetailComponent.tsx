@@ -21,7 +21,7 @@ const InstitutionDetailComponent = ({ institution, courses }: { institution: Ins
         <section className='flex gap-3 flex-wrap'>
             {
                 courses.map(course => (
-                    <Card key={course.id} className='w-72 min-h-44 flex flex-col gap-3 p-4 hover:opacity-60 hover:transition-all hover:animate-out' as={Link} href={`/dashboard/institutions/${institution?.id}/courses/${course?.id}`}>
+                    <Card key={course.id} className='w-72 min-h-44 flex flex-col gap-3 p-4 max-sm:w-full hover:opacity-60 hover:transition-all hover:animate-out' as={Link} href={`/dashboard/institutions/${institution?.id}/courses/${course?.id}`}>
                         <CardHeader className='flex justify-between items-center'>
                             <h2 className='text-[18px] tracking-tighter'>
                                 {course.code}

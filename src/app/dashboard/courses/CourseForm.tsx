@@ -19,18 +19,19 @@ const initialState = {
     success: false
 }  
 
-export default function CourseForm({ className, setOpen, course, institutions, toggleOpen }: { 
+export default function CourseForm({ className, setOpen, course, institutions, toggleOpen, institutionId }: { 
     className?: string, setOpen: React.Dispatch<React.SetStateAction<boolean>>, 
     course?: Course,
     institutions?: InstitutionList,
-    toggleOpen?: (id: number) => void 
+    toggleOpen?: (id: number) => void,
+    institutionId?: string, 
   }) {
   const [state, formAction] = useFormState(UpsertCourse, initialState)
 
   React.useEffect(() => {
     if (state?.message && state?.success) {
       toast.success(state?.message)
-      // setOpen?.(false)
+      setOpen?.(prev => !prev)
       toggleOpen?.(course?.id as number)
     } else if (state?.message && !state?.success) {
      toast.error(state?.message)
@@ -40,7 +41,7 @@ export default function CourseForm({ className, setOpen, course, institutions, t
   return (
     <form className={cn("grid items-start gap-4", className)} action={formAction}>
       <div className="grid gap-2">
-        <SelectCourse institutions={institutions as InstitutionList} institution_name={course?.name || ""} institution_id={course?.institution as number} />
+        <SelectCourse institutions={institutions as InstitutionList} institution_name={course?.name || ""} institution_id={course?.institution as number || institutionId as any} />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="name">Course Name</Label>

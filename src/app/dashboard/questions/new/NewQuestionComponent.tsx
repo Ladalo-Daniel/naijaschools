@@ -14,7 +14,7 @@ const NewQuestionComponent = ({ institutions, courses, question  }: { institutio
     const institutionId = searchParams.get("institution")
     const filteredCourses = courses.filter(old => old.institution === parseInt(institutionId as string))
   return (
-    <div className='flex flex-col gap-3 flex-1'>
+    <div className='flex flex-col gap-3 flex-1 px-2'>
         <section className='gap-5 overflow-auto flex-1 flex-col justify-start'>
             {!question && <SelectInstitution institutions={institutions as InstitutionList} question={question} institution_id={institutionId as any} />}
             {

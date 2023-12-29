@@ -14,7 +14,7 @@ const AdminStudentViewPage = async () => {
   return (
     <MaxWrapper className='max-w-7xl flex-1 bg-background'>
       <BackButton/>
-        <h2 className="text-2xl py-3">Students</h2>
+        <h2 className="text-2xl py-2">Students</h2>
         <div className='flex flex-col gap-3'>
             <StudentComponent />
         </div>
