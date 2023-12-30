@@ -108,17 +108,14 @@ export const useFetchRandomQuestions = ({user_id, course_id, numberOfQuestions}:
 }
 
 export const useUpdateQuiz = () => {
-    const router = useRouter()
     const queryClient = new QueryClient()
     return useMutation({
-        mutationFn: ({quizId, answers, score}: {quizId: string | number, answers: Json, score?: number} ) => updateQuiz(quizId, answers, score),
+        mutationFn: ({quizId, answers, score, duration}: {quizId: string | number, answers: Json, score?: number, duration?: string} ) => updateQuiz(quizId, answers, score, duration),
         mutationKey: [QUERY_KEYS.update_quiz_data],
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: [QUERY_KEYS.update_quiz_data]
             })
-            toast.success("Your progress have been successfully. You can reference it later on the `history page`.")
-            router.refresh()
         },
         onError: () => {
             toast.error("An error occured while saving your records to the database.")

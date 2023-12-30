@@ -14,6 +14,7 @@ const SelectQuestionNumber = () => {
         if (v) {
             setNOQ(v)
             router.push(`?noq=${v}`)
+            router.refresh()
         }
     }
     return (

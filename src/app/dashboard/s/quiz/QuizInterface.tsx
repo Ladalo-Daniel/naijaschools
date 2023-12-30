@@ -5,12 +5,19 @@ import { Button } from '@/components/ui/button'
 import QuizResults from './QuizResults'
 import ShowQuestions from './ShowQuestions'
 import { useUpdateQuiz } from '@/lib/react-query'
+import QuizTimer from './QuizTimer'
+import { toast } from 'sonner'
 
 const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, quizId: number}) => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [userAnswers, setUserAnswers] = useState<Record <string, string>>({})
   const [showResults, setShowResults] = useState(false)
+  const [hasFinished, setHasFinished] = useState(false)
+
+  const totalTimeInSeconds = questions?.length * 60;
+  const [timer, setTimer] = useState<number>(totalTimeInSeconds);
+  const elapsedSeconds = totalTimeInSeconds - timer;
 
   const {mutate: saveProgress, isPending} = useUpdateQuiz()
 
@@ -22,7 +29,7 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
   }
 
   const handleNextQuestion = () => {
-    if (currentQuestion < questions.length)
+    if (currentQuestion < questions?.length)
         setCurrentQuestion(currentQuestion + 1)
     else alert('finished')
     /** ==== TODO: Other logic here */
@@ -35,8 +42,8 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
     /** ==== TODO: Other logic here */
     }
 
-    const score = questions.reduce((totalScore, question) => {
-        if (userAnswers[question.id] === question.answer) {
+    const score = questions?.reduce((totalScore, question) => {
+        if (userAnswers[question?.id] === question.answer) {
             return totalScore + 1;
         }
         return totalScore
@@ -50,12 +57,16 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
      * 
      * I had to modularize the example since it fitted well with my data structure.
      * */
-    
+    setHasFinished(true)
     saveProgress({
         quizId,
         answers: JSON.stringify(userAnswers),
-        score: parseInt((score! / questions.length * 100).toFixed(2))
+        score: parseInt((score! / questions?.length * 100).toFixed(2)),
+        duration: elapsedSeconds.toString(),
+    }, {
+      onSuccess: () => toast.success("Your progress have been saved successfully. You can reference it later on the `history page`.")
     })
+    return
 }
 
 
@@ -73,25 +84,23 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
     ))
   }
 
-  const renderQuestion = (question: QuizQuestion) => (
-    <div key={question.id} className='bg-background'>
-      <div className='py-6 shadow-md w-full flex flex-col gap-3'>
-        <h3 className='text-[18px] text-primary my-2'>{currentQuestion + 1}. {question.question}</h3>
-        <RadioGroup className='flex flex-col gap-3'>
-            {renderOptions(question as any)}
-        </RadioGroup>
-
-        <div className='flex items-center justify-between py-4'>
-            {currentQuestion === 0 ? null : <Button onClick={handlePrevQuestion} variant={'outline'}>Previous</Button>}
-            {currentQuestion === questions.length - 1 ? null : <Button onClick={handleNextQuestion} variant={'outline'}>Next</Button>}
-            {currentQuestion === questions.length - 1 && <Button onClick={checkAnswers} variant={'outline'}>Finish</Button>}
-        </div>
-      </div>
-    </div>
-  )
-
   return (
-    <div className='py-4 min-w-[320px] max-w-4xl'>
+    <div className='py-4 min-w-[300px] max-w-4xl'
+      onSelect={() => false}
+      onCopy={() => false}
+      onPaste={() => false}
+      onMouseDown={() => false}
+    >
+      <QuizTimer 
+        totalQuestions={questions.length} 
+        showResults={checkAnswers}
+        elapsedSeconds={elapsedSeconds}
+        totalTimeInSeconds={totalTimeInSeconds} 
+        setTimer={setTimer}
+        timer={timer}
+        hasFinished={hasFinished}
+         />
+
         {!showResults && <div>
             <p className='py-1 text-muted-foreground'>{currentQuestion + 1} of {questions.length}</p>
             <section>

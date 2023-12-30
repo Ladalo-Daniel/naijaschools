@@ -30,9 +30,22 @@ const ShowQuestions = ({
             </RadioGroup>
 
             <div className='flex items-center justify-between py-4'>
-                {currentQuestion === 0 ? null : <Button onClick={handlePrevQuestion} variant={'outline'}>Previous</Button>}
-                {currentQuestion === questions.length - 1 ? null : <Button onClick={handleNextQuestion} variant={'outline'}>Next</Button>}
-                {currentQuestion === questions.length - 1 && <Button onClick={checkAnswers} variant={'outline'}>Finish</Button>}
+                {currentQuestion === 0 ? null : 
+                    <div className='relative w-full'>
+                        <Button onClick={handlePrevQuestion} variant={'outline'}>Previous</Button>
+                    </div>
+                }
+
+                {currentQuestion === questions.length - 1 ? null : 
+                    <div className='relative w-full'>
+                        <Button onClick={handleNextQuestion} variant={'outline'} className='absolute right-2'>Next</Button>
+                    </div>}
+
+                {currentQuestion === questions.length - 1 && 
+                    <div className='relative w-full'>
+                        <Button onClick={checkAnswers} variant={'outline'}>Finish</Button>
+                    </div>
+                }
             </div>
         </div>
         </div>

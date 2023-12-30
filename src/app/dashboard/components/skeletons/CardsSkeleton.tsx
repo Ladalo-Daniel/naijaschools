@@ -3,11 +3,11 @@ import React from 'react'
 
 const CardsSkeleton = () => {
   return (
-    <div className='flex flex-wrap gap-4'>
-        <Skeleton className='h-44 w-64 rounded-lg shadow'/>
-        <Skeleton className='h-44 w-64 rounded-lg shadow'/>
-        <Skeleton className='h-44 w-64 rounded-lg shadow'/>
-        <Skeleton className='h-44 w-64 rounded-lg shadow'/>
+    <div className='flex flex-wrap gap-4 max-sm:items-ceenter'>
+        <Skeleton className='h-44 w-64 max-sm:w-full rounded-lg shadow'/>
+        <Skeleton className='h-44 w-64 max-sm:w-full rounded-lg shadow'/>
+        <Skeleton className='h-44 w-64 max-sm:w-full rounded-lg shadow'/>
+        <Skeleton className='h-44 w-64 max-sm:w-full rounded-lg shadow'/>
     </div>
   )
 }

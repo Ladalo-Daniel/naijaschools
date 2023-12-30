@@ -23,10 +23,10 @@ export const fetchRandomQuestions = async (user_id: string, course_id: number, n
       }
   
       const totalQuestions = totalQuestionsCount.length;
-      if (!totalQuestions) {
-        console.log("There are no questions associated with your configuration yet.")
-        return 
-      }
+      // if (!totalQuestions) {
+      //   console.log("There are no questions associated with your configuration yet.")
+      //   return 
+      // }
   
       /** Calculate a random @start position within the total number of @questions */
       const randomStart = Math.floor(Math.random() * (totalQuestions - numberOfQuestions));
@@ -44,6 +44,7 @@ export const fetchRandomQuestions = async (user_id: string, course_id: number, n
         return null;
       }
 
+      
       if (!data?.length) {
         console.log("There are no questions associated with your configuration yet.")
         return 
@@ -72,14 +73,15 @@ export const fetchRandomQuestions = async (user_id: string, course_id: number, n
     }
   }
 
-  export async function updateQuiz(quizId: string | number, answers: Json, score?: number) {
+  export async function updateQuiz(quizId: string | number, answers: Json, score?: number, duration?: string) {
     
     const { data, error } = await supabaseClient
         .from('quizzes')
         .update({ 
           "answers": answers,
           "total_score": score,
-          "updated_at": new Date().toISOString()
+          "updated_at": new Date().toISOString(),
+          "duration": duration
          })
         .eq('id', quizId)
         .select()
