@@ -1,6 +1,8 @@
 'use server'
 
 import { Database } from "@/types/supabase";
+'use server'
+
 import { supabaseClient } from ".";
 
 export type StudentList = Database['public']['Tables']['users']['Row'][]

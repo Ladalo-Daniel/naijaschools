@@ -1,5 +1,5 @@
 import React from "react"
-import { BookIcon, Building2, LayoutDashboardIcon, LucideUsers2, Settings, Settings2, User, User2, Users, Users2Icon } from 'lucide-react'
+import { BookCheckIcon, BookIcon, Building2, LayoutDashboardIcon, LucideUsers2, Settings, Settings2, User, User2, Users, Users2Icon } from 'lucide-react'
 import { getProfile } from "@/supabase/user"
 import { QuestionMarkIcon } from "@radix-ui/react-icons"
 
@@ -40,6 +40,12 @@ export const side_bar_links: {
       activeIcon: <BookIcon size={18} />,
       tooltip: "Courses",
       hidden: true
+    },
+    {
+      href: "/dashboard/s/quiz",
+      icon: <BookCheckIcon size={18} />,
+      activeIcon: <BookCheckIcon size={18} />,
+      tooltip: "Quiz",
     },
     {
       href: "/dashboard/settings",

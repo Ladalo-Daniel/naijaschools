@@ -1,5 +1,6 @@
 import AuthTopNav from "@/components/AuthTopNav";
 import Section1 from "@/components/home/section1";
+import { getUserSession } from "@/supabase/session";
 
 export default function Home() {
   return (

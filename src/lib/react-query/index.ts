@@ -5,6 +5,9 @@ import { getProfile, getProfileById, makeAdmin, updateProfile } from "@/supabase
 import { useRouter } from "next/navigation";
 import { getInstitutions } from "@/supabase/institutions"
 import { Question, createQuestion, getQuestionById } from "@/supabase/questions";
+import { getCoursesByQuery } from "@/supabase/courses";
+import { fetchRandomQuestions, updateQuiz } from "@/supabase/quiz";
+import { Json } from "@/types/supabase";
 
 export const useGetProfile = () => {
     return useQuery({
@@ -90,3 +93,35 @@ export const useGetQuestionById = (id: string) => {
     })
 }
 
+export const useGetCourseByQuery = ({column, row, range}: { column: "code" | "description" | "id" | "institution", row: string | number, range?: number}) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_courses, column, row],
+        queryFn: () => getCoursesByQuery(column, row, range),
+    })
+}
+
+export const useFetchRandomQuestions = ({user_id, course_id, numberOfQuestions}: { user_id: string, course_id: number | number, numberOfQuestions?: number}) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_questions, user_id, course_id],
+        queryFn: () => fetchRandomQuestions(user_id, course_id, numberOfQuestions),
+    })
+}
+
+export const useUpdateQuiz = () => {
+    const router = useRouter()
+    const queryClient = new QueryClient()
+    return useMutation({
+        mutationFn: ({quizId, answers, score}: {quizId: string | number, answers: Json, score?: number} ) => updateQuiz(quizId, answers, score),
+        mutationKey: [QUERY_KEYS.update_quiz_data],
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.update_quiz_data]
+            })
+            toast.success("Your progress have been successfully. You can reference it later on the `history page`.")
+            router.refresh()
+        },
+        onError: () => {
+            toast.error("An error occured while saving your records to the database.")
+        }
+    })
+}

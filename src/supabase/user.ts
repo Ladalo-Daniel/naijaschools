@@ -136,25 +136,21 @@ export async function deleteProfileById(userId: string) {
 }
 
 
-
-
-// export async function doRealTime() {
-//     const changes = supabaseClient
-//     .channel('table-db-changes')
-//     .on(
-//         'postgres_changes',
-//         {
-//         event: '*',
-//         schema: 'public',
-//         table: 'users',
-//         },
-//         (payload) => {
-//             console.log(payload)
-//             toast("Wow! Realtime!")
-//         }
-//     )
-//     .subscribe()
-// }
-
-// doRealTime()
+export async function doRealTime() {
+    const changes = supabaseClient
+    .channel('table-db-changes')
+    .on(
+        'postgres_changes',
+        {
+        event: '*',
+        schema: 'public',
+        table: 'users',
+        },
+        (payload) => {
+            console.log(payload)
+            toast("Wow! Realtime!")
+        }
+    )
+    .subscribe()
+}
   
