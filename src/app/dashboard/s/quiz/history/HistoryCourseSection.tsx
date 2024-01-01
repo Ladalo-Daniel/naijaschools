@@ -21,7 +21,7 @@ const HistoryCourseSection = async ({ courseId }: { courseId: number }) => {
                                 <h2 className='text-[18px] tracking-tighter'>
                                     {course?.name} Quiz #{quiz.id}
                                 </h2>
-                                <p className='py-2 font-bold text-primary'>Score: {quiz.total_score}%</p>
+                                <p className={`py-2 font-bold ${quiz.total_score! < 40 ? "text-rose-500" : quiz.total_score! < 70 ? "text-primary-500" : "text-primary"}`}>Score: {quiz.total_score}%</p>
                             </div>
                             <ArrowRightCircleIcon size={15} className='text-primary hover:animate-pulse' />
                         </CardHeader>
