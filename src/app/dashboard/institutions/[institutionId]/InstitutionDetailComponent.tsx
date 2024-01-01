@@ -5,7 +5,7 @@ import { ArrowRightCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const InstitutionDetailComponent = ({ institution, courses }: { institution: Institution, courses: CourseList }) => {
+const InstitutionDetailComponent = async ({ institution, courses }: { institution: Institution, courses: CourseList }) => {
 
   if (courses?.length === 0) {
     return( 

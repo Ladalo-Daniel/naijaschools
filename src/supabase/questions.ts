@@ -39,7 +39,7 @@ export async function createQuestion(question: Question) {
 
 export async function getQuestions() {
     const { data, error } = await supabaseClient.from("questions")
-    .select()
+    .select('*')
     .order('created_at', {
         ascending: false
     })
@@ -62,7 +62,7 @@ export async function getQuestionById(id:string) {
 
 export async function getQuestionsByQuery(column: 'course_id' | 'id' | 'question', row: string | number, range?: number) {
     const { data, error, count } = await supabaseClient.from('questions')
-    .select()
+    .select('*')
     .eq(column, row)
 
     if (error) throw error
