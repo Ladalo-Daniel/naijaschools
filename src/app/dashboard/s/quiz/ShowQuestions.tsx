@@ -11,6 +11,7 @@ const ShowQuestions = ({
     handleNextQuestion,
     handlePrevQuestion,
     checkAnswers,
+    userAnswers
 }: { 
     question: QuizQuestion, 
     currentQuestion: number,
@@ -19,13 +20,14 @@ const ShowQuestions = ({
     handleNextQuestion: () => void,
     handlePrevQuestion: () => void,
     checkAnswers: () => void,
+    userAnswers: Record<string, string>
 }) => {
   return (
     <div className=''>
         <div key={question.id} className='bg-background'>
         <div className='py-6 shadow-md w-full flex flex-col gap-3 px-4 bg-slate-50 dark:bg-background rounded-md'>
             <h3 className='text-[18px] text-primary my-2'>{currentQuestion + 1}. {question.question}</h3>
-            <RadioGroup className='flex flex-col gap-3'>
+            <RadioGroup className='flex flex-col gap-3' defaultValue={userAnswers[question.id]}>
                 {renderOptions(question as any)}
             </RadioGroup>
 

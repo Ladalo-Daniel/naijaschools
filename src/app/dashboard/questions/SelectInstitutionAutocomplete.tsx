@@ -1,11 +1,7 @@
-'use client'
-
 import React from "react";
 import {Autocomplete as NextAutoComplete, AutocompleteItem} from "@nextui-org/autocomplete";
-import { ArrowRightCircle, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { InstitutionList } from "@/supabase/institutions";
-import Link from "next/link";
-import { Button } from "@nextui-org/button";
 import { Question } from "@/supabase/questions";
 import { useRouter } from "next/navigation";
 

@@ -11,7 +11,7 @@ const InstitutionDetailComponent = ({ institution, courses }: { institution: Ins
     return( 
         <Card className='p-4'> 
             <CardBody>
-                <h2 className='tracking-tighter'>Hang tight! Seems like the institution you selected doesn&#39;t have any available course yet but don&#39;t fret. Check back again as the <span className='text-primary' role='link'>Naijaschools</span> team is worgking restlessly to serve it up to you.</h2>
+                <h2 className='tracking-tighter'>Hang tight! Seems like the institution you selected doesn&#39;t have any available courses yet but don&#39;t fret. Check back again as the <span className='text-primary' role='link'>Naijaschools</span> team is working restlessly to serve it up to you.</h2>
             </CardBody>
         </Card>)
   }

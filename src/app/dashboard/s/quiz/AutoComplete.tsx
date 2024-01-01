@@ -1,11 +1,8 @@
-'use client'
-
 import React from "react";
 import {Autocomplete as NextAutoComplete, AutocompleteItem} from "@nextui-org/autocomplete";
-import { ArrowRightCircle, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { CourseList } from "@/supabase/courses";
 import Link from "next/link";
-import { Button } from "@nextui-org/button";
 
 export default function AutoComplete({ courses, institutionId }: { courses: CourseList, institutionId: string }) {
   return (
