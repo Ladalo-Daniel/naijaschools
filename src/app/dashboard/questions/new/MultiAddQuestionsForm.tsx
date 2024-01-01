@@ -185,7 +185,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormItem>
                             <FormLabel>Option 1</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Option 1 ..." {...field} className='min-w-[250px]' />
+                                <Textarea placeholder="Option 1 ..." {...field} className='min-w-[200px]' />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -208,7 +208,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormItem>
                             <FormLabel>Option 2</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Option 2 ..." {...field} className='min-w-[250px]' />
+                                <Textarea placeholder="Option 2 ..." {...field} className='min-w-[200px]' />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -231,7 +231,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormItem>
                             <FormLabel>Option 3</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Option 3 ..." {...field} className='min-w-[250px]'/>
+                                <Textarea placeholder="Option 3 ..." {...field} className='min-w-[200px]'/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -254,7 +254,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
                             <FormItem>
                             <FormLabel>Option 4</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Option 4 ..." {...field} className='min-w-[250px]'/>
+                                <Textarea placeholder="Option 4 ..." {...field} className='min-w-[200px]'/>
                             </FormControl>
                             <FormMessage />
                             </FormItem>

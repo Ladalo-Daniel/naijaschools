@@ -27,7 +27,7 @@ const SelectQuestionNumber = () => {
           <SelectGroup>
             <SelectLabel>Number of Questions</SelectLabel>
             {
-              [5, 10, 20, 30, 40, 50, 60].map(_ => (
+              [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(_ => (
                   <SelectItem value={_.toString()} key={_}>
                       {_}
                   </SelectItem>

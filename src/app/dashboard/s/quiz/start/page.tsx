@@ -9,7 +9,7 @@ const QuizStartPage = async () => {
   return (
     <MaxWrapper className='bg-background flex-1'>
         <BackButton />
-        <h2 className="text-2xl py-2 md:py-4">Select a Course to get Started</h2>
+        <h2 className="text-2xl py-2 md:py-4">Select a Course to continue.</h2>
 
         <section className='flex flex-col gap-3'>
             <QuizStartComponent institutions={institutions} />

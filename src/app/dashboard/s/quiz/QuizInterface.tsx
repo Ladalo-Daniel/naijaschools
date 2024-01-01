@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { QuizQuestion, QuizQuestionList } from '@/supabase/quiz'
-import { Radio, RadioGroup } from '@nextui-org/radio'
-import { Button } from '@/components/ui/button'
+import { Radio } from '@nextui-org/radio'
 import QuizResults from './QuizResults'
 import ShowQuestions from './ShowQuestions'
 import { useUpdateQuiz } from '@/lib/react-query'
@@ -14,10 +13,11 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
   const [userAnswers, setUserAnswers] = useState<Record <string, string>>({})
   const [showResults, setShowResults] = useState(false)
   const [hasFinished, setHasFinished] = useState(false)
+  const [wasChecked, setWasChecked] = useState<{id?: number, idx?: number, checked?: boolean, option?: string}[]>([])
 
-  const totalTimeInSeconds = questions?.length * 60;
-  const [timer, setTimer] = useState<number>(totalTimeInSeconds);
-  const elapsedSeconds = totalTimeInSeconds - timer;
+  const totalTimeInSeconds = questions?.length * 60
+  const [timer, setTimer] = useState<number>(totalTimeInSeconds)
+  const elapsedSeconds = totalTimeInSeconds - timer
 
   const {mutate: saveProgress, isPending} = useUpdateQuiz()
 
@@ -26,31 +26,38 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
       ...userAnswers,
       [questionId]: selectedOption,
     })
+    setWasChecked(prev => [...prev, {
+      id: questionId as number,
+      checked: true,
+      option: selectedOption
+    }])
   }
 
-  const handleNextQuestion = () => {
-    if (currentQuestion < questions?.length)
+    const handleNextQuestion = () => {
+      if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1)
-    else alert('finished')
-    /** ==== TODO: Other logic here */
-  }
-
-  const handlePrevQuestion = () => {
-    if (currentQuestion > 0 && currentQuestion < questions.length)
+      } else {
+        alert('Finished')
+      }
+    }
+    
+    const handlePrevQuestion = () => {
+      if (currentQuestion > 0) {
         setCurrentQuestion(currentQuestion - 1)
-    else alert('cant go back no more')
-    /** ==== TODO: Other logic here */
+      } else {
+        alert('Cannot go back further')
+      }
     }
 
     const score = questions?.reduce((totalScore, question) => {
         if (userAnswers[question?.id] === question.answer) {
-            return totalScore + 1;
+            return totalScore + 1
         }
         return totalScore
     }, 0)
 
   const checkAnswers = () => {
-    setShowResults(true);
+    setShowResults(true)
     /** Logic to compare userAnswers with fetchedQuestions' correct answers
      * You'll need to adapt this logic based on how your data is structured
      * Here's an example assuming the correct answers are in the 'answer' property of each question object 
@@ -72,20 +79,24 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
 
   const renderOptions = (question: QuizQuestion & typeof userAnswers) => {
     const options = ['option1', 'option2', 'option3', 'option4']
+
     return options.map((option, index) => (
-        <Radio
-            key={index}
-            name={`${question.id}`}
-            value={question[option]}
-            onChange={() => handleOptionSelect(question.id, question[option])}
-            checked={userAnswers[question.id] === question[option]}
-        
-        >{question[option]}</Radio>
+      <Radio
+        key={index}
+        name={`${question.id}`}
+        value={question[option]}
+        onChange={() => handleOptionSelect(question.id, question[option])}
+        checked={
+          userAnswers[question.id] === question[option]
+        }
+      >
+        {question[option]}
+      </Radio>
     ))
   }
 
   return (
-    <div className='py-4 min-w-[300px] max-w-4xl'
+    <div className='p-4 min-w-[240px] max-w-4xl'
       onSelect={() => false}
       onCopy={() => false}
       onPaste={() => false}
@@ -99,7 +110,8 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
         setTimer={setTimer}
         timer={timer}
         hasFinished={hasFinished}
-         />
+        totalAnswered={Object.values(userAnswers).length}
+        />
 
         {!showResults && <div>
             <p className='py-1 text-muted-foreground'>{currentQuestion + 1} of {questions.length}</p>

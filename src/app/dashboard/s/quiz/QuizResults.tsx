@@ -1,10 +1,18 @@
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { QuizQuestionList } from '@/supabase/quiz'
 import { CheckCircle2, XCircleIcon } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
-const QuizResults = ({ questions, userAnswers, score }: { questions: QuizQuestionList, userAnswers: Record<number, string>, score?: number}) => {
-    const totalScore = parseInt((score! / questions.length * 100).toFixed(2))
+const QuizResults = ({ questions, userAnswers, score, isHistory }: { 
+    questions: QuizQuestionList, 
+    userAnswers: Record<number, string>, 
+    score?: number,
+    duration?: number,
+    isHistory?: boolean
+}) => {
+    const totalScore = isHistory ? score! : parseInt((score! / questions.length * 100).toFixed(2))
 
   return (
     <div className='w-auto overflow-auto'>
@@ -37,6 +45,16 @@ const QuizResults = ({ questions, userAnswers, score }: { questions: QuizQuestio
                 </TableRow>))}
             </TableBody>
         </Table>
+        <section className="actions flex gap-4 max-sm:flex-col flex-wrap max-sm:items-center p-4">
+            <Button variant={'default'}
+                onClick={() => {
+
+                }}
+            >Retake Quiz</Button>
+            <Link href={'/dashboard/s/quiz/history'} className={buttonVariants({
+                variant: "secondary"
+            })}>Go to Quiz History</Link>
+        </section>
     </div>
   )
 }

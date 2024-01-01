@@ -28,7 +28,7 @@ const AdminComponent = async () => {
           className: "transition-all bg-background"
         })} >Students</Link> */}
       </div>
-      <h2 className="text-2xl pt-4 pb-2">Dasboard</h2>
+      <h2 className="text-2xl pt-4 pb-2">Dashboard</h2>
       <section className='flex gap-6 flex-col lg:flex-row items-start'>
         <DoughnutChart 
           labels={['Institutions', 'Students', 'Teachers']} 

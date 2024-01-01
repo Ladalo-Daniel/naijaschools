@@ -93,4 +93,24 @@ export const fetchRandomQuestions = async (user_id: string, course_id: number, n
 
     return { data, error }
 }
-  
+
+export async function getQuizzesByQuery(column: 'course_id' | 'user_id' | 'id', row: string | number, range?: number) {
+  const { data, error, count } = await supabaseClient.from('quizzes')
+  .select()
+  .eq(column, row)
+
+  if (error) throw error
+
+  return { data, error, count }
+}
+
+export async function getQuizById(quizId: number | string) {
+  const { data, error, count } = await supabaseClient.from('quizzes')
+  .select()
+  .eq("id", quizId)
+  .single()
+
+  if (error) throw error
+
+  return { data, error, count }
+}

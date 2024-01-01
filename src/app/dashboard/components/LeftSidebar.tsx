@@ -10,6 +10,9 @@ import React from 'react'
 
 const LeftSidebar = ({ profile }: { profile?: User }) => {
   const path = usePathname()
+
+  const isRootRouteActive = path.startsWith('/dashboard/institutions');
+
   return (
     <nav className='leftsidebar dark:bg-secondary bg-background light:bg-secondary shadow-sm z-20 min-h-screen border border-r-gray-100 dark:border-r-gray-800 relative'>
       <div className="fixed h-full overflow-auto dark:bg-secondary bg-background flex flex-col gap-4 min-h-screen left-0 min-w-[250px]">
@@ -19,12 +22,12 @@ const LeftSidebar = ({ profile }: { profile?: User }) => {
         <div className='flex flex-col gap-6 overflow-auto custom-scrollbar w-full p-2'>
           {side_bar_links.map(link => (
             <Link key={link.tooltip} href={link.href} className={cn("flex items-center hover:bg-gray-500 hover:text-gray-50 transition-all gap-2 p-2 rounded-md", {
-              "bg-primary text-green-50 shadow-sm transition-all": path === link.href,
+              "bg-primary text-green-50 shadow-sm transition-all": isRootRouteActive && link.href.startsWith('/dashboard/institutions') || path === link.href,
               "hidden": !(profile?.role === "admin" || profile?.role === "staff") && link.hidden,
             })}>
               {link.icon}
               <span>{link.tooltip}</span>
-            </Link>
+          </Link>
           ))}
         </div>
       </div>

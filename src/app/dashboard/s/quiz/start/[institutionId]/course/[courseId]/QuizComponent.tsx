@@ -4,11 +4,11 @@ import { User } from '@/supabase/user'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
 import SelectQuestionNumber from './SelectQuestionNumber'
-import { useFetchRandomQuestions } from '@/lib/react-query'
+import { useFetchRandomQuestions, useGetCourseByQuery } from '@/lib/react-query'
 import QuizInterface from '../../../../QuizInterface'
-import SelectCourseSkeleton from '@/app/dashboard/components/skeletons/SelectCourseSkeleton'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { RocketIcon } from '@radix-ui/react-icons'
+import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
 
 /**
  * I made the top level Component a client component because
@@ -18,6 +18,10 @@ import { RocketIcon } from '@radix-ui/react-icons'
 const QuizComponent = ({ profile, courseId, userId, coursName }: { profile: User, courseId: string, userId: string, coursName: string }) => {
     const searchParams = useSearchParams()
     const noq = searchParams.get("noq")
+    const {data: courses} = useGetCourseByQuery({
+        column: "id",
+        row: courseId
+    })
 
     const { data: quizQuestions, isPending } = useFetchRandomQuestions({
         user_id: userId,
@@ -25,7 +29,8 @@ const QuizComponent = ({ profile, courseId, userId, coursName }: { profile: User
         numberOfQuestions: parseInt(noq!)
     })
 
-    if (isPending) return <SelectCourseSkeleton />
+
+    if (isPending) return <GeneralSkeleton />
 
     if (!noq) {
         return (<div className='flex flex-col gap-4 mb-3 mt-8'>
@@ -42,12 +47,13 @@ const QuizComponent = ({ profile, courseId, userId, coursName }: { profile: User
         </div>)
     }
 
-    // if (!quizQuestions?.data?.length) return <div>
-    //     There seems to be no questions for your configuration yet.
-    // </div>
+    if (!quizQuestions?.data?.length) return <div className='p-4 border border-primary-500 rounded-md shadow'>
+        There seems to be no questions for your configuration yet.
+    </div>
 
   return (
     <div className='flex flex-col gap-3 border p-4 rounded-md'>
+        <h2 className='text-2xl text-primary tracking-tighter py-2 px-4'>{courses?.data.at(0)?.name} ({courses?.data.at(0)?.code})</h2>
         <section className='flex flex-col gap-3'>
             <QuizInterface questions={quizQuestions?.data!} quizId={quizQuestions?.quizId!} />
         </section>
