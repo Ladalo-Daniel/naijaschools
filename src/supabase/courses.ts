@@ -13,7 +13,7 @@ export const getCourses = async (range?: number) => {
 
 export const getCoursesByQuery = async (column: "code" | "description" | "id" | "institution", row: string | number ,range?: number) => {
     const { data, error, count } = await supabaseClient.from('courses')
-    .select()
+    .select('*')
     .eq(column, row)
 
     if (error) throw error

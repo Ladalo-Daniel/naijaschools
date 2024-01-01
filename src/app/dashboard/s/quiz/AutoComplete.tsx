@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import {Autocomplete as NextAutoComplete, AutocompleteItem} from "@nextui-org/autocomplete";
 import { SearchIcon } from "lucide-react";

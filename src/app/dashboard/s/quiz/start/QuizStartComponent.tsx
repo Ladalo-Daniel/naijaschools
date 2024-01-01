@@ -10,6 +10,7 @@ import { CourseList } from '@/supabase/courses'
 import SelectInstitutionAutoComplete from '@/app/dashboard/questions/SelectInstitutionAutocomplete'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
+import SelectInstitution from '@/app/dashboard/questions/SelectInstitution'
 
 const QuizStartComponent = ({ institutions, institution_id}: { institutions: InstitutionList, institution_id?: string | number}) => {
     const searchParams = useSearchParams()
@@ -46,7 +47,7 @@ const QuizStartComponent = ({ institutions, institution_id}: { institutions: Ins
                         We are almost done spinning your quiz up... We only need to know your ultimate preferences so we can serve you better. Now select an institution to get started.
                     </AlertDescription>
                 </Alert>
-                <SelectInstitutionAutoComplete institutions={institutions} institution_id={institution_id as number}/>
+                <SelectInstitution institutions={institutions} institution_id={institution_id as number}/>
             </div>
         )}
     </div>
