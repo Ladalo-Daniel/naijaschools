@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { QuizQuestionList } from '@/supabase/quiz'
@@ -45,14 +47,16 @@ const QuizResults = ({ questions, userAnswers, score, isHistory }: {
                 </TableRow>))}
             </TableBody>
         </Table>
-        <section className="actions flex gap-4 max-sm:flex-col flex-wrap max-sm:items-center p-4">
+        <section className="actions flex gap-4 max-sm:flex-col flex-wrap max-sm:items-center p-4 w-full">
             <Button variant={'default'}
                 onClick={() => {
 
                 }}
+                className='max-sm:w-full'
             >Retake Quiz</Button>
             <Link href={'/dashboard/s/quiz/history'} className={buttonVariants({
-                variant: "secondary"
+                variant: "secondary",
+                className: "max-sm:w-full"
             })}>Go to Quiz History</Link>
         </section>
     </div>
