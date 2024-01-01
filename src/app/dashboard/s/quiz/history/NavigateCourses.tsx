@@ -10,7 +10,7 @@ const NavigateCourses = ({ courseIds }: { courseIds: number[] }) => {
     <div>
         {
             courseNames?.map(name => (
-                <Link href={`#${name}`} >{name}</Link>
+                <Link href={`#${name}`} key={name} >{name}</Link>
             ))
         }
     </div>
