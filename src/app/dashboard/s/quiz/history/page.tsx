@@ -8,7 +8,7 @@ const QuizHistoryPage = () => {
   return (
     <MaxWrapper className='flex-1 bg-background gap-2'>
         <BackButton />
-        <h2 className='text-2xl'>Your Quiz History</h2>
+        <h2 className='text-2xl px-2'>Your Quiz History</h2>
         <section className="flex flex-col gap-3">
             <Suspense fallback={<GeneralSkeleton />}>
                 <QuizHistoryComponent />

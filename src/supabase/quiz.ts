@@ -8,8 +8,19 @@ export type Quiz = Database['public']['Tables']['quizzes']['Row']
 export type QuizQuestionList = Database['public']['Tables']['questions']['Row'][]
 export type QuizQuestion = Database['public']['Tables']['questions']['Row']
 
-export const fetchRandomQuestions = async (user_id: string, course_id: number, numberOfQuestions = 10) => {
+export const fetchRandomQuestions = async (user_id: string, course_id: number, numberOfQuestions = 10, quizId?: string | number) => {
     try {
+
+      if (quizId) {
+        const { data, error, count } = await supabaseClient.from('quizzes')
+        .select()
+        .eq("id", quizId)
+        .single()
+
+        if (error) throw error
+
+        return { data: JSON.parse(data?.questions?.toString()!) as QuizQuestionList, count, quizId: data?.id }
+      }
 
       /** Get the total count of questions in the @courses */
       const { data: totalQuestionsCount, error: countError } = await supabaseClient
@@ -23,10 +34,6 @@ export const fetchRandomQuestions = async (user_id: string, course_id: number, n
       }
   
       const totalQuestions = totalQuestionsCount.length;
-      // if (!totalQuestions) {
-      //   console.log("There are no questions associated with your configuration yet.")
-      //   return 
-      // }
   
       /** Calculate a random @start position within the total number of @questions */
       const randomStart = Math.floor(Math.random() * (totalQuestions - numberOfQuestions));
@@ -98,6 +105,9 @@ export async function getQuizzesByQuery(column: 'course_id' | 'user_id' | 'id', 
   const { data, error, count } = await supabaseClient.from('quizzes')
   .select()
   .eq(column, row)
+  .order("created_at", {
+    ascending: false
+  })
 
   if (error) throw error
 

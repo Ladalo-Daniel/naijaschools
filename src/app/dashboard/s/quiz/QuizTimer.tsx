@@ -38,7 +38,7 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ totalQuestions, showResults, elap
   }, [showResults, totalQuestions])
 
   const minutes: number = Math.floor(timer / 60)
-  const seconds: number = timer % 60
+  const seconds: number = timer % 45
   const totalQuestionsAnswered = (totalAnswered! / totalQuestions * 100)
 
   return (

@@ -7,7 +7,17 @@ import { useUpdateQuiz } from '@/lib/react-query'
 import QuizTimer from './QuizTimer'
 import { toast } from 'sonner'
 
-const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, quizId: number}) => {
+const QuizInterface = ({ 
+  questions, 
+  quizId, 
+  institutionId, 
+  courseId,
+}: { 
+  questions: QuizQuestionList, 
+  quizId: number,
+  institutionId?: string | number | undefined,
+  courseId?: string | number | undefined,
+}) => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [userAnswers, setUserAnswers] = useState<Record <string, string>>({})
@@ -125,12 +135,19 @@ const QuizInterface = ({ questions, quizId }: { questions: QuizQuestionList, qui
                         handleNextQuestion={handleNextQuestion}
                         handlePrevQuestion={handlePrevQuestion}
                         checkAnswers={checkAnswers}
+                        userAnswers={userAnswers}
                     />
                 )}
 
             </section>
         </div>}
-        {showResults && <QuizResults questions={questions} userAnswers={userAnswers} score={score!}/>}
+        {showResults && <QuizResults 
+          questions={questions} 
+          userAnswers={userAnswers} 
+          score={score!} 
+          courseId={courseId} 
+          institutionId={institutionId}
+          />}
     </div>
   )
 }

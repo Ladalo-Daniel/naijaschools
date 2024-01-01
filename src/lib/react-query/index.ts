@@ -100,10 +100,10 @@ export const useGetCourseByQuery = ({column, row, range}: { column: "code" | "de
     })
 }
 
-export const useFetchRandomQuestions = ({user_id, course_id, numberOfQuestions}: { user_id: string, course_id: number | number, numberOfQuestions?: number}) => {
+export const useFetchRandomQuestions = ({user_id, course_id, numberOfQuestions, quizId}: { user_id: string, course_id: number | number, numberOfQuestions?: number, quizId?: number | string}) => {
     return useQuery({
-        queryKey: [QUERY_KEYS.get_questions, user_id, course_id, numberOfQuestions],
-        queryFn: () => fetchRandomQuestions(user_id, course_id, numberOfQuestions),
+        queryKey: [QUERY_KEYS.get_questions, user_id, course_id, numberOfQuestions, quizId ?? null],
+        queryFn: () => fetchRandomQuestions(user_id, course_id, numberOfQuestions, quizId),
     })
 }
 

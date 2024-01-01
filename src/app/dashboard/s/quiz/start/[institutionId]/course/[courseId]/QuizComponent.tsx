@@ -15,9 +15,24 @@ import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleto
  * this page is going to be highly interactive
  * @returns JSX.Element
  */
-const QuizComponent = ({ profile, courseId, userId, coursName }: { profile: User, courseId: string, userId: string, coursName: string }) => {
+const QuizComponent = ({ 
+    profile, 
+    courseId, 
+    userId, 
+    coursName, 
+    quizId, 
+    institutionId 
+}: { 
+    profile: User, 
+    courseId: string, 
+    userId: string, 
+    coursName: string, 
+    quizId?: string | number,
+    institutionId?: string | number 
+}) => {
     const searchParams = useSearchParams()
     const noq = searchParams.get("noq")
+    const retake = searchParams.get('retake')
     const {data: courses} = useGetCourseByQuery({
         column: "id",
         row: courseId
@@ -26,7 +41,8 @@ const QuizComponent = ({ profile, courseId, userId, coursName }: { profile: User
     const { data: quizQuestions, isPending } = useFetchRandomQuestions({
         user_id: userId,
         course_id: parseInt(courseId),
-        numberOfQuestions: parseInt(noq!)
+        numberOfQuestions: parseInt(noq!),
+        quizId: retake === 'true' ? quizId : undefined 
     })
 
 
@@ -55,7 +71,7 @@ const QuizComponent = ({ profile, courseId, userId, coursName }: { profile: User
     <div className='flex flex-col gap-3 border p-4 rounded-md'>
         <h2 className='text-2xl text-primary tracking-tighter py-2 px-4'>{courses?.data.at(0)?.name} ({courses?.data.at(0)?.code})</h2>
         <section className='flex flex-col gap-3'>
-            <QuizInterface questions={quizQuestions?.data!} quizId={quizQuestions?.quizId!} />
+            <QuizInterface questions={quizQuestions?.data!} quizId={quizQuestions?.quizId!} courseId={courseId}/>
         </section>
     </div>
   )

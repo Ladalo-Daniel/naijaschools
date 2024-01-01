@@ -3,25 +3,55 @@
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { QuizQuestionList } from '@/supabase/quiz'
-import { CheckCircle2, XCircleIcon } from 'lucide-react'
+import { ArrowUp, CheckCircle, CheckCircle2, XCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-const QuizResults = ({ questions, userAnswers, score, isHistory }: { 
+import { useRouter } from 'next/navigation'
+
+const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, institutionId, correct, wrong }: { 
     questions: QuizQuestionList, 
     userAnswers: Record<number, string>, 
     score?: number,
     duration?: number,
-    isHistory?: boolean
+    isHistory?: boolean,
+    institutionId?: string | number,
+    courseId?: string | number,
+    correct?: number,
+    wrong?: number,
 }) => {
+    const router = useRouter()
     const totalScore = isHistory ? score! : parseInt((score! / questions.length * 100).toFixed(2))
 
+    const handlePrint = () => {
+        const contentToPrint = document.getElementById('contentToPrint')?.innerHTML
+        const printWindow = window?.open('', '_blank')
+      
+        printWindow?.document.open()
+        printWindow?.document.write(`<html><head><title>@Naijaschools - xeposoft. </title></head><body>`)
+        printWindow?.document.write(contentToPrint as string)
+      
+        const stylesheets = Array.from(document.styleSheets).map(
+          (styleSheet) =>
+            `<link rel="stylesheet" href="${(styleSheet as CSSStyleSheet).href}" />`
+        )
+        printWindow?.document.write(stylesheets.join(''))
+      
+        printWindow?.document.write('</body></html>')
+      
+        printWindow?.document.close()
+        printWindow?.print()
+      }
+      
+
   return (
-    <div className='w-auto overflow-auto'>
-        <section className="flex-1">
+    <div className='w-auto overflow-auto' id='contentToPrint'>
+        <section className="flex-1 flex-col flex gap-3 p-4 rounded-md border my-2">
             <h2 className="text-2xl">Score: <span className={totalScore < 40 ? "text-rose-500" : totalScore < 70 ? "text-primary-500" : "text-primary"}>{totalScore}%</span></h2>
+            {correct && <p className='text-primary flex items-center gap-2'>Total Correct: {correct} <CheckCircle /></p>}
+            {wrong && <p className='text-rose-500 flex items-center gap-2'>Total wrong: {wrong} <XCircleIcon /></p>}
         </section>
-        <Table className='py-5 w-[90%] overflow-scroll'>
+        <Table className='py-5 overflow-scroll'>
             <TableCaption>End of list. You&#39;re all caught up.</TableCaption>
             <TableHeader>
                 <TableRow>
@@ -50,14 +80,31 @@ const QuizResults = ({ questions, userAnswers, score, isHistory }: {
         <section className="actions flex gap-4 max-sm:flex-col flex-wrap max-sm:items-center p-4 w-full">
             <Button variant={'default'}
                 onClick={() => {
-
+                    router.push(`/dashboard/s/quiz/start/${institutionId}/course/${courseId}?noq=${questions.length}?retake=true`)
                 }}
                 className='max-sm:w-full'
+                title='Retake this quiz.'
             >Retake Quiz</Button>
-            <Link href={'/dashboard/s/quiz/history'} className={buttonVariants({
+            <Link href={'/dashboard/s/quiz/history'} 
+                className={buttonVariants({
                 variant: "secondary",
                 className: "max-sm:w-full"
-            })}>Go to Quiz History</Link>
+            })}
+                title='Go to your quiz history'
+            >Go to Quiz History</Link>
+            <Button variant={'outline'}
+                onClick={handlePrint}
+                className='max-sm:w-full'
+                title='Print this result.'
+            >Print</Button>
+            <Button 
+                variant={'outline'}
+                title='Back to top'
+                onClick={() => {
+                    scrollTo({top: 0})
+                }}
+                className='max-sm:w-full bg-primary-500 text-foreground-50'
+            ><ArrowUp size={15} /></Button>
         </section>
     </div>
   )

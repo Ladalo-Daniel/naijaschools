@@ -7,6 +7,7 @@ import { User, getProfile } from '@/supabase/user'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import MobileActions from './MobileActions'
+import { ModeToggle } from '@/components/ModeToggle'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
@@ -19,6 +20,7 @@ const TopNavbar = async () => {
       <MobileSidebar profile={profile?.data as User} />
 
       <div className='flex items-center gap-3'>
+        <ModeToggle />
         <Link href={'/dashboard/profile'} className='hidden md:block'>
           <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
         </Link>
