@@ -39,7 +39,7 @@ export default function ScrollG({ children }: { children: ReactNode }) {
   return (
     <>
       {["section1", "section2", "section3", "section4"].map((image) => (
-        <Section name={image}>
+        <Section name={image} key={image}>
             { children }
         </Section>
       ))}
