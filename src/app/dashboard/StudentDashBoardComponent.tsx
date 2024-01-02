@@ -12,7 +12,7 @@ const StudentDashBoardComponent = () => {
         <Link href={'/dashboard/s/courses'} className={buttonVariants({
           className: "transition-all"
         })} >Courses</Link>
-        <Link href={'/dashboard/s/quizzes'} className={buttonVariants({
+        <Link href={'/dashboard/s/quiz'} className={buttonVariants({
           variant: "secondary",
           className: "transition-all bg-background"
         })} >Quizzes</Link>
@@ -38,7 +38,7 @@ const StudentDashBoardComponent = () => {
             </Link>
         </Card>
         <Card className='p-6 h-44 border group rounded-md w-auto hover:opacity-60 hover:transition-all hover:animate-out cursor-pointer'>
-            <Link href={'/dashboard/s/history'} className='flex justify-between w-72'>
+            <Link href={'/dashboard/s/quiz/history'} className='flex justify-between w-72'>
                 <div className='flex flex-col gap-2 flex-1'>
                   <HistoryIcon size={15}  />
                   <p className='font-semibold text-sm'>History</p>

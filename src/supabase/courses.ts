@@ -15,10 +15,11 @@ export const getCoursesByQuery = async (column: "code" | "description" | "id" | 
     const { data, error, count } = await supabaseClient.from('courses')
     .select('*')
     .eq(column, row)
+    .order("created_at", {
+        ascending: false
+    })
 
-    console.log("Got called!")
     if (error) throw error
-    console.log(data)
 
     return {data, error, count}
 }

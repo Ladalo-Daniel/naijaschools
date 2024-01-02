@@ -79,6 +79,7 @@ export const side_bar_links: {
       icon: <Users2Icon size={18} />,
       activeIcon: <Users2Icon size={18} />,
       tooltip: "Community",
+      hidden: true
     },
   ]
   
