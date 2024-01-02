@@ -1,4 +1,4 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Database } from "../types/supabase"
 import { createClient } from "@supabase/supabase-js"
 
@@ -9,4 +9,4 @@ export const supabaseClient = createClient<Database>(supabaseUrl, process.env.NE
     {
         global: { fetch: fetch.bind(globalThis) }
     }
-    )
+)
