@@ -1,24 +1,39 @@
-import { Button } from '@nextui-org/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { Avatar } from '@nextui-org/avatar'
 import { buttonVariants } from './ui/button'
 import { cn } from '@/lib/utils'
+import { getUserSession } from '@/supabase/session'
+import SignOut from './shared/SignOut'
+import { NavigationMenu } from '@radix-ui/react-navigation-menu'
+import { NavMenu } from './NavigationMenu'
+import { ModeToggle } from './ModeToggle'
 
-const AuthTopNav = ({ isHome }: { isHome?: boolean}) => {
+const AuthTopNav = async ({ isHome }: { isHome?: boolean}) => {
+  const session = await getUserSession()
   return (
-    <nav className={cn('bg-gray-100 backdrop-blur-md bg-transparent px-2 md:px-16 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-10 h-16 border-b border-r-gray-600', {
-      "flex bg-white dark:bg-black": isHome,
+    <nav className={cn('bg-gray-100 backdrop-blur-md bg-transparent px-2 md:px-16 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-30 h-16 border-b border-r-gray-600', {
+      "flex light:bg-white dark:bg-zinc-900 bg-transparent backdrop-blur-lg": isHome,
       "hidden": !isHome
     })}>
-      <Link href={'/'} className={''}>
-        <Image src={'/images/logt2.png'} width={100} height={100} alt="logo" />
+      <Link href={'/'} className={'inline-block'}>
+        <Image src={'/images/logt2.png'} width={100} height={100} quality={100} alt="logo" />
       </Link>
       <div className='flex items-center gap-3'>
-        {/* <Avatar src='/images/human.png' isBordered hidden color='primary' /> */}
-        <Link className={buttonVariants({variant: "link"})} href={'/sign-up'} color='primary'>Log In</Link>
-        {/* <Button variant='faded' className='' color='danger'>Log Out</Button> */}
+        <NavMenu />
+        {
+          session?.user ? (
+            <div className='flex items-center gap-2'>
+              <Link className={buttonVariants({variant: "link", className: "no-underline hover:bg-primary hover:transition-all border rounded-md hover:text-foreground hover:no-underline"})} href={'/sign-up'}>Dashboard</Link>
+              <SignOut />
+            </div>
+          ): (
+            <>
+            <ModeToggle />
+              <Link className={buttonVariants({variant: "link", className: "no-underline hover:bg-primary hover:transition-all border rounded-md hover:text-foreground hover:no-underline"})} href={'/sign-up'}>Log In</Link>
+            </>
+          )
+        }
       </div>
     </nav>
   )

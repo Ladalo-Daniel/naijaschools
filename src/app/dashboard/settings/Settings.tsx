@@ -6,6 +6,7 @@ import UpdateSettingsForm from './UpdateSettingsForm'
 import { ThemeToggle } from './ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { ArrowRightIcon } from 'lucide-react'
+import SignOut from '@/components/shared/SignOut'
 
 const Settings = ({ profile }: { profile: Database['public']['Tables']['users']['Row']}) => {
   return (
@@ -61,9 +62,7 @@ const Settings = ({ profile }: { profile: Database['public']['Tables']['users'][
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <form action={'/auth/signout'} method='post'>
-                  <Button className={'mr-2'} type='submit'>Sign Out <ArrowRightIcon size={20}/></Button>
-                </form>
+                <SignOut />
             </CardContent>
         </Card>
 
