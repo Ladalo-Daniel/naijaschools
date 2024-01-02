@@ -60,16 +60,6 @@ export default function AutoComplete({ courses, institutionId }: { courses: Cour
                 <span className="text-small">{item.name!}</span>
                 <span className="text-tiny text-default-400">{item.description!}</span>
               </div>
-              {/* <Button
-                as={Link}
-                className="border-small mr-0.5 font-medium shadow-small"
-                radius="full"
-                size="sm"
-                variant="bordered"
-                href={`/dashboard/s/quiz/start/${institutionId}/course/${item.id}`}
-                >
-                <ArrowRightCircle className="text-primary" />
-              </Button> */}
             </div>
           </div>
         </AutocompleteItem>

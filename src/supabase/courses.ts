@@ -16,7 +16,9 @@ export const getCoursesByQuery = async (column: "code" | "description" | "id" | 
     .select('*')
     .eq(column, row)
 
+    console.log("Got called!")
     if (error) throw error
+    console.log(data)
 
     return {data, error, count}
 }
