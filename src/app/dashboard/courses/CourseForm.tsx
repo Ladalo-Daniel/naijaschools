@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useFormState } from "react-dom"
 import { toast } from "sonner"
-import { SelectCourse } from "./SelectCourse"
+import SelectCourseInstitution from "./SelectCourseInstitution"
 import UpsertCourse from "./courses.actions"
 import { SaveButton } from "./SaveCourseButton"
 import { Course } from "@/supabase/courses"
@@ -41,7 +41,7 @@ export default function CourseForm({ className, setOpen, course, institutions, t
   return (
     <form className={cn("grid items-start gap-4", className)} action={formAction}>
       <div className="grid gap-2">
-        <SelectCourse institutions={institutions as InstitutionList} institution_name={course?.name || ""} institution_id={course?.institution as number || institutionId as any} />
+        <SelectCourseInstitution institutions={institutions as InstitutionList} institution_name={course?.name || ""} institution_id={course?.institution as number || institutionId as any} />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="name">Course Name</Label>

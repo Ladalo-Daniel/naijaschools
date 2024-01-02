@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select"
 import { InstitutionList } from "@/supabase/institutions"
 
-export function SelectCourse({ institutions, institution_id, institution_name }: {
+export default function SelectCourseInstitution({ institutions, institution_id, institution_name }: {
     institutions: InstitutionList,
     institution_id?: number,
     institution_name?: string
