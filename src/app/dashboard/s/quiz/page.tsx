@@ -8,9 +8,12 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { ArrowRightCircleIcon } from 'lucide-react'
+import { redirect } from 'next/navigation'
 
 const QuizPage = async () => {
   const profile = await getProfile()
+  if (!profile?.data?.id) return redirect('/')
+
   const institution = await getInstitutionById(profile?.data?.institution as string)
   return (
     <MaxWrapper className='max-w-5xl bg-background p-2'>

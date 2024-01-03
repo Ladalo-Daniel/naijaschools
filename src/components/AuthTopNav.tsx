@@ -5,7 +5,6 @@ import { buttonVariants } from './ui/button'
 import { cn } from '@/lib/utils'
 import { getUserSession } from '@/supabase/session'
 import SignOut from './shared/SignOut'
-import { NavigationMenu } from '@radix-ui/react-navigation-menu'
 import { NavMenu } from './NavigationMenu'
 import { ModeToggle } from './ModeToggle'
 

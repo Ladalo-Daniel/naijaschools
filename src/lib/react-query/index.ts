@@ -8,17 +8,19 @@ import { Question, createQuestion, getQuestionById } from "@/supabase/questions"
 import { getCoursesByQuery } from "@/supabase/courses";
 import { fetchRandomQuestions, updateQuiz } from "@/supabase/quiz";
 import { Json } from "@/types/supabase";
+import { createUpdateArticle, getArticleById, getArticlesByQuery } from "@/supabase/articles";
+
+const queryClient = new QueryClient()
 
 export const useGetProfile = () => {
     return useQuery({
+        queryFn: getProfile,
         queryKey: [QUERY_KEYS.get_user_profile],
-        queryFn: () => getProfile
     })
 }
 
 export const useUpdateProfile = () => {
     const router = useRouter()
-    const queryClient = new QueryClient()
     return useMutation({
         mutationFn: ({userId, onboarded, avatar, ...rest}: { userId: string, onboarded: boolean, avatar?: File[] }) => updateProfile({userId, avatar, ...rest}),
         mutationKey: [QUERY_KEYS.update_user_profile],
@@ -37,7 +39,6 @@ export const useUpdateProfile = () => {
 
 export const useMakeAdmin = () => {
     const router = useRouter()
-    const queryClient = new QueryClient()
     return useMutation({
         mutationKey: [QUERY_KEYS.update_user_profile],
         mutationFn: ({ role, userId }: { role: string, userId: string }) => makeAdmin({role, userId}),
@@ -70,7 +71,6 @@ export const useGetInstitutions = () => {
 }
 
 export const useCreateQuestion = () => {
-    const queryClient = useQueryClient()
     const router = useRouter()
     return useMutation({
         mutationFn: (question: Question ) => createQuestion(question),
@@ -119,7 +119,6 @@ export const useFetchRandomQuestions = ({user_id, course_id, numberOfQuestions, 
 }
 
 export const useUpdateQuiz = () => {
-    const queryClient = new QueryClient()
     return useMutation({
         mutationFn: ({quizId, answers, score, duration}: {quizId: string | number, answers: Json, score?: number, duration?: string} ) => updateQuiz(quizId, answers, score, duration),
         mutationKey: [QUERY_KEYS.update_quiz_data],
@@ -131,5 +130,39 @@ export const useUpdateQuiz = () => {
         onError: () => {
             toast.error("An error occured while saving your records to the database.")
         }
+    })
+}
+
+
+export const useCreateUpdateArticle = () => {
+    const router = useRouter()
+    return useMutation({
+        mutationFn: ({articleId, image, ...rest}: { articleId: string, image?: File[] }) => createUpdateArticle({articleId, image, ...rest}),
+        mutationKey: [QUERY_KEYS.create_update_article_data],
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.create_update_article_data]
+            })
+            router.refresh()
+        },
+        onError: (error) => {
+            toast.error(error.message)
+        }
+    })
+}
+
+export const useGetArticlesByQuery = ({column, row, range}: { column:  "author" | "id" | "title" | "tags", row: string, range?: number}) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_articles, column, row],
+        queryFn: () => getArticlesByQuery(column, row, range),
+        enabled: !!row
+    })
+}
+
+export const useGetInstitutionArticleById = (id: string) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_articles, id],
+        queryFn: () => getArticleById(id),
+        enabled: !!id
     })
 }

@@ -17,11 +17,14 @@ import ProfileCard from './ProfileCard'
 import { getProfile } from '@/supabase/user'
 import { getInstitutions } from '@/supabase/institutions'
 import BackButton from '@/components/shared/BackButton'
+import { redirect } from 'next/navigation'
 
 export default async function Profile() {
   const session = await getUserSession()
   const profile = await getProfile()
   const { data: institutions } = await getInstitutions() as any
+
+  // if (profile?.data) return redirect('/')
 
   return <MaxWrapper className='gap-3 max-w-5xl'>
     <div className='space-y-2'>

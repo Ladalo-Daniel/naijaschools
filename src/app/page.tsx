@@ -7,6 +7,8 @@ import IntroSection from "@/components/home/IntroSection"
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import { getUserSession } from "@/supabase/session";
 import { Session } from "@supabase/supabase-js";
+import { Suspense } from "react";
+import GeneralSkeleton from "./dashboard/components/skeletons/GeneralSkeleton";
 
 export default async function Home() {
 
@@ -19,7 +21,9 @@ export default async function Home() {
       <IntroSection session={session as Session} />
       <FeaturesSection />
       <TestimonialsSection />
-      <BlogSection />
+      <Suspense fallback={<GeneralSkeleton />}>
+        <BlogSection />
+      </Suspense>
       <FooterSection />
     </MaxWrapper>
     </div>

@@ -1,4 +1,4 @@
-'use server'
+// 'use server'
 
 import { Database } from "@/types/supabase"
 import { supabaseClient, supabaseUrl } from "."
@@ -74,7 +74,7 @@ export async function updateProfile({
   
     if (storageError) {
       await supabaseClient
-      .from('cabin-images')
+      .from('avatars')
       .delete()
       // @ts-ignore
       .eq('id', data?.id)

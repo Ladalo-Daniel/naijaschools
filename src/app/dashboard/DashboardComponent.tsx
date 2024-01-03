@@ -3,6 +3,7 @@ import React from 'react'
 import AdminComponent from './AdminComponent'
 import StudentDashBoardComponent from './StudentDashBoardComponent'
 import StaffDashBoardComponent from './StaffDashBoardComponent'
+import { redirect } from 'next/navigation'
 
 const DashboardComponent = async () => {
   const profile = await getProfile()
