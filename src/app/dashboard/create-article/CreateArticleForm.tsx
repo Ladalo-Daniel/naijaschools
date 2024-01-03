@@ -36,7 +36,7 @@ const CreateArticleForm = ({ article, session }: {article?: Article, session?: P
 
       function onSubmit(values: z.infer<typeof ArticleSchema>) {
         try {
-             updateCreateArticle({...values,  image: values.image || [], articleId: article?.id || "",},
+             updateCreateArticle({...values,  image: values.image || [], articleId: article?.id!,},
              {
                 onSuccess: () => {
                     form.reset()

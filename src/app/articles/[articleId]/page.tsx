@@ -6,16 +6,22 @@ import React from 'react'
 import ArticleDetailComponent from './ArticleDetailComponent'
 import BackButton from '@/components/shared/BackButton'
 import AuthTopNav from '@/components/AuthTopNav'
+import { Button } from '@nextui-org/button'
+import Link from 'next/link'
+import { Edit } from 'lucide-react'
+import { getProfile } from '@/supabase/user'
 
 const ArticleDetailPage = async ({params}: {params: { articleId: string }}) => {
 
     const {articleId} = params
     const { data: article } = await getArticleById(articleId)
+    const profile = await getProfile()
   return (
     <div className="mx-auto flex flex-col gap-4 border bg-gradient-to-tr ">
         <AuthTopNav isHome  />
         <MaxWrapper className='bg-background p-4 max-w-7xl'>
             <BackButton />
+            {(profile?.data?.role === 'admin' || profile?.data?.role === 'staff' ) && <Button as={Link} href={`/dashboard/edit-article?articleId=${article.id}`} variant='ghost' color='primary' className='w-fit'><Edit size={18}/> Edit</Button>}
             <h2 className='font-semibold text-3xl py-3'>{article.title}</h2>
             <AspectRatio ratio={5 / 2} className='object-cover'>
                 <Image src={article.image_url!} fill alt={article.title!} className='object-cover rounded-md' />
