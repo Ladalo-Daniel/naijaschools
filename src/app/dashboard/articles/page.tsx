@@ -1,8 +1,9 @@
 import MaxWrapper from '@/components/MaxWrapper'
-import React from 'react'
+import React, { Suspense } from 'react'
 import AdminArticleComponent from './AdminArticleComponent'
 import { getArticles } from '@/supabase/articles'
 import BackButton from '@/components/shared/BackButton'
+import ArticleSkeleton from '@/components/skeletons/ArticleSkeleton'
 
 const AdminAndStaffArticleView = async () => {
     const { data: articles, count } = await getArticles()
@@ -14,7 +15,9 @@ const AdminAndStaffArticleView = async () => {
         </h2>
 
         <section className='flex flex-col gap-3'>
-            <AdminArticleComponent articles={articles} />
+            <Suspense fallback={<ArticleSkeleton />}>
+              <AdminArticleComponent articles={articles} />
+            </Suspense>
         </section>
     </MaxWrapper>
   )

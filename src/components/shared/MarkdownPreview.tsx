@@ -21,7 +21,7 @@ export default function MarkdownPreview({
 			rehypePlugins={[rehypeHighlight]}
 			components={{
 				h1: ({ node, ...props }) => {
-					return <h1 {...props} className="text-3xl font-bold text-primary hover:underline transition-all" />;
+					return <h1 {...props} className="text-2xl font-bold text-primary hover:underline transition-all" />;
 				},
 				h2: ({ node, ...props }) => {
 					return (
@@ -94,7 +94,7 @@ export default function MarkdownPreview({
 									</div>
 									<CopyButton id={id} />
 								</div>
-								<div className="overflow-x-auto w-full">
+								<div className="overflow-x-auto">
 									<div className="p-5" id={id}>
 										{children}
 									</div>
@@ -105,7 +105,7 @@ export default function MarkdownPreview({
 						return (
 							// TODO: convert to code block
 							<code
-								className="text-lg break-words bg-zinc-700 px-1 rounded-sm"
+								className="text-lg break-words bg-zinc-700 px-1 w-auto overflow-auto font-serif rounded-sm"
 								{...props}
 							>
 								{children}

@@ -8,7 +8,7 @@ import { Question, createQuestion, getQuestionById } from "@/supabase/questions"
 import { getCoursesByQuery } from "@/supabase/courses";
 import { fetchRandomQuestions, updateQuiz } from "@/supabase/quiz";
 import { Json } from "@/types/supabase";
-import { createUpdateArticle, getArticleById, getArticlesByQuery } from "@/supabase/articles";
+import { createUpdateArticle, getArticleById, getArticlesByQuery, getArticlesByTag } from "@/supabase/articles";
 
 const queryClient = new QueryClient()
 
@@ -155,7 +155,7 @@ export const useGetArticlesByQuery = ({column, row, range}: { column:  "author" 
     return useQuery({
         queryKey: [QUERY_KEYS.get_articles, column, row],
         queryFn: () => getArticlesByQuery(column, row, range),
-        enabled: !!row
+        enabled: true
     })
 }
 
@@ -163,6 +163,14 @@ export const useGetInstitutionArticleById = (id: string) => {
     return useQuery({
         queryKey: [QUERY_KEYS.get_articles, id],
         queryFn: () => getArticleById(id),
-        enabled: !!id
+        enabled: true
+    })
+}
+
+export const useGetArticlesByTag = (tag: string) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_articles, tag],
+        queryFn: () => getArticlesByTag(tag),
+        enabled: true
     })
 }

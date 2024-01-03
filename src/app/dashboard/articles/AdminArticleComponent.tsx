@@ -7,6 +7,8 @@ import { Edit2, Trash } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Markdown from 'react-markdown'
+import DeleteArticle from './DeleteArticle'
 
 const AdminArticleComponent = ({ articles }: {articles: ArticleList}) => {
   return (
@@ -14,7 +16,7 @@ const AdminArticleComponent = ({ articles }: {articles: ArticleList}) => {
         <div className='flex flex-wrap gap-4'>
         {
             articles?.map(article => (
-                <Card className='bg-gradient w-68 min-h-50 max-w-[350px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full from-green-950 to-zinc-800' key={article?.id} 
+                <Card className='bg-gradient w-68 min-h-50 max-w-[320px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full from-green-950 to-zinc-800' key={article?.id} 
                 >
                     <CardHeader className='flex items-center justify-between'>
                         <AspectRatio ratio={16/9} className='bg-muted'>
@@ -32,12 +34,14 @@ const AdminArticleComponent = ({ articles }: {articles: ArticleList}) => {
                             {article.title}
                         </h2>
                         <div className='py-2 text-muted-foreground'>
-                            <MarkdownPreview content={article.content?.slice(0, 80) + "..."} className='text-tiny' />
+                            <Markdown>
+                                {article.content?.slice(0, 80) + "..."}
+                            </Markdown>
                         </div>
                     </CardBody>
                     <CardFooter className='flex gap-2 flex-wrap'>
                         <Button variant='flat' color='primary' isIconOnly as={Link} href={`/dashboard/edit-article?articleId=${article.id}`}><Edit2  size={15}/></Button>
-                        <Button variant='flat' color='danger' isIconOnly ><Trash  size={15} /></Button>
+                        <DeleteArticle article={article!} />
                     </CardFooter>
                 </Card>
             ))

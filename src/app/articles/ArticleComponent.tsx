@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Markdown from 'react-markdown'
 
 const ArticleComponent = ({ articles }: {articles: ArticleList}) => {
   return (
@@ -11,7 +12,7 @@ const ArticleComponent = ({ articles }: {articles: ArticleList}) => {
         <div className='flex flex-wrap gap-4'>
         {
             articles?.map(article => (
-                <Card className='bg-gradient w-68 min-h-50 max-w-[500px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full from-green-950 to-zinc-800' key={article?.id} as={Link}
+                <Card className='bg-gradient w-68 min-h-50 max-w-[320px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full from-green-950 to-zinc-800' key={article?.id} as={Link}
                     href={`/articles/${article.id}`}
                 >
                     <CardHeader className='flex items-center justify-between'>
@@ -28,9 +29,11 @@ const ArticleComponent = ({ articles }: {articles: ArticleList}) => {
                         <h2 className='text-primary py-2 font-semibold'>
                             {article.title}
                         </h2>
-                        <p className='py-2 text-muted-foreground'>
-                            {article.content?.slice(0, 80) + "..."}
-                        </p>
+                        <div className='py-2 text-muted-foreground'>
+                            <Markdown>
+                                {article.content?.slice(0, 80) + "..."}
+                            </Markdown>
+                        </div>
                     </CardBody>
                 </Card>
             ))

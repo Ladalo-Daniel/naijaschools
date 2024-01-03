@@ -23,7 +23,7 @@ const AuthTopNav = async ({ isHome }: { isHome?: boolean}) => {
         {
           session?.user ? (
             <div className='flex items-center gap-2'>
-              <Link className={buttonVariants({variant: "link", className: "no-underline hover:bg-primary hover:transition-all border rounded-md hover:text-foreground hover:no-underline"})} href={'/sign-up'}>Dashboard</Link>
+              <Link className={buttonVariants({variant: "link", className: "no-underline hover:bg-primary hover:transition-all border rounded-md hover:text-foreground hover:no-underline"})} href={'/dashboard'}>Dashboard</Link>
               <SignOut />
             </div>
           ): (

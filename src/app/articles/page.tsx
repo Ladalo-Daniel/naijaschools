@@ -5,6 +5,12 @@ import { getArticles } from '@/supabase/articles'
 import { Alert } from '@/components/ui/alert'
 import BackButton from '@/components/shared/BackButton'
 import AuthTopNav from '@/components/AuthTopNav'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: "All Articles",
+    description: "A list of all articles to explore from @Naijaschools."
+}
 
 const ArticlePage = async () => {
     const { data: articles } = await getArticles()

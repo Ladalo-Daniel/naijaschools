@@ -4,8 +4,8 @@ import { AspectRatio } from '../ui/aspect-ratio'
 import Image from 'next/image'
 import Link from 'next/link';
 import { buttonVariants } from '../ui/button';
-import { getArticles, getRecentArticles } from '@/supabase/articles';
-import MarkdownPreview from '../shared/MarkdownPreview';
+import { getRecentArticles } from '@/supabase/articles';
+import Markdown from 'react-markdown';
 
 
 const BlogSection = async () => {
@@ -17,7 +17,7 @@ const BlogSection = async () => {
         <div className='flex flex-wrap gap-4'>
           {
             articles?.map(article => (
-                <Card className='bg-gradient w-68 min-h-50 max-w-[500px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full from-green-950 to-zinc-800' key={article?.id} as={Link}
+                <Card className='bg-gradient w-68 min-h-50 max-w-[320px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full from-green-950 to-zinc-800' key={article?.id} as={Link}
                     href={`/articles/${article.id}`}
                 >
                     <CardHeader className='flex items-center justify-between'>
@@ -35,7 +35,9 @@ const BlogSection = async () => {
                             {article.title}
                         </h2>
                         <div className='py-2 text-muted-foreground'>
-                            <MarkdownPreview content={article.content?.slice(0, 80) + "..."} className='text-tiny' />
+                            <Markdown>
+                                {article.content?.slice(0, 80) + "..."}
+                            </Markdown>
                         </div>
                     </CardBody>
                 </Card>

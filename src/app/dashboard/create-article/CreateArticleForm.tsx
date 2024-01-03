@@ -41,8 +41,7 @@ const CreateArticleForm = ({ article, session }: {article?: Article, session?: P
                 onSuccess: () => {
                     form.reset()
                     toast.success("Success!")
-                    article?.id ? router.push('/articles/' + article?.id) : null
-                    return
+                    return article?.id ? router.push('/articles/' + article?.id) : router.push('/articles')
                 }
              });
           } catch (error) {

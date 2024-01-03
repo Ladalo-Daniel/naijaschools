@@ -9,7 +9,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const ArticleDetailComponent = async ({ article }: { article: Article }) => {
-    const { data: author } = await getProfileById(article.author!)
+    const { data: author } = await getProfileById(article.author! ?? "")
   return (
     <div className='flex flex-col gap-3'>
         <div className="flex flex-col gap-2">
@@ -24,9 +24,9 @@ const ArticleDetailComponent = async ({ article }: { article: Article }) => {
         <div className="p-2 flex gap-1">
            {
             article.tags?.split(',').map(tag => (
-                <Link key={tag} href={"/articles?tag=" + tag} className={buttonVariants({
+                <Link key={tag} href={`/articles/tags?tag=${tag}`} className={buttonVariants({
                     variant: "link",
-                    className: "hover:no-underline hover:bg-primary transition-all"
+                    className: "hover:no-underline hover:bg-primary transition-all hover:text-gray-50"
                 })}>
                     {tag}
                 </Link>

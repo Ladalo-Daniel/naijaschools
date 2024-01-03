@@ -25,6 +25,26 @@ export async function getArticles() {
     }
 }
 
+export async function getArticlesByTag(tag: string) {
+    try {
+        const {data, error, count} = await supabaseClient.from("articles").select("*")
+        .order("updated_at", {
+            ascending: false
+        })
+        .order("created_at", {
+            ascending: false
+        })
+        .filter("tags", "like", tag)
+
+        if(error) throw error
+
+        return {data, error, count}
+
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
 export async function getArticlesByQuery(column: "author" | "id" | "title" | "tags", row: string, range?: number) {
     const { data, error, count} = await supabaseClient.from('articles')
     .select('*')
@@ -75,7 +95,6 @@ export async function createUpdateArticle({
     articleId?: string,
     image?: File[] | string
     }) {
-        console.log(image)
     try {
     // @ts-ignore
     const hasImagePath = image?.startsWith?.(supabaseUrl)
@@ -84,7 +103,7 @@ export async function createUpdateArticle({
     const imagePath = hasImagePath ? image : `${supabaseUrl}/storage/v1/object/public/articles/${imageName}`
   
 
-    const { error, data } = await supabaseClient.from('articles').insert({
+    const { error, data } = await supabaseClient.from('articles').upsert({
         id: articleId!,
         updated_at: new Date().toISOString(),
         image_url: imagePath as string,
