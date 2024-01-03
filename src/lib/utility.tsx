@@ -1,5 +1,5 @@
 import React from "react"
-import { BookCheckIcon, BookIcon, Building2, LayoutDashboardIcon, LucideUsers2, Settings, Settings2, User, User2, Users, Users2Icon } from 'lucide-react'
+import { Book, BookAIcon, BookCheckIcon, BookIcon, Building2, LayoutDashboardIcon, LucideUsers2, Plus, Settings, Settings2, User, User2, Users, Users2Icon } from 'lucide-react'
 import { getProfile } from "@/supabase/user"
 import { QuestionMarkIcon } from "@radix-ui/react-icons"
 
@@ -11,7 +11,7 @@ async function hideRolesRoute() {
 export const side_bar_links: {
     href: string,
     icon: React.JSX.Element,
-    activeIcon: React.JSX.Element,
+    activeIcon?: React.JSX.Element,
     tooltip: string,
     hidden?: boolean
   }[] = [
@@ -79,6 +79,23 @@ export const side_bar_links: {
       icon: <Users2Icon size={18} />,
       activeIcon: <Users2Icon size={18} />,
       tooltip: "Community",
+      hidden: true
+    },
+    {
+      href: "/dashboard/create-article",
+      icon: <Plus size={18} />,
+      tooltip: "Create Article",
+      hidden: true
+    },
+    {
+      href: "/articles",
+      icon: <Book size={18} />,
+      tooltip: "Articles",
+    },
+    {
+      href: "/dashboard/articles",
+      icon: <BookAIcon size={18} />,
+      tooltip: "Articles (admin)",
       hidden: true
     },
   ]
