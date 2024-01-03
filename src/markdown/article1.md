@@ -8,7 +8,7 @@ console.log("Hello World")
 
 ```
 
-[https://a.com]My World
+[https://a.com](My World)
 
 **ello**
 *Hello*
