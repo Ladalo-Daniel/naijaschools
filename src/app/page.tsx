@@ -22,7 +22,7 @@ export default async function Home() {
       <FeaturesSection />
       <TestimonialsSection />
       <Suspense fallback={<ArticleSkeleton />}>
-        <BlogSection />
+        <BlogSection/>
       </Suspense>
       <FooterSection />
     </MaxWrapper>
