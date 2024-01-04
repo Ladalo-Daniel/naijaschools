@@ -1,11 +1,7 @@
-import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import React from 'react'
-import { AspectRatio } from '../ui/aspect-ratio'
-import Image from 'next/image'
 import Link from 'next/link';
 import { buttonVariants } from '../ui/button';
 import { getRecentArticles } from '@/supabase/articles';
-import Markdown from 'react-markdown';
 import ArticleReel from '../shared/ArticleReel';
 
 

@@ -1,10 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Roboto, Geologica } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/Providers'
 import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
+ 
+const geologica = Geologica({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
+ 
 
 export const metadata: Metadata = {
   title: 'Naijaschools',
@@ -19,7 +31,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn('inter.className')}>
+      <body className={cn(geologica.className)}>
         <Providers>
           {children}
         </Providers>
