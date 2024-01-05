@@ -1,20 +1,23 @@
+"use client"
+
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card'
 import React from 'react'
 import { AspectRatio } from '../ui/aspect-ratio'
 import Image from 'next/image'
 import Markdown from 'react-markdown'
-import { Button } from '@nextui-org/button'
-import DeleteArticle from '@/app/dashboard/articles/DeleteArticle'
 import { Article } from '@/supabase/articles'
 import Link from 'next/link'
+import { useGetProfile } from '@/lib/react-query'
+import { Button } from '@nextui-org/button'
+import DeleteArticle from '@/app/dashboard/articles/DeleteArticle'
 import { Edit2 } from 'lucide-react'
-import { getProfile } from '@/supabase/user'
 
-const ArticleItem = async ({article}: { article: Article }) => {
-    // const _profile = await getProfile()
-    // const profile = _profile?.data
+const ArticleItem = ({article}: { article: Article }) => {
+    let { data: _profile, isPending } = useGetProfile()
+    const profile = _profile?.data
+
   return (
-    <Card className='bg-gradient w-68 min-h-50 md:max-w-[320px] max-sm:w-full hover:opacity-60 hover:animate-in cursor-pointer from-green-950 to-zinc-800' key={article?.id} 
+    <Card className='bg-gradient hover:opacity-60 hover:animate-in cursor-pointer from-green-950 to-zinc-800' key={article?.id} 
     >
         <CardHeader className='flex items-center justify-between'>
             <AspectRatio ratio={16/9} className='bg-muted'>
@@ -37,10 +40,10 @@ const ArticleItem = async ({article}: { article: Article }) => {
                 </Markdown>
             </div>
                     </CardBody>
-                    {/* {(profile?.role === 'admin' || profile?.role === 'staff') && <CardFooter className='flex gap-2 flex-wrap'>
+                    {(profile?.role === 'admin' || profile?.role === 'staff') && <CardFooter className='flex gap-2 flex-wrap'>
                         <Button variant='flat' color='primary' isIconOnly as={Link} href={`/dashboard/edit-article?articleId=${article.id}`}><Edit2  size={15}/></Button>
                         <DeleteArticle article={article!} />
-                    </CardFooter>} */}
+                    </CardFooter>}
     </Card>
   )
 }

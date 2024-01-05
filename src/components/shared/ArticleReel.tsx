@@ -1,3 +1,5 @@
+'use client'
+
 import { ArticleList } from '@/supabase/articles'
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card'
 import React from 'react'
@@ -8,10 +10,11 @@ import Markdown from 'react-markdown'
 import { Button } from '@nextui-org/button'
 import DeleteArticle from '@/app/dashboard/articles/DeleteArticle'
 import { Edit2 } from 'lucide-react'
-import { getProfile } from '@/supabase/user'
+import { useGetProfile } from '@/lib/react-query'
 
-const ArticleReel = async ({ articles }: { articles: ArticleList }) => {
-    const profile = await getProfile()
+const ArticleReel = ({ articles }: { articles: ArticleList }) => {
+    let { data: _profile, isPending } = useGetProfile()
+    const profile = _profile?.data
   return (
     <div className='flex flex-wrap gap-4'>
         {
@@ -39,7 +42,7 @@ const ArticleReel = async ({ articles }: { articles: ArticleList }) => {
                             </Markdown>
                         </div>
                     </CardBody>
-                    {(profile?.data?.role === 'admin' || profile?.data?.role === 'staff') && <CardFooter className='flex gap-2 flex-wrap'>
+                    {(profile?.role === 'admin' || profile?.role === 'staff') && <CardFooter className='flex gap-2 flex-wrap'>
                         <Button variant='flat' color='primary' isIconOnly as={Link} href={`/dashboard/edit-article?articleId=${article.id}`}><Edit2  size={15}/></Button>
                         <DeleteArticle article={article!} />
                     </CardFooter>}

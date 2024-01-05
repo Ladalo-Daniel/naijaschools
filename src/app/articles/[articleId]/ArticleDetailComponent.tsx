@@ -1,7 +1,7 @@
 import MarkdownPreview from '@/components/shared/MarkdownPreview'
 import { buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { multiFormatDateString } from '@/lib/utils'
+import { shortMultiFormatDateString } from '@/lib/utils'
 import { Article } from '@/supabase/articles'
 import { getProfileById } from '@/supabase/user'
 import { TimerIcon } from 'lucide-react'
@@ -38,7 +38,7 @@ const ArticleDetailComponent = async ({ article }: { article: Article }) => {
             <MarkdownPreview content={article.content!} />
         </div>
         <div className="p-2">
-            Last updated <b>{multiFormatDateString(article.updated_at!)}</b> ago.
+            Last updated <b>{shortMultiFormatDateString(article.updated_at!)}</b> ago.
         </div>
     </div>
   )
