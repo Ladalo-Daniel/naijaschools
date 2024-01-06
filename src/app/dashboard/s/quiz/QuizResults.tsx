@@ -111,12 +111,12 @@ const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, insti
                 title='Print this result.'
             >Print</Button>
             <Button 
-                variant={'outline'}
+                variant={'ghost'}
                 title='Back to top'
                 onClick={() => {
                     scrollTo({top: 0})
                 }}
-                className='max-sm:w-full bg-primary-500 text-foreground-50'
+                className='max-sm:w-full'
             ><ArrowUp size={15} /></Button>
         </section>
     </div>
