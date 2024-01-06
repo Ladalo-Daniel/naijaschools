@@ -15,7 +15,7 @@ export default async function Home() {
 
   const session = await getUserSession()
   return (
-    <div className="mx-auto flex flex-col gap-4 border bg-gradient-to-tr ">
+    <div className="mx-auto flex flex-col gap-4 border bg-gradient-to-br ">
     <AuthTopNav isHome />
     <MaxWrapper className="flex-1 gap-9 min-h-screen py-24 px-4 md:px-20 max-w-7xl overflow-hidden"
     >
