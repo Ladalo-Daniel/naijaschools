@@ -29,6 +29,9 @@ import FileUploader from "@/components/shared/FileUploader"
 import { toast } from "sonner"
 import { User } from "@/supabase/user"
 import { InstitutionList } from "@/supabase/institutions"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Link from "next/link"
+import { faculties } from "@/lib/faculties"
 
 export default function AccountForm({ session, isUpdate, profile, isDashboard, institutions }: { 
   session: Session | null, 
@@ -53,6 +56,7 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
       last_name: profile?.last_name || "",
       email: user?.email,
       avatar: profile?.image_url || "",
+      faculty: profile?.faculty ||""
     },
   })
 
@@ -130,6 +134,33 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
           )}
         />
         <ComboboxForm institutions={institutions as any} form={form} />
+        <FormField
+          control={form.control}
+          name="faculty"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Faculty</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a valid faculty." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {
+                    faculties.map(f => (
+                      <SelectItem value={f} key={f}>{f}</SelectItem>
+                    ))
+                  }
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                <Link href="/faculty/l-m">Learn more.</Link>.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <DatePicker form={form}/>
         <FormField
           control={form.control}

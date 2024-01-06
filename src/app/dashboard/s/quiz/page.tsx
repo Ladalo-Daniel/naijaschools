@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { ArrowRightCircleIcon } from 'lucide-react'
 import { redirect } from 'next/navigation'
+import { Card, CardHeader } from '@nextui-org/card'
 
 const QuizPage = async () => {
   const profile = await getProfile()

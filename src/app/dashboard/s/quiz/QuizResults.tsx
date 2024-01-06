@@ -5,7 +5,8 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { QuizQuestionList } from '@/supabase/quiz'
 import { ArrowUp, CheckCircle, CheckCircle2, XCircleIcon } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
+import Confetti from 'canvas-confetti'
 
 import { useRouter } from 'next/navigation'
 
@@ -42,6 +43,18 @@ const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, insti
         printWindow?.document.close()
         printWindow?.print()
       }
+
+      const fireConfetti = () => {
+        Confetti({
+          particleCount: 1000,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      };
+
+      useEffect(() => {
+        if (totalScore > 75) fireConfetti()
+      }, [totalScore])
       
 
   return (

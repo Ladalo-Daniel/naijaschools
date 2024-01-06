@@ -17,6 +17,7 @@ import Image from 'next/image'
 import SwitchForm from './SwitchRoleForm'
 import { useGetProfileById, useMakeAdmin } from '@/lib/react-query'
 import { User } from '@/supabase/user'
+import GeneralSkeleton from '../components/skeletons/GeneralSkeleton'
   
 
 const AdminStudentDetailView = () => {
@@ -35,6 +36,8 @@ const AdminStudentDetailView = () => {
     if (!id) {
         return <></>
     }
+
+    // if (isPending) return <GeneralSkeleton />
   return (
     <Drawer open={open} onOpenChange={setOpen}>
         <DrawerContent className='border-background'>

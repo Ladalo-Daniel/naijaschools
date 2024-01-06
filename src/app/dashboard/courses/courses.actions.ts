@@ -14,8 +14,7 @@ const schema = z.object({
   code: z.string({
     invalid_type_error: 'Provide a valid course code ',
   }),
-  question_number: z.string().optional(),
-  total_marks: z.string().optional(),
+  faculty: z.string(),
   description: z.string().optional(),
   upsert_id: z.string().optional()
 })
@@ -25,8 +24,7 @@ export default async function UpsertCourse(prevState: any, formData: FormData) {
     institution: formData.get('institution'),
     name: formData.get('name'),
     code: formData.get('code'),
-    question_number: formData.get('question_number'),
-    total_marks: formData.get('total_marks'),
+    faculty: formData.get('faculty'),
     description: formData.get('description'),
     upsert_id: formData.get("upsert_id")
   })
@@ -56,10 +54,9 @@ export default async function UpsertCourse(prevState: any, formData: FormData) {
       id: parseInt(validatedFields?.data?.upsert_id),
       name: validatedFields.data.name.trim(),
       description: validatedFields?.data?.description?.trim() || "",
-      question_number: validatedFields.data.question_number,
-      total_marks: validatedFields.data.total_marks,
+      faculty: validatedFields.data.faculty,
       code: validatedFields.data.code,
-      institution: validatedFields.data.institution
+      institution: parseInt(validatedFields.data.institution)
     })
 
     if (error)  
@@ -82,10 +79,9 @@ export default async function UpsertCourse(prevState: any, formData: FormData) {
     // @ts-ignore
     name: validatedFields.data.name.trim(),
     description: validatedFields?.data?.description?.trim() || "",
-    question_number: validatedFields.data.question_number,
-    total_marks: validatedFields.data.total_marks,
+    faculty: validatedFields.data.faculty,
     code: validatedFields.data.code,
-    institution: validatedFields.data.institution
+    institution: parseInt(validatedFields.data.institution)
   })
 
   if (error)  

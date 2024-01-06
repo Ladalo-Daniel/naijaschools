@@ -11,7 +11,31 @@ import Link from 'next/link'
 import { Edit } from 'lucide-react'
 import { getProfile } from '@/supabase/user'
 
-const ArticleDetailPage = async ({params}: {params: { articleId: string }}) => {
+import type { Metadata, ResolvingMetadata } from 'next'
+type Props = {
+  params: { articleId: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+ 
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const articleId = params.articleId
+ 
+  const { data: article } = await getArticleById(articleId)
+ 
+  const previousImages = (await parent).openGraph?.images || []
+ 
+  return {
+    title: article.title,
+    openGraph: {
+      images: [article.image_url!, ...previousImages],
+    },
+  }
+}
+ 
+const ArticleDetailPage = async ({params}: Props) => {
 
     const {articleId} = params
     const { data: article } = await getArticleById(articleId)

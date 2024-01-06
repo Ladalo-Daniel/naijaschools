@@ -10,5 +10,6 @@ export const userFormSchema = z.object({
   dob: z.any().optional(),
   avatar: z.any().optional(),
   first_name: z.string().optional(),
-  last_name: z.string().optional()
+  last_name: z.string().optional(),
+  faculty: z.string().optional(),
 })

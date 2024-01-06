@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/carousel'
 import { Card } from "@/components/ui/card"
 import DeleteUser from "./DeleteUser"
+import GeneralSkeleton from "../components/skeletons/GeneralSkeleton"
  
 const FormSchema = z.object({
   make_admin: z.boolean().optional(),
@@ -58,6 +59,8 @@ export default function SwitchForm({ makeAdmin, userId, isPending, profile, setO
       })
     }
    form.watch()
+
+    // if (isPending) return <GeneralSkeleton />
     return (
       <Carousel>
         <CarouselContent>

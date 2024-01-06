@@ -52,12 +52,8 @@ export default function CourseForm({ className, setOpen, course, institutions, t
         <Input id="code" name="code" defaultValue={course?.code || ""} placeholder="Course code..." required/>
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="question_number">Total Number of Questions</Label>
-        <Input id="question_number" type="number" name="question_number" defaultValue={course?.question_number || ""} placeholder="question_number..." required/>
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="total_marks">Possible Total Marks</Label>
-        <Input id="total_marks" type="number" name="total_marks" defaultValue={course?.total_marks || ""} placeholder="total_marks..." required/>
+        <Label htmlFor="faculty">Faculty</Label>
+        <Input id="faculty" type="text" name="faculty" defaultValue={course?.faculty || ""} placeholder="faculty..." required/>
       </div>
       <div className="grid gap-2">
         <Label htmlFor="description">Description</Label>
