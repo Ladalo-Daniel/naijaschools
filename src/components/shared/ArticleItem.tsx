@@ -17,7 +17,7 @@ const ArticleItem = ({article}: { article: Article }) => {
     const profile = _profile?.data
 
   return (
-    <Card className='bg-gradient hover:opacity-60 hover:animate-in cursor-pointer from-green-950 to-zinc-800' key={article?.id} 
+    <Card className='bg-gradient hover:opacity-60 h-[500px] hover:animate-in cursor-pointer from-green-950 to-zinc-800' key={article?.id} 
     >
         <CardHeader className='flex items-center justify-between'>
             <AspectRatio ratio={16/9} className='bg-muted'>

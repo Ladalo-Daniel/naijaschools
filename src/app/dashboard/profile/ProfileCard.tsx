@@ -103,6 +103,10 @@ const ProfileCard = async ({ profile }: { profile: User}) => {
                     <span className='font-semibold flex-1'>Institution:</span>
                     <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{institutionName || "-"}</span>
                 </CardDescription>
+                <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
+                    <span className='font-semibold flex-1'>Faculty:</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.faculty || "-"}</span>
+                </CardDescription>
             </CardContent>
         </Card>
         </div>

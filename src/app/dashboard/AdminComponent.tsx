@@ -19,15 +19,6 @@ const AdminComponent = async () => {
 
   return (
     <section className='flex flex-col gap-3'>
-      <div className='flex flex-wrap gap-4 md:gap-16'>
-        {/* <Link href={'/dashboard/teacher'} className={buttonVariants({
-          className: "transition-all"
-        })} >Teachers</Link>
-        <Link href={'/dashboard/students'} className={buttonVariants({
-          variant: "secondary",
-          className: "transition-all bg-background"
-        })} >Students</Link> */}
-      </div>
       <h2 className="text-2xl pt-4 pb-2">Dashboard</h2>
       <section className='flex gap-6 flex-col lg:flex-row items-start'>
         <DoughnutChart 

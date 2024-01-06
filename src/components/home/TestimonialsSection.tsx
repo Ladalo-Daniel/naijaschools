@@ -36,7 +36,7 @@ const TestimonialsSection = () => {
         {
             testimonials?.map(testimonial => (
                 <Card
-                    className='bg-transparent w-68 max-w-[500px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full p-4 bg-gradient-to-t backdrop-blur flex gap-2'
+                    className='bg-transparent max-w-[500px] hover:opacity-60 hover:animate-in cursor-pointer max-sm:w-full p-4 bg-gradient-to-t backdrop-blur flex gap-2'
                     key={testimonial?.name}
                     >
                     <CardHeader className='flex items-start justify-start'>

@@ -19,7 +19,7 @@ const ArticleReel = ({ articles }: { articles: ArticleList }) => {
     <div className='flex flex-wrap gap-4'>
         {
             articles?.map(article => (
-                <Card className='bg-gradient w-68 min-h-50 md:max-w-[320px] max-sm:w-full hover:opacity-60 hover:animate-in cursor-pointer from-green-950 to-zinc-800' key={article?.id} 
+                <Card className='bg-gradient min-h-50 md:max-w-[320px] max-sm:w-full hover:opacity-60 hover:animate-in cursor-pointer from-green-950 to-zinc-800' key={article?.id} 
                 >
                     <CardHeader className='flex items-center justify-between'>
                         <AspectRatio ratio={16/9} className='bg-muted'>
@@ -49,7 +49,7 @@ const ArticleReel = ({ articles }: { articles: ArticleList }) => {
                 </Card>
             ))
         }
-        </div>
+    </div>
   )
 }
 

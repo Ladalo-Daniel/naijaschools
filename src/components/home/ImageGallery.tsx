@@ -16,7 +16,7 @@ import { images } from "@/lib/images"
 
 export default function ImageGallery() {
   return (
-    <Carousel className="max-sm:max-w-sm max-md:max-w-md">
+    <Carousel className="">
       <CarouselContent className="-ml-1">
         {images.map(img => (
           <CarouselItem key={img.alt} className="pl-1 md:basis-1/2 lg:basis-1/3">

@@ -83,6 +83,7 @@ export default function BlogSection() {
     return (
       <div className="flex flex-col gap-3">
         <ArticleReel articles={articles?.data!} />
+        <Button as={Link} href="/articles" variant="flat" className="my-4 w-fit" color="primary">See more <MoveRight size={15} /></Button>
       </div>
     )
   }
