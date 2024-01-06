@@ -2,6 +2,9 @@ import { Button } from '@/components/ui/button'
 import { QuizQuestion, QuizQuestionList } from '@/supabase/quiz'
 import { RadioGroup } from '@nextui-org/radio'
 import React from 'react'
+import { useGetQuizExplanation } from './chats/useGetQuizExplanation'
+import { toast } from 'sonner'
+import QuizExplanation from './chats/QuizExplanation'
 
 const ShowQuestions = ({ 
     question, 
@@ -22,8 +25,31 @@ const ShowQuestions = ({
     checkAnswers: () => void,
     userAnswers: Record<string, string>
 }) => {
+
+    const { mutate: getQuizExplanation, isPending: isGetting, data: response } = useGetQuizExplanation()
+
+    function handleGetQuizExplanation() {
+        const question = questions[currentQuestion]
+        const query = `
+            Below is the question, options and answer object in a string format.
+            Explain to me why the correct answer is the *answer* specified in relation to the context of the question.
+
+            ${JSON.stringify(question)}
+        `
+        getQuizExplanation({
+            message: query
+        }, {
+            onSuccess: (data) => {
+                toast.success("AI query is ready!")
+            },
+            onError: ({ message }) => {
+                toast.error("AI had a hard time getting an explanation for this question. Hard luck!")
+            },
+        })
+    }
+
   return (
-    <div className=''>
+    <div className='flex flex-col gap-3'>
         <div key={question.id} className='bg-background'>
         <div className='py-6 shadow-md w-full flex flex-col gap-3 px-4 bg-slate-50 dark:bg-background rounded-md'>
             <h3 className='text-[18px] text-primary my-2'>{currentQuestion + 1}. {question.question}</h3>
@@ -51,6 +77,11 @@ const ShowQuestions = ({
             </div>
         </div>
         </div>
+        <QuizExplanation 
+            response={response!} 
+            isGetting={isGetting} 
+            handleGetQuizExplanation={handleGetQuizExplanation} 
+        />
     </div>
   )
 }
