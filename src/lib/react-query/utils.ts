@@ -11,4 +11,10 @@ export enum QUERY_KEYS {
     
     
     get_quiz_explanations = "get_quiz_explanations",
+    get_search_courses = "get_search_courses",
+    get_search_institutions = "get_search_institutions",
+    get_search_articles = "get_search_articles",
+    get_search_quizzes = "get_search_quizzes",
+
+    get_ai_search_response = "get_ai_search_response",
 } 

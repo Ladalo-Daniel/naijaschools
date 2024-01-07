@@ -35,7 +35,7 @@ export async function generateMetadata(
   }
 }
  
-const ArticleDetailPage = async ({params}: Props) => {
+const ArticleDetailPage = async ({ params }: Props) => {
 
     const {articleId} = params
     const { data: article } = await getArticleById(articleId)
