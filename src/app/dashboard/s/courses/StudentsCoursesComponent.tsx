@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CourseList } from '@/supabase/courses'
 import { InstitutionList } from '@/supabase/institutions'
 import { User } from '@/supabase/user'
+import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import Link from 'next/link'
 import React from 'react'
 
@@ -25,20 +25,25 @@ const StudentsCoursesComponent = ({ profile, courses, institutions }: { profile:
         <section className='flex flex-wrap gap-4'>
         {
             userCourses?.map(course => (
-                <Card className='bg-gradient w-68 h-40 max-w-[300px] max-sm:w-full' key={course?.id}>
+                <Card 
+                  className='bg-card min-h-40 max-w-[300px] transition-all max-sm:w-full hover:animate-appearance-in hover:opacity-60 p-3' 
+                  key={course?.id}
+                  as={Link}
+                  href={`/dashboard/s/courses/${course.id}`}
+                  >
                     <CardHeader>
-                        <CardTitle className='text-primary'>
+                        <h2 className='text-primary py-2'>
                             {course.name}
-                        </CardTitle>
+                        </h2>
                     </CardHeader>
-                    <CardContent>
-                        <CardDescription className='font-semibold'>
+                    <CardBody>
+                        <p className='font-semibold py-2'>
                             {course.code}
-                        </CardDescription>
-                        <CardDescription>
+                        </p>
+                        <p>
                             {course.description}
-                        </CardDescription>
-                    </CardContent>
+                        </p>
+                    </CardBody>
                 </Card>
             ))
         }
