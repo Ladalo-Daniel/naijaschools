@@ -1,7 +1,7 @@
 import MarkdownPreview from '@/components/shared/MarkdownPreview'
 import { Alert } from '@/components/ui/alert'
 import { Button } from '@nextui-org/button'
-import { SendHorizonal, Sparkles } from 'lucide-react'
+import { SendHorizonal, Sparkle } from 'lucide-react'
 import React from 'react'
 
 const QuizExplanation = ({ response, isGetting, handleGetQuizExplanation,aiRes, setAiRes}: {
@@ -17,7 +17,7 @@ const QuizExplanation = ({ response, isGetting, handleGetQuizExplanation,aiRes, 
         (response && aiRes) && (
             <Alert className='mb-3'>
                 <div className="flex flex-row gap-1 py-2">
-                    <Sparkles size={18} className={'animate-spin'} />
+                    <Sparkle size={18} className={'animate-spin text-primary'} />
                     <span className="text-primary">Naijaschools AI</span>
                 </div>
                 <MarkdownPreview content={response} />

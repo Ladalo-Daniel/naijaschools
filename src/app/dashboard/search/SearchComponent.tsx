@@ -27,8 +27,8 @@ const SearchComponent = () => {
         <h2 className="text-[18px] py-1.5 tracking-tighter">Search results for <span className="text-primary">{query}</span>.</h2>
 
         <section>
-        <Tabs defaultValue="courses" className="max-w-4xl max-sm:overflow-auto max-sm:grid">
-            <TabsList className='overflow-auto max-sm:ml-4 max-sm:w-full'>
+        <Tabs defaultValue="courses" className="max-w-4xl">
+            <TabsList className=''>
                 <TabsTrigger value="courses" className='flex flex-row items-center gap-1'>
                     Courses <span className={`${courses?.data.length ? "text-primary " : "bg-secondary "} h-5 w-5 flex items-center rounded-full`}>{courses?.data.length ? courses?.data.length : "0" }</span>
                 </TabsTrigger>
@@ -38,7 +38,7 @@ const SearchComponent = () => {
                 <TabsTrigger value="articles" className='flex flex-row items-center gap-1'>
                     Articles <span className={`${articles?.data.length ? "text-primary " : "bg-secondary "} h-5 w-5 flex items-center rounded-full`}>{articles?.data.length ? articles?.data.length : "0" }</span>
                 </TabsTrigger>
-                <TabsTrigger value="ai" className='flex flex-row items-center gap-1'>
+                <TabsTrigger value="ai" className='flex flex-row items-center gap-1 max-sm:hidden'>
                     AI Response <SparkleIcon size={16} className='animate-spin text-primary' />
                 </TabsTrigger>
             </TabsList>
