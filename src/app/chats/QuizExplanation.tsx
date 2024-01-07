@@ -4,15 +4,17 @@ import { Button } from '@nextui-org/button'
 import { SendHorizonal, Sparkles } from 'lucide-react'
 import React from 'react'
 
-const QuizExplanation = ({ response, isGetting, handleGetQuizExplanation}: {
+const QuizExplanation = ({ response, isGetting, handleGetQuizExplanation,aiRes, setAiRes}: {
     response: string | null,
     isGetting: boolean,
-    handleGetQuizExplanation: () => void
+    handleGetQuizExplanation: () => void,
+    setAiRes: any,
+    aiRes: boolean
 }) => {
   return (
     <section className="py-4 px-2">
     {
-        response && (
+        (response && aiRes) && (
             <Alert className='mb-3'>
                 <div className="flex flex-row gap-1 py-2">
                     <Sparkles size={18} className={'animate-spin'} />

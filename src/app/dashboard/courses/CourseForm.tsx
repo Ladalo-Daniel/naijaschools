@@ -12,6 +12,8 @@ import React from "react"
 import { cn } from "@/lib/utils"
 import { InstitutionList } from "@/supabase/institutions"
 import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { faculties } from "@/lib/faculties"
 
 const initialState = {
     errors: {},
@@ -44,16 +46,26 @@ export default function CourseForm({ className, setOpen, course, institutions, t
         <SelectCourseInstitution institutions={institutions as InstitutionList} institution_name={course?.name || ""} institution_id={course?.institution as number || institutionId as any} />
       </div>
       <div className="grid gap-2">
+        <Select defaultValue={course?.faculty || ""} name="faculty">
+            <SelectTrigger>
+              <SelectValue placeholder="Select a valid faculty." />
+            </SelectTrigger>
+          <SelectContent>
+            {
+              faculties.map(f => (
+                <SelectItem value={f} key={f}>{f}</SelectItem>
+              ))
+            }
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="grid gap-2">
         <Label htmlFor="name">Course Name</Label>
         <Input type="name" id="name" name="name" placeholder="Course Name." defaultValue={course?.name  || ""} required />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="code">Course Code</Label>
         <Input id="code" name="code" defaultValue={course?.code || ""} placeholder="Course code..." required/>
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="faculty">Faculty</Label>
-        <Input id="faculty" type="text" name="faculty" defaultValue={course?.faculty || ""} placeholder="faculty..." required/>
       </div>
       <div className="grid gap-2">
         <Label htmlFor="description">Description</Label>
