@@ -58,7 +58,7 @@ export default function NavSearchBar() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="flex items-center justify-center gap-1.5 text-muted-foreground bg-background mr-2 border rounded-md hover:animate-appearance-in hover:opacity-60 p-2 cursor-pointer">
-          <SearchIcon />
+          <SearchIcon size={18} />
           <span className='hidden md:block'>Search ... Ctrl/Cmd + K</span>
         </div>
       </DialogTrigger>

@@ -103,9 +103,17 @@ export function InstitutionForm({ className, setOpen, institution, toggleOpen }:
 
   return (
     <form className={cn("grid items-start gap-4", className)} action={formAction}>
+      {/* <div className="grid gap-2">
+        <Label htmlFor="logo">Logo</Label>
+        <Input type="file" id="logo" onChange={(e) => setFile(e.target?.files?.[0])} required />
+      </div> */}
       <div className="grid gap-2">
         <Label htmlFor="name">Institution Name</Label>
         <Input type="name" id="name" name="name" placeholder="National Open University of Nigeria." defaultValue={institution?.name || ""} required />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="motto">Motto</Label>
+        <Textarea id="motto" name="motto" defaultValue={institution?.motto || ""} placeholder="motto..."/>
       </div>
       <div className="grid gap-2">
         <Label htmlFor="description">Description</Label>

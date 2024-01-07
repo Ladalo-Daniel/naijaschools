@@ -1,6 +1,6 @@
 'use server'
  
-import { supabaseClient } from '@/supabase'
+import { supabaseClient, supabaseUrl } from '@/supabase'
 import { getUserSession } from '@/supabase/session'
 import { getProfile } from '@/supabase/user'
 import { revalidatePath } from 'next/cache'
@@ -13,16 +13,19 @@ const schema = z.object({
   description: z.string({
     invalid_type_error: 'Provide a valid description',
   }),
+  motto: z.string().optional(),
   upsert_id: z.string().optional()
 })
- 
+
 export default async function UpsertInstitution(prevState: any, formData: FormData) {
   const validatedFields = schema.safeParse({
     name: formData.get('name'),
     description: formData.get('description'),
-    upsert_id: formData.get("upsert_id")
+    upsert_id: formData.get("upsert_id"),
+    motto: formData.get("motto"),
   })
- 
+
+  
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -39,6 +42,7 @@ export default async function UpsertInstitution(prevState: any, formData: FormDa
     message: 'You are not authorized to carry out this operation.',
     success: false
   }
+
   
   const { data } = await supabaseClient.from("institutions").select()
   data?.forEach(i => {
@@ -50,12 +54,15 @@ export default async function UpsertInstitution(prevState: any, formData: FormDa
     }
   })
 
+  try {
+
   if (validatedFields.data.upsert_id) {
     const { error } = await supabaseClient.from('institutions')
     .upsert({
       id: parseInt(validatedFields.data.upsert_id),
       name: validatedFields.data.name.trim(),
       description: validatedFields.data.description.trim(),
+      motto: validatedFields?.data?.motto?.trim(),
     })
 
     if (error)  
@@ -77,12 +84,13 @@ export default async function UpsertInstitution(prevState: any, formData: FormDa
   .upsert({
     name: validatedFields.data.name.trim(),
     description: validatedFields.data.description.trim(),
+    motto: validatedFields.data.motto?.trim(),
   })
 
   if (error)  
     return {
-      message: error.message,
-      success: false
+  message: error.message,
+  success: false
     }
 
     revalidatePath('/dashboard/institutions')
@@ -92,6 +100,13 @@ export default async function UpsertInstitution(prevState: any, formData: FormDa
         success: true
     }
 
+  } catch (error: any) {
+    console.error(error)
+    return {
+      message: error?.message,
+      success: false
+    }
+  }
 }
 
 export async function deleteInstitution(prevState: any, formData: FormData) {

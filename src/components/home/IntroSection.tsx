@@ -12,10 +12,10 @@ const IntroSection = ({ session }: { session: Session }) => {
     <section className="flex flex-col gap-4 p-4 py-16 bg-background from-green-950 to-zinc-800 mt-4"
     >
       <p className={"text-primary hover:underline py-2 transition-all hidden"}>#intro</p>
-      <h2 className="text-5xl font-bold py-2.5 text-primary hover:underline transition-all">Welcome to <span className="text-warning-800">Naijaschools</span>;</h2>
+      <h2 className="text-5xl py-2.5 text-primary hover:underline transition-all">Welcome to <span className="">Naijaschools</span>;</h2>
       <>
         <motion.h2 
-          className="text-4xl text-primary py-3"
+          className="text-3xl text-primary py-3"
           initial={{ opacity: 0.5 }}
           whileInView={{ opacity: 1 }}
           >
