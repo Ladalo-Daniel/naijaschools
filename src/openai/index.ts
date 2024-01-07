@@ -20,5 +20,4 @@ export async function getQuizExplanation(message: string) {
 }
 
 export async function getAIGuide(messages: string[]) {
-
 }

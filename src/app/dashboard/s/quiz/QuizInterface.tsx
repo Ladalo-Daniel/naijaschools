@@ -67,6 +67,11 @@ const QuizInterface = ({
     }, 0)
 
   const checkAnswers = () => {
+    if ((currentQuestion === questions.length - 1) && (Object.entries(userAnswers).length !== questions.length)) { 
+      toast.warning("You are about to submit without answering all questions!")
+      return
+    }
+
     setShowResults(true)
     /** Logic to compare userAnswers with fetchedQuestions' correct answers
      * You'll need to adapt this logic based on how your data is structured

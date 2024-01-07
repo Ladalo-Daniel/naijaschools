@@ -25,7 +25,7 @@ const HistoryCourseSection = async ({ courseId }: { courseId: number }) => {
                                     {course?.name} Quiz #{quiz.id}
                                 </h2>
                                 <p className={`py-2 font-bold ${quiz.total_score! < 40 ? "text-rose-500" : quiz.total_score! < 70 ? "text-primary-500" : "text-primary"}`}>Score: {quiz.total_score}%</p>
-                                <p className={`py-2 font-bold text-muted-foreground flex items-center gap-1`}><Clock size={15}/> {shortMultiFormatDateString(quiz.updated_at || quiz.created_at || "")}</p>
+                                <p className={`py-2 font-bold text-muted-foreground flex items-center gap-1`}><Clock size={15}/> {shortMultiFormatDateString(quiz.updated_at || quiz.created_at || "")} ago.</p>
                             </div>
                             <ArrowRightCircleIcon size={15} className='text-primary hover:animate-pulse' />
                         </CardHeader>
