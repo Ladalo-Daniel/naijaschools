@@ -1,10 +1,10 @@
+import QuizExplanation from '@/app/chats/QuizExplanation'
+import { useGetQuizExplanation } from '@/app/chats/useGetQuizExplanation'
 import { Button } from '@/components/ui/button'
 import { QuizQuestion, QuizQuestionList } from '@/supabase/quiz'
 import { RadioGroup } from '@nextui-org/radio'
 import React, { useEffect, useState } from 'react'
-import { useGetQuizExplanation } from './chats/useGetQuizExplanation'
 import { toast } from 'sonner'
-import QuizExplanation from './chats/QuizExplanation'
 
 const ShowQuestions = ({ 
     question, 
