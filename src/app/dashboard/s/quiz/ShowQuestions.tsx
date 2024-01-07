@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { QuizQuestion, QuizQuestionList } from '@/supabase/quiz'
 import { RadioGroup } from '@nextui-org/radio'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetQuizExplanation } from './chats/useGetQuizExplanation'
 import { toast } from 'sonner'
 import QuizExplanation from './chats/QuizExplanation'
@@ -27,6 +27,11 @@ const ShowQuestions = ({
 }) => {
 
     const { mutate: getQuizExplanation, isPending: isGetting, data: response } = useGetQuizExplanation()
+    const [aiRes, setAiRes] = useState(true)
+
+    useEffect(() => {
+        setAiRes(false)
+    }, [currentQuestion])
 
     function handleGetQuizExplanation() {
         const question = questions[currentQuestion]
@@ -41,6 +46,7 @@ const ShowQuestions = ({
         }, {
             onSuccess: (data) => {
                 toast.success("AI query is ready!")
+                setAiRes(true)
             },
             onError: ({ message }) => {
                 toast.error("AI had a hard time getting an explanation for this question. Hard luck!")
@@ -80,7 +86,9 @@ const ShowQuestions = ({
         <QuizExplanation 
             response={response!} 
             isGetting={isGetting} 
-            handleGetQuizExplanation={handleGetQuizExplanation} 
+            handleGetQuizExplanation={handleGetQuizExplanation}
+            setAiRes={setAiRes}
+            aiRes={aiRes} 
         />
     </div>
   )
