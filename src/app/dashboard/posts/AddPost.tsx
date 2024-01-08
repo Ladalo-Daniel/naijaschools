@@ -27,7 +27,7 @@ const AddPost = ({ user, setOpen, post }: { user: User, post?: Post, setOpen?: R
             image: "",
             user: user?.username! || "",
             faculty: user?.faculty! || "",
-            parent_post_id: post?.id ? post?.id : '',
+            parent_post_id: post?.id ? post?.id : undefined,
             is_reply: post?.id ? true : false
         },
     })
