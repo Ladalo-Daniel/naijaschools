@@ -87,11 +87,13 @@ export async function createUpdatePost({
     const { error, data } = await supabaseClient.from('posts').upsert({
         id: postId!,
         updated_at: new Date().toISOString(),
-        image: imagePath as string,
+        // @ts-ignore
+        image: image[0]?.name ? imagePath as string : "",
         ...rest,
     })
 
     if (error) throw error
+    if (!image) return
 
     const { error: storageError } = await supabaseClient
     .storage

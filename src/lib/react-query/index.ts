@@ -1,7 +1,7 @@
 import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "./utils";
 import { toast } from "sonner";
-import { getProfile, getProfileById, makeAdmin, updateProfile } from "@/supabase/user";
+import { getProfile, getProfileById, getProfileByUsername, makeAdmin, updateProfile } from "@/supabase/user";
 import { useRouter } from "next/navigation";
 import { getInstitutionById, getInstitutions } from "@/supabase/institutions"
 import { Question, createQuestion, getQuestionById } from "@/supabase/questions";
@@ -67,6 +67,14 @@ export const useGetProfileById = (userId: string) => {
         queryKey: [QUERY_KEYS.get_user_profile, userId],
         queryFn: () => getProfileById(userId),
         enabled: !!userId
+    })
+}
+
+export const useGetProfileByUsername = (username: string) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_user_profile, username],
+        queryFn: () => getProfileByUsername(username),
+        enabled: !!username
     })
 }
 

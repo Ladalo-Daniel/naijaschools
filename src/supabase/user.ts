@@ -116,6 +116,21 @@ export async function getProfileById(userId: string) {
     return { data, error }
 }
 
+export async function getProfileByUsername(username: string) {
+    const { data, error } = await supabaseClient
+        .from('users')
+        .select()
+        .eq('username', username)
+        .single()
+
+        if (error) {
+            console.error(error)
+            return { data: null, error }
+        }
+
+    return { data, error }
+}
+
 export async function deleteProfileById(userId: string) {
     
     const { error: b_error } = await supabaseClient.from('auth.users').delete().eq("id", userId)
