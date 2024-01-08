@@ -9,6 +9,7 @@ import { getCoursesByQuery } from "@/supabase/courses";
 import { fetchRandomQuestions, updateQuiz } from "@/supabase/quiz";
 import { Json } from "@/types/supabase";
 import { createUpdateArticle, getArticleById, getArticlesByQuery, getArticlesByTag, getRecentArticles } from "@/supabase/articles";
+import { createUpdatePost } from "@/supabase/posts";
 
 const queryClient = new QueryClient()
 
@@ -31,8 +32,14 @@ export const useUpdateProfile = () => {
             toast.success("Your profile was updated successfully.")
             router.refresh()
         },
-        onError: () => {
+        onError: ({message}) => {
+            console.log(message)
+            if (message === 'duplicate key value violates unique constraint "unique_username"') {
+                toast.error("Eyyah, this username already exists. Why don't you try another one?")
+                return
+            }
             toast.error("Sorry, an error occured while we were trying to update your profile... but hang on, let us give it another shot.")
+            return
         }
     })
 }
@@ -180,5 +187,24 @@ export const useGetRecentArticles = (range: number) => {
         queryKey: [QUERY_KEYS.get_articles, range],
         queryFn: () => getRecentArticles(range),
         enabled: true
+    })
+}
+
+
+
+export const useCreateUpdatePost = () => {
+    const router = useRouter()
+    return useMutation({
+        mutationFn: ({postId, image, ...rest}: { postId?: string, image?: File[] }) => createUpdatePost({postId, image, ...rest}),
+        mutationKey: [QUERY_KEYS.create_update_post],
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.create_update_post]
+            })
+            router.refresh()
+        },
+        onError: (error) => {
+            toast.error(error.message)
+        }
     })
 }

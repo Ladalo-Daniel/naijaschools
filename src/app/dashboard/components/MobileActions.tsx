@@ -5,16 +5,10 @@ import { Avatar } from '@nextui-org/avatar'
 import React from 'react'
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { ArrowRight } from 'lucide-react'
@@ -35,14 +29,18 @@ const MobileActions = ({ profile }: {profile: User}) => {
             <Separator />
             <Avatar src={profile?.image_url || ""} name={profile?.username || ""} size='lg' as={Link} href={'/dashboard/profile'} color='primary' className='cursor-pointer' />
             <form action={'/auth/signout'} method='post' className=''>
+                <SheetClose asChild>
                 <Button className={'items-center flex  gap-2'} variant={'outline'} size={'sm'} type='submit'>
                     <span>Sign Out</span>
                     <ArrowRight size={15} className='text-rose-500'/>
                 </Button>
+                </SheetClose>
              </form>
-             <NextButton as={Link} href='/dashboard/profile' variant='ghost' className='rounded-md'>
+             <SheetClose asChild>
+             <NextButton as={Link} href='/dashboard/profile' variant='flat' color='success' className='rounded-md'>
                 Go to profile
              </NextButton>
+             </SheetClose>
           </SheetContent>
         </Sheet>
     </div>

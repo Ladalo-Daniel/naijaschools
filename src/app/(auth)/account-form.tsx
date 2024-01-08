@@ -191,11 +191,11 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
             </FormItem>
           )}
         />
-          {!isDashboard && <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>}
+          {!isDashboard && <Button isLoading={isUpdating} className="" disabled={!form.formState.isValid} type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>}
           {
           isDashboard && 
-          <SheetClose asChild>
-            <Button isLoading={isUpdating} className="" type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
+          <SheetClose asChild={form.formState.isValid}>
+            <Button isLoading={isUpdating} className="" disabled={!form.formState.isValid} type="submit" variant="bordered" color="primary">{isUpdate ? "Update" : "Submit"}</Button>
           </SheetClose>
           }
       </form>

@@ -20,6 +20,11 @@ const TopNavbar = async () => {
 
       <MobileSidebar profile={profile?.data as User} />
 
+      <div className="justify-between hidden items-center gap-4">
+        <Button>All</Button>
+        <Button>For you</Button>
+      </div>
+
       <div className='flex items-center gap-3'>
         <NavSearchBar />
         <ModeToggle />

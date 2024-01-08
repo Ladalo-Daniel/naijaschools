@@ -17,4 +17,5 @@ export enum QUERY_KEYS {
     get_search_quizzes = "get_search_quizzes",
 
     get_ai_search_response = "get_ai_search_response",
+    create_update_post = "create_update_post",
 } 
