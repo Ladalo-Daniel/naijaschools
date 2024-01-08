@@ -23,8 +23,9 @@ import {
     DrawerTrigger,
   } from "@/components/ui/drawer"
 import { useMediaQuery } from '@/hooks/use-media-query'
+import { Post } from '@/supabase/posts'
 
-const PostModal = ({ user }: { user: User }) => {
+const PostModal = ({ user, post }: { user: User, post?: Post }) => {
     const [open, setOpen] = useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)")
   if (isDesktop) {
@@ -32,12 +33,12 @@ const PostModal = ({ user }: { user: User }) => {
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button startContent={<Plus size={15} />} variant='flat'className='w-fit' color='success'>
-                Add Post
+                {post?.id ? "Reply" : "Add Post"}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] md:min-w-[600px]">
             <div className="flex flex-col gap-4 py-4">
-              <AddPost user={user} setOpen={setOpen}/>
+              <AddPost user={user} setOpen={setOpen} post={post}/>
             </div>
             <DialogFooter>
             <Button startContent={<XIcon size={15} />} variant='flat' color='danger' onClick={() => setOpen(false)}>
@@ -53,12 +54,12 @@ const PostModal = ({ user }: { user: User }) => {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
       <Button startContent={<Plus size={15} />} variant='flat'className='w-fit' color='success'>
-            Add Post
-        </Button>
+        {post?.id ? "Reply" : "Add Post"}
+      </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="flex flex-col gap-4 p-4">
-          <AddPost user={user} setOpen={setOpen}/>
+          <AddPost user={user} setOpen={setOpen} post={post}/>
         </div>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>

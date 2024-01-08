@@ -5,6 +5,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Textarea } from '@/components/ui/textarea'
 import { useCreateUpdatePost } from '@/lib/react-query'
 import { PostSchema } from '@/lib/validators/posts'
+import { Post } from '@/supabase/posts'
 import { User } from '@/supabase/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@nextui-org/button'
@@ -15,7 +16,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-const AddPost = ({ user, setOpen }: { user: User, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
+const AddPost = ({ user, setOpen, post }: { user: User, post?: Post, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
 
     const { mutate: updateCreatePost, isPending } = useCreateUpdatePost()
     const router = useRouter()
@@ -25,7 +26,9 @@ const AddPost = ({ user, setOpen }: { user: User, setOpen?: React.Dispatch<React
         defaultValues: {
             image: "",
             user: user?.username! || "",
-            faculty: user?.faculty! || ""
+            faculty: user?.faculty! || "",
+            parent_post_id: post?.id ? post?.id : '',
+            is_reply: post?.id ? true : false
         },
     })
 

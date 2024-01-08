@@ -8,6 +8,7 @@ export type Post = Database['public']['Tables']['posts']['Row']
 export const getInfiniteGeneralPosts = async (prevRange = 0, range = 20) => {
     const { data, error } = await supabaseClient.from("posts")
     .select()
+    .eq("is_reply", false)
     .order("created_at", {
         ascending: false
     })
@@ -25,6 +26,7 @@ export const getInfiniteRelevantPosts = async (user: User, prevRange = 0, range 
     const { data, error } = await supabaseClient.from("posts")
     .select()
     .eq("institution", user.institution!)
+    .eq("is_reply", false)
     .order("created_at", {
         ascending: false
     })
@@ -42,6 +44,7 @@ export async function getPostsByQuery(column: "user" | "id" | "institution" | "l
     const { data, error, count} = await supabaseClient.from('posts')
     .select('*')
     .eq(column, row)
+    .eq("is_reply", false)
     .order("created_at", {
         ascending: false
     })
@@ -64,7 +67,6 @@ export async function getPostById(id: string) {
     if(error) throw error
 
     return { data }
-
 }
 
 
@@ -120,4 +122,22 @@ export async function deletePost(id:string) {
     .eq("id", id)
 
     if(error) throw error
+}
+
+export const getInfinitePostReplies = async (postId: string, prevRange = 0, range = 20) => {
+    const { data, error } = await supabaseClient.from("posts")
+    .select()
+    .eq("parent_post_id", postId)
+    .neq("is_reply", false)
+    .order("created_at", {
+        ascending: false
+    })
+    .order("updated_at", {
+        ascending: false
+    })
+    .range(prevRange, range)
+
+    if (error) throw error
+
+    return { data, error }
 }

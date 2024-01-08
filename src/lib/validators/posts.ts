@@ -7,4 +7,6 @@ export const PostSchema = z.object({
     institution: z.string().optional(),
     location: z.string().optional(),
     user: z.string(),
+    parent_post_id: z.string().optional(),
+    is_reply: z.boolean().optional(),
 })
