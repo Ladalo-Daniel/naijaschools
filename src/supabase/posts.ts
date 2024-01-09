@@ -1,6 +1,7 @@
 import { Database } from "@/types/supabase";
 import { supabaseClient, supabaseUrl } from ".";
 import { User } from "./user";
+import { revalidatePath } from "next/cache";
 
 export type PostList = Database['public']['Tables']['posts']['Row'][]
 export type Post = Database['public']['Tables']['posts']['Row']
@@ -16,6 +17,42 @@ export const getInfiniteGeneralPosts = async (prevRange = 0, range = 20) => {
         ascending: false
     })
     .range(prevRange, range)
+
+    if (error) throw error
+
+    return { data, error }
+}
+
+export async function fetchInitialPostReplies(postId: string) {
+    const { data, error, count} = await supabaseClient.from('posts')
+    .select('*')
+    .eq("parent_post_id", postId)
+    .eq("is_reply", true)
+    .order("created_at", {
+        ascending: false
+    })
+    .order("updated_at", {
+        ascending: false
+    })
+    .limit(20)
+    
+    if (error) throw error
+
+    return { data, error, count }
+}
+
+
+export const fetchInitialPosts = async () => {
+    const { data, error } = await supabaseClient.from("posts")
+    .select()
+    .eq("is_reply", false)
+    .order("created_at", {
+        ascending: false
+    })
+    .order("updated_at", {
+        ascending: false
+    })
+    .limit(20)
 
     if (error) throw error
 

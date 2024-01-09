@@ -17,6 +17,7 @@ import { Button } from '@nextui-org/button'
 import UpdatePostTrigger from './UpdatePostTrigger'
 import { User } from '@/supabase/user'
 import DeletePost from './DeletePost'
+import ImageView from './ImageView'
 
 /**
  * A reply is still a post
@@ -70,18 +71,13 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
                 }
             </div>
         </CardHeader>
-        <CardBody as={Link} href={`/dashboard/${author?.data?.username}/${post.id}`} className="flex flex-col px-0">
+        <CardBody as={Link} href={`/dashboard/${author?.data?.username}/${post.id}`} className="flex hover:opacity-60 hover:transition-all flex-col px-0">
           {post.content}
         </CardBody>
         {post.image ? <AspectRatio ratio={5 / 7}>
-          <Image
-            src={post.image!}
-            alt={post.user + "'s post."}
-            fill
-            className='rounded-3xl object-cover'
-          />
+          <ImageView post={post} />
         </AspectRatio> : <></>}
-        <PostStats post={post} />
+        <PostStats post={post} author={ author?.data as User } />
       </div>
     </Card>
   )
