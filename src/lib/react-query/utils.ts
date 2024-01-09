@@ -15,7 +15,13 @@ export enum QUERY_KEYS {
     get_search_institutions = "get_search_institutions",
     get_search_articles = "get_search_articles",
     get_search_quizzes = "get_search_quizzes",
+    get_search_posts = "get_search_posts",
 
     get_ai_search_response = "get_ai_search_response",
     create_update_post = "create_update_post",
+    delete_post = "delete_post",
+
+    get_infinite_posts = "get_infinite_posts",
+    get_posts_by_query = "get_posts_by_query",
+    get_post_replies_by_query = "get_post_replies_by_query",
 } 

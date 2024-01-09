@@ -40,7 +40,25 @@ export const getInfiniteRelevantPosts = async (user: User, prevRange = 0, range 
     return { data, error }
 }
 
-export async function getPostsByQuery(column: "user" | "id" | "institution" | "location", row: string, range?: number) {
+export async function getPostRepliesByQuery(column: "user" | "id" | "institution" | "location" | "parent_post_id", row: string) {
+    const { data, error, count} = await supabaseClient.from('posts')
+    .select('*')
+    .eq(column, row)
+    .eq("is_reply", true)
+    .order("created_at", {
+        ascending: false
+    })
+    .order("updated_at", {
+        ascending: false
+    })
+    
+
+    if (error) throw error
+
+    return { data, error, count }
+}
+
+export async function getPostsByQuery(column: "user" | "id" | "institution" | "location" | "parent_post_id", row: string) {
     const { data, error, count} = await supabaseClient.from('posts')
     .select('*')
     .eq(column, row)

@@ -16,7 +16,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-const AddPost = ({ user, setOpen, post }: { user: User, post?: Post, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
+const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, isUpdate?: boolean, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
 
     const { mutate: updateCreatePost, isPending } = useCreateUpdatePost()
     const router = useRouter()
@@ -24,23 +24,26 @@ const AddPost = ({ user, setOpen, post }: { user: User, post?: Post, setOpen?: R
     const form = useForm<z.infer<typeof PostSchema>>({
         resolver: zodResolver(PostSchema),
         defaultValues: {
-            image: "",
             user: user?.username! || "",
             faculty: user?.faculty! || "",
-            parent_post_id: post?.id ? post?.id : undefined,
-            is_reply: post?.id ? true : false
+            parent_post_id:( post?.id && !isUpdate ) ? post?.id : post?.parent_post_id || undefined,
+            is_reply: ( post?.id && !isUpdate ) ? true : post?.is_reply || false,
+            content: (post?.content && isUpdate) ? post?.content : "",
+            institution: post?.institution?.toString() || undefined,
+            location: post?.location || ""
         },
     })
 
     function onSubmit(values: z.infer<typeof PostSchema>) {
         try {
-            updateCreatePost({...values,  image: values.image || [],},
+            updateCreatePost({...values,  image: values.image || [], postId: ( post?.id && isUpdate ) ? post?.id : undefined },
              {
                 onSuccess: () => {
                     form.reset()
                     form.setValue("image", "")
                     toast.success("Success! Your ninja is now surfing the naijaschools galaxy")
                     setOpen?.(false)
+                    router.refresh()
                 }
              });
           } catch (error) {
@@ -71,15 +74,15 @@ const AddPost = ({ user, setOpen, post }: { user: User, post?: Post, setOpen?: R
                 render={({ field }) => (
                     <FormItem>
                     <FormControl>
-                      <CreatePostUploader fieldChange={field.onChange}  />
+                      <CreatePostUploader fieldChange={field.onChange} mediaUrl={post?.image as string} />
                     </FormControl>
                     <FormMessage />
                     </FormItem>
                 )}
                 />
-            <div className='mx-auto'>
-            <Button variant={'flat'} type='submit' color='success' endContent={<SendHorizonal size={15}/>} isLoading={isPending} className='max-[480px]:w-full'>
-                Post
+            <div className=''>
+            <Button variant={'flat'} type='submit' color='success' endContent={<SendHorizonal size={15}/>} isLoading={isPending} className='w-full'>
+                {isUpdate ? "Update" : "Post"}
             </Button> 
             </div>
             </form>
