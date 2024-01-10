@@ -209,6 +209,9 @@ export const useCreateUpdatePost = () => {
             queryClient.invalidateQueries({
                 queryKey: [QUERY_KEYS.create_update_post]
             })
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.get_infinite_posts]
+            })
             router.refresh()
         },
         onError: (error) => {

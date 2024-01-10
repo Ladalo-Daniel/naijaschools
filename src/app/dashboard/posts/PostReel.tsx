@@ -1,22 +1,23 @@
 'use client'
 
-import { PostList } from '@/supabase/posts'
+import { Post, PostList, getInfiniteGeneralPosts } from '@/supabase/posts'
 import React, { useEffect, useRef, useState } from 'react'
 import PostCard from './PostCard'
 import { Alert } from '@/components/ui/alert'
-import { supabaseClient } from '@/supabase'
 import { debounce } from 'lodash'
 import { motion } from 'framer-motion'
 import { Button } from '@nextui-org/button'
+import { supabaseClient } from '@/supabase'
 
 const PostReel = ({ posts }: { posts?: PostList }) => {
     const PAGE_COUNT = 20
     const containerRef = useRef<HTMLDivElement | null>(null)
     const [loadedPosts, setLoadedPosts] = useState(posts)
-    const [offset, setOffset] = useState(1)
+    const [offset, setOffset] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
     const [isInView, setIsInView] = useState(false)
     const [isLast, setIsLast] = useState(false)
+    const [recentPost, setRecentPost] = useState<Post | any>({})
 
     const handleScroll = () => {
       if (containerRef.current && typeof window !== 'undefined') {
@@ -35,11 +36,22 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
       }
     }, [])
 
+    const handleRealtimePostInsert = (payload: any) => {
+    console.log('Change received!', payload?.new)
+    setRecentPost(payload)
+    }
+    
+
+    supabaseClient
+    .channel('posts-insert')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts' }, handleRealtimePostInsert)
+    .subscribe()
+
     useEffect(() => {
       if (isInView) {
         loadMorePosts(offset)
       }
-    }, [isInView])
+    }, [isInView, recentPost])
 
     const loadMorePosts = async (offset: number) => {
       setIsLoading(true)
@@ -57,14 +69,7 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
       const from = offset * PAGE_COUNT
       const to = from + PAGE_COUNT - 1
 
-      const { data } = await supabaseClient!
-          .from('posts')
-          .select('*')
-          .eq("is_reply", false)
-          .range(from, to)
-          .order('created_at', { ascending: false })
-          .order('updated_at', { ascending: false })
-
+      const { data } = await getInfiniteGeneralPosts(from, to)
       return data
     }
 

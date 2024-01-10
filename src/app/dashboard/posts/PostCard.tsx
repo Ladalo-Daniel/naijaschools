@@ -53,7 +53,7 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
                 <span className="hidden md:block">.</span>
                 <p className='text-primary tracking-tighter'>@{author?.data?.username}</p>
                 <span className="hidden md:block">.</span>
-                <p className="text-muted">{shortMultiFormatDateString(post.created_at)} ago.</p>
+                <p className="opacity-50">{shortMultiFormatDateString(post.created_at)}.</p>
                 </>
               )
             }

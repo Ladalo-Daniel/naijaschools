@@ -36,7 +36,7 @@ const PostModal = ({ user, post, addPostButton }: { user: User, post?: Post, add
               addPostButton ? (
                 addPostButton
               ): (
-                <Button startContent={<Plus size={15} />} variant='flat'className='w-fit' color='success'>
+                  post?.id && <Button startContent={<Plus size={15} />} variant='flat'className='w-fit' color='success'>
                     {post?.id ? "Reply" : "Add Post"}
                 </Button>
               )

@@ -73,10 +73,10 @@ export const shortMultiFormatDateString = (timestamp: string = ""): string => {
     case Math.floor(diffInDays) > 1 && diffInDays < 30:
       return `${Math.floor(diffInDays)}d`;
     case Math.floor(diffInHours) >= 1:
-      return `${Math.floor(diffInHours)}h`;
+      return `${Math.floor(diffInHours)}hr`;
     case Math.floor(diffInMinutes) >= 1:
-      return `${Math.floor(diffInMinutes)}mins`;
+      return `${Math.floor(diffInMinutes)}m`;
     default:
-      return "0min";
+      return "just now";
   }
 };

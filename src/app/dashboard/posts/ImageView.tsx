@@ -62,14 +62,16 @@ const ImageView = ({ post }: { post: Post }) => {
                 href={post.image!}
                 download={post.image}
                 startContent={<Download size={15} />}
-                variant='solid'
-                color='success'
-                className='w-full'
+                // variant='ghost'
+                color='secondary'
+                className='w-full bg-transparent'
                 onClick={handleDownloadClick}
                 >
                 Download
             </Button>
-            <Button startContent={<XIcon size={15} />} variant='solid' color='danger' className='w-full' onClick={() => setOpen(false)}>
+            <Button startContent={<XIcon size={15} />} 
+              // variant='ghost' 
+              color='danger' className='w-full bg-transparent' onClick={() => setOpen(false)}>
                 Close
             </Button>
             </DialogFooter>

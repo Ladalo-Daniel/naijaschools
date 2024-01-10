@@ -11,10 +11,10 @@ import { User } from '@/supabase/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@nextui-org/button'
 import { SendHorizonal } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
+import { useRouter } from 'next/navigation'
 
 const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, isUpdate?: boolean, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
 
@@ -41,8 +41,11 @@ const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, is
                 onSuccess: () => {
                     form.reset()
                     form.setValue("image", "")
-                    toast.success("Success! Your ninja is now surfing the naijaschools galaxy")
+                    toast.success("Success! Your ninja is now surfing the naijaschools galaxy.")
                     setOpen?.(false)
+                    if (!post?.id && !isUpdate) {
+                        router.prefetch('/dashboard/posts')
+                    }
                     router.refresh()
                 }
              });
@@ -74,7 +77,7 @@ const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, is
                 render={({ field }) => (
                     <FormItem>
                     <FormControl>
-                      <CreatePostUploader fieldChange={field.onChange} mediaUrl={post?.image as string} />
+                      <CreatePostUploader fieldChange={field.onChange} mediaUrl={( post?.id && isUpdate) ? post?.image as string : undefined} />
                     </FormControl>
                     <FormMessage />
                     </FormItem>

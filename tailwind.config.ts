@@ -10,7 +10,7 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
 
-    './node_modules/@nextui-org/theme/dist/components/(button|input|avatar|card|slider|tooltip|user|spinner|switch|radio|progress|autocomplete|chip|breadcrumbs).js',
+    './node_modules/@nextui-org/theme/dist/components/(button|input|avatar|card|slider|tooltip|user|spinner|switch|radio|progress|autocomplete|chip|breadcrumbs|popover).js',
 	],
   theme: {
     container: {
