@@ -18,6 +18,7 @@ import UpdatePostTrigger from './UpdatePostTrigger'
 import { User } from '@/supabase/user'
 import DeletePost from './DeletePost'
 import ImageView from './ImageView'
+import { UserCard } from './UserCard'
 
 /**
  * A reply is still a post
@@ -32,7 +33,12 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
       <div className="w-12">
         {
           isPending ? <Skeleton className='w-12 h-12 rounded-full' /> : (
-            <Avatar src={author?.data?.image_url || '/icons/profile-placeholder.svg'}/>
+            <UserCard
+              author={author?.data as User }
+              authorTrigger={
+                <Avatar src={author?.data?.image_url || '/icons/profile-placeholder.svg'} className='cursor-pointer opacity-60 transition-all'/>
+              }
+            />
           ) 
         }
         <Separator orientation='vertical' className={`h-[75%] mx-auto mt-1 ${ isReply ? "text-muted" : "" } mb-8`}/>

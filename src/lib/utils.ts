@@ -80,3 +80,7 @@ export const shortMultiFormatDateString = (timestamp: string = ""): string => {
       return "just now";
   }
 };
+
+export const checkIsLiked = (likeList: string[], userId: string) => {
+  return likeList?.includes(userId);
+};

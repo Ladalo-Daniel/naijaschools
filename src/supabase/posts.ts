@@ -1,6 +1,6 @@
 // 'use server'
 
-import { Database } from "@/types/supabase";
+import { Database, Json } from "@/types/supabase";
 import { supabaseClient, supabaseUrl } from ".";
 import { User } from "./user";
 
@@ -192,3 +192,15 @@ export const getInfinitePostReplies = async (postId: string, prevRange = 0, rang
     return { data, error }
 }
 
+export const likePost = async (postId: string, likes: Json) => {
+    console.log(likes, postId)
+    const { data, error } = await supabaseClient
+    .from('posts')
+    .update({ likes: likes })
+    .eq("id", postId)
+    .select()
+
+    if (error) throw error
+
+    return { data }
+}
