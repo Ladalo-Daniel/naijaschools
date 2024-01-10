@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { QUERY_KEYS } from "./utils"
-import { deletePost, getInfiniteGeneralPosts, getPostRepliesByQuery, likePost } from "@/supabase/posts"
+import { deletePost, fetchInitialPosts, getInfiniteGeneralPosts, getPostRepliesByQuery, likePost } from "@/supabase/posts"
 import { Json } from "@/types/supabase"
 import { useRouter } from "next/navigation"
 
@@ -11,12 +11,20 @@ export const useGetPostRepliesByQuery = (column: "user" | "id" | "institution" |
     })
 }
 
+export const useFetchInitialPosts = () => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_initial_posts],
+        queryFn: fetchInitialPosts
+    })
+}
+
 export const useDeletePost = () => {
     return useMutation({
         mutationKey: [QUERY_KEYS.delete_post],
         mutationFn: ({ id }: { id: string }) => deletePost(id)
     })
 }
+
 export const useGetInfiniteGeneralPosts = () => {
     const fetchPosts = ({ from = 0, to = 5 }) =>
     getInfiniteGeneralPosts(from, to)

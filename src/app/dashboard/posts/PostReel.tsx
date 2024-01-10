@@ -7,17 +7,15 @@ import { Alert } from '@/components/ui/alert'
 import { debounce } from 'lodash'
 import { motion } from 'framer-motion'
 import { Button } from '@nextui-org/button'
-import { supabaseClient } from '@/supabase'
 
 const PostReel = ({ posts }: { posts?: PostList }) => {
     const PAGE_COUNT = 20
     const containerRef = useRef<HTMLDivElement | null>(null)
     const [loadedPosts, setLoadedPosts] = useState(posts)
-    const [offset, setOffset] = useState(0)
+    const [offset, setOffset] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
     const [isInView, setIsInView] = useState(false)
     const [isLast, setIsLast] = useState(false)
-    const [recentPost, setRecentPost] = useState<Post | any>({})
 
     const handleScroll = () => {
       if (containerRef.current && typeof window !== 'undefined') {
@@ -36,22 +34,11 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
       }
     }, [])
 
-    const handleRealtimePostInsert = (payload: any) => {
-    console.log('Change received!', payload?.new)
-    setRecentPost(payload)
-    }
-    
-
-    supabaseClient
-    .channel('posts-insert')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts' }, handleRealtimePostInsert)
-    .subscribe()
-
     useEffect(() => {
       if (isInView) {
         loadMorePosts(offset)
       }
-    }, [isInView, recentPost])
+    }, [isInView])
 
     const loadMorePosts = async (offset: number) => {
       setIsLoading(true)

@@ -84,3 +84,8 @@ export const shortMultiFormatDateString = (timestamp: string = ""): string => {
 export const checkIsLiked = (likeList: string[], userId: string) => {
   return likeList?.includes(userId);
 };
+
+export const pluralize = (value: number) => {
+  if (value === 1) return ""
+  else return 's'
+}

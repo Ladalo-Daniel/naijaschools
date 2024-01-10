@@ -19,6 +19,7 @@ import { User } from '@/supabase/user'
 import DeletePost from './DeletePost'
 import ImageView from './ImageView'
 import { UserCard } from './UserCard'
+import ProcessedPost from './ProcessedPost'
 
 /**
  * A reply is still a post
@@ -78,7 +79,7 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
             </div>
         </CardHeader>
         <CardBody as={Link} href={`/dashboard/${author?.data?.username}/${post.id}`} className="flex hover:opacity-60 hover:transition-all flex-col px-0">
-          {post.content}
+          <ProcessedPost content={post?.content!} />
         </CardBody>
         {post.image ? <AspectRatio ratio={5 / 7}>
           <ImageView post={post} />

@@ -21,6 +21,7 @@ export enum QUERY_KEYS {
     create_update_post = "create_update_post",
     delete_post = "delete_post",
 
+    get_initial_posts = "get_initial_posts",
     get_infinite_posts = "get_infinite_posts",
     get_posts_by_query = "get_posts_by_query",
     get_post_replies_by_query = "get_post_replies_by_query",

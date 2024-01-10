@@ -3,7 +3,7 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { useGetProfile } from '@/lib/react-query'
 import { useGetPostRepliesByQuery, useLikePost } from '@/lib/react-query/posts'
-import { checkIsLiked } from '@/lib/utils'
+import { checkIsLiked, pluralize } from '@/lib/utils'
 import { Post } from '@/supabase/posts'
 import { User } from '@/supabase/user'
 import { Button } from '@nextui-org/button'
@@ -39,7 +39,7 @@ const PostStats = ({ post, author }: { post: Post, author: User }) => {
     <div className='flex flex-col gap3 py-2'>
         <div className="flex justify-between items-center">
             <Button isIconOnly 
-                className='bg-transparent px-0'
+                className='bg-transparent px-0 w-[50px]'
             >
                 <HeartIcon 
                     size={18} 
@@ -51,7 +51,7 @@ const PostStats = ({ post, author }: { post: Post, author: User }) => {
                 <PostLikedUsers 
                     likes={likes}
                     likesTrigger={
-                        <span className='text-tiny ml-1 text-primary hover:underline'>{likes?.length}</span>
+                        <span className='text-tiny ml-1 text-primary hover:underline'>{likes?.length >= 10 ? '9+' : likes?.length} like{pluralize(likes?.length)}</span>
                     }
                  />
             </Button>

@@ -44,7 +44,7 @@ const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, is
                     toast.success("Success! Your ninja is now surfing the naijaschools galaxy.")
                     setOpen?.(false)
                     if (!post?.id && !isUpdate) {
-                        router.prefetch('/dashboard/posts')
+                        router.replace('/dashboard/posts')
                     }
                     router.refresh()
                 }

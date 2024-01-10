@@ -1,15 +1,21 @@
+// const {data: profile, isPending} = useGetProfile()
+// const { data: posts, isPending: is } = useFetchInitialPosts()
+// import { useGetProfile } from '@/lib/react-query'
+// import { useFetchInitialPosts } from '@/lib/react-query/posts'
+// if (isPending || is) return <p>loai...</p>
+// 'use client'
+
 import React from 'react'
-import AddPost from './AddPost'
 import { User, getProfile } from '@/supabase/user'
 import PostModal from './PostModal'
-import PostReel from './PostReel'
 import { fetchInitialPosts } from '@/supabase/posts'
 import { PlusIcon } from 'lucide-react'
 import { Button } from '@nextui-org/button'
 import { GetServerSideProps } from 'next'
 import { supabaseClient } from '@/supabase'
+import PostReel from './PostReel'
 
-const PostComponent = async () => {
+const PostComponent = async  () => {
     const profile = await getProfile()
     const { data: posts } = await fetchInitialPosts()
 
@@ -22,7 +28,7 @@ const PostComponent = async () => {
               <PostModal
                 user={profile?.data as User}
                 addPostButton={
-                  <Button variant='solid' style={{padding: 0}} color='primary' className='w-[50px] h-[70px] max-sm:w-[40px] max-sm:h-[40px] p-0 m-0 flex items-center justify-center rounded-full'>
+                  <Button variant='solid' style={{padding: 0}} color='primary' className='w-[40px] h-[70px] max-sm:w-[40px] max-sm:h-[60px] p-0 m-0 flex items-center justify-center rounded-full'>
                     <PlusIcon size={15} />
                   </Button>
                 }
