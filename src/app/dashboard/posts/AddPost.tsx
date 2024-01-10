@@ -1,21 +1,22 @@
 'use client'
 
+import React from 'react'
 import CreatePostUploader from '@/components/shared/CreatePostUploader'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
 import { useCreateUpdatePost } from '@/lib/react-query'
 import { PostSchema } from '@/lib/validators/posts'
+import { Post } from '@/supabase/posts'
 import { User } from '@/supabase/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@nextui-org/button'
 import { SendHorizonal } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
+import { useRouter } from 'next/navigation'
 
-const AddPost = ({ user, setOpen }: { user: User, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
+const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, isUpdate?: boolean, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
 
     const { mutate: updateCreatePost, isPending } = useCreateUpdatePost()
     const router = useRouter()
@@ -23,21 +24,29 @@ const AddPost = ({ user, setOpen }: { user: User, setOpen?: React.Dispatch<React
     const form = useForm<z.infer<typeof PostSchema>>({
         resolver: zodResolver(PostSchema),
         defaultValues: {
-            image: "",
             user: user?.username! || "",
-            faculty: user?.faculty! || ""
+            faculty: user?.faculty! || "",
+            parent_post_id:( post?.id && !isUpdate ) ? post?.id : post?.parent_post_id || undefined,
+            is_reply: ( post?.id && !isUpdate ) ? true : post?.is_reply || false,
+            content: (post?.content && isUpdate) ? post?.content : "",
+            institution: post?.institution?.toString() || undefined,
+            location: post?.location || ""
         },
     })
 
     function onSubmit(values: z.infer<typeof PostSchema>) {
         try {
-            updateCreatePost({...values,  image: values.image || [],},
+            updateCreatePost({...values,  image: values.image || [], postId: ( post?.id && isUpdate ) ? post?.id : undefined },
              {
                 onSuccess: () => {
                     form.reset()
                     form.setValue("image", "")
-                    toast.success("Success! Your ninja is now surfing the naijaschools galaxy")
+                    toast.success("Success! Your ninja is now surfing the naijaschools galaxy.")
                     setOpen?.(false)
+                    if (!post?.id && !isUpdate) {
+                        router.prefetch('/dashboard/posts')
+                    }
+                    router.refresh()
                 }
              });
           } catch (error) {
@@ -68,15 +77,15 @@ const AddPost = ({ user, setOpen }: { user: User, setOpen?: React.Dispatch<React
                 render={({ field }) => (
                     <FormItem>
                     <FormControl>
-                      <CreatePostUploader fieldChange={field.onChange}  />
+                      <CreatePostUploader fieldChange={field.onChange} mediaUrl={( post?.id && isUpdate) ? post?.image as string : undefined} />
                     </FormControl>
                     <FormMessage />
                     </FormItem>
                 )}
                 />
-            <div className='mx-auto'>
-            <Button variant={'flat'} type='submit' color='success' endContent={<SendHorizonal size={15}/>} isLoading={isPending} className='max-[480px]:w-full'>
-                Post
+            <div className=''>
+            <Button variant={'flat'} type='submit' color='success' endContent={<SendHorizonal size={15}/>} isLoading={isPending} className='w-full'>
+                {isUpdate ? "Update" : "Post"}
             </Button> 
             </div>
             </form>

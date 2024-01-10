@@ -1,23 +1,22 @@
 'use client'
 
-import { Post, PostList, getInfiniteGeneralPosts } from '@/supabase/posts'
+import { Post, PostList } from '@/supabase/posts'
 import React, { useEffect, useRef, useState } from 'react'
-import PostCard from './PostCard'
 import { Alert } from '@/components/ui/alert'
+import { supabaseClient } from '@/supabase'
 import { debounce } from 'lodash'
 import { motion } from 'framer-motion'
 import { Button } from '@nextui-org/button'
-import { supabaseClient } from '@/supabase'
+import PostCard from '../../posts/PostCard'
 
-const PostReel = ({ posts }: { posts?: PostList }) => {
+const PostReel = ({ replies, post }: { replies?: PostList, post: Post  }) => {
     const PAGE_COUNT = 20
     const containerRef = useRef<HTMLDivElement | null>(null)
-    const [loadedPosts, setLoadedPosts] = useState(posts)
-    const [offset, setOffset] = useState(0)
+    const [loadedReplies, setLoadedReplies] = useState(replies)
+    const [offset, setOffset] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
     const [isInView, setIsInView] = useState(false)
     const [isLast, setIsLast] = useState(false)
-    const [recentPost, setRecentPost] = useState<Post | any>({})
 
     const handleScroll = () => {
       if (containerRef.current && typeof window !== 'undefined') {
@@ -36,44 +35,41 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
       }
     }, [])
 
-    const handleRealtimePostInsert = (payload: any) => {
-    console.log('Change received!', payload?.new)
-    setRecentPost(payload)
-    }
-    
-
-    supabaseClient
-    .channel('posts-insert')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts' }, handleRealtimePostInsert)
-    .subscribe()
-
     useEffect(() => {
       if (isInView) {
-        loadMorePosts(offset)
+        loadMorereplies(offset)
       }
-    }, [isInView, recentPost])
+    }, [isInView])
 
-    const loadMorePosts = async (offset: number) => {
+    const loadMorereplies = async (offset: number) => {
       setIsLoading(true)
       setOffset((prev) => prev + 1)
-      const newPosts = await fetchPosts(offset, PAGE_COUNT)
-      setLoadedPosts((prevPosts) => [...prevPosts!, ...newPosts!])
+      const newReplies = await fetchreplies(offset, PAGE_COUNT)
+      setLoadedReplies((prevReplies) => [...prevReplies!, ...newReplies!])
       setIsLoading(false)
 
-      if (newPosts?.length! < PAGE_COUNT) {
+      if (newReplies?.length! < PAGE_COUNT) {
         setIsLast(true)
       }
     }
     
-    const fetchPosts = async (offset: number, PAGE_COUNT: number) => {
+    const fetchreplies = async (offset: number, PAGE_COUNT: number) => {
       const from = offset * PAGE_COUNT
       const to = from + PAGE_COUNT - 1
 
-      const { data } = await getInfiniteGeneralPosts(from, to)
+      const { data } = await supabaseClient!
+          .from('posts')
+          .select('*')
+          .eq("parent_post_id", post?.id)
+          .eq("is_reply", true)
+          .range(from, to)
+          .order('created_at', { ascending: false })
+          .order('updated_at', { ascending: false })
+
       return data
     }
 
-    if (loadedPosts?.length === 0) {
+    if (loadedReplies?.length === 0) {
       return (
           <Alert className='p-4 max-w-screen-sm'>
               There are no replies for this post yet.
@@ -83,7 +79,7 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
   return (
     <div className='flex flex-col gap-6' ref={containerRef}>
         {
-            loadedPosts?.map((post, i) => {
+            loadedReplies?.map((post, i) => {
               const recalculatedDelay =
             i >= PAGE_COUNT * 2 ? (i - PAGE_COUNT * (offset - 1)) / 15 : i / 15
 
@@ -98,7 +94,7 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
                 delay: recalculatedDelay,
               }}
             >
-               <PostCard post={post} key={post.id} />
+               <PostCard post={post} key={post.id} isReply />
             </motion.div>
           )
         })

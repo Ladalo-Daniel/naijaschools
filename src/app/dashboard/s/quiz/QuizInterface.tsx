@@ -6,6 +6,8 @@ import ShowQuestions from './ShowQuestions'
 import { useUpdateQuiz } from '@/lib/react-query'
 import QuizTimer from './QuizTimer'
 import { toast } from 'sonner'
+import ConfirmFinish from './ConfirmFinish'
+import { Button } from '@nextui-org/button'
 
 const QuizInterface = ({ 
   questions, 
@@ -23,6 +25,8 @@ const QuizInterface = ({
   const [userAnswers, setUserAnswers] = useState<Record <string, string>>({})
   const [showResults, setShowResults] = useState(false)
   const [hasFinished, setHasFinished] = useState(false)
+  const [confirmFinished, setConfirmFinished] = useState(false)
+  const [confirmFinishedModalOpen, setConfirmFinishedModalOpen] = useState(false)
   const [wasChecked, setWasChecked] = useState<{id?: number, idx?: number, checked?: boolean, option?: string}[]>([])
 
   const totalTimeInSeconds = questions?.length * 60
@@ -67,28 +71,37 @@ const QuizInterface = ({
     }, 0)
 
   const checkAnswers = () => {
-    if ((currentQuestion === questions.length - 1) && (Object.entries(userAnswers).length !== questions.length)) { 
-      toast.warning("You are about to submit without answering all questions!")
-      return
-    }
+    if ((currentQuestion === questions.length - 1) || (Object.entries(userAnswers).length !== questions.length)) { 
+      if (!confirmFinished) {
+        setConfirmFinishedModalOpen(true)
+        if ((!confirmFinished && confirmFinishedModalOpen)) {
+          setConfirmFinished(true)
+          return
+        }
+      }
 
-    setShowResults(true)
-    /** Logic to compare userAnswers with fetchedQuestions' correct answers
-     * You'll need to adapt this logic based on how your data is structured
-     * Here's an example assuming the correct answers are in the 'answer' property of each question object 
-     * 
-     * I had to modularize the example since it fitted well with my data structure.
-     * */
-    setHasFinished(true)
-    saveProgress({
-        quizId,
-        answers: JSON.stringify(userAnswers),
-        score: parseInt((score! / questions?.length * 100).toFixed(2)),
-        duration: elapsedSeconds.toString(),
-    }, {
-      onSuccess: () => toast.success("Your progress have been saved successfully. You can reference it later on the `history page`.")
-    })
-    return
+      
+    }
+    if (confirmFinished) {
+      setShowResults(true)
+      /** Logic to compare userAnswers with fetchedQuestions' correct answers
+       * You'll need to adapt this logic based on how your data is structured
+       * Here's an example assuming the correct answers are in the 'answer' property of each question object 
+       * 
+       * I had to modularize the example since it fitted well with my data structure.
+       * */
+      setHasFinished(true)
+      saveProgress({
+          quizId,
+          answers: JSON.stringify(userAnswers),
+          score: parseInt((score! / questions?.length * 100).toFixed(2)),
+          duration: elapsedSeconds.toString(),
+      }, {
+        onSuccess: () => toast.success("Your progress have been saved successfully. You can reference it later on the `history page`.")
+      })
+      return
+      
+    }
 }
 
 
@@ -117,6 +130,9 @@ const QuizInterface = ({
       onPaste={() => false}
       onMouseDown={() => false}
     >
+      {
+        isPending && <Button isIconOnly isLoading={isPending} variant='flat' color='primary' className='my-2' />
+      }
       <QuizTimer 
         totalQuestions={questions.length} 
         showResults={checkAnswers}
@@ -127,6 +143,16 @@ const QuizInterface = ({
         hasFinished={hasFinished}
         totalAnswered={Object.values(userAnswers).length}
         />
+
+        {
+          confirmFinishedModalOpen && <ConfirmFinish 
+            open={confirmFinishedModalOpen} 
+            setOpen={setConfirmFinishedModalOpen} 
+            confirmFinish={confirmFinished} 
+            setConfirmFinish={setConfirmFinished} 
+            checkAnswers={checkAnswers}
+            />
+        }
 
         {!showResults && <div>
             <p className='py-1 text-muted-foreground'>{currentQuestion + 1} of {questions.length}</p>

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Plus, XIcon } from 'lucide-react'
+import { Edit, Plus, XIcon } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -16,38 +16,29 @@ import {
     Drawer,
     DrawerClose,
     DrawerContent,
-    DrawerDescription,
     DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
     DrawerTrigger,
   } from "@/components/ui/drawer"
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { Post } from '@/supabase/posts'
 
-const PostModal = ({ user, post, addPostButton }: { user: User, post?: Post, addPostButton?: React.JSX.Element }) => {
+const UpdatePostTrigger = ({ user, post, isUpdate }: { user: User, post?: Post, isUpdate?: boolean }) => {
     const [open, setOpen] = useState(false)
     const isDesktop = useMediaQuery("(min-width: 768px)")
   if (isDesktop) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            {
-              addPostButton ? (
-                addPostButton
-              ): (
-                  post?.id && <Button startContent={<Plus size={15} />} variant='flat'className='w-fit' color='success'>
-                    {post?.id ? "Reply" : "Add Post"}
-                </Button>
-              )
-            }
+            <Button isIconOnly className='bg-transparent'>
+                <Edit size={15} />
+            </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] md:min-w-[600px] p-4">
+          <DialogContent className="sm:max-w-[425px] md:min-w-[600px]">
             <div className="flex flex-col gap-4 py-4">
-              <AddPost user={user} setOpen={setOpen} post={post}/>
+              <AddPost user={user} setOpen={setOpen} post={post} isUpdate={isUpdate}/>
             </div>
             <DialogFooter>
-            <Button startContent={<XIcon size={15} />} variant='flat' color='danger' className='w-full' onClick={() => setOpen(false)}>
+            <Button startContent={<XIcon size={15} />} variant='flat' color='danger' onClick={() => setOpen(false)}>
                 Close
             </Button>
             </DialogFooter>
@@ -59,19 +50,13 @@ const PostModal = ({ user, post, addPostButton }: { user: User, post?: Post, add
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        {
-          addPostButton ? (
-            addPostButton
-          ): (
-            <Button startContent={<Plus size={15} />} variant='flat'className='w-fit' color='success'>
-                {post?.id ? "Reply" : "Add Post"}
-            </Button>
-          )
-        }
+        <Button isIconOnly className='bg-transparent'>
+            <Edit size={15} />
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="flex flex-col gap-4 p-4">
-          <AddPost user={user} setOpen={setOpen} post={post}/>
+          <AddPost user={user} setOpen={setOpen} post={post} isUpdate />
         </div>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
@@ -85,4 +70,4 @@ const PostModal = ({ user, post, addPostButton }: { user: User, post?: Post, add
   )
 }
 
-export default PostModal
+export default UpdatePostTrigger
