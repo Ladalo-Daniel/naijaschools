@@ -3,6 +3,7 @@
 import { Database, Json } from "@/types/supabase";
 import { supabaseClient, supabaseUrl } from ".";
 import { User } from "./user";
+import { notify, sendReplyNotification } from "./notifications";
 
 export type PostList = Database['public']['Tables']['posts']['Row'][]
 export type Post = Database['public']['Tables']['posts']['Row']
@@ -164,7 +165,7 @@ export async function createUpdatePost({
       .eq('id', data?.id)
       throw storageError
     }
-
+    notify()
     return { data, status }
     
     } catch (error) {

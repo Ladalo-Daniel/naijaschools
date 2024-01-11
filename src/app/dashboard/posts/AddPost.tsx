@@ -51,7 +51,6 @@ const AddPost = ({ user, setOpen, post, isUpdate}: {
                     toast.success("Success! Your ninja is now surfing the naijaschools galaxy.")
                     setOpen?.(false)
                     router.refresh()
-                    console.log(info)
                     if (info?.status === 201) {
                         if (isUpdate) {
                             const filteredPosts = loadedPosts.filter(p => p.id !== post?.id)

@@ -8,6 +8,7 @@ import { debounce } from 'lodash'
 import { motion } from 'framer-motion'
 import { Button } from '@nextui-org/button'
 import { PostContext } from './PostProvider'
+import { supabaseClient } from '@/supabase'
 
 const PostReel = ({ posts }: { posts?: PostList }) => {
     const PAGE_COUNT = 20
@@ -33,14 +34,31 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
       return () => {
         window.removeEventListener('scroll', handleDebouncedScroll)
       }
-    }, [])
-
+    }, [isLast])
+    
     useEffect(() => {
       if (isInView) {
         loadMorePosts(offset)
       }
-    }, [isInView])
+    }, [isInView, offset])
 
+    useEffect(() => {
+      const channel = supabaseClient.channel("posts realtime")
+      .on("postgres_changes", {
+        event: "INSERT",
+        schema: "public",
+        table: "posts"
+      }, (payload) => {
+        if (!((payload.new as Post).is_reply || (payload.new as Post).parent_post_id)) 
+          setLoadedPosts(prev => [...prev, payload.new as Post])
+      })
+      .subscribe()
+
+      return () => {
+        supabaseClient.removeChannel(channel)
+      }
+    }, [setLoadedPosts])
+    
     const loadMorePosts = async (offset: number) => {
       setIsLoading(true)
       setOffset((prev) => prev + 1)

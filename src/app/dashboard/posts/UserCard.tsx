@@ -23,10 +23,10 @@ export const UserCard = ({ author, authorTrigger }: { author: User, authorTrigge
       <Card shadow="none" className="max-w-[300px] border-none bg-transparent">
         <CardHeader className="justify-between">
             <div className="flex gap-3">
-            <Avatar isBordered radius="full" size="md" src={author.image_url!} alt={author.username!} />
+            <Avatar isBordered radius="full" size="md" src={author?.image_url!} alt={author?.username!} />
             <div className="flex flex-col items-start justify-center">
-                <h4 className="text-small font-semibold leading-none text-default-600">{author.first_name} {author.last_name}</h4>
-                <h5 className="text-small tracking-tight text-default-500">@{author.username}</h5>
+                <h4 className="text-small font-semibold leading-none text-default-600">{author?.first_name} {author?.last_name}</h4>
+                <h5 className="text-small tracking-tight text-default-500">@{author?.username}</h5>
             </div>
             </div>
             <Button

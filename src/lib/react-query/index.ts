@@ -216,7 +216,6 @@ export const useCreateUpdatePost = () => {
                 queryKey: [QUERY_KEYS.get_initial_posts]
             })
             router.refresh()
-            console.log(data)
         },
         onError: (error) => {
             toast.error(error.message)
