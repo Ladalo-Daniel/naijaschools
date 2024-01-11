@@ -14,13 +14,15 @@ import { Button } from '@nextui-org/button'
 import { GetServerSideProps } from 'next'
 import { supabaseClient } from '@/supabase'
 import PostReel from './PostReel'
+import PostProvider from './PostProvider'
 
 const PostComponent = async  () => {
     const profile = await getProfile()
     const { data: posts } = await fetchInitialPosts()
 
   return (
-    <div className='py-4 flex flex-col gap-3'>
+    <PostProvider posts={posts}>
+      <div className='py-4 flex flex-col gap-3'>
         <PostModal user={profile?.data as User} />
         <PostReel posts={posts}  />
 
@@ -34,7 +36,8 @@ const PostComponent = async  () => {
                 }
               />
             </div>
-        </div>
+      </div>
+    </PostProvider>
   )
 }
 

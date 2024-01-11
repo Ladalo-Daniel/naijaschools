@@ -136,13 +136,16 @@ export async function createUpdatePost({
     const imagePath = hasImagePath ? image : `${supabaseUrl}/storage/v1/object/public/posts/${imageName}`
   
 
-    const { error, data } = await supabaseClient.from('posts').upsert({
+    const { error, data, status } = await supabaseClient.from('posts').upsert({
         id: postId!,
         updated_at: new Date().toISOString(),
         // @ts-ignore
         image: image[0]?.name ? imagePath as string : "",
         ...rest,
     })
+    .select()
+    .single()
+
 
     if (error) throw error
     if (!image) return
@@ -161,17 +164,21 @@ export async function createUpdatePost({
       .eq('id', data?.id)
       throw storageError
     }
+
+    return { data, status }
+    
     } catch (error) {
     throw error
     } 
 }
 
 export async function deletePost(id:string) {
-    const { error } = await supabaseClient.from("posts")
+    const { error, statusText, status } = await supabaseClient.from("posts")
     .delete()
     .eq("id", id)
 
     if(error) throw error
+    return { status, statusText }
 }
 
 export const getInfinitePostReplies = async (postId: string, prevRange = 0, range = 20) => {

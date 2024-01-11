@@ -21,7 +21,7 @@ export const useFetchInitialPosts = () => {
 export const useDeletePost = () => {
     return useMutation({
         mutationKey: [QUERY_KEYS.delete_post],
-        mutationFn: ({ id }: { id: string }) => deletePost(id)
+        mutationFn: ({ id }: { id: string }) => deletePost(id),
     })
 }
 
@@ -44,10 +44,6 @@ export const useLikePost = () => {
     return useMutation({
         mutationFn: ({postId, likes}: {postId: string, likes: Json}) => likePost(postId, likes),
         onSuccess: (data) => {
-            // queryClient.invalidateQueries({queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.id]})
-            // queryClient.invalidateQueries({queryKey: [QUERY_KEYS.GET_RECENT_POSTS]})
-            // queryClient.invalidateQueries({queryKey: [QUERY_KEYS.GET_USER_BY_ID]})
-            // queryClient.invalidateQueries({queryKey: [QUERY_KEYS.GET_CURRENT_USER]})
             router.refresh()
         }
     })

@@ -3,11 +3,16 @@ import BackButton from '@/components/shared/BackButton'
 import React from 'react'
 import PostDetailComponent from './PostDetailComponent'
 import { Post, getPostById } from '@/supabase/posts'
-import { User, getProfile, getProfileByUsername } from '@/supabase/user'
+import { User, getProfile } from '@/supabase/user'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Posts | Broadcasts | Naijaschools",
+  description: "A broadcast page for discovering posts in Naijaschools."
+}
 
 const PostDetailPage = async ({ params: { username, postId } }: { params: { username: string, postId: string }}) => {
   const {data: post} = await getPostById(postId)
-  const profile = await getProfileByUsername(username)
   const currentUser = await getProfile()
     return (
     <MaxWrapper className='p-6 bg-background'>

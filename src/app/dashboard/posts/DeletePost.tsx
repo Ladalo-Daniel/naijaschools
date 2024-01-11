@@ -6,21 +6,27 @@ import { Post } from '@/supabase/posts'
 import { Button } from '@nextui-org/button'
 import { Trash, XIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { toast } from 'sonner'
+import { PostContext } from './PostProvider'
 
 const DeletePost = ({ post }: { post: Post }) => {
     const [open, setOpen] = useState(false)
     const { mutate: deletePost, isPending: deletingPost } = useDeletePost()
     const router = useRouter()
+    const { loadedPosts, setLoadedPosts } = useContext(PostContext)
 
     const handleDeletePost = () => {
         deletePost({
             id: post?.id
         }, {
-            onSuccess: () => {
+            onSuccess: ({status}) => {
                 toast.success("Your post has been taken off our servers successfully.")
                 setOpen(false)
+                if (status === 204) {
+                  const filteredPosts = loadedPosts.filter(p => p.id !== post?.id)
+                  setLoadedPosts((prev) => [...filteredPosts])
+                }
                 router.refresh()
                 return
             },

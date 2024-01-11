@@ -1,4 +1,4 @@
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "./utils";
 import { toast } from "sonner";
 import { getProfile, getProfileById, getProfileByUsername, makeAdmin, updateProfile } from "@/supabase/user";
@@ -205,7 +205,7 @@ export const useCreateUpdatePost = () => {
     return useMutation({
         mutationFn: ({postId, image, ...rest}: { postId?: string, image?: File[] }) => createUpdatePost({postId, image, ...rest}),
         mutationKey: [QUERY_KEYS.create_update_post],
-        onSuccess: () => {
+        onSuccess: (data) => {
             queryClient.invalidateQueries({
                 queryKey: [QUERY_KEYS.create_update_post]
             })
@@ -216,6 +216,7 @@ export const useCreateUpdatePost = () => {
                 queryKey: [QUERY_KEYS.get_initial_posts]
             })
             router.refresh()
+            console.log(data)
         },
         onError: (error) => {
             toast.error(error.message)

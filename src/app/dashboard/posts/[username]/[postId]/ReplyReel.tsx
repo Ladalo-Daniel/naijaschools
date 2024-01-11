@@ -1,18 +1,19 @@
 'use client'
 
 import { Post, PostList } from '@/supabase/posts'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Alert } from '@/components/ui/alert'
 import { supabaseClient } from '@/supabase'
 import { debounce } from 'lodash'
 import { motion } from 'framer-motion'
 import { Button } from '@nextui-org/button'
-import PostCard from '../../posts/PostCard'
+import PostCard from '../../PostCard'
+import { PostContext } from '../../PostProvider'
 
 const PostReel = ({ replies, post }: { replies?: PostList, post: Post  }) => {
     const PAGE_COUNT = 20
     const containerRef = useRef<HTMLDivElement | null>(null)
-    const [loadedReplies, setLoadedReplies] = useState(replies)
+    const {loadedPosts: loadedReplies, setLoadedPosts: setLoadedReplies} = useContext(PostContext)
     const [offset, setOffset] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
     const [isInView, setIsInView] = useState(false)

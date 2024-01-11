@@ -2,7 +2,6 @@ import { Alert } from '@/components/ui/alert'
 import { PostList } from '@/supabase/posts'
 import React from 'react'
 import AISearchResponse from './AISearchResponse'
-import Link from 'next/link'
 import PostCard from '../posts/PostCard'
 
 const PostSearchResults = ({ posts, query }: { posts: PostList, query?: string }) => {

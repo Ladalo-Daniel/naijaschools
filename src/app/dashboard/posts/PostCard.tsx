@@ -7,13 +7,11 @@ import { shortMultiFormatDateString } from '@/lib/utils'
 import { Post } from '@/supabase/posts'
 import { Avatar } from '@nextui-org/avatar'
 import { Card, CardBody, CardHeader } from '@nextui-org/card'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import PostStats from './PostStats'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Globe, Trash } from 'lucide-react'
-import { Button } from '@nextui-org/button'
 import UpdatePostTrigger from './UpdatePostTrigger'
 import { User } from '@/supabase/user'
 import DeletePost from './DeletePost'
@@ -37,7 +35,7 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
             <UserCard
               author={author?.data as User }
               authorTrigger={
-                <Avatar src={author?.data?.image_url || '/icons/profile-placeholder.svg'} className='cursor-pointer opacity-60 transition-all'/>
+                <Avatar src={author?.data?.image_url || '/icons/profile-placeholder.svg'} className='cursor-pointer hover:opacity-60 transition-all'/>
               }
             />
           ) 
@@ -67,7 +65,10 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
           </div>
             <div className="md:flex max-sm:flex-col">
                 {
-                  author?.data?.username === profile.data?.data?.username ? (
+                  (
+                    (author?.data?.username === profile.data?.data?.username) || 
+                    profile.data?.data?.role === 'admin'
+                    ) ? (
                     <div className='flex gap-1 items-center max-sm:flex-col'>
                       <UpdatePostTrigger user={profile?.data?.data as User} isUpdate post={post}/>
                       <DeletePost post={post} />
@@ -78,7 +79,7 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
                 }
             </div>
         </CardHeader>
-        <CardBody as={Link} href={`/dashboard/${author?.data?.username}/${post.id}`} className="flex hover:opacity-60 hover:transition-all flex-col px-0">
+        <CardBody as={Link} href={`/dashboard/posts/${author?.data?.username}/${post.id}`} className="flex hover:opacity-60 hover:transition-all flex-col px-0">
           <ProcessedPost content={post?.content!} />
         </CardBody>
         {post.image ? <AspectRatio ratio={5 / 7}>

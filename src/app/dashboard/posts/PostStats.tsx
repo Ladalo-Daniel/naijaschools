@@ -39,10 +39,10 @@ const PostStats = ({ post, author }: { post: Post, author: User }) => {
     <div className='flex flex-col gap3 py-2'>
         <div className="flex justify-between items-center">
             <Button isIconOnly 
-                className='bg-transparent px-0 w-[50px]'
+                className='bg-transparent px-0 w-[60px]'
             >
                 <HeartIcon 
-                    size={18} 
+                    size={20} 
                     className={checkIsLiked(likes, currentUser?.data?.id!) ? "text-primary" : "" }
                     fill={checkIsLiked(likes, currentUser?.data?.id!) ? "currentColor" : ""}
                     onClick={handleLikePost}
@@ -55,7 +55,7 @@ const PostStats = ({ post, author }: { post: Post, author: User }) => {
                     }
                  />
             </Button>
-            <Button isIconOnly className='bg-transparent px-0 gap-1 flex items-center' as={Link} href={`/dashboard/${author?.username}/${post.id}`}>
+            <Button isIconOnly className='bg-transparent px-0 gap-1 flex items-center' as={Link} href={`/dashboard/posts/${author?.username}/${post.id}`}>
                 <MessageCircleReplyIcon size={18} />
                 {gettingReplies ? <Skeleton className='h-4 w-8' /> : <span className='text-tiny ml-1 text-muted-foreground'>{replies?.data.length}</span>}
             </Button>

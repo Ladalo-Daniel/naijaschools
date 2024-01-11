@@ -27,7 +27,7 @@ const PostLikeUserCard = ({ userId }: { userId: string }) => {
                 <User   
                     as={Link}
                     name={author?.first_name + ' ' + author?.last_name}
-                    description={author?.bio?.slice(0, 50) + (author?.bio?.slice(0, 51) ? "..." : "")}
+                    description={author?.bio?.slice(0, 80) + (author?.bio?.slice(0, 81) ? "..." : "")}
                     className="transition-transform"
                     avatarProps={{
                         src: author?.image_url!

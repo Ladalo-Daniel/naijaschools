@@ -1,17 +1,18 @@
 'use client'
 
 import { Post, PostList, getInfiniteGeneralPosts } from '@/supabase/posts'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import PostCard from './PostCard'
 import { Alert } from '@/components/ui/alert'
 import { debounce } from 'lodash'
 import { motion } from 'framer-motion'
 import { Button } from '@nextui-org/button'
+import { PostContext } from './PostProvider'
 
 const PostReel = ({ posts }: { posts?: PostList }) => {
     const PAGE_COUNT = 20
     const containerRef = useRef<HTMLDivElement | null>(null)
-    const [loadedPosts, setLoadedPosts] = useState(posts)
+    const {loadedPosts, setLoadedPosts} = useContext(PostContext)
     const [offset, setOffset] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
     const [isInView, setIsInView] = useState(false)

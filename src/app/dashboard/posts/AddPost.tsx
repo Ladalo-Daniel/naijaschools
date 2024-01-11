@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useContext } from 'react'
 import CreatePostUploader from '@/components/shared/CreatePostUploader'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
@@ -15,11 +15,18 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
+import { PostContext } from './PostProvider'
 
-const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, isUpdate?: boolean, setOpen?: React.Dispatch<React.SetStateAction<boolean>>} ) => {
+const AddPost = ({ user, setOpen, post, isUpdate}: { 
+    user: User, 
+    post?: Post, 
+    isUpdate?: boolean, 
+    setOpen?: React.Dispatch<React.SetStateAction<boolean>>
+} ) => {
 
     const { mutate: updateCreatePost, isPending } = useCreateUpdatePost()
     const router = useRouter()
+    const { loadedPosts, setLoadedPosts } = useContext(PostContext)
 
     const form = useForm<z.infer<typeof PostSchema>>({
         resolver: zodResolver(PostSchema),
@@ -38,15 +45,22 @@ const AddPost = ({ user, setOpen, post, isUpdate}: { user: User, post?: Post, is
         try {
             updateCreatePost({...values,  image: values.image || [], postId: ( post?.id && isUpdate ) ? post?.id : undefined },
              {
-                onSuccess: () => {
+                onSuccess: (info) => {
                     form.reset()
                     form.setValue("image", "")
                     toast.success("Success! Your ninja is now surfing the naijaschools galaxy.")
                     setOpen?.(false)
-                    if (!post?.id && !isUpdate) {
-                        router.replace('/dashboard/posts')
-                    }
                     router.refresh()
+                    console.log(info)
+                    if (info?.status === 201) {
+                        if (isUpdate) {
+                            const filteredPosts = loadedPosts.filter(p => p.id !== post?.id)
+                            setLoadedPosts(prv => [...[info?.data as Post], ...filteredPosts])
+                        return
+                        }
+                        setLoadedPosts(prv => [...[info?.data as Post], ...prv])
+                        return
+                    }
                 }
              });
           } catch (error) {
