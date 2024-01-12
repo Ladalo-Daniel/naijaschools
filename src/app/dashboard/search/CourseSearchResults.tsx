@@ -6,7 +6,7 @@ import { Alert } from '@/components/ui/alert'
 
 const CourseSearchResults = ({ courses, query }: { courses: CourseList, query?: string }) => {
     if (!courses.length) return <div className='flex flex-col gap-3'>
-        <Alert>
+        <Alert className="border-none">
             Your query <b>{query}</b> could not be found in our Courses. You may proceed with Naijaschools AI.
         </Alert>
         <AISearchResponse query={query!} />

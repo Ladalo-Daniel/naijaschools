@@ -16,6 +16,7 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 import { PostContext } from './PostProvider'
+import { useSendReplyNotication } from '@/lib/react-query/notifications'
 
 const AddPost = ({ user, setOpen, post, isUpdate}: { 
     user: User, 
@@ -25,6 +26,7 @@ const AddPost = ({ user, setOpen, post, isUpdate}: {
 } ) => {
 
     const { mutate: updateCreatePost, isPending } = useCreateUpdatePost()
+    const { mutate: sendReplyNotification} = useSendReplyNotication()
     const router = useRouter()
     const { loadedPosts, setLoadedPosts } = useContext(PostContext)
 
@@ -58,6 +60,7 @@ const AddPost = ({ user, setOpen, post, isUpdate}: {
                         return
                         }
                         setLoadedPosts(prv => [...[info?.data as Post], ...prv])
+                        sendReplyNotification({post: info?.data})
                         return
                     }
                 }

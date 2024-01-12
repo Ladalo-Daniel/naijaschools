@@ -6,7 +6,7 @@ import AISearchResponse from './AISearchResponse'
 
 const ArticleSearchResults = ({ articles, query }: { articles: ArticleList, query?: string }) => {
     if (!articles.length) return <div className='flex flex-col gap-3'>
-        <Alert>
+        <Alert className="border-none">
             Your query <b>{query}</b> could not be found in our articles. You may proceed with Naijaschools AI.
         </Alert>
         <AISearchResponse query={query!} />

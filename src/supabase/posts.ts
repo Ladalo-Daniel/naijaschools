@@ -3,7 +3,7 @@
 import { Database, Json } from "@/types/supabase";
 import { supabaseClient, supabaseUrl } from ".";
 import { User } from "./user";
-import { notify, sendReplyNotification } from "./notifications";
+import { notify } from "./notifications";
 
 export type PostList = Database['public']['Tables']['posts']['Row'][]
 export type Post = Database['public']['Tables']['posts']['Row']
@@ -130,18 +130,15 @@ export async function createUpdatePost({
     image?: File[] | string
     }) {
     try {
-    // @ts-ignore
-    const hasImagePath = image?.startsWith?.(supabaseUrl)
-    // @ts-ignore
-    const imageName = `${Math.random()}-${image[0]?.name}`?.replaceAll('/', '')
+    const hasImagePath = (image as string)?.startsWith?.(supabaseUrl)
+    const imageName = `${Math.random()}-${(image?.[0] as File)?.name}`?.replaceAll('/', '')
     const imagePath = hasImagePath ? image : `${supabaseUrl}/storage/v1/object/public/posts/${imageName}`
   
 
     const { error, data, status } = await supabaseClient.from('posts').upsert({
         id: postId!,
         updated_at: new Date().toISOString(),
-        // @ts-ignore
-        image: image[0]?.name ? imagePath as string : "",
+        image: (image?.[0] as File)?.name ? imagePath as string : image?.[0] as string,
         ...rest,
     })
     .select()
@@ -149,19 +146,17 @@ export async function createUpdatePost({
 
 
     if (error) throw error
-    if (!image) return
+    if (!image || ((image[0] as File)?.name) === undefined) return { data, status }
 
     const { error: storageError } = await supabaseClient
     .storage
     .from('posts')
-    // @ts-ignore
     .upload(imageName, image[0] as File)
   
     if (storageError) {
       await supabaseClient
       .from('posts')
       .delete()
-    //   @ts-ignore
       .eq('id', data?.id)
       throw storageError
     }

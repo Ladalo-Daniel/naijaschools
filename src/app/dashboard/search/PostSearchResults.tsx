@@ -6,7 +6,7 @@ import PostCard from '../posts/PostCard'
 
 const PostSearchResults = ({ posts, query }: { posts: PostList, query?: string }) => {
     if (!posts.length) return <div className='flex flex-col gap-3'>
-    <Alert>
+    <Alert className="border-none">
         Your query <b>{query}</b> could not be found in our posts. You may proceed with Naijaschools AI.
     </Alert>
     <AISearchResponse query={query!} />

@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@nextui-org/autocomplete": "^2.0.9",
     "@nextui-org/avatar": "^2.0.24",
+    "@nextui-org/badge": "^2.0.24",
     "@nextui-org/breadcrumbs": "^2.0.4",
     "@nextui-org/button": "^2.0.26",
     "@nextui-org/card": "^2.0.24",

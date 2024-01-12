@@ -32,6 +32,7 @@ const ImageView = ({ post }: { post: Post }) => {
           link.click()
     
           document.body.removeChild(link)
+          setOpen(false)
         } catch (error) {
           console.error('Error downloading image:', error)
           toast.error('Failed to download image')

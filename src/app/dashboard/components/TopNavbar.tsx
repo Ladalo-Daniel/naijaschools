@@ -9,9 +9,12 @@ import { ArrowRight } from 'lucide-react'
 import MobileActions from './MobileActions'
 import { ModeToggle } from '@/components/ModeToggle'
 import NavSearchBar from '../search/NavSearchBar'
+import NotificationBadge from '../notifications/NotificationBadge'
+import { NotificationList, getRecentNotifications } from '@/supabase/notifications'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
+  const {data: notifications} = await getRecentNotifications(profile?.data?.username!)
   return (
     <nav className='bg-gray-200 backdrop-blur-md bg-transparent px-2 flex md:px-10 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-40 h-16 border-b border-r-gray-600'>
       <Link href={'/'} className={'md:block hidden'}>
@@ -27,6 +30,7 @@ const TopNavbar = async () => {
 
       <div className='flex items-center gap-3'>
         <NavSearchBar />
+        <NotificationBadge user={ profile?.data as User } notifications={notifications as NotificationList}/>
         <ModeToggle />
         <Link href={'/dashboard/profile'} className='hidden md:block'>
           <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />

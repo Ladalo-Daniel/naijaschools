@@ -28,7 +28,7 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
   const { data: author, isPending } = useGetProfileByUsername(post.user!)
   const profile = useGetProfile()
   return (
-    <Card className={`p-4 border-muted bg-background rounded-3xl ${isReply ? "border-none": "border"} lg:p-7 w-full max-w-screen-sm hover:transition-all flex flex-row gap-1.5`}>
+    <Card className={`p-4 border-muted bg-background rounded-3xl ${isReply ? "border-none rounded-none shadow-none": "border"} lg:p-7 w-full max-w-screen-sm hover:transition-all flex flex-row gap-1.5`}>
       <div className="w-12">
         {
           isPending ? <Skeleton className='w-12 h-12 rounded-full' /> : (
@@ -40,7 +40,7 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
             />
           ) 
         }
-        <Separator orientation='vertical' className={`h-[75%] mx-auto mt-1 ${ isReply ? "text-muted" : "" } mb-8`}/>
+        <Separator orientation='vertical' className={`mx-auto mt-1 ${ isReply ? "text-muted h-[90%]" : "h-[75%] mb-8" }`}/>
       </div>
       <div className="flex flex-col gap-0.5 p-2 md:p-3 lg:p-4 -mt-8 w-full pb-4">
         <CardHeader className='flex items-center gap-1 w-full px-0'>
@@ -48,9 +48,9 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
             {
               isPending ? (
                 <>
-                <Skeleton className='h-5 w-28' />
-                <Skeleton className='h-5 w-16' />
-                <Skeleton className='h-5 w-24' />
+                <Skeleton className='h-3 w-28' />
+                <Skeleton className='h-3 w-16' />
+                <Skeleton className='h-3 w-24' />
                 </>
               ) : (
                 <>

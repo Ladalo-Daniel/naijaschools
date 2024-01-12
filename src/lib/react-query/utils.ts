@@ -25,4 +25,7 @@ export enum QUERY_KEYS {
     get_infinite_posts = "get_infinite_posts",
     get_posts_by_query = "get_posts_by_query",
     get_post_replies_by_query = "get_post_replies_by_query",
+    send_reply_notification = "send_reply_notification",
+
+    get_recent_notications = "get_recent_notications",
 } 

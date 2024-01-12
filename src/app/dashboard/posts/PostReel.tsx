@@ -49,9 +49,10 @@ const PostReel = ({ posts }: { posts?: PostList }) => {
         schema: "public",
         table: "posts"
       }, (payload) => {
-        if (!((payload.new as Post).is_reply || (payload.new as Post).parent_post_id)) 
+        if (!((payload.new as Post).is_reply || (payload.new as Post).parent_post_id)) {
           setLoadedPosts(prev => [...prev, payload.new as Post])
-      })
+        }
+        })
       .subscribe()
 
       return () => {
