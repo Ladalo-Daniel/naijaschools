@@ -18,15 +18,15 @@ export default function AIChatComponent({ profile }: { profile: User }) {
     onFinish: () => setFetching(false),
   });
 
-  useEffect(() => {
-    async function saveChat() {
-        if (!fetching && chats.length !== 0) {
-            // await 
-        }
-    }
+//   useEffect(() => {
+//     async function saveChat() {
+//         if (!fetching && chats.length !== 0) {
+//             // await 
+//         }
+//     }
 
-    saveChat()
-  }, [fetching])
+//     saveChat()
+//   }, [fetching])
 
   const lastMessage = messages[messages.length - 1];
   const response =
@@ -35,10 +35,10 @@ export default function AIChatComponent({ profile }: { profile: User }) {
   const onTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(e.target.value);
     handleInputChange(e);
-    setChats(prev => [...prev, {user_prompt: e.target.value, bot_response: response!}])
-  };
+};
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // setChats(prev => [{user_prompt: prompt, bot_response: response!}, ...prev])
     e.preventDefault();
     setFetching(true);
     handleSubmit(e, {
@@ -55,12 +55,12 @@ export default function AIChatComponent({ profile }: { profile: User }) {
         <h3 className='text-2xl my-2 text-primary hidden'>Naijaschools AI</h3>
         <div className='py-3 flex flex-col gap-3 min-h-[90%] relative max-w-5xl overflow-auto'>
             {response && (
-                <div className='flex flex-col gap-3'>
-                <ChatMarkdown content={response} />
+                <div className='flex flex-col gap-3 pb-20 mb-10'>
+                    <ChatMarkdown content={response} />
                 </div>
             )}
 
-            {chats.map(chat => (
+            {/* {chats.map(chat => (
                 <div className='flex flex-col gap-4'>
                    { chat.user_prompt && (
                         <div className='flex flex-row gap-1 py-2'>
@@ -70,17 +70,17 @@ export default function AIChatComponent({ profile }: { profile: User }) {
                             <ChatMarkdown content={chat.user_prompt} />
                         </div>
                     )}
-                    {chat.bot_response && (
+                    {response && (
                         <div className='flex flex-row gap-1 py-2'>
                             <div className='w-12'>
                                 <Avatar src='/logos/logo.png'/>
                             </div>
-                            <ChatMarkdown content={chat.bot_response} />
+                            <ChatMarkdown content={response} />
                         </div>
                     )}
                 </div>
             ))}
-            
+             */}
             <section>
                 <ChatInputForm 
                     fetching={fetching}
