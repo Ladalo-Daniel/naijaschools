@@ -28,4 +28,8 @@ export enum QUERY_KEYS {
     send_reply_notification = "send_reply_notification",
 
     get_recent_notications = "get_recent_notications",
+    get_chat_by_id = "get_chat_by_id",
+    get_user_chats = "get_user_chats",
+
+    create_update_chat = "create_update_chat"
 } 
