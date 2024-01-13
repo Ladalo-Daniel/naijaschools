@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Jost } from 'next/font/google'
+import { Inter, Jost, Fira_Code } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/Providers'
 import { cn } from '@/lib/utils'

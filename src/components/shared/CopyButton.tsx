@@ -43,6 +43,7 @@ export default function CopyButton({ id }: { id: string }) {
 							setSuccess(true);
 						}
 					}}
+					size={18}
 				/>
 			</div>
 		</div>
