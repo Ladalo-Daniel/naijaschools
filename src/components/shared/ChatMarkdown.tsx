@@ -52,7 +52,7 @@ export default function ChatMarkdown({
 					return (
 						<ul
 							{...props}
-							className="text-[17px] py-2.5 list-disc transition-all no-underline"
+							className="text-[17px] py-2.5 px-2 list-disc transition-all no-underline"
 						/>
 					);
 				},
@@ -60,7 +60,7 @@ export default function ChatMarkdown({
 					return (
 						<ol
 							{...props}
-							className="text-[17px] py-2.5 list-decimal transition-all"
+							className="text-[17px] py-2.5 px-2 list-decimal transition-all"
 						/>
 					);
 				},
