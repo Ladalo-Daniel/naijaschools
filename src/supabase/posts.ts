@@ -3,7 +3,6 @@
 import { Database, Json } from "@/types/supabase";
 import { supabaseClient, supabaseUrl } from ".";
 import { User } from "./user";
-import { notify } from "./notifications";
 
 export type PostList = Database['public']['Tables']['posts']['Row'][]
 export type Post = Database['public']['Tables']['posts']['Row']
@@ -160,7 +159,6 @@ export async function createUpdatePost({
       .eq('id', data?.id)
       throw storageError
     }
-    notify()
     return { data, status }
     
     } catch (error) {
@@ -206,4 +204,68 @@ export const likePost = async (postId: string, likes: Json) => {
     if (error) throw error
 
     return { data }
+}
+
+export const getBookmarks = async (userId: string) => {
+    const { data, error } = await supabaseClient.from('bookmarks')
+    .select()
+    .eq("user", userId)
+    .order("created_at", {ascending: false})
+
+    if (error) throw error
+
+    return { data }
+}
+
+export const getBookmarkById = async (id: string) => {
+    const { data, error } = await supabaseClient.from('bookmarks')
+    .select()
+    .eq("id", id)
+    .single()
+
+    if (error) throw error
+
+    return { data }
+}
+
+export const getBookmarkQuery = async (query: 'user' | 'post', row: string | number) => {
+    const { data, error } = await supabaseClient.from('bookmarks')
+    .select()
+    .eq(query, row)
+
+    if (error) throw error
+
+    return { data }
+}
+
+export const bookmarkPost = async (userId: string, postId: string, bookmarks?: Json) => {
+    const { error } = await supabaseClient
+    .from('posts')
+    .update({ bookmarks })
+    .eq("id", postId)
+    .select()
+
+    if (error) throw error
+
+    const { error: bookmarkError, data } = await supabaseClient.from("bookmarks")
+    .insert([{
+        post: postId,
+        user: userId
+    }])
+    .select()
+    .single()
+
+    if (bookmarkError) throw bookmarkError
+
+    return { bookmark: data  }
+}
+
+
+export async function deleteBookmark(id:string) {
+    const { error, statusText, status } = await supabaseClient.from("bookmarks")
+    .delete()
+    .eq("id", id)
+
+    if(error) throw error
+    return { status, statusText }
 }

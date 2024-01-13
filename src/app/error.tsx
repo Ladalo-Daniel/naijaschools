@@ -19,7 +19,7 @@ export default function Error({
  
   return (
     <div className='flex mx-auto items-center justify-center min-h-screen w-full bg-background'>
-      <div className='p-6 flex flex-col gap-4 mx-2 w-fit border rounded-md items-center'>
+      <div className='p-6 flex flex-col gap-4 mx-2 w-fit rounded-md items-center'>
         <h2 className='text-2xl py-2 text-rose-500 text-center'>Something went wrong!</h2>
         <Button
             onClick={

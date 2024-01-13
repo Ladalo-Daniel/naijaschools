@@ -28,7 +28,7 @@ const TopNavbar = async () => {
         <Button>For you</Button>
       </div>
 
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center md:gap-3 gap-2'>
         <NavSearchBar />
         <NotificationBadge user={ profile?.data as User } notifications={notifications as NotificationList}/>
         <ModeToggle />

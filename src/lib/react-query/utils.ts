@@ -20,6 +20,7 @@ export enum QUERY_KEYS {
     get_ai_search_response = "get_ai_search_response",
     create_update_post = "create_update_post",
     delete_post = "delete_post",
+    like_post = "like_post",
 
     get_initial_posts = "get_initial_posts",
     get_infinite_posts = "get_infinite_posts",
@@ -28,4 +29,10 @@ export enum QUERY_KEYS {
     send_reply_notification = "send_reply_notification",
 
     get_recent_notications = "get_recent_notications",
+    send_like_notification = "send_like_notification",
+    seen_reply = "seen_reply",
+    seen_notifications = "seen_notifications",
+    delete_bookmark = "delete_bookmark",
+    create_bookmark = "create_bookmark",
+    get_bookmarks = "get_bookmarks",
 } 
