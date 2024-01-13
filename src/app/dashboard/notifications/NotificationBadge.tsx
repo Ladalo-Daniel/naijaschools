@@ -8,10 +8,12 @@ import { supabaseClient } from '@/supabase'
 import { NotificationList, Notification } from '@/supabase/notifications'
 import { User } from '@/supabase/user'
 import NotificationSheet from './NotificationSheet'
+import { useSeenNotifications } from '@/lib/react-query/notifications'
 
 const NotificationBadge = ({ user, notifications }: { user?: User, notifications: NotificationList }) => {    
     const [recents, setRecents] = useState<NotificationList>(notifications ?? [])
     const [sheetOpen, setSheet] = useState(false)
+    const { data: seenNotifications } = useSeenNotifications(user?.username as string)
 
     useEffect(() => {
         const channel = supabaseClient.channel("real time notifications")
@@ -21,7 +23,6 @@ const NotificationBadge = ({ user, notifications }: { user?: User, notifications
           table: "notifications",
           filter: `user=eq.${user?.username}`
         }, (payload) => {
-            console.log(payload)
           setRecents((prev) => [...prev, payload?.new as Notification] )
         })
         .subscribe()
@@ -35,22 +36,25 @@ const NotificationBadge = ({ user, notifications }: { user?: User, notifications
 
   return (
     <>
-    <Badge content={cleanedNotifications.length > 99 ? '99+' : cleanedNotifications.length} shape="circle" className='text-foreground' color="success">
-      <Button
-        radius="full"
-        isIconOnly
-        aria-label={`more than ${cleanedNotifications.length} notifications`}
-        variant="light"
-        onClick={() => setSheet(true)}
-      >
-        <NotificationIcon size={24} />
-      </Button>
-    </Badge>
-    <NotificationSheet 
-        notifications={cleanedNotifications}
-        setSheet={setSheet}
-        sheetOpen={sheetOpen}
-    />
+      <Badge content={
+        cleanedNotifications.length === 0 ? null : cleanedNotifications.length > 99 ? '99+' : cleanedNotifications.length
+      } shape="circle" className='text-foreground' color="success">
+        <Button
+          radius="full"
+          isIconOnly
+          aria-label={`more than ${cleanedNotifications.length} notifications`}
+          variant="light"
+          onClick={() => setSheet(prev => !prev)}
+        >
+          <NotificationIcon size={24} />
+        </Button>
+      </Badge>
+      <NotificationSheet 
+          notifications={cleanedNotifications.concat(seenNotifications?.data!)}
+          setSheet={setSheet}
+          sheetOpen={sheetOpen}
+          cleanedNotifications={cleanedNotifications}
+      />
     </>
   )
 }
