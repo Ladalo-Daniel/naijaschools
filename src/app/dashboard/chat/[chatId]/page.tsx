@@ -1,17 +1,20 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import React from 'react'
-import AIChatComponent from './AIChatComponent'
+import AIChatDetailComponent from './AIChatDetailComponent'
 import { User, getProfile } from '@/supabase/user'
-import { Sheet, SheetContent, SheetTrigger,  } from '@/components/ui/sheet'
+import ChatHistorySheet from '../ChatHistorySheet'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@nextui-org/button'
 import { History, HistoryIcon } from 'lucide-react'
-import ChatHistory from './ChatHistory'
+import ChatHistory from '../ChatHistory'
+import { getChatById } from '@/supabase/chats'
 
-const AIChatPage = async () => {
-    const profile =  await getProfile()
+const AIChatDetailPage = async ({ params: { chatId }}:{ params: { chatId: string }}) => {
+    const profile = await getProfile()
+    const { data: chat } = await getChatById(chatId)
   return (
-    <MaxWrapper className='bg-background p-6 max-w-5xl'>
+    <MaxWrapper className='bg-background p-5 max-w-5xl'>
         <div className="flex items-center justify-between">
             <BackButton />
             <Sheet>
@@ -26,12 +29,11 @@ const AIChatPage = async () => {
                 </SheetContent>
             </Sheet>
         </div>
-
         <section className="flex flex-col gap-3">
-            <AIChatComponent profile={profile?.data as User } />
+            <AIChatDetailComponent chat={chat} profile={profile?.data as User }/>
         </section>
     </MaxWrapper>
   )
 }
 
-export default AIChatPage
+export default AIChatDetailPage

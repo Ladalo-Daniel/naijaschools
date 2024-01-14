@@ -116,8 +116,8 @@ export default function ChatMarkdown({
 						}
 
 						return (
-							<div className={cn(" bg-graident-dark border-[0.5px] rounded-2xl border-zinc-900", fira.className)}>
-								<div className="flex items-center justify-between px-5 py-2 border-b-[0.5px] border-zinc-600 bg-background">
+							<div className={cn(" bg-graident-dark border-[0.5px] rounded-2xl border-zinc-900 break-words overflow-auto", fira.className)}>
+								<div className="flex items-center justify-between px-5 py-2 border-b-[0.5px] border-zinc-600">
 									<div className="flex items-center gap-2">
 										<Icon />
 										<p className="text-sm text-gray-400">
@@ -138,7 +138,7 @@ export default function ChatMarkdown({
 						return (
 							// TODO: convert to code block
 							<code
-								className={cn("text-md bg-secondary px-1 w-auto break-words overflow-auto rounded-md p-1", fira.className)}
+								className={cn("text-md bg-secondary px-1 break-words w-auto overflow-auto rounded-md p-1", fira.className)}
 								{...props}
 							>
 								{children}

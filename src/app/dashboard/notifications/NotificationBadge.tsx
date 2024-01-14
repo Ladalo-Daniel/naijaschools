@@ -37,7 +37,7 @@ const NotificationBadge = ({ user, notifications }: { user?: User, notifications
   return (
     <>
       <Badge content={
-        cleanedNotifications.length === 0 ? null : cleanedNotifications.length > 99 ? '99+' : cleanedNotifications.length
+        cleanedNotifications.length === 0 ? undefined : cleanedNotifications.length > 99 ? '99+' : cleanedNotifications.length
       } shape="circle" className='text-foreground' color="success">
         <Button
           radius="full"
