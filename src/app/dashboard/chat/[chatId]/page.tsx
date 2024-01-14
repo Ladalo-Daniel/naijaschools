@@ -3,14 +3,37 @@ import BackButton from '@/components/shared/BackButton'
 import React from 'react'
 import AIChatDetailComponent from './AIChatDetailComponent'
 import { User, getProfile } from '@/supabase/user'
-import ChatHistorySheet from '../ChatHistorySheet'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@nextui-org/button'
 import { History, HistoryIcon } from 'lucide-react'
 import ChatHistory from '../ChatHistory'
 import { getChatById } from '@/supabase/chats'
+import { Metadata, ResolvingMetadata } from 'next'
 
-const AIChatDetailPage = async ({ params: { chatId }}:{ params: { chatId: string }}) => {
+type Props = {
+    params: { chatId: string }
+    searchParams: { [key: string]: string | string[] | undefined }
+  }
+   
+  export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent: ResolvingMetadata
+  ): Promise<Metadata> {
+    const chatId = params.chatId
+   
+    const { data: chat } = await getChatById(chatId)
+   
+    const previousImages = (await parent).openGraph?.images || []
+   
+    return {
+      title: chat.title,
+      openGraph: {
+        images: [...previousImages],
+      },
+    }
+  }
+
+const AIChatDetailPage = async ({ params: { chatId }}: Props) => {
     const profile = await getProfile()
     const { data: chat } = await getChatById(chatId)
   return (

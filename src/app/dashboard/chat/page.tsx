@@ -7,6 +7,12 @@ import { Sheet, SheetContent, SheetTrigger,  } from '@/components/ui/sheet'
 import { Button } from '@nextui-org/button'
 import { History, HistoryIcon } from 'lucide-react'
 import ChatHistory from './ChatHistory'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: "New Chat | Naijaschools AI",
+    description: "New chat @Naijaschools AI.",
+}
 
 const AIChatPage = async () => {
     const profile =  await getProfile()

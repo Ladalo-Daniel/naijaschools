@@ -11,6 +11,7 @@ import { createUpdateChat } from '@/supabase/chats';
 import { useRouter } from 'next/navigation';
 import ChatProxy from './ChatProxy';
 import { getLastNItems } from './utils';
+import ChatCrumb from './ChatCrumb';
 
 export default function AIChatComponent({ profile }: { profile: User }) {
   const [prompt, setPrompt] = useState('');
@@ -79,30 +80,7 @@ export default function AIChatComponent({ profile }: { profile: User }) {
                 ): (
                     <>
                         {messages.map((message, index) => (
-                        <div key={index} className="flex flex-col gap-4">
-                            {message.role === 'user' && (
-                            <div className="flex flex-row gap-2 py-4 px-2">
-                                <div className="w-12 mr-2.5">
-                                    <Avatar src={profile?.image_url || '/default-avatar.png'} />
-                                </div>
-                                <section className='flex flex-col gap-2'>
-                                    <b className="pb-1.5">You</b>
-                                    <ChatMarkdown content={message.content} />
-                                </section>
-                            </div>
-                            )}
-                            {message.role === 'assistant' && (
-                            <div className="flex flex-row gap-2 py-4 px-2 bg-secondary dark:bg-zinc-900 rounded-md">
-                                <div className="w-12 mr-2.5">
-                                    <Avatar src="/logos/logo.png" />
-                                </div>
-                                <section className='flex flex-col gap-2 break-words overflow-auto max-w-5xl'>
-                                    <b className="text-primary pb-1.5">Naijaschools AI</b>
-                                    <ChatMarkdown content={message.content!} />
-                                </section>
-                            </div>
-                            )}
-                        </div>
+                          <ChatCrumb message={message as chat} profile={profile} key={index} />
                         ))}
                     </>
                 )

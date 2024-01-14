@@ -49,10 +49,9 @@ export const side_bar_links: {
     },
     {
       href: "/dashboard/chat",
-      icon: <Sparkle className="animate-spin text-default" size={18} />,
+      icon: <Sparkle className="animate-spin" size={18} />,
       activeIcon: <Sparkle size={18} />,
       tooltip: "AI Chat",
-      hidden: true
     },
     {
       href: "/dashboard/s/quiz",
