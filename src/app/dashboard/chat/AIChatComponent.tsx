@@ -108,7 +108,7 @@ export default function AIChatComponent({ profile }: { profile: User }) {
                 )
             }
             
-            <section className='relative max-w-5xl bg-background w-full custom-scrollbar'>
+            <section className='relative max-w-5xl bg-background custom-scrollbar right-0 left-0'>
                 <ChatInputForm 
                     fetching={fetching}
                     onSubmit={onSubmit}

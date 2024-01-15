@@ -23,10 +23,24 @@ const TopNavbar = async () => {
 
       <MobileSidebar profile={profile?.data as User} />
 
+      <div className="justify-between md:hidden items-center gap-4">
+        <Link href={'/'} passHref>
+          <Image 
+            src={'/logos/logo.png'}
+            width={500}
+            height={500}
+            quality={100}
+            alt='Naijaschools logo'
+            className='w-6 h-6 mr-14'
+          />
+        </Link>
+      </div>
+
       <div className="justify-between hidden items-center gap-4">
         <Button>All</Button>
         <Button>For you</Button>
       </div>
+
 
       <div className='flex items-center md:gap-3 gap-2'>
         <NavSearchBar />

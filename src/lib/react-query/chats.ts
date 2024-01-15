@@ -55,7 +55,7 @@ export const useDeleteChat = () => {
         mutationKey: [QUERY_KEYS.create_update_chat],
 
         onSuccess: ({status}) => {
-            toast.success("Chat deleted successfully.")
+            // toast.success("Chat deleted successfully.")
             router.refresh()
             queryClient.invalidateQueries({queryKey: [QUERY_KEYS.get_user_chats]})
             queryClient.invalidateQueries({queryKey: [QUERY_KEYS.create_update_chat]})

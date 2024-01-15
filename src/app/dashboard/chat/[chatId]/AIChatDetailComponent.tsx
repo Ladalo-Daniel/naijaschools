@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useChat } from 'ai/react';
 import ChatMarkdown from '@/components/shared/ChatMarkdown';
 import { Avatar } from '@nextui-org/avatar';
@@ -9,6 +9,7 @@ import { Chat, createUpdateChat } from '@/supabase/chats';
 import { useRouter } from 'next/navigation';
 import ChatInputForm from '../ChatInputForm';
 import { chat } from '../types'
+import { getLastNItems } from '../utils';
 
 export default function AIChatComponent({ profile, chat }: { profile: User, chat: Chat }) {
   const [prompt, setPrompt] = useState('');
@@ -22,7 +23,7 @@ export default function AIChatComponent({ profile, chat }: { profile: User, chat
         role: role,
     }]))
 
-    const { data } = await createUpdateChat(JSON.stringify(chats), profile?.id, chat?.id || undefined)
+    await createUpdateChat(JSON.stringify(chats), profile?.id, chat?.id)
     router.refresh()
 }
 
@@ -38,6 +39,8 @@ export default function AIChatComponent({ profile, chat }: { profile: User, chat
 
   const lastMessage = messages[messages.length - 1];
   const response = lastMessage?.role === 'assistant' ? lastMessage?.content : null
+  const lastChats = getLastNItems(chats, 5)
+  const followUpChatsAsString = JSON.stringify(lastChats)
 
   const onTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(e.target.value);
@@ -53,7 +56,7 @@ export default function AIChatComponent({ profile, chat }: { profile: User, chat
     handleSubmit(e, {
         options: {
             body: {
-                prompt,
+                prompt: `"previousChats": ${followUpChatsAsString}; prompt: ${prompt}`,
                 messages
             },
         },

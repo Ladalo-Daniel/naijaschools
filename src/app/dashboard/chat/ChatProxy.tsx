@@ -24,7 +24,7 @@ const ChatProxy = ({ profile, setPrompt, setChats }: {
         <h2 className="text-[23px] py-2 text-primary">Hi {profile?.username}!, Welcome to Naijaschools AI</h2>
         <p className="py-1">Ask Naijaschools AI any question. Start chatting right away!</p>
 
-        {/* <div className="flex flex-col gap-3">
+        <div className="flex-col gap-3 hidden">
             {
                 proxy_chats.map(j => (
                     <Button 
@@ -43,13 +43,13 @@ const ChatProxy = ({ profile, setPrompt, setChats }: {
                     >{j}</Button>
                 ))
             }
-        </div> */}
+        </div>
         <div className="flex flex-col gap-3">
             <h2 className="text-warning-500 text-2xl py-1.5">Limitations</h2>
 
             <ul className="flex flex-col gap-3">
                 <li>- Naijaschools AI is currently experimental and may produce incorrect responses. Be sure to verify important inormation.</li>
-                <li>- Naijaschools AI cannot currently remember previous chats. Hang tight! The Naijaschools team is working on that.</li>
+                <li>- Naijaschools AI cannot currently remember previous chats more than 5 levels up. Hang tight! The Naijaschools team is working on that.</li>
             </ul>
         </div>
   </div>
