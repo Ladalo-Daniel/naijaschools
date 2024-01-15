@@ -5,7 +5,7 @@ import ChatMarkdown from "@/components/shared/ChatMarkdown";
 
 export default function ChatCrumb({ message, profile }: { message: chat, profile: User }) {
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full">
             {message.role === 'user' && (
             <div className="flex flex-row gap-2 py-2 p-4 rounded-md">
                 <div className="w-12 mr-2.5">

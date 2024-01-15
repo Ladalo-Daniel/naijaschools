@@ -37,6 +37,7 @@ export default function AIChatComponent({ profile }: { profile: User }) {
         const response = lastMessage?.role === 'assistant' ? lastMessage?.content : null
         setFetching(false)
         handlePromptSubmit(response!, 'assistant')
+        scrollTo({top: -(window.screenY), behavior: 'smooth'})
     },
   });
 
@@ -82,11 +83,11 @@ export default function AIChatComponent({ profile }: { profile: User }) {
                         <ChatProxy profile={profile} setPrompt={setPrompt} />
                     </>
                 ): (
-                    <>
+                    <div className='mb-6'>
                         {messages.map((message, index) => (
                           <ChatCrumb message={message as chat} profile={profile} key={index} />
                         ))}
-                    </>
+                    </div>
                 )
             }
             
