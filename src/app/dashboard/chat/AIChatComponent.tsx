@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import ChatProxy from './ChatProxy';
 import { getLastNItems } from './utils';
 import ChatCrumb from './ChatCrumb';
+import { toast } from 'sonner';
 
 export default function AIChatComponent({ profile }: { profile: User }) {
   const [prompt, setPrompt] = useState('');
@@ -38,6 +39,11 @@ export default function AIChatComponent({ profile }: { profile: User }) {
         handlePromptSubmit(response!, 'assistant')
     },
   });
+
+  if (!messages) {
+    setFetching(false)
+    toast.error("Network error while placing request")
+  }
 
   const lastMessage = messages[messages.length - 1];
   const response = lastMessage?.role === 'assistant' ? lastMessage?.content : null

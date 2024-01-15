@@ -1,6 +1,7 @@
 import { Configuration, OpenAIApi } from 'openai-edge'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { chat } from '@/app/dashboard/chat/types'
+import { NextResponse } from 'next/server'
 
 const config = new Configuration({
   apiKey: process.env.NEXT_OPENAI_API_KEY!,
@@ -28,6 +29,6 @@ export async function POST(req: Request) {
 
   return new StreamingTextResponse(stream)
   } catch (error) {
-    return { messages: null}
+    return NextResponse.json({ messages: null })
   }
 }

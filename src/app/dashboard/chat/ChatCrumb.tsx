@@ -7,7 +7,7 @@ export default function ChatCrumb({ message, profile }: { message: chat, profile
     return (
         <div className="flex flex-col gap-4">
             {message.role === 'user' && (
-            <div className="flex flex-row gap-2 py-2">
+            <div className="flex flex-row gap-2 py-2 p-4 rounded-md">
                 <div className="w-12 mr-2.5">
                 <Avatar src={profile?.image_url || '/default-avatar.png'} />
                 </div>
@@ -18,7 +18,7 @@ export default function ChatCrumb({ message, profile }: { message: chat, profile
             </div>
             )}
             {message.role === 'assistant' && (
-                <div className="flex flex-row gap-2 py-2">
+            <div className="flex flex-row gap-2 py-2 bg-secondary dark:bg-zinc-900 p-4 rounded-md">
                 <div className="w-12 mr-2.5">
                 <Avatar src="/logos/logo.png" />
                 </div>
