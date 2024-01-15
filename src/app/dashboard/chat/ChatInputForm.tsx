@@ -15,7 +15,7 @@ const ChatInputForm = ({
     fetching: boolean
 }) => {
   return (
-    <form onSubmit={onSubmit} className='flex flex-row gap-1 z-30 bg-background w-full max-w-5xl items-end fixed bottom-0'>
+    <form onSubmit={onSubmit} className='flex flex-row gap-1 z-30 bg-background w-full max-w-5xl items-end fixed bottom-0 md:right-[270px]'>
         <div className='rounded-3xl py-5 px-6 flex items-end justify-center gap-1 max-w-5xl w-full relative'>
             <Textarea
                 value={prompt}

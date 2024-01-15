@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { useChat } from 'ai/react';
-import ChatMarkdown from '@/components/shared/ChatMarkdown';
-import { Avatar } from '@nextui-org/avatar';
 import { User } from '@/supabase/user';
 import { Chat, createUpdateChat } from '@/supabase/chats';
 import { useRouter } from 'next/navigation';

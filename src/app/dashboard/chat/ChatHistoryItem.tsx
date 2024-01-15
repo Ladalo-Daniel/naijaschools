@@ -1,12 +1,10 @@
 import { Chat } from '@/supabase/chats'
 import Link from 'next/link'
 import React from 'react'
-import type { chat } from './types'
 import DeleteChat from './DeleteChat'
 import { SheetClose } from '@/components/ui/sheet'
 
 const ChatHistoryItem = ({ chat }: {chat: Chat }) => {
-    const prompts = JSON.parse(JSON.stringify(chat.prompts?.toString()!) || '[]') as chat[]
   return (
     <SheetClose asChild>
         <div className='flex flex-col gap-1.5 py-2 border-b' >

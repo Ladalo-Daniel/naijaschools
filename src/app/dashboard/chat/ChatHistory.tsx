@@ -1,25 +1,35 @@
-import { getUserChats } from '@/supabase/chats'
-import { getProfile } from '@/supabase/user'
-import React from 'react'
+'use client'
+
+import { Chats } from '@/supabase/chats'
+import React, { createContext, useState } from 'react'
 import ChatHistoryItem from './ChatHistoryItem'
 
-const ChatHistory = async () => {
-    const profile = await getProfile()
-    const {data: chats} = await getUserChats(profile?.data?.id!)
+export const ChatsContext = createContext<{
+    chats: Chats,
+    setChats: React.Dispatch<React.SetStateAction<Chats>>,
+}>({
+    chats: [],
+    setChats: () => {}
+})
 
-    if (chats?.length === 0) {
+const ChatHistory = ({ chats }: { chats: Chats }) => {
+    const [chatsInState, setChats] = useState(chats)
+
+    if (chatsInState?.length === 0) {
         return <div className='flex gap-3 py-4'>
             <p>There is nothing here yet, Enjoy the silence!</p>
         </div>
     }
   return (
+    <ChatsContext.Provider value={{chats, setChats}}>
     <div className='flex flex-col py-3 gap-3'>
         {
-            chats.map(chat => (
+            chatsInState.map(chat => (
                 <ChatHistoryItem chat={chat} key={chat?.id} />
-            ))
-        }
+                ))
+            }
     </div>
+    </ChatsContext.Provider>
   )
 }
 

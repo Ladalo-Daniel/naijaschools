@@ -6,13 +6,15 @@ import { Chat } from '@/supabase/chats'
 import { Button } from '@nextui-org/button'
 import { Trash, XIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { toast } from 'sonner'
+import { ChatsContext } from './ChatHistory'
 
 const DeleteChat = ({ chat }: { chat: Chat }) => {
     const [open, setOpen] = useState(false)
     const { mutate: deleteChat, isPending: deletingChat } = useDeleteChat()
     const router = useRouter()
+    const { chats, setChats} = useContext(ChatsContext)
 
     const handleDeleteChat = () => {
         deleteChat({
@@ -21,6 +23,8 @@ const DeleteChat = ({ chat }: { chat: Chat }) => {
             onSuccess: ({status}) => {
                 toast.success("Your chat has been taken off our servers successfully.")
                 setOpen(false)
+                const filteredChats = chats.filter(c => c.id !== chat?.id)
+                setChats(prev => [...filteredChats])
                 router.refresh()
                 router.push('/dashboard/chat')
                 return

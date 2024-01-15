@@ -1,6 +1,8 @@
 import { getProfile } from '@/supabase/user'
 import { Card } from '@nextui-org/card'
-import { BookPlusIcon, BrainCircuit, ChevronRight, HistoryIcon, SparklesIcon } from 'lucide-react'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { BookPlusIcon, BrainCircuit, ChevronRight, HistoryIcon, Podcast, SparklesIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -13,24 +15,35 @@ const StudentDashBoardComponent = async () => {
       href: "/dashboard/s/courses",
       cn: "dark:from-slate-700 dark:to-slate-900 from-slate-300 to-slate-500",
       icon: BookPlusIcon,
+      image_url: '/gallery/g_img_a.jpg'
+    },
+    {
+      tip: "Posts",
+      href: "/dashboard/posts",
+      cn: "dark:from-green-700 dark:to-green-900 from-green-400 to-green-500",
+      icon: Podcast,
+      image_url: '/gallery/g_img_b.jpg'
     },
     {
       tip: "Quizzes",
       href: "/dashboard/s/quiz",
       cn: "dark:from-green-700 dark:to-green-900 from-green-400 to-green-500",
       icon: BrainCircuit,
+      image_url: '/gallery/g_img_c.jpg'
     },
     {
       tip: "History",
       href: "/dashboard/s/quiz/history",
       cn: "dark:from-orange-700 dark:to-orange-900 bg-orange-300",
       icon: HistoryIcon,
+      image_url: '/gallery/g_img_d.jpg'
     },
     {
-      tip: "AI Guide",
-      href: "/dashboard/s/ai",
+      tip: "AI Chat",
+      href: "/dashboard/chat",
       cn: "dark:from-blue-700 dark:to-blue-900 bg-blue-300",
       icon: SparklesIcon,
+      image_url: '/gallery/g_img_e.jpg'
     },
   ]
 
@@ -42,12 +55,21 @@ const StudentDashBoardComponent = async () => {
       <div className='flex flex-wrap gap-4 w-auto py-5 md:flex-row max-xs:flex-col '>
          {
           list.map(itm => (
-            <Card as={Link} key={itm.tip} href={itm.href} className={`p-6 h-44 border group rounded-md flex justify-between w-72 hover:opacity-60 bg-gradient-to-tr hover:transition-all hover:animate-out cursor-pointer max-sm:w-full ${itm.cn}`}>
+            <Card as={Link} key={itm.tip} href={itm.href} className={`p-2.5 bg-background border group rounded-md flex flex-col gap-2.5 justify-between min-w-[280px] hover:opacity-60 bg-gradient-to-tr hover:transition-all hover:animate-out cursor-pointer max-sm:w-full md:w-[320px] `}>
+            <AspectRatio ratio={1/1}>
+              <Image 
+                src={itm.image_url}
+                alt={itm.tip}
+                fill
+                quality={100}
+                className='rounded-xl object-cover'
+              />
+            </AspectRatio>
             <div className='flex flex-col gap-2 flex-1'>
               <itm.icon size={15}  />
               <p className='font-semibold text-sm'>{itm.tip}</p>
+              <ChevronRight className='text-primary' size={20} />
             </div>
-            <ChevronRight className='text-primary' size={20} />
         </Card>
           ))
          }

@@ -2,9 +2,7 @@
 
 import { useState } from 'react';
 import { useChat } from 'ai/react';
-import ChatMarkdown from '@/components/shared/ChatMarkdown';
 import ChatInputForm from './ChatInputForm';
-import { Avatar } from '@nextui-org/avatar';
 import { User } from '@/supabase/user';
 import type { chat } from './demo';
 import { createUpdateChat } from '@/supabase/chats';
