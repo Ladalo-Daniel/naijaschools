@@ -101,6 +101,7 @@ export async function getPostsByQuery(column: "user" | "id" | "institution" | "l
     .order("updated_at", {
         ascending: false
     })
+    .limit(50)
     
 
     if (error) throw error

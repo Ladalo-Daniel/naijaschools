@@ -32,7 +32,7 @@ export async function getUserChats(userId: string) {
 }
 
 export async function createUpdateChat(prompts: Json, userId: string, chatId?: string) {
-    if (prompts == '[]') return { data: null}
+    if (prompts == '[]' || !prompts) return { data: null}
     const title = (JSON.parse(prompts as string) as chat[]).at?.(0)?.content?.trim()?.split('\n').at?.(0) || "New chat"
     const {data, error, status} = await supabaseClient.from("chats")
     .upsert({

@@ -48,10 +48,8 @@ export async function updateProfile({
     avatar?: File[] | string
     }) {
     try {
-    // @ts-ignore
-    const hasImagePath = avatar?.startsWith?.(supabaseUrl)
-    // @ts-ignore
-    const imageName = `${Math.random()}-${avatar[0]?.name}`.replaceAll('/', '')
+    const hasImagePath = (avatar as string)?.startsWith?.(supabaseUrl)
+    const imageName = `${Math.random()}-${(avatar?.[0] as File)?.name}`.replaceAll('/', '')
     const imagePath = hasImagePath ? avatar : `${supabaseUrl}/storage/v1/object/public/avatars/${imageName}`
   
 
@@ -63,20 +61,20 @@ export async function updateProfile({
         image_url: imagePath as string,
         ...rest,
     })
+    .select()
+    .single()
 
     if (error) throw error
 
     const { error: storageError } = await supabaseClient
     .storage
     .from('avatars')
-    // @ts-ignore
-    .upload(imageName, avatar[0] as File)
+    .upload(imageName, avatar?.[0] as File)
   
     if (storageError) {
       await supabaseClient
       .from('avatars')
       .delete()
-      // @ts-ignore
       .eq('id', data?.id)
       throw storageError
     }

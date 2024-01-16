@@ -1,8 +1,8 @@
 'use client'
 
-import { useGetProfileById } from '@/lib/react-query'
-
 import React from "react"
+
+import { useGetProfileById } from '@/lib/react-query'
 import { User } from '@nextui-org/user'
 import { useGetInstitutionById } from "@/lib/react-query"
 import Link from 'next/link'
