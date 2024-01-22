@@ -82,8 +82,8 @@ const ProfileCard = async ({ profile }: { profile: User}) => {
                     <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.bio || '-'}</span>
                 </CardDescription>
                 <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
-                    <span className='font-semibold flex-1'>Date of Birth:</span>
-                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{format(new Date(profile?.dob as string),"yyyy-mm-dd") || "-"}</span>
+                    <span className='font-semibold flex-1'>Age Range:</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.dob as string || "-"}</span>
                 </CardDescription>
             </CardContent>
         </Card>
