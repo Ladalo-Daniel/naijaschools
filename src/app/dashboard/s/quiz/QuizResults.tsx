@@ -9,6 +9,7 @@ import React, { useEffect } from 'react'
 import Confetti from 'canvas-confetti'
 
 import { useRouter } from 'next/navigation'
+import GrandeProgress from './GrandeProgress'
 
 const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, institutionId, correct, wrong }: { 
     questions: QuizQuestionList, 
@@ -53,12 +54,15 @@ const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, insti
       };
 
       useEffect(() => {
-        if (totalScore > 75) fireConfetti()
+        if (totalScore > 74) fireConfetti()
       }, [totalScore])
       
 
   return (
     <div className='w-auto overflow-auto' id='contentToPrint'>
+        {/* <div className='py-4 mx-auto'>
+            <GrandeProgress score={score!} />
+        </div> */}
         <section className="flex-1 flex-col flex gap-3 p-4 rounded-md border my-2">
             <h2 className="text-2xl">Score: <span className={totalScore < 40 ? "text-rose-500" : totalScore < 70 ? "text-primary-500" : "text-primary"}>{totalScore}%</span></h2>
             {correct && <p className='text-primary flex items-center gap-2'>Total Correct: {correct} <CheckCircle /></p>}

@@ -32,7 +32,7 @@ const QuizExplanation = ({ response, isGetting, handleGetQuizExplanation,aiRes, 
         title='Only use Naijaschools AI when the situation is critical or when not too confident of your self.'
         endContent={<SendHorizonal size={15} />}
     >Ask Naijaschools AI</Button>
-    <Alert className='py-4 p-2 border-primary-500 mt-3'>
+    <Alert className='py-4 p-4 border mt-3'>
         We advise you only use Naijaschools AI when you want to `study while attempting`. It should not debase it's true purpose.
     </Alert>
     </section>

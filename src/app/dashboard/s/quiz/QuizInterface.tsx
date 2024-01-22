@@ -7,7 +7,7 @@ import { useUpdateQuiz } from '@/lib/react-query'
 import QuizTimer from './QuizTimer'
 import { toast } from 'sonner'
 import ConfirmFinish from './ConfirmFinish'
-import { Button } from '@nextui-org/button'
+import QuizTick from './QuizTick'
 
 const QuizInterface = ({ 
   questions, 
@@ -63,6 +63,10 @@ const QuizInterface = ({
       }
     }
 
+    function handleSkipToQuestion(idx: number) {
+      setCurrentQuestion(idx)
+    }
+
     const score = questions?.reduce((totalScore, question) => {
         if (userAnswers[question?.id] === question.answer) {
             return totalScore + 1
@@ -70,7 +74,22 @@ const QuizInterface = ({
         return totalScore
     }, 0)
 
-  const checkAnswers = () => {
+  const checkAnswers = (duration?: string, type?: "elapse" | "other") => {
+
+    if (type === "elapse") {
+      setShowResults(true)
+      setHasFinished(true)
+      saveProgress({
+          quizId,
+          answers: JSON.stringify(userAnswers),
+          score: parseInt((score! / questions?.length * 100).toFixed(2)),
+          duration: elapsedSeconds.toString(),
+      }, {
+        onSuccess: () => toast.success("Your progress has been saved successfully. You can reference it later on the `history page`.")
+      })
+      return
+    }
+
     if ((currentQuestion === questions.length - 1) || (Object.entries(userAnswers).length !== questions.length)) { 
       if (!confirmFinished) {
         setConfirmFinishedModalOpen(true)
@@ -84,12 +103,6 @@ const QuizInterface = ({
     }
     if (confirmFinished) {
       setShowResults(true)
-      /** Logic to compare userAnswers with fetchedQuestions' correct answers
-       * You'll need to adapt this logic based on how your data is structured
-       * Here's an example assuming the correct answers are in the 'answer' property of each question object 
-       * 
-       * I had to modularize the example since it fitted well with my data structure.
-       * */
       setHasFinished(true)
       saveProgress({
           quizId,
@@ -122,17 +135,21 @@ const QuizInterface = ({
       </Radio>
     ))
   }
-
+  
   return (
-    <div className='p-4 min-w-[240px] max-w-4xl'
-      onSelect={() => false}
-      onCopy={() => false}
-      onPaste={() => false}
-      onMouseDown={() => false}
+    <div className='p-4 min-w-[240px] max-w-5xl'
+    onSelect={() => false}
+    onCopy={() => false}
+    onPaste={() => false}
+    onMouseDown={() => false}
     >
-      {
-        isPending && <Button isIconOnly isLoading={isPending} variant='flat' color='primary' className='my-2' />
-      }
+    <QuizTick 
+      handleSkipToQuestion={handleSkipToQuestion}
+      questions={questions}
+      userAnswers={userAnswers}
+      checkAnswers={checkAnswers}
+    />
+
       <QuizTimer 
         totalQuestions={questions.length} 
         showResults={checkAnswers}
@@ -179,6 +196,7 @@ const QuizInterface = ({
           courseId={courseId} 
           institutionId={institutionId}
           />}
+
     </div>
   )
 }

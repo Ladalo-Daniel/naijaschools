@@ -4,7 +4,7 @@ import { Progress } from '@nextui-org/progress'
 
 interface QuizTimerProps {
   totalQuestions: number
-  showResults: (duration?: string) => void
+  showResults: (duration?: string, type?: "elapse" | "other") => void,
   timer: number,
   setTimer: React.Dispatch<React.SetStateAction<number>>,
   totalTimeInSeconds: number,
@@ -21,14 +21,14 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ totalQuestions, showResults, elap
       setTimer((prevTimer) => {
         if (hasFinished) {
             clearInterval(countdown)
-            showResults(elapsedSeconds.toString())
+            showResults(elapsedSeconds.toString(), "elapse")
             return 0
         }
         if (prevTimer > 0) {
           return prevTimer - 1
         } else {
           clearInterval(countdown)
-          showResults(elapsedSeconds.toString())
+          showResults(elapsedSeconds.toString(), "elapse")
           return 0
         }
       })
@@ -52,7 +52,7 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ totalQuestions, showResults, elap
             aria-label='counting...'
         />
         <p className='flex items-center gap-2 py-2'>
-          <CheckCheckIcon size={15} className={totalAnswered === totalQuestions ? "text-primary" : "text-cyan-500" } /> {`${totalAnswered} of ${totalQuestions}`}.
+          <CheckCheckIcon size={15} className={totalAnswered === totalQuestions ? "text-primary" : "text-cyan-500" } />Answered {`${totalAnswered} of ${totalQuestions}`}.
         </p>
       </div>
       <div className=''>

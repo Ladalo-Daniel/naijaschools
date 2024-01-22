@@ -7,7 +7,6 @@ import { Avatar } from "@nextui-org/avatar"
 import { User } from "@/supabase/user"
 import { useGetInstitutionById } from "@/lib/react-query"
 import { Building, Globe } from "lucide-react"
-import Image from "next/image"
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover"
 import Link from "next/link"
 
@@ -36,7 +35,7 @@ export const UserCard = ({ author, authorTrigger }: { author: User, authorTrigge
                 size="sm"
                 variant={"flat"}
                 as={Link}
-                href={`/profile/${author?.username}`}
+                href={`/dashboard/profile/${author?.username}`}
             >
             Profile
             </Button>

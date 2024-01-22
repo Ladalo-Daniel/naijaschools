@@ -2,13 +2,15 @@
 
 import { User } from '@/supabase/user'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import SelectQuestionNumber from './SelectQuestionNumber'
 import { useFetchRandomQuestions, useGetCourseByQuery } from '@/lib/react-query'
 import QuizInterface from '../../../../QuizInterface'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { RocketIcon } from '@radix-ui/react-icons'
 import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
+import { Button } from '@nextui-org/button'
+import QOnboard from './QOnboard'
 
 /**
  * I made the top level Component a client component because
@@ -30,6 +32,7 @@ const QuizComponent = ({
     quizId?: string | number,
     institutionId?: string | number 
 }) => {
+    const [qOnboard, setQOnboard] = useState(true)
     const searchParams = useSearchParams()
     const noq = searchParams.get("noq")
     const retake = searchParams.get('retake')
@@ -46,7 +49,10 @@ const QuizComponent = ({
     })
 
 
-    if (isPending) return <GeneralSkeleton />
+    if (isPending) return <div className="py-10 flex items-center justify-center flex-col gap-2">
+        <h2 className='text-muted-foreground'>Hang on as we mould your quiz questions ...</h2>
+        <Button isLoading={isPending} variant='flat' className='bg-transparent'>loading ...</Button>
+    </div>
 
     if (!noq) {
         return (<div className='flex flex-col gap-4 mb-3 mt-8'>
@@ -63,9 +69,11 @@ const QuizComponent = ({
         </div>)
     }
 
-    if (!quizQuestions?.data?.length) return <div className='p-4 border border-primary-500 rounded-md shadow'>
-        There seems to be no questions for your configuration yet.
+    if (!quizQuestions?.data?.length) return <div className='p-4 border border rounded-md shadow'>
+        There seems to be no questions for your configuration yet!
     </div>
+
+    if (qOnboard) return <QOnboard setQOnboard={setQOnboard} />
 
   return (
     <div className='flex flex-col gap-3 border p-4 rounded-md'>
