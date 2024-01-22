@@ -23,12 +23,12 @@ const ConfirmFinish = ({
 }) => {
 
     function handleConfirmFinish() {
-        // setConfirmFinish(true)
+        setConfirmFinish(true)
 
-        // if (confirmFinish) {
+        if (confirmFinish) {
             setOpen(false)
             checkAnswers()
-        // } else setOpen(true)
+        } else setOpen(true)
     }
 
     

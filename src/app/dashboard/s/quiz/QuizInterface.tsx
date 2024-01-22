@@ -143,12 +143,12 @@ const QuizInterface = ({
     onPaste={() => false}
     onMouseDown={() => false}
     >
-    <QuizTick 
+    {!showResults && <QuizTick 
       handleSkipToQuestion={handleSkipToQuestion}
       questions={questions}
       userAnswers={userAnswers}
       checkAnswers={checkAnswers}
-    />
+    />}
 
       <QuizTimer 
         totalQuestions={questions.length} 
