@@ -9,7 +9,10 @@ export const userFormSchema = z.object({
   institution: z.number(),
   dob: z.any().optional(),
   avatar: z.any().optional(),
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  faculty: z.string().optional(),
+  first_name: z.string(),
+  last_name: z.string(),
+  faculty: z.string(),
+  state_of_residence: z.string(),
+  state_of_origin: z.string(),
+  phone: z.string()
 })

@@ -31,7 +31,7 @@ import { User } from "@/supabase/user"
 import { InstitutionList } from "@/supabase/institutions"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
-import { faculties } from "@/lib/faculties"
+import { age_range, faculties, statesAndCapitalsNigeria } from "@/lib/faculties"
 
 export default function AccountForm({ session, isUpdate, profile, isDashboard, institutions }: { 
   session: Session | null, 
@@ -56,7 +56,10 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
       last_name: profile?.last_name || "",
       email: user?.email,
       avatar: profile?.image_url || "",
-      faculty: profile?.faculty ||""
+      faculty: profile?.faculty ||"",
+      phone: profile?.phone || "",
+      state_of_origin: profile?.state_of_origin || "",
+      state_of_residence: profile?.state_of_residence || "",
     },
   })
 
@@ -83,7 +86,7 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
         name="avatar"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="shad-form_label">Add Photos</FormLabel>
+            <FormLabel className="shad-form_label">Add Profile Picture</FormLabel>
             <FormControl>
               <FileUploader fieldChange={field?.onChange} isProfile mediaUrl={profile?.image_url as string} />
             </FormControl>
@@ -161,7 +164,30 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
             </FormItem>
           )}
         />
-        <DatePicker form={form}/>
+        <FormField
+          control={form.control}
+          name="dob"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select your Age range</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an Age range" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {
+                    age_range.map(f => (
+                      <SelectItem value={f} key={f}>{f}</SelectItem>
+                    ))
+                  }
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="email"
@@ -171,6 +197,67 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
               <FormControl>
                 <Input placeholder="youremail@example.com..." disabled={true} {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone Number</FormLabel>
+              <FormControl>
+                <Input placeholder="070 1234 5678" disabled={true} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="state_of_origin"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Your State of Origin</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a valid state." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {
+                    statesAndCapitalsNigeria.map(f => (
+                      <SelectItem value={f.state} key={f.state}>{f.state} {f.capital}</SelectItem>
+                    ))
+                  }
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="state_of_residence"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>State of Residence</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a valid state." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {
+                    statesAndCapitalsNigeria.map(f => (
+                      <SelectItem value={f.state} key={f.state}>{f.state} {f.capital}</SelectItem>
+                    ))
+                  }
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

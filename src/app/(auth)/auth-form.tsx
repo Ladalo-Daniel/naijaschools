@@ -17,7 +17,7 @@ export default function AuthForm() {
         extend: false,
 
         className: {
-          button: "w-full bg-primary rounded-md transition-all p-2 space-y-4 mt-2 mb-2 block text-accent shadow border-none",
+          button: "w-full bg-primary flex items-center gap-2 justify-center rounded-md transition-all p-2 space-y-4 mt-2 mb-2 block text-accent shadow border-none",
           label: "block space-y-2 text-muted-foreground mb-1 font-bold",
           input: "p-2 ring rounded-md shadow focus:ring-primary mt-2 transition-all mb-2 w-full",
           container: "flex flex-col gap-4",
@@ -27,8 +27,14 @@ export default function AuthForm() {
       }}
       theme="dark"
       showLinks={false}
-      providers={[]}
       redirectTo={`${process.env.NEXT_PUBLIC_SITE_URL!}/auth/callback`}
+      
+      providers={['google']}
+      queryParams={{
+        access_type: 'offline',
+        prompt: 'consent',
+        hd: 'naijaschools.vercel.app',
+      }}
     />
   )
 }

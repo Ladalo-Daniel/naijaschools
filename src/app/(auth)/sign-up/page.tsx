@@ -2,6 +2,7 @@ import { Card } from "@nextui-org/card";
 import AuthForm from "../auth-form";
 import { getUserSession } from "@/supabase/session";
 import { redirect } from "next/navigation";
+import GoogleSigninButton from "../GoogleSigninButton";
 
 export default async function Home() {
   const session = await getUserSession()
@@ -19,7 +20,7 @@ export default async function Home() {
       >
         <Card className="p-8 flex flex-col gap-6">
           <h1 className="text-2xl tracking-tight font-semibold text-primary">Welcome to naijaschools</h1>
-          <p className="text-muted-foreground font-inherit tracking-tight text-xs">
+          <p className="text-muted-foreground font-inherit tracking-tight">
             Experience a whole new world of learning... <br />
             Now let us quickly sign you in with our magic link to get started.
           </p>

@@ -90,6 +90,28 @@ const ProfileCard = async ({ profile }: { profile: User}) => {
         <Card className='p-2 dark:bg-secondary border bg-background'>
             <CardHeader className='my-4'>
                 <CardTitle>
+                    Contact Information
+                    <Separator className='dark:bg-zinc-700 mt-2' />
+                </CardTitle>
+            </CardHeader>
+            <CardContent className='flex flex-col gap-3'>
+                <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
+                    <span className='font-semibold flex-1'>Phone Number:</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.phone || '-'}</span>
+                </CardDescription>
+                <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
+                    <span className='font-semibold flex-1'>State of Origin:</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.state_of_origin || "-"}</span>
+                </CardDescription>
+                <CardDescription className='flex justify-between md:items-center md:flex-row flex-col gap-2'>
+                    <span className='font-semibold flex-1'>State of Residence:</span>
+                    <span className='p-4 rounded-md border flex-1 dark:border-zinc-700 shadow'>{profile?.state_of_residence || "-"}</span>
+                </CardDescription>
+            </CardContent>
+        </Card>
+        <Card className='p-2 dark:bg-secondary border bg-background'>
+            <CardHeader className='my-4'>
+                <CardTitle>
                     Other Information
                     <Separator className='dark:bg-zinc-700 mt-2' />
                 </CardTitle>
