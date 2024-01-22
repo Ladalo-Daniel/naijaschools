@@ -55,7 +55,7 @@ const StudentDashBoardComponent = async () => {
       <div className='flex flex-wrap gap-4 w-auto py-5 md:flex-row max-xs:flex-col '>
          {
           list.map(itm => (
-            <Card as={Link} key={itm.tip} href={itm.href} className={`p-2.5 bg-background border group rounded-md flex flex-col gap-2.5 justify-between min-w-[280px] hover:opacity-60 bg-gradient-to-tr hover:transition-all hover:animate-out cursor-pointer max-sm:w-full md:w-[320px] ${itm.cn} `}>
+            <Card as={Link} key={itm.tip} href={itm.href} className={`p-2.5 bg-background border group rounded-md flex flex-col gap-2.5 justify-between min-w-[280px] hover:opacity-60 bg-gradient-to-tr hover:transition-all hover:animate-out cursor-pointer max-sm:w-full md:w-[320px] ${itm.cn} h-72`}>
             {/* <AspectRatio ratio={1/1}>
               <Image 
                 src={itm.image_url}
@@ -66,7 +66,7 @@ const StudentDashBoardComponent = async () => {
               />
             </AspectRatio> */}
             <div className='flex flex-col gap-2 flex-1'>
-              <itm.icon size={15}  />
+              <itm.icon size={20}  />
               <p className='font-semibold text-xl'>{itm.tip}</p>
               <ChevronRight className='text-primary' size={20} />
             </div>
