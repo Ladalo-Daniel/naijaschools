@@ -5,6 +5,7 @@ export const faculties = [
     "Engineering",
     "Science",
     "Social Science",
+    "Computer Science",
     "Other",
 ]
 
