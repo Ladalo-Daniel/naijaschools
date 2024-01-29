@@ -1,4 +1,4 @@
-import { getPostsByQuery } from '@/supabase/posts'
+import { Post, getPostsByQuery } from '@/supabase/posts'
 import { getProfileByUsername } from '@/supabase/user'
 import Image from 'next/image'
 import React from 'react'
@@ -6,6 +6,7 @@ import PostCard from '../../posts/PostCard'
 import { pluralize } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 import { getInstitutionById } from '@/supabase/institutions'
+import ImageView from '../../posts/ImageView'
 
 const ProfilePageComponent = async ({ username }: { username: string }) => {
     const {data: profile} = await getProfileByUsername(username)
@@ -14,7 +15,11 @@ const ProfilePageComponent = async ({ username }: { username: string }) => {
   return (
     <div className='flex flex-col gap-3'>
         <div className="mx-auto py-2">
-            <Image src={profile?.image_url!} width={500} height={500} quality={100} alt={profile?.username!} className='h-36 w-36 rounded-full object-cover' />
+            {/*  */}
+            <ImageView post={{
+                image: profile?.image_url!,
+                user: profile?.username!,
+            } as Post } profile/>
         </div>
         <div className="flex flex-col gap-3 justify-center items-center">
             <h2 className="text-xl">{profile?.first_name} {profile?.last_name}</h2>

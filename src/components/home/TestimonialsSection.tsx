@@ -2,6 +2,7 @@ import { Avatar } from '@nextui-org/avatar'
 import { Card, CardBody, CardHeader,  } from '@nextui-org/card'
 import { BookCheckIcon, HelpingHand, LucideSparkles, SettingsIcon } from 'lucide-react'
 import React from 'react'
+import MaxWrapper from '../MaxWrapper'
 
 
 const testimonials = [
@@ -29,7 +30,8 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section className='flex flex-col gap-4 p-4 py-16'>
+    <MaxWrapper className='max-w-7xl'>
+        <section className='flex flex-col gap-4 p-4 py-16'>
         <p className={"text-primary hover:underline py-2 transition-all hidden"}>#testimonials</p>
         <h2 className="text-2xl hover:underline py-2 transition-all text-primary">Testimonials</h2>
         <div className='flex flex-wrap gap-4'>
@@ -53,6 +55,7 @@ const TestimonialsSection = () => {
         }
         </div>
     </section>
+    </MaxWrapper>
   )
 }
 

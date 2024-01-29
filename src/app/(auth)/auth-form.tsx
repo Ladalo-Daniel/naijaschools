@@ -33,7 +33,7 @@ export default function AuthForm() {
       queryParams={{
         access_type: 'offline',
         prompt: 'consent',
-        hd: 'naijaschools.vercel.app',
+        // hd: 'naijaschools.vercel.app',
       }}
     />
   )

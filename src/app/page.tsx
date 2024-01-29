@@ -10,6 +10,9 @@ import { Session } from "@supabase/supabase-js";
 import { Suspense } from "react";
 import ArticleSkeleton from "@/components/skeletons/ArticleSkeleton";
 import ImageGallery from "../components/home/ImageGallery";
+import Pro_IntroSection from "@/components/home/Pro_IntroSection";
+import Pro_Quiz from "@/components/home/features/Pro_Quiz";
+import Pro_FeatureSection from "@/components/home/features/Pro_FeatureSection";
 
 export default async function Home() {
 
@@ -17,19 +20,15 @@ export default async function Home() {
   return (
     <div className="mx-auto flex flex-col gap-4 border bg-gradient-to-br ">
     <AuthTopNav isHome />
-    <MaxWrapper className="flex-1 gap-9 min-h-screen py-24 px-4 md:px-20 max-w-7xl overflow-hidden"
-    >
-      <IntroSection session={session as Session} />
-      <Suspense fallback={<ArticleSkeleton />}>
-        <ImageGallery />
-      </Suspense>
-      <FeaturesSection />
+    <div className="py-20">
+      <Pro_IntroSection />
+      <Pro_FeatureSection />
       <TestimonialsSection />
       <Suspense fallback={<ArticleSkeleton />}>
         <BlogSection/>
       </Suspense>
       <FooterSection />
-    </MaxWrapper>
+    </div>
     </div>
   )
 }

@@ -15,7 +15,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { toast } from 'sonner'
 
-const ImageView = ({ post }: { post: Post }) => {
+const ImageView = ({ post, profile }: { post: Post, profile?: boolean }) => {
     const [open, setOpen] = useState(false)
 
     const handleDownloadClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -41,12 +41,15 @@ const ImageView = ({ post }: { post: Post }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Image
+            {profile ? (
+              <Image src={post?.image!} width={500} height={500} quality={100} alt={post?.user!} className='h-36 w-36 rounded-full object-cover cursor-pointer' />
+            ) : (
+              <Image
                 src={post.image!}
                 alt={post.user + "'s post."}
                 fill
-                className='md:rounded-2xl rounded-lg object-cover cursor-pointer'
-            />
+                className={'md:rounded-2xl rounded-lg object-cover cursor-pointer'}
+            />)}
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] min-w-300 md:min-w-[700px] p-4">
             <div className="flex flex-col gap-4 py-4 w-full min-h-[500px] overflow-auto">

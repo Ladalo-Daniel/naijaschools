@@ -43,6 +43,7 @@ import { Button } from "@nextui-org/button"
 import Link from "next/link"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import ArticleReel from "../shared/ArticleReel"
+import MaxWrapper from "../MaxWrapper"
 
 export default function BlogSection() {
   const { data: articles, isPending } = useGetRecentArticles(6)
@@ -51,7 +52,9 @@ export default function BlogSection() {
   if (isPending) return <ArticleSkeleton />
   if (isDesktop) {
     return (
-      <Carousel className="max-sm:max-w-sm max-md:max-w-md">
+      <MaxWrapper className="max-w-7xl bg-secondary">
+        <h2 className="text-4xl text-primary py-2">Our Blog</h2>
+      <Carousel className="max-sm:max-w-sm max-md:max-w-md px-2">
         <CarouselContent className="-ml-1">
           {articles?.data.map(article => (
             <CarouselItem key={article.id} className="pl-1 md:basis-1/2 lg:basis-1/3">
@@ -76,15 +79,19 @@ export default function BlogSection() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+      </MaxWrapper>
     ) 
   }
 
   if (!isDesktop) {
     return (
+      <MaxWrapper className="max-w-7xl bg-secondary">
+        <h2 className="text-3xl text-primary py-2">Our Blog</h2>
       <div className="flex flex-col gap-3">
         <ArticleReel articles={articles?.data!} />
         <Button as={Link} href="/articles" variant="flat" className="my-4 w-fit" color="primary">See more <MoveRight size={15} /></Button>
       </div>
+      </MaxWrapper>
     )
   }
 

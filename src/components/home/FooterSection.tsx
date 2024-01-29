@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Separator } from '../ui/separator'
 import { cn } from '@/lib/utils'
+import MaxWrapper from '../MaxWrapper'
 
 const auth_links = [
     {
@@ -40,7 +41,8 @@ const contact_links = [
 
 const FooterSection = () => {
   return (
-    <footer className='flex flex-col gap-3'>
+    <MaxWrapper className='max-w-7xl'>
+        <footer className='flex flex-col gap-3'>
         <Separator />
         <h2 className="text-2xl hover:underline py-2 transition-all text-primary max-sm:text-center">Naijaschools</h2>
         <section className='flex flex-col md:flex-row gap-3 py-3 justify-between max-sm:items-center max-sm:text-center'>
@@ -71,6 +73,7 @@ const FooterSection = () => {
         <Separator />
         <p className="text-muted-foreground tracking-tighter py-2 max-sm:text-center">&copy;Naijaschools Inc. @Bala Mathias && Ladalo</p>
     </footer>
+    </MaxWrapper>
   )
 }
 
