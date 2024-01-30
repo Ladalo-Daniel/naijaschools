@@ -2,11 +2,22 @@
 
 import { Button } from '@nextui-org/button'
 import { Rocket } from 'lucide-react'
+import Image from 'next/image'
 import React from 'react'
 
 const QOnboard = ({ setQOnboard }: { setQOnboard: React.Dispatch<React.SetStateAction<boolean>>}) => {
   return (
     <div className='flex flex-col gap-4'>
+        <div className="flex-1">
+            <Image
+                src={'/svg/hi2.svg'}
+                width={500}
+                height={500}
+                quality={100}
+                alt='Gif of hi'
+                className='' 
+            />
+        </div>
         <h2 className="text-2xl text-primary py-2">
             Hi there! Your quiz questions are ready for this course.
         </h2>

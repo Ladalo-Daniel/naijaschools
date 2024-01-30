@@ -1,6 +1,5 @@
 'use client'
 
-import { Button, buttonVariants } from '@/components/ui/button'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { QuizQuestionList } from '@/supabase/quiz'
 import { ArrowUp, CheckCircle, CheckCircle2, XCircleIcon } from 'lucide-react'
@@ -9,7 +8,8 @@ import React, { useEffect } from 'react'
 import Confetti from 'canvas-confetti'
 
 import { useRouter } from 'next/navigation'
-import GrandeProgress from './GrandeProgress'
+import QuizResultItem from './QuizResultItem'
+import { Button } from '@nextui-org/button'
 
 const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, institutionId, correct, wrong }: { 
     questions: QuizQuestionList, 
@@ -59,16 +59,18 @@ const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, insti
       
 
   return (
-    <div className='w-auto overflow-auto' id='contentToPrint'>
-        {/* <div className='py-4 mx-auto'>
-            <GrandeProgress score={score!} />
-        </div> */}
+    <div className='w-auto overflow-auto max-w-7xl' id='contentToPrint'>
         <section className="flex-1 flex-col flex gap-3 p-4 rounded-md border my-2">
             <h2 className="text-2xl">Score: <span className={totalScore < 40 ? "text-rose-500" : totalScore < 70 ? "text-primary-500" : "text-primary"}>{totalScore}%</span></h2>
             {correct && <p className='text-primary flex items-center gap-2'>Total Correct: {correct} <CheckCircle /></p>}
             {wrong && <p className='text-rose-500 flex items-center gap-2'>Total wrong: {wrong} <XCircleIcon /></p>}
         </section>
-        <Table className='py-5 overflow-scroll'>
+        <section className="flex flex-col gap-3">
+        {questions?.map((question, index) => (
+            <QuizResultItem question={question} index={index} userAnswers={userAnswers} key={index} />
+        ))}
+        </section>
+        {/* <Table className='py-5 overflow-scroll'>
             <TableCaption>End of list. You&#39;re all caught up.</TableCaption>
             <TableHeader>
                 <TableRow>
@@ -93,23 +95,21 @@ const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, insti
                     </TableCell>
                 </TableRow>))}
             </TableBody>
-        </Table>
+        </Table> */}
         <section className="actions flex gap-4 max-sm:flex-col flex-wrap max-sm:items-center p-4 w-full">
-            <Button variant={'default'}
+            <Button variant={'solid'}
                 onClick={() => {
                     router.push(`/dashboard/s/quiz/start/${institutionId}/course/${courseId}?noq=${questions.length}?retake=true`)
                 }}
                 className='max-sm:w-full'
                 title='Retake this quiz.'
             >Retake Quiz</Button>
-            <Link href={'/dashboard/s/quiz/history'} 
-                className={buttonVariants({
-                variant: "secondary",
-                className: "max-sm:w-full"
-            })}
+            <Button as={Link} href={'/dashboard/s/quiz/history'} 
+                variant={"flat"}
+                className={"max-sm:w-full"}
                 title='Go to your quiz history'
-            >Go to Quiz History</Link>
-            <Button variant={'outline'}
+            >Go to Quiz History</Button>
+            <Button variant={'bordered'}
                 onClick={handlePrint}
                 className='max-sm:w-full'
                 title='Print this result.'
@@ -118,7 +118,7 @@ const QuizResults = ({ questions, userAnswers, score, isHistory, courseId, insti
                 variant={'ghost'}
                 title='Back to top'
                 onClick={() => {
-                    scrollTo({top: 0})
+                    scrollTo({top: 0, behavior: "smooth"})
                 }}
                 className='max-sm:w-full'
             ><ArrowUp size={15} /></Button>

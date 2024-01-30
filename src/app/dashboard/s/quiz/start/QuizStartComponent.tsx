@@ -10,6 +10,7 @@ import { CourseList } from '@/supabase/courses'
 import SelectInstitutionAutoComplete from '@/app/dashboard/questions/SelectInstitutionAutocomplete'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
+import Image from 'next/image'
 
 const QuizStartComponent = ({ institutions, institution_id}: { institutions: InstitutionList, institution_id?: string | number}) => {
     const searchParams = useSearchParams()
@@ -24,10 +25,20 @@ const QuizStartComponent = ({ institutions, institution_id}: { institutions: Ins
     if (isPending && institutionId && isFetchingInstitutionData) return <GeneralSkeleton />
     
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-3 py-4'>
         {institutionId ? (
             <div className='flex flex-col gap-3'>
-                <Alert>
+                <div className="flex-1">
+                <Image
+                    src={'/svg/hi_smooth.svg'}
+                    width={500}
+                    height={400}
+                    quality={100}
+                    alt='Gif of hi'
+                    className='' 
+                />
+            </div>
+                <Alert className='border-none'>
                     <RocketIcon className="h-4 w-4" />
                     <AlertTitle>Heads up!</AlertTitle>
                     <AlertDescription>
@@ -38,7 +49,17 @@ const QuizStartComponent = ({ institutions, institution_id}: { institutions: Ins
             </div>
         ) : (
             <div className='flex flex-col gap-3'>
-                <Alert>
+                <div className="flex-1">
+                    <Image
+                        src={'/svg/hi.svg'}
+                        width={500}
+                        height={500}
+                        quality={100}
+                        alt='Gif of welcome'
+                        className='' 
+                    />
+                </div>
+                <Alert className='border-none'>
                     <RocketIcon className="h-4 w-4" />
                     <AlertTitle>Heads up!</AlertTitle>
                     <AlertDescription>

@@ -11,6 +11,7 @@ import { ModeToggle } from '@/components/ModeToggle'
 import NavSearchBar from '../search/NavSearchBar'
 import NotificationBadge from '../notifications/NotificationBadge'
 import { NotificationList, getRecentNotifications } from '@/supabase/notifications'
+import SignOut from '@/components/shared/SignOut'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
@@ -49,12 +50,7 @@ const TopNavbar = async () => {
         <Link href={'/dashboard/profile'} className='hidden md:block'>
           <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
         </Link>
-        <form action={'/auth/signout'} method='post' className='hidden md:block'>
-          <Button className={'items-center flex  gap-2'} variant={'outline'} size={'sm'} type='submit'>
-            <span>Sign Out</span>
-            <ArrowRight size={15} className='text-rose-500'/>
-          </Button>
-        </form>
+        <SignOut content/>
 
         {/** ======= Mobile ====== */}
         <MobileActions profile={profile?.data as User} />

@@ -11,7 +11,7 @@ const QuizDetailPage = async ({ params }: { params: { institutionId: string, cou
     const coursName = await (await getCourseById(courseId)).data.name
 
   return (
-    <MaxWrapper className='flex-1 bg-background px-2'>
+    <MaxWrapper className='flex-1 bg-background px-2 max-w-7xl'>
         <section className="py-2">
             <BackButton />
         </section>

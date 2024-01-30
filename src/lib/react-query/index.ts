@@ -122,7 +122,7 @@ export const useGetCourseByQuery = ({column, row, range}: { column: "code" | "de
     return useQuery({
         queryKey: [QUERY_KEYS.get_courses, column, row],
         queryFn: () => getCoursesByQuery(column, row, range),
-        enabled: !!row
+        enabled: !!row,
     })
 }
 
@@ -197,8 +197,6 @@ export const useGetRecentArticles = (range: number) => {
         enabled: true
     })
 }
-
-
 
 export const useCreateUpdatePost = () => {
     const router = useRouter()

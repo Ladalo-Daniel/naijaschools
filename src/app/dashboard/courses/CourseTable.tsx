@@ -19,12 +19,15 @@ import DeleteCourse from './DeleteCourse'
 import { Course, CourseList } from '@/supabase/courses'
 import CourseForm from './CourseForm'
 import { InstitutionList } from '@/supabase/institutions'
+import { useGetProfile } from '@/lib/react-query'
+import Loading from '../loading'
 
 
 const CourseTable = ({ courses, institutions }: {courses: CourseList, institutions: InstitutionList}) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const [openStates, setOpenStates] = React.useState<{ [key: number]: boolean }>({})
+  const {data: profile, isPending: gettingUser} = useGetProfile()
 
   const toggleOpen = (id: number) => {
     setOpenStates((prevState) => ({
@@ -32,6 +35,8 @@ const CourseTable = ({ courses, institutions }: {courses: CourseList, institutio
       [id]: !prevState[id],
     }))
   }
+
+  if (gettingUser) return <Loading />
 
   return (
      <Table className='py-5'>
@@ -45,7 +50,7 @@ const CourseTable = ({ courses, institutions }: {courses: CourseList, institutio
             <TableCell>Question_number</TableCell>
             <TableCell>Total_marks</TableCell>
             <TableCell>Institution</TableCell>
-            <TableCell>Actions</TableCell>
+            {profile?.data?.role === "admin" && <TableCell>Actions</TableCell>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -58,7 +63,7 @@ const CourseTable = ({ courses, institutions }: {courses: CourseList, institutio
             <TableCell>{i.question_number}</TableCell>
             <TableCell>{i.total_marks}</TableCell>
             <TableCell>{institutions.find(idx => idx.id === i.institution)?.name}</TableCell>
-            <TableCell className="text-right flex items-center gap-2">
+            {profile?.data?.role === "admin" && <TableCell className="text-right flex items-center gap-2">
 
               <DeleteCourse course={i}/>
 
@@ -94,7 +99,7 @@ const CourseTable = ({ courses, institutions }: {courses: CourseList, institutio
                     </DrawerContent>
                     </Drawer>}
 
-            </TableCell>
+            </TableCell>}
           </TableRow>
         ))}
       </TableBody>

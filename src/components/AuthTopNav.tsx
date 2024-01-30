@@ -16,16 +16,17 @@ const AuthTopNav = async ({ isHome }: { isHome?: boolean}) => {
       "flex light:bg-white dark:bg-black bg-transparent backdrop-blur-lg": isHome,
       "hidden": !isHome
     })}>
-      <Link href={'/'} className={'inline-block'}>
+      <Link href={'/'} className={'flex items-end p-4'}>
         <Image src={'/logos/logo.png'} width={30} height={30} quality={100} alt="logo" />
+        <h2 className="text-muted-foreground hidden md:block text-2xl -mt-2">aijaschools</h2>
       </Link>
       <div className='flex items-center gap-3'>
         <NavMenu />
         {
           session?.user ? (
             <div className='flex items-center gap-2'>
-              <Link className={buttonVariants({variant: "link", className: "no-underline hover:bg-primary hover:transition-all border rounded-md hover:text-foreground hover:no-underline text-sm"})} href={'/dashboard'}>Dashboard</Link>
-              <SignOut />
+              <Link className={buttonVariants({variant: "link", className: "no-underline p-2 hover:bg-primary hover:transition-all border rounded-md hover:text-foreground hover:no-underline text-tiny"})} href={'/dashboard'}>Dashboard</Link>
+              <SignOut content/>
             </div>
           ): (
             <>

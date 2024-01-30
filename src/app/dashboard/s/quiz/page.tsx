@@ -17,7 +17,7 @@ const QuizPage = async () => {
 
   const institution = await getInstitutionById(profile?.data?.institution as string)
   return (
-    <MaxWrapper className='max-w-5xl bg-background p-2'>
+    <MaxWrapper className='max-w-7xl bg-background p-2'>
       <BackButton />
       <h2 className="text-2xl tracking-tighter py-2">Start Quiz</h2>
       <p>

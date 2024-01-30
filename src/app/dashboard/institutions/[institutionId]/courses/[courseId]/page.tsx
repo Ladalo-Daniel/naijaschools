@@ -21,8 +21,7 @@ const InstitutionCoursePage = async ({ params }: { params: { courseId: string, i
   const profile = await getProfile()
   const {data: institution} = await getInstitutionById(institutionId)
 
-  if (profile?.data?.role !== 'admin') return redirect('/dashboard')
-
+  if (!((profile?.data?.role === 'admin') || (profile?.data?.role === 'staff'))) return redirect('/dashboard')
   return (
     <MaxWrapper className='bg-background flex-1 max-w-7xl gap-2'>
       <BackButton />

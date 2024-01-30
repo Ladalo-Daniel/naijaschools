@@ -86,7 +86,7 @@ const MultiAddQuestionsForm = ({ course_id, question }: { course_id: number, que
             if (!firstNonNullOption) return
             if (nonNullValuesCount > 1) return
 
-            !(isPending && isError && navigator.onLine) ? router.push(`/dashboard/institutions/${institution}/courses/${course_id}`): null
+            !(isPending && isError && navigator.onLine) ? router.back(): null
         }
         
         if (buttonType === 'reset') {

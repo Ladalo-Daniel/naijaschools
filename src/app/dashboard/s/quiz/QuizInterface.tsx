@@ -137,7 +137,7 @@ const QuizInterface = ({
   }
   
   return (
-    <div className='p-4 min-w-[240px] max-w-5xl'
+    <div className='p-4 min-w-[240px] max-w-7xl'
     onSelect={() => false}
     onCopy={() => false}
     onPaste={() => false}

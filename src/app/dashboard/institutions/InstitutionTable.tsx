@@ -19,9 +19,10 @@ import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerT
 import DeleteInstitution from './DeleteInstitution'
 import { InstitutionList } from '@/supabase/institutions'
 import Link from 'next/link'
+import { User } from '@/supabase/user'
 
 
-const InstitutionTable = ({ institutions }: {institutions: InstitutionList}) => {
+const InstitutionTable = ({ institutions, profile }: {institutions: InstitutionList, profile?: User}) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const [openStates, setOpenStates] = React.useState<{ [key: number]: boolean }>({})
@@ -52,6 +53,7 @@ const InstitutionTable = ({ institutions }: {institutions: InstitutionList}) => 
             <TableCell>{i.description}</TableCell>
             <TableCell className="text-right flex items-center gap-2">
 
+            {profile?.role === 'admin' && <>
               <DeleteInstitution institution={i}/>
 
                  <Dialog open={openStates[i.id]} onOpenChange={() => toggleOpen(i.id)}>
@@ -85,8 +87,9 @@ const InstitutionTable = ({ institutions }: {institutions: InstitutionList}) => 
                         </DrawerFooter>
                     </DrawerContent>
                     </Drawer>}
+                  </>} 
 
-                    <Button as={Link} href={`/dashboard/institutions/${i.id}`} isIconOnly className='bg-transparent'><EyeIcon size={15} className='text-primary' /></Button>
+                  <Button as={Link} href={`/dashboard/institutions/${i.id}`} isIconOnly className='bg-transparent'><EyeIcon size={15} className='text-primary' /></Button>
             </TableCell>
           </TableRow>
         ))}

@@ -11,6 +11,7 @@ import { RocketIcon } from '@radix-ui/react-icons'
 import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
 import { Button } from '@nextui-org/button'
 import QOnboard from './QOnboard'
+import Image from 'next/image'
 
 /**
  * I made the top level Component a client component because
@@ -50,13 +51,35 @@ const QuizComponent = ({
 
 
     if (isPending) return <div className="py-10 flex items-center justify-center flex-col gap-2">
+        <div className="flex-1">
+            <Image
+                src={'/svg/running.svg'}
+                width={500}
+                height={500}
+                quality={100}
+                alt='Gif of welcome'
+                className='' 
+            />
+        </div>
+        <div className="flex flex-col gap-3">
         <h2 className='text-muted-foreground'>Hang on as we mould your quiz questions ...</h2>
         <Button isLoading={isPending} variant='flat' className='bg-transparent'>loading ...</Button>
+        </div>
     </div>
 
     if (!noq) {
         return (<div className='flex flex-col gap-4 mb-3 mt-8'>
-            <Alert className='border border-primary'>
+            <div className="flex-1">
+                <Image
+                    src={'/svg/hi.svg'}
+                    width={500}
+                    height={500}
+                    quality={100}
+                    alt='Gif of hi'
+                    className='' 
+                />
+            </div>
+            <Alert className='border-none'>
                 <RocketIcon className="h-4 w-4" />
                 <AlertTitle>Hi {profile?.username}!, </AlertTitle>
                 <AlertDescription>
@@ -69,14 +92,24 @@ const QuizComponent = ({
         </div>)
     }
 
-    if (!quizQuestions?.data?.length) return <div className='p-4 border border rounded-md shadow'>
-        There seems to be no questions for your configuration yet!
+    if (!quizQuestions?.data?.length) return <div className='p-4 rounded-md shadow flex flex-col gap-3'>
+        <div className="flex-1">
+            <Image
+                src={'/svg/404.svg'}
+                width={500}
+                height={500}
+                quality={100}
+                alt='Gif of welcome'
+                className='' 
+            />
+        </div>
+        <p className='py-3 text-2xl'>There seems to be no questions for your configuration yet!</p>
     </div>
 
     if (qOnboard) return <QOnboard setQOnboard={setQOnboard} />
 
   return (
-    <div className='flex flex-col gap-3 border p-4 rounded-md'>
+    <div className='flex flex-col gap-3 border p-4 rounded-md max-w-7xl'>
         <h2 className='text-2xl text-primary tracking-tighter py-2 px-4'>{courses?.data.at(0)?.name} ({courses?.data.at(0)?.code})</h2>
         <section className='flex flex-col gap-3'>
             <QuizInterface questions={quizQuestions?.data!} quizId={quizQuestions?.quizId!} courseId={courseId}/>

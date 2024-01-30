@@ -11,18 +11,19 @@ import React from 'react'
 const LeftSidebar = ({ profile }: { profile?: User }) => {
   const path = usePathname()
 
-  const isRootRouteActive = path.startsWith('/dashboard/institutions');
+  const isRootRouteActive = path.startsWith('/dashboard/posts');
 
   return (
     <nav className='leftsidebar dark:bg-secondary shadow-sm z-50 min-h-screen bg-zinc-200 border border-r-gray-100 dark:border-r-gray-800 relative'>
       <div className="fixed h-full overflow-auto dark:bg-secondary bg-zinc-200 flex flex-col gap-4 min-h-screen left-0 min-w-[250px]">
-      <Link href={'/'} className={''}>
-        <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
+      <Link href={'/'} className={'md:flex items-end p-4'}>
+        <Image src={'/logos/logo.png'} width={30} height={30} alt="logo" />
+        <h2 className="text-muted-foreground hidden md:block text-2xl -mt-2">aijaschools</h2>
       </Link>
         <div className='flex flex-col gap-6 overflow-auto custom-scrollbar w-full p-2'>
           {side_bar_links.map(link => (
             <Link key={link.tooltip} href={link.href} className={cn("flex items-center hover:bg-gray-500 hover:text-gray-50 transition-all gap-2 p-2 rounded-md", {
-              "bg-primary text-green-50 shadow-sm transition-all": isRootRouteActive && link.href.startsWith('/dashboard/institutions') || path === link.href,
+              "bg-primary text-green-50 shadow-sm transition-all": isRootRouteActive && link.href.startsWith('/dashboard/posts') || path === link.href,
               "hidden": !(profile?.role === "admin" || profile?.role === "staff") && link.hidden,
             })}>
               {link.icon}

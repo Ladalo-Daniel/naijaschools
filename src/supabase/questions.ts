@@ -43,7 +43,7 @@ export async function getQuestions() {
     .order('created_at', {
         ascending: false
     })
-    .range(0, 30)
+    .range(0, 100)
 
     if (error) throw error
     return { data, error }
@@ -64,6 +64,7 @@ export async function getQuestionsByQuery(column: 'course_id' | 'id' | 'question
     const { data, error, count } = await supabaseClient.from('questions')
     .select('*')
     .eq(column, row)
+    .order("created_at", {ascending: false})
 
     if (error) throw error
 

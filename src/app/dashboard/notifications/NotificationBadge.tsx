@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@nextui-org/button'
 import { Badge } from '@nextui-org/badge'
-import { NotificationIcon } from './NotificationIcon'
 import { supabaseClient } from '@/supabase'
 import { NotificationList, Notification } from '@/supabase/notifications'
 import { User } from '@/supabase/user'
 import NotificationSheet from './NotificationSheet'
 import { useSeenNotifications } from '@/lib/react-query/notifications'
+import { Bell } from 'lucide-react'
 
 const NotificationBadge = ({ user, notifications }: { user?: User, notifications: NotificationList }) => {    
     const [recents, setRecents] = useState<NotificationList>(notifications ?? [])
@@ -38,7 +38,7 @@ const NotificationBadge = ({ user, notifications }: { user?: User, notifications
     <>
       <Badge content={
         cleanedNotifications.length === 0 ? undefined : cleanedNotifications.length > 99 ? '99+' : cleanedNotifications.length
-      } shape="circle" className='text-foreground' color="success">
+      } shape="circle" className='text-default' color="success">
         <Button
           radius="full"
           isIconOnly
@@ -46,7 +46,7 @@ const NotificationBadge = ({ user, notifications }: { user?: User, notifications
           variant="light"
           onClick={() => setSheet(prev => !prev)}
         >
-          <NotificationIcon size={24} />
+          <Bell size={24} />
         </Button>
       </Badge>
       <NotificationSheet 
