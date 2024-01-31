@@ -23,7 +23,7 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
       <SheetContent className='md:hidden min-h-screen overflow-auto mt-0 pt-0 bg-zinc-200 dark:bg-secondary' side={'left'}>
         <SheetHeader className='flex flex-col flex-1 items-start pt-0 mt-0'>
           <SheetTitle>
-          <div className="justify-between md:hidden items-center gap-4">
+          <div className="justify-between md:hidden items-center gap-4 my-2.5">
             <Link href={'/'} passHref>
               <Image 
                 src={'/logos/logo.png'}

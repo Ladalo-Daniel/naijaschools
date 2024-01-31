@@ -17,7 +17,7 @@ const TopNavbar = async () => {
   const profile = await getProfile()
   const {data: notifications} = await getRecentNotifications(profile?.data?.username!)
   return (
-    <nav className='bg-gray-200 backdrop-blur-md bg-transparent px-2 flex md:px-10 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-40 h-16 border-b border-r-gray-600'>
+    <nav className='bg-gray-200 backdrop-blur-md bg-transparent shadow-md px-2 flex md:px-10 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-40 h-16 border-b border-r-gray-600'>
       <Link href={'/'} className={'md:block hidden'}>
         <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
       </Link>
@@ -50,7 +50,9 @@ const TopNavbar = async () => {
         <Link href={'/dashboard/profile'} className='hidden md:block'>
           <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
         </Link>
-        <SignOut content/>
+        <div className="hidden md:block">
+          <SignOut content/>
+        </div>
 
         {/** ======= Mobile ====== */}
         <MobileActions profile={profile?.data as User} />

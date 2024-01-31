@@ -14,6 +14,7 @@ const NotificationBadge = ({ user, notifications }: { user?: User, notifications
     const [recents, setRecents] = useState<NotificationList>(notifications ?? [])
     const [sheetOpen, setSheet] = useState(false)
     const { data: seenNotifications } = useSeenNotifications(user?.username as string)
+    const [newNotificationLength, setNewNotificationLength] = useState(0)
 
     useEffect(() => {
         const channel = supabaseClient.channel("real time notifications")
@@ -34,19 +35,26 @@ const NotificationBadge = ({ user, notifications }: { user?: User, notifications
 
     const cleanedNotifications = recents.filter(obj => obj.from !== user?.username)
 
+    useEffect(() => {
+      setNewNotificationLength(cleanedNotifications?.length)
+    }, [cleanedNotifications])
+
   return (
     <>
       <Badge content={
-        cleanedNotifications.length === 0 ? undefined : cleanedNotifications.length > 99 ? '99+' : cleanedNotifications.length
+        newNotificationLength === 0 ? null : newNotificationLength > 99 ? '99+' : newNotificationLength
       } shape="circle" className='text-default' color="success">
         <Button
           radius="full"
           isIconOnly
-          aria-label={`more than ${cleanedNotifications.length} notifications`}
+          aria-label={`more than ${newNotificationLength} notifications`}
           variant="light"
-          onClick={() => setSheet(prev => !prev)}
+          onClick={() => {
+            setNewNotificationLength(0)
+            setSheet(prev => !prev)
+          }}
         >
-          <Bell size={24} />
+          <Bell size={18} />
         </Button>
       </Badge>
       <NotificationSheet 
