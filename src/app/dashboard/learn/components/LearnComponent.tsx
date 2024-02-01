@@ -26,8 +26,8 @@ const LearnComponent: React.FC<LearnComponentProps> = async () => {
 
   return (
     <div className='flex flex-col gap-3'>
-      <h2 className="text-2xl py-2 text-primary">Welcome to Naijaschools &quot;Learn&quot;, now select a course to continue.</h2>
-      <p className="text-muted-foreground text-sm">Note that this courses reflects ypur institution and faculty of <span className="text-primary">{user?.data?.faculty}</span></p>
+      <h2 className="text-4xl py-2 text-primary">Welcome to Naijaschools &quot;Learn&quot;, now select a course to continue.</h2>
+      <p className="text-muted-foreground text-sm">Note that these courses reflects your institution and faculty of <span className="text-primary">{user?.data?.faculty}</span></p>
         <section className="flex flex-wrap flex-row gap-4">
           {
             courses?.map(course => (<CourseCard course={course} key={course.id} />))

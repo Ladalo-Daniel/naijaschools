@@ -6,11 +6,11 @@ import { supabaseClient, supabaseUrl } from ".";
 export type Lesson = Database['public']['Tables']['lessons']['Row']
 export type LessonList = Database['public']['Tables']['lessons']['Row'][]
 
-export async function getLessonsByQuery(column: "faculty" | "title" | "id", row: string, range?: number) {
+export async function getLessonsByQuery(column: "faculty" | "title" | "id" | "course", row: string, range?: number) {
     const { data, error } = await supabaseClient.from("lessons")
         .select()
         .eq(column, row)
-        .order(column)
+        .order("created_at")
 
     if (error) throw error
 
@@ -72,8 +72,8 @@ export async function deleteLesson(id:string) {
     return { status, statusText }
 }
 
-export async function getQuestionById(id:string) {
-    const { data, error } = await supabaseClient.from('lesson_mcqs')
+export async function getLessonById(id:string) {
+    const { data, error } = await supabaseClient.from('lessons')
     .select()
     .eq("id", id)
     .single()

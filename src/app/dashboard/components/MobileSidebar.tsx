@@ -20,7 +20,7 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
       <SheetTrigger asChild>
         <ShadButton variant={'ghost'} className='flex items-center gap-2 md:hidden'><Menu size={20} /></ShadButton>
       </SheetTrigger>
-      <SheetContent className='md:hidden min-h-screen overflow-auto mt-0 pt-0 bg-zinc-200 dark:bg-secondary' side={'left'}>
+      <SheetContent className='md:hidden min-h-screen overflow-auto mt-0 pt-0 bg-zinc-800 text-white dark:bg-secondary' side={'left'}>
         <SheetHeader className='flex flex-col flex-1 items-start pt-0 mt-0'>
           <SheetTitle>
           <div className="justify-between md:hidden items-center gap-4 my-2.5">

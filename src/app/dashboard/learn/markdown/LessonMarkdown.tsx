@@ -4,12 +4,11 @@ import React from "react";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
-import CopyButton from "./CopyButton";
 import "highlight.js/styles/github-dark.css";
 import { cn } from "@/lib/utils";
-import { TerminalIcon } from "lucide-react";
-import { icons } from "../ui/icons";
+import { TerminalIcon, icons } from "lucide-react";
 import { Fira_Code } from "next/font/google";
+import CopyButton from "@/components/shared/CopyButton";
 
 const fira = Fira_Code({
     weight: '400',
@@ -17,7 +16,7 @@ const fira = Fira_Code({
     display: 'swap',
   })
 
-export default function ChatMarkdown({
+export default function LessonMarkdown({
 	content,
 	className = "",
 }: {
@@ -30,13 +29,13 @@ export default function ChatMarkdown({
 			rehypePlugins={[rehypeHighlight]}
 			components={{
 				h1: ({ node, ...props }) => {
-					return <h1 {...props} className="text-[24px] font-bold transition-all" />;
+					return <h1 {...props} className="text-3xl font-semibold transition-all" id={props.children as string}/>;
 				},
 				h2: ({ node, ...props }) => {
 					return (
 						<h2
 							{...props}
-							className="text-[21px] font-semibold py-2.5 transition-all"
+							className="text-2xl font-semibold py-2.5 transition-all"
 						/>
 					);
 				},
@@ -44,7 +43,7 @@ export default function ChatMarkdown({
 					return (
 						<h3
 							{...props}
-							className="text-[18px] py-2.5 transition-all"
+							className="text-xl py-2.5 transition-all"
 						/>
 					);
 				},
@@ -52,7 +51,7 @@ export default function ChatMarkdown({
 					return (
 						<ul
 							{...props}
-							className="text-[17px] py-2.5 px-2 list-disc transition-all no-underline"
+							className="text-xl py-2.5 px-2 list-disc transition-all no-underline"
 						/>
 					);
 				},
@@ -60,7 +59,7 @@ export default function ChatMarkdown({
 					return (
 						<ol
 							{...props}
-							className="text-[17px] py-2.5 px-2 list-decimal transition-all"
+							className="text-xl py-2.5 px-2 list-decimal transition-all"
 						/>
 					);
 				},
@@ -68,7 +67,7 @@ export default function ChatMarkdown({
 					return (
 						<li
 							{...props}
-							className="text-[16px] py-2.5 transition-all"
+							className="text-xl py-2.5 transition-all"
 						/>
 					);
 				},
@@ -84,7 +83,7 @@ export default function ChatMarkdown({
 					return (
 						<b
 							{...props}
-							className="my-2 text-green-600 transition-all font-bold"
+							className="my-2 text-primary transition-all font-bold"
 						/>
 					);
 				},
@@ -92,7 +91,7 @@ export default function ChatMarkdown({
 					return (
 						<blockquote
 							{...props}
-							className="my-2 transition-all p-4 border rounded-md"
+							className="my-2 transition-all p-4 py-8 bg-secondary border-l-4 border-l-primary rounded-sm"
 						/>
 					);
 				},
