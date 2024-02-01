@@ -24,7 +24,7 @@ const AdminAndStaffArticleView = async () => {
             </Suspense>
         </section>
     </MaxWrapper>
-  )
+  ) 
 }
 
 export default AdminAndStaffArticleView
