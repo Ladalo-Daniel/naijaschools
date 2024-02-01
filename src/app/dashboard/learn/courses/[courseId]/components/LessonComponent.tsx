@@ -6,6 +6,7 @@ import { getProfile } from '@/supabase/user'
 import Link from 'next/link'
 import React from 'react'
 import LessonItem from './LessonItem'
+import { learn_urls } from '@/app/dashboard/urls'
 
 interface LessonComponentProps {
   courseId: string,
@@ -22,7 +23,7 @@ const LessonComponent: React.FC<LessonComponentProps> = async ({courseId}) => {
       <Component404 />
 
       <h2 className="text-2xl">Sorry, We could not find lessons for <span className="text-primary">{course?.name}</span> in the faculty of <span className="text-primary">{user?.data?.faculty!}</span> for <span className="text-primary">{school?.name}</span>
-      <br />Please check back again or select another course on the <Link href={"/dashboard/learn"} className='text-primary underline'>Course page</Link>.
+      <br />Please check back again or select another course on the <Link href={learn_urls()} className='text-primary underline'>Course page</Link>.
       </h2>
     </div>)
   }

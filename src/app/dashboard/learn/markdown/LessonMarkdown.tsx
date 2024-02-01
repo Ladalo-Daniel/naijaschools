@@ -5,10 +5,11 @@ import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 
 import "highlight.js/styles/github-dark.css";
-import { cn } from "@/lib/utils";
+import { cn, slugify } from "@/lib/utils";
 import { TerminalIcon, icons } from "lucide-react";
 import { Fira_Code } from "next/font/google";
 import CopyButton from "@/components/shared/CopyButton";
+import Image from "next/image";
 
 const fira = Fira_Code({
     weight: '400',
@@ -29,7 +30,7 @@ export default function LessonMarkdown({
 			rehypePlugins={[rehypeHighlight]}
 			components={{
 				h1: ({ node, ...props }) => {
-					return <h1 {...props} className="text-3xl font-semibold transition-all" id={props.children as string}/>;
+					return <h1 {...props} className="text-3xl font-semibold transition-all" id={slugify(props.children as string)}/>;
 				},
 				h2: ({ node, ...props }) => {
 					return (
@@ -92,6 +93,19 @@ export default function LessonMarkdown({
 						<blockquote
 							{...props}
 							className="my-2 transition-all p-4 py-8 bg-secondary border-l-4 border-l-primary rounded-sm"
+						/>
+					);
+				},
+				img: ({ node, ...props }) => {
+					return (
+						// @ts-ignore
+						<Image
+							{...props}
+							alt="Naijaschools learn Image"
+							width={500}
+							height={500}
+							quality={100}
+							className="my-2 transition-all min-w-60 max-w-3xl rounded-sm"
 						/>
 					);
 				},

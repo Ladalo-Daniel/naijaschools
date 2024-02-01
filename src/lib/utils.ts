@@ -92,20 +92,9 @@ export const pluralize = (value: number) => {
 
 export const slugify = (content: string) => {
   const cleaned = content
-    .replace(/ /g, "-")
-    .replace(/./g, '')
-    .replace(/\?/g, '')
-    .replace(/$/g, '')
-    .replace(/@/g, '')
-    .replace(/%/g, '')
-    .replace(/^/g, '')
-    .replace(/&/g, '')
-    .replace(/\*/g, '')
-    .replace(/\(/g, '')
-    .replace(/\)/g, '')
-    .replace(/\+/g, '')
-    .replace(/\=/g, '')
-    .replace(/\_/g, '')
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
     .toLowerCase()
 
   return cleaned

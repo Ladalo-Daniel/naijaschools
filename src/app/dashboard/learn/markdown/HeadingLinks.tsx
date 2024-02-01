@@ -1,12 +1,30 @@
 'use client'
 
+import { slugify } from "@/lib/utils";
 import Link from "next/link";
 
 interface HeadingLinksProps {
-    markdown: string;
-  }
-  
+  markdown: string;
+}
+
+
+
 const HeadingLinks: React.FC<HeadingLinksProps> = ({ markdown }) => {
+
+  const scrollToHeading = (event: React.MouseEvent<HTMLAnchorElement>, heading: string) => {
+      event.preventDefault();
+  
+      const targetHeading = document.getElementById(heading);
+      if (targetHeading) {
+        targetHeading.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+  
+        window.scrollBy(0, -50);
+      }
+    };
+
     const regex = /^#\s(.+)$/gm;
   
     const headings: string[] = [];
@@ -19,26 +37,12 @@ const HeadingLinks: React.FC<HeadingLinksProps> = ({ markdown }) => {
     const jsxElements = headings.map((heading, index) => (
       <li key={index}>
         <Link 
-            href={`#${heading}`}
+            href={`#${slugify(heading)}`}
             className="text-primary"
-            onClick={(e) => scrollToHeading(e, heading)}
+            // onClick={(e) => scrollToHeading(e, heading)}
         >{heading}</Link>
       </li>
     ));
-
-    const scrollToHeading = (event: React.MouseEvent<HTMLAnchorElement>, heading: string) => {
-        event.preventDefault();
-    
-        const targetHeading = document.getElementById(heading);
-        if (targetHeading) {
-          targetHeading.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-          });
-    
-          window.scrollBy(0, -99);
-        }
-      };
   
     return (
     <div className="flex flex-col gap-2">

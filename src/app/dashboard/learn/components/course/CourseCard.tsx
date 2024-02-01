@@ -1,3 +1,4 @@
+import { learn_urls } from '@/app/dashboard/urls'
 import { Course } from '@/supabase/courses'
 import { Card, CardBody, CardHeader } from '@nextui-org/card'
 import { ArrowRightCircleIcon } from 'lucide-react'
@@ -23,7 +24,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   return (
     <Card key={course.id} className={' w-72 min-h-44 flex border flex-col shadow-md rounded-md gap-3 p-4 max-sm:w-full hover:opacity-60 hover:transition-all hover:animate-out'} 
       as={Link} 
-      href={`/dashboard/learn/courses/${course?.id}`}>
+      href={learn_urls(course?.id)}>
         <CardHeader className='flex justify-between items-center'>
             <h2 className='text-2xl tracking-tighter'>
                 {course.code}

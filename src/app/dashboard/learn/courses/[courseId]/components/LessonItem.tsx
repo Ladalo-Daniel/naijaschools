@@ -1,4 +1,6 @@
+import { learn_urls } from '@/app/dashboard/urls'
 import { slugify } from '@/lib/utils'
+import { Course } from '@/supabase/courses'
 import { Lesson } from '@/supabase/lessons'
 import { Card } from '@nextui-org/card'
 import Link from 'next/link'
@@ -6,6 +8,7 @@ import React from 'react'
 
 interface LessonItemProps {
     lesson: Lesson,
+    course?: Course,
 }
 
 const bgColors = [
@@ -20,12 +23,12 @@ const bgColors = [
     //  bgColors[Math.round((lesson.id * 6) % 5)]
 ]
 
-const LessonItem: React.FC<LessonItemProps> = ({lesson}) => {
+const LessonItem: React.FC<LessonItemProps> = ({lesson, course}) => {
   return (
     <Card
         as={Link}
         className={'p-4 border text-xl max-sm:w-full w-80 '}
-        href={`/dashboard/learn/courses/${lesson.course}/lesson/${lesson?.id}`}
+        href={learn_urls(lesson?.course || course?.id, lesson.id)}
     >
         <h2>{lesson.title}</h2>
     </Card>
