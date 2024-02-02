@@ -2,7 +2,7 @@ import MaxWrapper from '@/components/MaxWrapper'
 import { getProfile } from '@/supabase/user'
 import { redirect } from 'next/navigation'
 import React from 'react'
-import StudentComponent from './StudentComponent'
+import StudentComponent from './components/StudentComponent'
 import BackButton from '@/components/shared/BackButton'
 
 const AdminStudentViewPage = async () => {

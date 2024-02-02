@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import QuizStartComponent from './QuizStartComponent'
+import QuizStartComponent from './components/QuizStartComponent'
 import { getInstitutions } from '@/supabase/institutions'
 import BackButton from '@/components/shared/BackButton'
 

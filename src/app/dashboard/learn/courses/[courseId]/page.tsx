@@ -1,7 +1,8 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
-import React from 'react'
+import React, { Suspense } from 'react'
 import LessonComponent from './components/LessonComponent'
+import Loading from '@/app/dashboard/loading'
 
 const Page = async ({ params }: { params: { courseId: string }}) => {
   return (
@@ -9,7 +10,9 @@ const Page = async ({ params }: { params: { courseId: string }}) => {
         <BackButton />
 
         <section className="flex flex-col gap-4">
-            <LessonComponent courseId={params.courseId} />
+            <Suspense fallback={<Loading />}>
+              <LessonComponent courseId={params.courseId} />
+            </Suspense>
         </section>
     </MaxWrapper>
   )

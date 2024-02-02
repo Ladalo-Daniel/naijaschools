@@ -5,7 +5,7 @@ import { LucideEye } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AdminStudentDetailView from '../students/AdminStudentDetailView'
+import AdminStudentDetailView from '../students/components/AdminStudentDetailView'
 import { UserList, getProfile } from '@/supabase/user'
 
 

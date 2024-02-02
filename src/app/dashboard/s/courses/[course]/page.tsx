@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import React, { Suspense } from 'react'
-import StudentCourseViewComponent from './StudentCourseViewComponent'
+import StudentCourseViewComponent from './components/StudentCourseViewComponent'
 import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
 
 async function Course({ params: {course}}: { params: { course: string }}) {

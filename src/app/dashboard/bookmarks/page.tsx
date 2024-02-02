@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import React from 'react'
-import BookmarkComponent from './BookmarkComponent'
+import BookmarkComponent from './components/BookmarkComponent'
 
 const BookMarkPage = async () => {
   return (

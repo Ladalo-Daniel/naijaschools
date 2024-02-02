@@ -2,7 +2,7 @@ import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
 import { Settings2Icon } from 'lucide-react'
 import { getProfile } from '@/supabase/user'
-import Settings from './Settings'
+import Settings from './components/Settings'
 import BackButton from '@/components/shared/BackButton'
 
 const SettingsPage = async () => {

@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import QuestionComponent from './QuestionComponent'
+import QuestionComponent from './components/QuestionComponent'
 import { getProfile } from '@/supabase/user'
 import { redirect } from 'next/navigation'
 import BackButton from '@/components/shared/BackButton'

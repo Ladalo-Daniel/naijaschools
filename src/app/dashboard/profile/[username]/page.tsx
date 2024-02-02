@@ -1,7 +1,7 @@
 import React from 'react'
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
-import ProfilePageComponent from './ProfilePageComponent'
+import ProfilePageComponent from './components/ProfilePageComponent'
 
 const ProfilePage = async ({
     params: { username }

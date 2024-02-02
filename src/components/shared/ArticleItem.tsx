@@ -9,7 +9,7 @@ import { Article } from '@/supabase/articles'
 import Link from 'next/link'
 import { useGetProfile } from '@/lib/react-query'
 import { Button } from '@nextui-org/button'
-import DeleteArticle from '@/app/dashboard/articles/DeleteArticle'
+import DeleteArticle from '@/app/dashboard/articles/components/DeleteArticle'
 import { Edit2 } from 'lucide-react'
 
 const ArticleItem = ({article}: { article: Article }) => {

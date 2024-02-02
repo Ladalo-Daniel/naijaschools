@@ -4,7 +4,8 @@ import AIChatDetailComponent from './AIChatDetailComponent'
 import { User, getProfile } from '@/supabase/user'
 import { getChatById } from '@/supabase/chats'
 import { Metadata, ResolvingMetadata } from 'next'
-import ChatHistorySheet from '../ChatHistorySheet'
+import ChatHistorySheet from '../components/ChatHistorySheet'
+import AIChatComponent from '../components/AIChatComponent'
 
 type Props = {
     params: { chatId: string }
@@ -36,7 +37,7 @@ const AIChatDetailPage = async ({ params: { chatId }}: Props) => {
     <MaxWrapper className='bg-background p-5 max-w-5xl'>
         <ChatHistorySheet />
         <section className="flex flex-col gap-3">
-            <AIChatDetailComponent chat={chat} profile={profile?.data as User }/>
+            <AIChatComponent chat={chat} profile={profile?.data as User }/>
         </section>
     </MaxWrapper>
   )

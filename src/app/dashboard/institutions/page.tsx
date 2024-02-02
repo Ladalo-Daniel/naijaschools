@@ -1,9 +1,9 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import InstitutionComponent from './InstitutionComponent'
+import InstitutionComponent from './components/InstitutionComponent'
 import { getProfile } from '@/supabase/user'
 import { redirect } from 'next/navigation'
-import InstitutionTable from './InstitutionTable'
+import InstitutionTable from './components/InstitutionTable'
 import { supabaseClient } from '@/supabase'
 import BackButton from '@/components/shared/BackButton'
 

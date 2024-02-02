@@ -1,8 +1,9 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import { Metadata } from 'next'
-import React from 'react'
+import React, { Suspense } from 'react'
 import LearnComponent from './components/LearnComponent'
+import Loading from '../loading'
 
 export const metadata: Metadata = {
     title: "Learn | Naijaschools | Welcome",
@@ -15,7 +16,9 @@ const Page = () => {
         <BackButton />
 
         <section className="flex flex-col gap-3">
+          <Suspense fallback={<Loading />}>
             <LearnComponent />
+          </Suspense>
         </section>
     </MaxWrapper>
   )

@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import { User, getProfile } from '@/supabase/user'
 import React from 'react'
-import QuizComponent from './QuizComponent'
+import QuizComponent from './components/QuizComponent'
 import BackButton from '@/components/shared/BackButton'
 import { getCourseById } from '@/supabase/courses'
 

@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import { Search } from 'lucide-react'
 import React from 'react'
-import SearchComponent from './SearchComponent'
+import SearchComponent from './components/SearchComponent'
 import BackButton from '@/components/shared/BackButton'
 
 const SearchPage = async () => {

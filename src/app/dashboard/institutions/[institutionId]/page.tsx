@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import { getInstitutionById, getInstitutions } from '@/supabase/institutions'
 import React from 'react'
-import InstitutionDetailComponent from './InstitutionDetailComponent'
+import InstitutionDetailComponent from './components/InstitutionDetailComponent'
 import BackButton from '@/components/shared/BackButton'
 import { getCoursesByQuery } from '@/supabase/courses'
 
@@ -11,7 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import AddCourseForm from '../../courses/AddCourseForm'
+import AddCourseForm from '../../courses/components/AddCourseForm'
 
 
 const InstitutionDetailPage = async ({ params }: { params: { institutionId: string } }) => {

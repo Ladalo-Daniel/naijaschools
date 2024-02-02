@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import LessonDetailComponent from './components/LessonDetailComponent'
@@ -8,6 +8,7 @@ import { getLessonById, getLessonsByQuery } from '@/supabase/lessons'
 import NavigateLessonContext from '../../components/NavigateLessonContext'
 
 import type { Metadata, ResolvingMetadata } from 'next'
+import Loading from '@/app/dashboard/loading'
 type Props = {
   params: { lessonId: string, courseId: string },
   searchParams: { [key: string]: string | string[] | undefined }
@@ -43,7 +44,9 @@ const Page = async ({ params }: Props) => {
         </div>
 
         <section className="flex flex-col gap-4">
+          <Suspense fallback={<Loading />}>
             <LessonDetailComponent lessonId={params.lessonId} />
+          </Suspense>
         </section>
     </MaxWrapper>
     </NavigateLessonContext>

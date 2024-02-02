@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import CourseComponent from './CourseComponent'
+import CourseComponent from './components/CourseComponent'
 import BackButton from '@/components/shared/BackButton'
 
 const CoursesPage = async () => {
