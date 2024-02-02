@@ -11,7 +11,6 @@ import ChatProxy from './ChatProxy';
 import { getLastNItems, scrollToBottom } from '../utils';
 import ChatCrumb from './ChatCrumb';
 import { toast } from 'sonner';
-import NewChatButton from './NewChatButton';
 
 export default function AIChatComponent({ profile, chat }: { profile: User, chat?: Chat }) {
   const [prompt, setPrompt] = useState('');
@@ -108,7 +107,7 @@ export default function AIChatComponent({ profile, chat }: { profile: User, chat
                 )
             }
             
-            <section className='relative max-w-5xl bg-background custom-scrollbar right-0 left-0'>
+            <section className='relative max-w-5xl bg-background custom-scrollbar overflow-auto right-0 left-0'>
                 <ChatInputForm 
                     fetching={fetching}
                     onSubmit={onSubmit}
