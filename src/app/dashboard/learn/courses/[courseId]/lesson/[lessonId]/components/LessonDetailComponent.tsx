@@ -1,8 +1,9 @@
 import BackToTopButton from '@/app/dashboard/learn/components/BackToTopButton'
 import HeadingLinks from '@/app/dashboard/learn/markdown/HeadingLinks'
 import LessonMarkdown from '@/app/dashboard/learn/markdown/LessonMarkdown'
-import { getLessonById, getLessonsByQuery } from '@/supabase/lessons'
+import { getLessonById } from '@/supabase/lessons'
 import React from 'react'
+import NextPrevLessons from './NextPrevLessons'
 
 interface LessonComponentProps {
     lessonId: string,
@@ -28,6 +29,8 @@ const LessonDetailComponent: React.FC<LessonComponentProps> = async ({lessonId})
         <section className="fixed z-20 right-10 bottom-5">
             <BackToTopButton />
         </section>
+
+        <NextPrevLessons lesson={lesson} />
     </div>
   )
 }

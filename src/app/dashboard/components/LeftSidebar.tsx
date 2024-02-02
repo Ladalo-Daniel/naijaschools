@@ -16,9 +16,9 @@ const LeftSidebar = ({ profile }: { profile?: User }) => {
   return (
     <nav className='leftsidebar dark:bg-secondary shadow-lg z-50 min-h-screen bg-zinc-800 border border-r-gray-100 dark:border-r-gray-800 relative'>
       <div className="fixed h-full overflow-auto dark:bg-secondary bg-zinc-800 text-white flex flex-col gap-4 min-h-screen left-0 min-w-[250px]">
-      <Link href={'/'} className={'md:flex items-end p-4'}>
+      <Link href={'/'} className={'md:flex items-end p-4 gap-1'}>
         <Image src={'/logos/logo.png'} width={30} height={30} alt="logo" />
-        <h2 className="text-muted-foreground hidden md:block text-2xl -mt-2">aijaschools</h2>
+        <h2 className="text-muted-foreground hidden md:block text-2xl -mt-2">Naijaschools</h2>
       </Link>
         <div className='flex flex-col gap-6 overflow-auto custom-scrollbar w-full p-2'>
           {side_bar_links.map(link => (

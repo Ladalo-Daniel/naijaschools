@@ -1,5 +1,6 @@
+'use client'
+
 import { learn_urls } from '@/app/dashboard/urls'
-import { slugify } from '@/lib/utils'
 import { Course } from '@/supabase/courses'
 import { Lesson } from '@/supabase/lessons'
 import { Card } from '@nextui-org/card'

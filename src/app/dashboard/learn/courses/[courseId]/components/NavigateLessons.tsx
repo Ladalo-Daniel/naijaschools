@@ -21,8 +21,8 @@ const NavigateLessons: React.FC<NavigateLessonsProps> = ({ lessons, course }) =>
   return (
     <div className=''>
         <Sheet open={sheetOpen} onOpenChange={setSheet}>
-            <SheetTrigger asChild className='w-14 h-14 flex items-center justify-center rounded-full hover:bg-secondary hover:transition-all'>
-                <Menu size={20}/>
+            <SheetTrigger asChild className='w-14 h-14 flex items-center cursor-pointer justify-center rounded-full hover:bg-secondary hover:transition-all'>
+                <Menu size={15} className='w-8 h-8'/>
             </SheetTrigger>
           <SheetContent side={'right'} className='flex flex-col gap-3 flex-1 max-sm:w-full min-w-[280px]'>
             <h2 className='py-2 text-[18px] text-primary hover:transition-all'>{course?.name} ({course?.code})</h2>

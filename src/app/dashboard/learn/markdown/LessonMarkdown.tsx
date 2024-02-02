@@ -52,7 +52,7 @@ export default function LessonMarkdown({
 					return (
 						<ul
 							{...props}
-							className="text-xl py-2.5 px-2 list-disc transition-all no-underline"
+							className="text-lg py-1.5 px-8 list-disc transition-all no-underline"
 						/>
 					);
 				},
@@ -60,7 +60,7 @@ export default function LessonMarkdown({
 					return (
 						<ol
 							{...props}
-							className="text-xl py-2.5 px-2 list-decimal transition-all"
+							className="text-lg py-1.5 px-8 list-decimal transition-all"
 						/>
 					);
 				},
@@ -68,7 +68,15 @@ export default function LessonMarkdown({
 					return (
 						<li
 							{...props}
-							className="text-xl py-2.5 transition-all"
+							className="text-lg py-1.5 px-4 transition-all"
+						/>
+					);
+				},
+				p: ({ node, ...props }) => {
+					return (
+						<p
+							{...props}
+							className="text-lg transition-all"
 						/>
 					);
 				},
@@ -76,7 +84,7 @@ export default function LessonMarkdown({
 					return (
 						<a
 							{...props}
-							className="my-2 text-primary hover:underline transition-all"
+							className="my-1.5 text-primary hover:underline transition-all"
 						/>
 					);
 				},
@@ -84,7 +92,7 @@ export default function LessonMarkdown({
 					return (
 						<b
 							{...props}
-							className="my-2 text-primary transition-all font-bold"
+							className="my-1.5 text-primary transition-all font-bold"
 						/>
 					);
 				},
