@@ -38,7 +38,7 @@ export default function DeleteArticle({ article }: { article: Article }) {
         toast.success(state?.message)
         setOpen(false)
         router.refresh()
-        } else if (state?.message && !state?.success) {
+        } else if (state?.message && !state?.success) { 
         toast.error(state?.message)
         }
     }, [state])

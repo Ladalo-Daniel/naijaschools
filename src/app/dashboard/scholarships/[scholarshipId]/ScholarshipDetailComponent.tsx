@@ -3,10 +3,10 @@
 import { Scholarship } from '@/supabase/scholarships'
 import Image from 'next/image'
 import React from 'react'
-import ProcessedPost from '../../posts/ProcessedPost'
 import { Card } from '@/components/ui/card'
 import { shortMultiFormatDateString } from '@/lib/utils'
 import { Calendar, User } from 'lucide-react'
+import ProcessedScholarship from '../ProcessedScholarship'
 
 function ScholarshipDetailComponent({scholarship}: {scholarship: Scholarship}) {
    
@@ -26,7 +26,7 @@ function ScholarshipDetailComponent({scholarship}: {scholarship: Scholarship}) {
             </div>
         </div>
         <hr className=' mb-3' />
-        <ProcessedPost content={scholarship.content!} />
+        <ProcessedScholarship content={scholarship.content!} />
         </Card>
     </div>
   )

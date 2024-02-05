@@ -6,7 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Session } from '@supabase/supabase-js'
-import { z } from 'zod'
+import { string, z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { Scholarship } from '@/supabase/scholarships'
 import { ScholarshipSchema } from '@/lib/validators/scholarship'
@@ -16,7 +16,7 @@ import { useCreateUpdateScholarship } from '@/lib/react-query/scholarships'
 import { toast } from 'sonner'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
-function CreateScholarshipForm({session, scholarship}: {scholarship?: Scholarship ,session?: Pick<Session, "user">}) {
+function CreateScholarshipForm({session, scholarship, isUpdate}: {scholarship?: Scholarship, isUpdate?:boolean ,session?: Pick<Session, "user">}) {
     const [open, setOpen] = React.useState(false);
 
     const { mutate: updateCreateScholarship, isPending } = useCreateUpdateScholarship()
@@ -24,11 +24,11 @@ function CreateScholarshipForm({session, scholarship}: {scholarship?: Scholarshi
 
     const form = useForm<z.infer<typeof ScholarshipSchema>>({
         resolver: zodResolver(ScholarshipSchema),
-        defaultValues: {
+        defaultValues: { 
             author: session?.user.id!,
             content: scholarship?.content ? scholarship.content : "",
             title: scholarship?.title ? scholarship.title : "",
-            tags: scholarship?.tags ? scholarship.tags : "",
+            tags: scholarship?.tags  ? scholarship.tags : "",
             image: scholarship?.image_url ? scholarship.image_url : "", 
         },
     })
@@ -37,13 +37,13 @@ function CreateScholarshipForm({session, scholarship}: {scholarship?: Scholarshi
 
     function onSubmit(values: z.infer<typeof ScholarshipSchema>) {
         try {
-             updateCreateScholarship({...values,  image: values.image || [], scholarshipId: scholarship?.id!,},
+             updateCreateScholarship({...values,  image: values.image || [], scholarshipId: scholarship?.id!  },
              {
                 onSuccess: () => {
                     form.reset()
-                    toast.success("Success!")
+                    toast.success(`${isUpdate ? "Edited successfully" : "Created successfully"}`)
                     setOpen(false)
-                    router.refresh()
+                    return scholarship?.id ? router.refresh() : router.refresh()
                 }
              });
           } catch (error) {
@@ -52,14 +52,17 @@ function CreateScholarshipForm({session, scholarship}: {scholarship?: Scholarshi
       }
 
 
+    
+
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline">Add Scholarship</Button>
+        <Button variant="outline">{isUpdate ? "Edit" : "Create"}</Button>
       </SheetTrigger>
       <SheetContent className="sm:max-w-[425px] max-sm:w-full overflow-auto">
         <SheetHeader>
-          <SheetTitle>Add Scholarship</SheetTitle>
+          <SheetTitle>{isUpdate ? "Update Scholarship" : "Add Scholarship"}</SheetTitle>
         </SheetHeader>
         <div className="w-full max-w-3xl">
          <Form {...form}>
@@ -71,7 +74,7 @@ function CreateScholarshipForm({session, scholarship}: {scholarship?: Scholarshi
                     <FormItem>
                     <FormLabel>Add image</FormLabel>
                     <FormControl>
-                        <PostFileUploader fieldChange={field?.onChange} mediaUrl={scholarship?.image_url as string} />
+                        <PostFileUploader fieldChange={field?.onChange} mediaUrl={scholarship?.image_url as string } />
                     </FormControl>
                     <FormMessage />
                     </FormItem>
@@ -116,7 +119,16 @@ function CreateScholarshipForm({session, scholarship}: {scholarship?: Scholarshi
                     </FormItem>
                 )}
                 />
-                <Button variant="outline" color="primary" type="submit">{isPending ? "Submiting" : "Submit"}</Button>
+                {
+                    isUpdate ?
+                    (
+                     <Button variant="outline" color="primary" type="submit">{isPending ? "Editing" : "Edit"}</Button>
+                     
+                     ) :
+                     (
+                    <Button variant="outline" color="primary" type="submit">{isPending ? "Creating" : "Create"}</Button>
+                     )
+                }
             </form>
          </Form>
        </div>

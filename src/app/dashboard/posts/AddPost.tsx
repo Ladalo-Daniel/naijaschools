@@ -19,7 +19,7 @@ import { PostContext } from './PostProvider'
 import { useSendReplyNotication } from '@/lib/react-query/notifications'
 
 const AddPost = ({ user, setOpen, post, isUpdate}: { 
-    user: User, 
+    user: User,
     post?: Post, 
     isUpdate?: boolean, 
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>

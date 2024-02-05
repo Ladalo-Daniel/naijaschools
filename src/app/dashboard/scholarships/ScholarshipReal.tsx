@@ -3,11 +3,14 @@ import { ScholarshipList } from '@/supabase/scholarships'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { Calendar, Tag, User } from 'lucide-react'
-import ProcessedPost from '../posts/ProcessedPost'
+import { Calendar, Tag, UserIcon } from 'lucide-react'
 import { shortMultiFormatDateString } from '@/lib/utils'
+import ProcessedScholarship from './ProcessedScholarship'
+import EditScholarship from './EditScholarship'
+import DeleteScholarship from './DeleteScholarship'
+import { User } from '@/supabase/user'
 
- function ScholarshipReal({scholarships}: {scholarships: ScholarshipList}) {
+ function ScholarshipReal({scholarships, profile}: {scholarships: ScholarshipList, profile: User}) {
 
   return (
     <div className=''>
@@ -20,10 +23,10 @@ import { shortMultiFormatDateString } from '@/lib/utils'
                   <Tag className=' text-green-600' size={14} />
                   <Link href="#" className=' text-medium hover:text-yellow-600'>{item.tags}</Link>
                 </div>
-                <ProcessedPost content={`${item.content!.slice(0, 200)}...`} /> <Link href={`/dashboard/scholarships/${item.id}`} className=' text-yellow-700'>READ MORE</Link>
+                <ProcessedScholarship content={`${item.content!.slice(0, 200)}...`} /> <Link href={`/dashboard/scholarships/${item.id}`} className=' text-yellow-700'>READ MORE</Link>
                 <div className=' flex items-center flex-row justify-between'>
                   <div className=' flex items-center flex-row gap-2 shadow-inner px-2 py-1 bg-zinc-100 dark:bg-zinc-800  rounded-md'>
-                    <User className=' text-green-500' size={16} />
+                    <UserIcon className=' text-green-500' size={16} />
                     <h3>By Admin</h3>
                   </div>
                   <div className=' flex items-center flex-row gap-2 shadow-inner px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-md'>
@@ -31,6 +34,14 @@ import { shortMultiFormatDateString } from '@/lib/utils'
                     <h3>{shortMultiFormatDateString(item.updated_at!)} ago</h3>
                   </div>
                 </div>
+                {profile?.role === "admin" && 
+                 (
+                 <div className=' flex flex-row items-center justify-between'>
+                   <EditScholarship scholarship={item} />
+                   <DeleteScholarship scholarship={item} />
+                </div>
+                )
+                }
                 </div>
             </Card>
         ))}
