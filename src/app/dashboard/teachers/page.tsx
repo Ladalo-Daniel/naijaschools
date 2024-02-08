@@ -2,7 +2,7 @@ import MaxWrapper from '@/components/MaxWrapper'
 import { getProfile } from '@/supabase/user'
 import { redirect } from 'next/navigation'
 import React from 'react'
-import TeacherComponent from './TeacherComponent'
+import TeacherComponent from './components/TeacherComponent'
 import BackButton from '@/components/shared/BackButton'
 
 const TeachersPage = async () => {

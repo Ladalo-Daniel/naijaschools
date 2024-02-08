@@ -15,6 +15,7 @@ const ScholarshipPage = async () => {
 
 
   const {data: scholarships} = await getScholarships()
+  
   return (
     <MaxWrapper className='max-w-7xl flex-1 bg-background'>
        <div className=' flex justify-between items-center flex-row'>

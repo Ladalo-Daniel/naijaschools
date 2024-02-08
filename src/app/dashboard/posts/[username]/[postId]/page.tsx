@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import React from 'react'
-import PostDetailComponent from './PostDetailComponent'
+import PostDetailComponent from './components/PostDetailComponent'
 import { Post, getPostById } from '@/supabase/posts'
 import { User, getProfile } from '@/supabase/user'
 import { Metadata } from 'next'

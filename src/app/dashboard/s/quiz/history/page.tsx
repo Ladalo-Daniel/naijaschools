@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React, { Suspense } from 'react'
-import QuizHistoryComponent from './QuizHistoryComponent'
+import QuizHistoryComponent from './components/QuizHistoryComponent'
 import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
 import BackButton from '@/components/shared/BackButton'
 

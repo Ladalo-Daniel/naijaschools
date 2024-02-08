@@ -18,7 +18,7 @@ const Pro_IntroSection: React.FC<Pro_IntroProps> = () => {
                 <Button 
                     className='w-fit hover:transition-all hover:opacity-60 hover:animate-in mt-10' 
                     as={Link} 
-                    href='#' size='lg' variant='solid' color='primary'>Get Started</Button>
+                    href='/dashboard' size='lg' variant='solid' color='primary'>Get Started</Button>
             </div>
             <div className="flex-1">
                 <Image

@@ -89,3 +89,13 @@ export const pluralize = (value: number) => {
   if (value === 1) return ""
   else return 's'
 }
+
+export const slugify = (content: string) => {
+  const cleaned = content
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .toLowerCase()
+
+  return cleaned
+}

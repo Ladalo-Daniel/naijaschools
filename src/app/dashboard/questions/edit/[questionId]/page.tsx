@@ -2,7 +2,7 @@ import MaxWrapper from '@/components/MaxWrapper'
 import React, { Suspense } from 'react'
 import { CourseList, getCourses } from '@/supabase/courses'
 import { InstitutionList, getInstitutions } from '@/supabase/institutions'
-import QuestionEditComponent from './QuestionEditComponent'
+import QuestionEditComponent from './components/QuestionEditComponent'
 import Loading from '@/app/dashboard/loading'
 import BackButton from '@/components/shared/BackButton'
 

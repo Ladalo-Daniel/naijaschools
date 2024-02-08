@@ -12,7 +12,7 @@ const Layout = async ({ children }: { children: React.ReactNode }): Promise<Reac
       <TopNavbar />
       <LeftSidebar profile={profile?.data as User} />
       <>
-        <main className='flex min-h-screen dark:bg-background bg-slate-100 flex-1 gap-4 h-full'>
+        <main className='flex min-h-screen dark:bg-background flex-1 gap-4 h-full'>
           { children }
         </main>
       </>

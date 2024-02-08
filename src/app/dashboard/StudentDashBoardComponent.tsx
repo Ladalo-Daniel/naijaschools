@@ -1,15 +1,23 @@
 import { getProfile } from '@/supabase/user'
 import { Card } from '@nextui-org/card'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { BookPlusIcon, BrainCircuit, ChevronRight, HistoryIcon, Podcast, SparklesIcon } from 'lucide-react'
+import { BookA, BookPlusIcon, BrainCircuit, ChevronRight, HistoryIcon, Podcast, SparklesIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { learn_urls } from './urls'
 
 const StudentDashBoardComponent = async () => {
   const profile = await getProfile()
 
   const list = [
+    {
+      tip: "Learn",
+      href: learn_urls(),
+      cn: "dark:from-fuschia-700 dark:to-fuschia-900 from-fuschia-300 to-fuschia-500",
+      icon: BookA,
+      image_url: '/s_dashboard/courses.jpg'
+    },
     {
       tip: "Courses",
       href: "/dashboard/s/courses",

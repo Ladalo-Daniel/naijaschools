@@ -15,11 +15,12 @@ import { useRouter } from 'next/navigation'
 import { useCreateUpdateScholarship } from '@/lib/react-query/scholarships'
 import { toast } from 'sonner'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Edit } from 'lucide-react'
 
-function CreateScholarshipForm({session, scholarship, isUpdate}: {scholarship?: Scholarship, isUpdate?:boolean ,session?: Pick<Session, "user">}) {
+function CreateScholarshipForm({session, scholarship, isUpdate, isEdit}: {scholarship?: Scholarship, isEdit?:boolean , isUpdate?:boolean ,session?: Pick<Session, "user">}) {
     const [open, setOpen] = React.useState(false);
 
-    const { mutate: updateCreateScholarship, isPending } = useCreateUpdateScholarship()
+    const { mutateAsync: updateCreateScholarship, isPending } = useCreateUpdateScholarship()
     const router = useRouter()
 
     const form = useForm<z.infer<typeof ScholarshipSchema>>({
@@ -43,7 +44,7 @@ function CreateScholarshipForm({session, scholarship, isUpdate}: {scholarship?: 
                     form.reset()
                     toast.success(`${isUpdate ? "Edited successfully" : "Created successfully"}`)
                     setOpen(false)
-                    return scholarship?.id ? router.refresh() : router.refresh()
+                    isEdit  ? router.refresh() : router.refresh()
                 }
              });
           } catch (error) {
@@ -58,7 +59,7 @@ function CreateScholarshipForm({session, scholarship, isUpdate}: {scholarship?: 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline">{isUpdate ? "Edit" : "Create"}</Button>
+        <Button variant="outline">{isUpdate ? <Edit size={16} className=' text-green-600' /> : "Create"}</Button>
       </SheetTrigger>
       <SheetContent className="sm:max-w-[425px] max-sm:w-full overflow-auto">
         <SheetHeader>

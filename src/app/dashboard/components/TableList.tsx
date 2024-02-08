@@ -5,7 +5,7 @@ import { LucideEye } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AdminStudentDetailView from '../students/AdminStudentDetailView'
+import AdminStudentDetailView from '../students/components/AdminStudentDetailView'
 import { UserList, getProfile } from '@/supabase/user'
 
 
@@ -24,7 +24,7 @@ const TableList = async ({ table, role }: { table: UserList, role?: "students" |
                     <TableHead >Email</TableHead>
                     <TableHead >Institution</TableHead>
                     <TableHead >CommunityID</TableHead>
-                    <TableHead >DOB</TableHead>
+                    <TableHead >Age Range</TableHead>
                     <TableHead >Actions</TableHead>
                 </TableRow>
             </TableHeader>
@@ -47,7 +47,7 @@ const TableList = async ({ table, role }: { table: UserList, role?: "students" |
                     <TableCell >{row.email!}</TableCell>
                     <TableCell >{row.institution || '-'}</TableCell>
                     <TableCell >{row.community_id!}</TableCell>
-                    <TableCell >{format(new Date(row?.dob!), "yyyy-mm-dd") || "-"}</TableCell>
+                    <TableCell >{row?.dob!}</TableCell>
                     <TableCell >
                         
                         {profile?.data?.role === "admin" && <Link href={`/dashboard/${role}?id=${row?.id}`}>

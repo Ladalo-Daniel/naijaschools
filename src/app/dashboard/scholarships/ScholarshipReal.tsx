@@ -1,24 +1,45 @@
+"use client"
 import { Card } from '@/components/ui/card'
 import { ScholarshipList } from '@/supabase/scholarships'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import { Calendar, Tag, UserIcon } from 'lucide-react'
+import React, { useState } from 'react'
+import { ArrowLeft, ArrowRight, Calendar, Tag, UserIcon } from 'lucide-react'
 import { shortMultiFormatDateString } from '@/lib/utils'
 import ProcessedScholarship from './ProcessedScholarship'
 import EditScholarship from './EditScholarship'
 import DeleteScholarship from './DeleteScholarship'
 import { User } from '@/supabase/user'
+import { Button } from '@/components/ui/button'
 
  function ScholarshipReal({scholarships, profile}: {scholarships: ScholarshipList, profile: User}) {
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const scholarshipsPerPage = 3
+
+  const startIndex = (currentPage - 1) * scholarshipsPerPage; //0
+  const endIndex = startIndex + scholarshipsPerPage;          //3
+  const currentScholarships = scholarships.slice(startIndex, endIndex);
+
+  
+
+
+  const handleNext = () =>{
+    setCurrentPage(currentPage + 1)
+  }
+  const handlePrev = () =>{
+    setCurrentPage(currentPage - 1)
+  }
+
+  
+
   return (
     <div className=''>
-        {scholarships?.map((item, idx)=> (
+        {currentScholarships?.map((item, idx)=> (
             <Card key={idx} className=' flex flex-col md:flex-row gap-5 p-5 mb-5'>
                 <Image src={item.image_url as string} width={1000} height={1000} alt='scholarships-image' className=' md:w-1/2 w-full h-[300px] rounded-md object-cover hover:translate-y-1' />
                 <div className=' flex flex-col gap-3 md:w-1/2'>
-                <Link href={`/dashboard/scholarships/${item.id}`} className=' hover:text-yellow-600 font-semibold'>{idx + 1}. {item.title}</Link>
+                <Link href={`/dashboard/scholarships/${item.id}`} className=' hover:text-yellow-600 font-semibold'> {item.title}</Link>
                 <div className=' flex flex-row gap-2 items-center'>
                   <Tag className=' text-green-600' size={14} />
                   <Link href="#" className=' text-medium hover:text-yellow-600'>{item.tags}</Link>
@@ -34,6 +55,7 @@ import { User } from '@/supabase/user'
                     <h3>{shortMultiFormatDateString(item.updated_at!)} ago</h3>
                   </div>
                 </div>
+           {/* EDIT_DELETE_BUTTONS */}
                 {profile?.role === "admin" && 
                  (
                  <div className=' flex flex-row items-center justify-between'>
@@ -42,9 +64,26 @@ import { User } from '@/supabase/user'
                 </div>
                 )
                 }
+
                 </div>
             </Card>
         ))}
+        {/* NEXT_PREV_PAGINATION */}
+       <section className="flex py-6 w-full items-center justify-center gap-5">
+        <div className=''>
+            <Button onClick={handlePrev} disabled={startIndex === 0}>
+              <ArrowLeft size={12} className=' mr-2' />
+              Prev
+            </Button>
+        </div>
+        <div className=''>
+            <Button onClick={handleNext} disabled={endIndex >= scholarships.length}>
+              Next
+              <ArrowRight size={12} className=' ml-2' />
+            </Button>
+        </div>
+    </section>
+
     </div>
   )
 }

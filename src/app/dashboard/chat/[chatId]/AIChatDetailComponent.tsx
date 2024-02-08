@@ -5,10 +5,10 @@ import { useChat } from 'ai/react';
 import { User } from '@/supabase/user';
 import { Chat, createUpdateChat } from '@/supabase/chats';
 import { useRouter } from 'next/navigation';
-import ChatInputForm from '../ChatInputForm';
+import ChatInputForm from '../components/ChatInputForm';
 import { chat } from '../types'
-import { getLastNItems } from '../utils';
-import ChatCrumb from '../ChatCrumb';
+import { getLastNItems, scrollToBottom } from '../utils';
+import ChatCrumb from '../components/ChatCrumb';
 
 export default function AIChatComponent({ profile, chat }: { profile: User, chat: Chat }) {
   const [prompt, setPrompt] = useState('');
@@ -33,6 +33,7 @@ export default function AIChatComponent({ profile, chat }: { profile: User, chat
         const response = lastMessage?.role === 'assistant' ? lastMessage?.content : null
         setFetching(false)
         handlePromptSubmit(response!, 'assistant')
+        scrollToBottom()
     },
   });
 

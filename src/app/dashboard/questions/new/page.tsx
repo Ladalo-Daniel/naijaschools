@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React, { Suspense } from 'react'
 import { InstitutionList, getInstitutions } from '@/supabase/institutions'
-import NewQuestionComponent from './NewQuestionComponent'
+import NewQuestionComponent from './components/NewQuestionComponent'
 import { CourseList, getCourses } from '@/supabase/courses'
 import SelectCourseSkeleton from '../../components/skeletons/SelectCourseSkeleton'
 import BackButton from '@/components/shared/BackButton'

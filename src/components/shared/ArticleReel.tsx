@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Markdown from 'react-markdown'
 import { Button } from '@nextui-org/button'
-import DeleteArticle from '@/app/dashboard/articles/DeleteArticle'
+import DeleteArticle from '@/app/dashboard/articles/components/DeleteArticle'
 import { Edit2 } from 'lucide-react'
 import { useGetProfile } from '@/lib/react-query'
 

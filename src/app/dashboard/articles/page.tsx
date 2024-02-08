@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React, { Suspense } from 'react'
-import AdminArticleComponent from './AdminArticleComponent'
+import AdminArticleComponent from './components/AdminArticleComponent'
 import { getArticles } from '@/supabase/articles'
 import BackButton from '@/components/shared/BackButton'
 import ArticleSkeleton from '@/components/skeletons/ArticleSkeleton'

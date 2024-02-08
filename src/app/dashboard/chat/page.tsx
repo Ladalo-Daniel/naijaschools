@@ -1,9 +1,9 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import AIChatComponent from './AIChatComponent'
+import AIChatComponent from './components/AIChatComponent'
 import { User, getProfile } from '@/supabase/user'
 import { Metadata } from 'next'
-import ChatHistorySheet from './ChatHistorySheet'
+import ChatHistorySheet from './components/ChatHistorySheet'
 
 export const metadata: Metadata = {
     title: "New Chat | Naijaschools AI",

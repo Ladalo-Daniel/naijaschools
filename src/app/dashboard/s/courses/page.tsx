@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import StudentsCoursesComponent from './StudentsCoursesComponent'
+import StudentsCoursesComponent from './components/StudentsCoursesComponent'
 import { User, getProfile } from '@/supabase/user'
 import { CourseList, getCourses } from '@/supabase/courses'
 import { InstitutionList, getInstitutions } from '@/supabase/institutions'

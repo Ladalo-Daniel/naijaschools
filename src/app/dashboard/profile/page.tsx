@@ -13,7 +13,7 @@ import {
 import AccountForm from '@/app/(auth)/account-form'
 import { Pencil, User2Icon } from 'lucide-react'
 import { getUserSession } from '@/supabase/session'
-import ProfileCard from './ProfileCard'
+import ProfileCard from './components/ProfileCard'
 import { getProfile } from '@/supabase/user'
 import { getInstitutions } from '@/supabase/institutions'
 import BackButton from '@/components/shared/BackButton'

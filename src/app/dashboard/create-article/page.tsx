@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import CreateArticleComponent from './CreateArticleComponent'
+import CreateArticleComponent from './components/CreateArticleComponent'
 import { getUserSession } from '@/supabase/session'
 import BackButton from '@/components/shared/BackButton'
 

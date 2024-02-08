@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useChat } from 'ai/react';
 import ChatMarkdown from '@/components/shared/ChatMarkdown';
-import ChatInputForm from './ChatInputForm';
+import ChatInputForm from './components/ChatInputForm';
 import { Avatar } from '@nextui-org/avatar';
 import { User } from '@/supabase/user';
 

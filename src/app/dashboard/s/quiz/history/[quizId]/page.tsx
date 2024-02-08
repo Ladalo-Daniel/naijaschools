@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import { QuizQuestionList, getQuizById } from '@/supabase/quiz'
 import React from 'react'
-import QuizResults from '../../QuizResults'
+import QuizResults from '../../components/QuizResults'
 import { Metadata } from 'next'
 import { getCourseById } from '@/supabase/courses'
 import { redirect } from 'next/navigation'

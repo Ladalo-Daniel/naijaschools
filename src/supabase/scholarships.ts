@@ -107,10 +107,21 @@ export async function createUpdateScholarship(
 }
 
 
-export async function deleteScholarship(id:string) {
+export async function deleteScholarship(prevState: any, formData:FormData) {
     const { error } = await supabaseClient.from("scholarships")
     .delete()
-    .eq("id", id)
+    .eq("id", formData.get("id") as string)
 
-    if(error) throw error
+    if (error)
+      return {
+        message: error.message,
+        success: false,
+        pending: false
+      }
+    
+    return {
+      message: 'Success! Scholarship has been deleted.',
+      success: true,
+      pending: false
+    }
 }

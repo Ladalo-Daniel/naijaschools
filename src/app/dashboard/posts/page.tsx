@@ -1,6 +1,6 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import React from 'react'
-import PostComponent from './PostComponent'
+import PostComponent from './components/PostComponent'
 import BackButton from '@/components/shared/BackButton'
 import { Metadata } from 'next'
 import { fetchInitialPosts } from '@/supabase/posts'

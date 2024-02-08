@@ -20,12 +20,21 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
       <SheetTrigger asChild>
         <ShadButton variant={'ghost'} className='flex items-center gap-2 md:hidden'><Menu size={20} /></ShadButton>
       </SheetTrigger>
-      <SheetContent className='md:hidden min-h-screen overflow-auto mt-0 pt-0 bg-zinc-200 dark:bg-secondary' side={'left'}>
+      <SheetContent className='md:hidden min-h-screen overflow-auto mt-0 pt-0 bg-zinc-800 text-white dark:bg-secondary' side={'left'}>
         <SheetHeader className='flex flex-col flex-1 items-start pt-0 mt-0'>
           <SheetTitle>
-          <Link href={'/'} className={'md:hidden'}>
-            <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
-          </Link>
+          <div className="justify-between md:hidden items-center gap-4 my-2.5">
+            <Link href={'/'} passHref>
+              <Image 
+                src={'/logos/logo.png'}
+                width={500}
+                height={500}
+                quality={100}
+                alt='Naijaschools logo'
+                className='w-6 h-6 mr-14'
+              />
+            </Link>
+          </div>
           </SheetTitle>
         </SheetHeader>
         <div className='flex flex-col gap-6 overflow-auto custom-scrollbar'>

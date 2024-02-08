@@ -8,15 +8,16 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import MobileActions from './MobileActions'
 import { ModeToggle } from '@/components/ModeToggle'
-import NavSearchBar from '../search/NavSearchBar'
-import NotificationBadge from '../notifications/NotificationBadge'
+import NavSearchBar from '../search/components/NavSearchBar'
+import NotificationBadge from '../notifications/components/NotificationBadge'
 import { NotificationList, getRecentNotifications } from '@/supabase/notifications'
+import SignOut from '@/components/shared/SignOut'
 
 const TopNavbar = async () => {
   const profile = await getProfile()
   const {data: notifications} = await getRecentNotifications(profile?.data?.username!)
   return (
-    <nav className='bg-gray-200 backdrop-blur-md bg-transparent px-2 flex md:px-10 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-40 h-16 border-b border-r-gray-600'>
+    <nav className='bg-gray-200 backdrop-blur-md bg-transparent shadow-md px-2 flex md:px-10 items-center justify-between bg-gradient-to-tr fixed top-0 w-full z-40 h-16 border-b border-r-gray-600'>
       <Link href={'/'} className={'md:block hidden'}>
         <Image src={'/images/logt2.png'} width={100} height={30} alt="logo" />
       </Link>
@@ -49,12 +50,9 @@ const TopNavbar = async () => {
         <Link href={'/dashboard/profile'} className='hidden md:block'>
           <Avatar src={profile?.data?.image_url || ""} name={profile?.data?.username || ""} color='primary' />
         </Link>
-        <form action={'/auth/signout'} method='post' className='hidden md:block'>
-          <Button className={'items-center flex  gap-2'} variant={'outline'} size={'sm'} type='submit'>
-            <span>Sign Out</span>
-            <ArrowRight size={15} className='text-rose-500'/>
-          </Button>
-        </form>
+        <div className="hidden md:block">
+          <SignOut content/>
+        </div>
 
         {/** ======= Mobile ====== */}
         <MobileActions profile={profile?.data as User} />
