@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button'
  function ScholarshipReal({scholarships, profile}: {scholarships: ScholarshipList, profile: User}) {
 
   const [currentPage, setCurrentPage] = useState(1)
-  const scholarshipsPerPage = 3
+  const scholarshipsPerPage = 2
 
   const startIndex = (currentPage - 1) * scholarshipsPerPage; //0
   const endIndex = startIndex + scholarshipsPerPage;          //3

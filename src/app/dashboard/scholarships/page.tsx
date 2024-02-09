@@ -6,6 +6,7 @@ import { getUserSession } from '@/supabase/session'
 import { getScholarships } from '@/supabase/scholarships'
 import ScholarshipReal from './ScholarshipReal'
 import { getProfile } from '@/supabase/user'
+import BackToTopButton from '../learn/components/BackToTopButton'
 
 
 
@@ -15,7 +16,7 @@ const ScholarshipPage = async () => {
 
 
   const {data: scholarships} = await getScholarships()
-  
+
   return (
     <MaxWrapper className='max-w-7xl flex-1 bg-background'>
        <div className=' flex justify-between items-center flex-row'>
