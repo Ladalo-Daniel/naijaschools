@@ -26,7 +26,7 @@ function CreateScholarshipForm({session, scholarship, isUpdate, isEdit}: {schola
     const form = useForm<z.infer<typeof ScholarshipSchema>>({
         resolver: zodResolver(ScholarshipSchema),
         defaultValues: { 
-            author: session?.user.id!,
+            author: session?.user.id! || scholarship?.author!,
             content: scholarship?.content ? scholarship.content : "",
             title: scholarship?.title ? scholarship.title : "",
             tags: scholarship?.tags  ? scholarship.tags : "",
