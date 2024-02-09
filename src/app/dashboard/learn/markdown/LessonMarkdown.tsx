@@ -113,7 +113,7 @@ export default function LessonMarkdown({
 							width={500}
 							height={500}
 							quality={100}
-							className="my-2 transition-all min-w-60 max-w-3xl rounded-sm"
+							className="my-2 transition-all min-w-60 max-w-3xl max-sm:w-[250px] rounded-sm"
 						/>
 					);
 				},

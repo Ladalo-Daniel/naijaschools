@@ -6,13 +6,16 @@ import React from 'react'
 import { Card } from '@/components/ui/card'
 import { shortMultiFormatDateString } from '@/lib/utils'
 import { Calendar, User } from 'lucide-react'
-import ProcessedScholarship from '../ProcessedScholarship'
+import ProcessedScholarship from '../../components/ProcessedScholarship'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 
 function ScholarshipDetailComponent({scholarship}: {scholarship: Scholarship}) {
    
   return (
     <div className=' flex flex-col gap-4 mt-5'>
-        <Image src={scholarship.image_url as string} width={1000} height={1000} className=' w-full rounded-md' alt='scholarship-detail-page-image' />
+      <AspectRatio ratio={16/9}>
+        <Image src={scholarship.image_url as string} fill className=' w-full object-cover rounded-md' alt='scholarship-detail-page-image' />
+      </AspectRatio>
         <h1 className=' font-bold text-2xl'>{scholarship.title}</h1>
         <Card className=' p-5'>
         <div className=' flex items-center flex-row justify-between my-5'>

@@ -5,7 +5,7 @@ import { Scholarship } from '@/supabase/scholarships'
 function EditScholarship({scholarship}: {scholarship: Scholarship}) {
   return (
     <>
-      <CreateScholarshipForm isUpdate isEdit scholarship={scholarship} />
+      <CreateScholarshipForm isUpdate isEdit scholarship={scholarship}/>
     </>
   )
 }
