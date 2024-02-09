@@ -80,7 +80,7 @@ const PostCard = ({ post, isReply }: { post: Post, isReply?: boolean }) => {
             </div>
         </CardHeader>
         <CardBody as={Link} href={`/dashboard/posts/${author?.data?.username}/${post.id}`} className="flex hover:opacity-60 hover:transition-all flex-col px-0">
-          <ProcessedPost content={post?.content!} />
+          <ProcessedPost content={post?.content!} /> 
         </CardBody>
         {post.image ? <AspectRatio ratio={5 / 7}>
           <ImageView post={post} />

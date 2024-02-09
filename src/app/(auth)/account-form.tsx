@@ -273,7 +273,7 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
               </FormControl>
               <FormDescription>
                 Tell us more about yourself.
-              </FormDescription>
+              </FormDescription> 
               <FormMessage />
             </FormItem>
           )}

@@ -20,7 +20,7 @@ import DeleteButton from "@/app/dashboard/components/DeleteButton"
 import { useRouter } from "next/navigation"
 import { deleteArticle } from "../articles.actions"
 
-
+   
 const initialState = {
     message: "",
     success: false,
@@ -38,7 +38,7 @@ export default function DeleteArticle({ article }: { article: Article }) {
         toast.success(state?.message)
         setOpen(false)
         router.refresh()
-        } else if (state?.message && !state?.success) {
+        } else if (state?.message && !state?.success) { 
         toast.error(state?.message)
         }
     }, [state])

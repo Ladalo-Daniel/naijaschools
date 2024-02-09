@@ -41,7 +41,7 @@ const ArticleDetailComponent = async ({ article }: { article: Article }) => {
             Last updated <b>{shortMultiFormatDateString(article.updated_at!)}</b> ago.
         </div>
     </div>
-  )
+  ) 
 }
 
 export default ArticleDetailComponent

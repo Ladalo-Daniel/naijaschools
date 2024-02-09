@@ -8,6 +8,8 @@ export enum QUERY_KEYS {
     update_quiz_data = "update_quiz_data",
     create_update_article_data = "create_update_article_data",
     get_articles = "get_articles",
+    create_update_scholarship_data = "create_update_scholarship_data",
+    get_scholarships = "get_scholarships",
     
     
     get_quiz_explanations = "get_quiz_explanations",
