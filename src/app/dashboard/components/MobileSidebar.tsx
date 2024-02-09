@@ -37,6 +37,7 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
           </div>
           </SheetTitle>
         </SheetHeader>
+        <div className="overflow-auto min-h-screen">
         <div className='flex flex-col gap-6 overflow-auto custom-scrollbar'>
           {side_bar_links.map(link => (
             <SheetClose key={link.tooltip} asChild>
@@ -49,6 +50,7 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
                 </Link>
             </SheetClose>
           ))}
+        </div>
         </div>
       </SheetContent>
       </Sheet>
