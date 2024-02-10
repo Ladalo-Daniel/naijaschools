@@ -1,10 +1,10 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import React from 'react'
-import CreateScholarshipForm from './CreateScholarshipForm'
+import CreateScholarshipForm from './components/CreateScholarshipForm'
 import { getUserSession } from '@/supabase/session'
 import { getScholarships } from '@/supabase/scholarships'
-import ScholarshipReal from './ScholarshipReal'
+import ScholarshipReal from './components/ScholarshipReal'
 import { getProfile } from '@/supabase/user'
 import BackToTopButton from '../learn/components/BackToTopButton'
 

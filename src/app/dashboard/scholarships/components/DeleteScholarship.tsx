@@ -13,7 +13,7 @@ import {
 import { Button } from "@nextui-org/button"
 import { Trash } from "lucide-react"
 import React from "react"
-import DeleteButton from "../components/DeleteButton"
+import DeleteButton from "../../components/DeleteButton"
 import { Scholarship, deleteScholarship } from "@/supabase/scholarships"
 import { useFormState } from "react-dom"
 import { useRouter } from "next/navigation"

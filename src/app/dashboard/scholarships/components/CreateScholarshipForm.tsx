@@ -6,7 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Session } from '@supabase/supabase-js'
-import { string, z } from 'zod'
+import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { Scholarship } from '@/supabase/scholarships'
 import { ScholarshipSchema } from '@/lib/validators/scholarship'
@@ -42,19 +42,15 @@ function CreateScholarshipForm({session, scholarship, isUpdate, isEdit}: {schola
              {
                 onSuccess: () => {
                     form.reset()
+                    isEdit  ? router.refresh() : router.refresh()
                     toast.success(`${isUpdate ? "Edited successfully" : "Created successfully"}`)
                     setOpen(false)
-                    isEdit  ? router.refresh() : router.refresh()
                 }
              });
           } catch (error) {
             console.error("Error submitting article:", error);
           }
       }
-
-
-    
-
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -123,11 +119,11 @@ function CreateScholarshipForm({session, scholarship, isUpdate, isEdit}: {schola
                 {
                     isUpdate ?
                     (
-                     <Button variant="outline" color="primary" type="submit">{isPending ? "Editing" : "Edit"}</Button>
+                     <Button variant="outline" color="primary" type="submit">{isPending ? "Editing..." : "Edit"}</Button>
                      
                      ) :
                      (
-                    <Button variant="outline" color="primary" type="submit">{isPending ? "Creating" : "Create"}</Button>
+                    <Button variant="outline" color="primary" type="submit">{isPending ? "Creating..." : "Create"}</Button>
                      )
                 }
             </form>

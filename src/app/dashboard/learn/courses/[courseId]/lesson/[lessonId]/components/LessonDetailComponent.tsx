@@ -12,7 +12,7 @@ interface LessonComponentProps {
 const LessonDetailComponent: React.FC<LessonComponentProps> = async ({lessonId}) => {
     const { data: lesson } = await getLessonById(lessonId)
   return (
-    <div className='flex flex-col gap-3 py-4 relative'>
+    <div className='flex flex-col gap-3 py-4 relative overflow-auto'>
         <h2 className="text-4xl text-primary py-4">{lesson.title}</h2>
         
         <HeadingLinks markdown={lesson?.content!} />

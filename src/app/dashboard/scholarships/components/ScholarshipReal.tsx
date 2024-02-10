@@ -18,8 +18,8 @@ import { useRouter } from 'next/navigation'
   const [currentPage, setCurrentPage] = useState(1)
   const scholarshipsPerPage = 2
 
-  const startIndex = (currentPage - 1) * scholarshipsPerPage; //0
-  const endIndex = startIndex + scholarshipsPerPage;          //3
+  const startIndex = (currentPage - 1) * scholarshipsPerPage
+  const endIndex = startIndex + scholarshipsPerPage
   const currentScholarships = scholarships.slice(startIndex, endIndex);
 
   
@@ -76,7 +76,7 @@ import { useRouter } from 'next/navigation'
     <div className=''>
         {currentScholarships?.map((item, idx)=> (
             <Card key={idx} className=' flex flex-col md:flex-row gap-5 p-5 mb-5'>
-                <Image src={item.image_url as string} width={1000} height={1000} alt='scholarships-image' className=' md:w-1/2 w-full h-[300px] rounded-md object-cover hover:translate-y-1' />
+                <Image src={item.image_url as string} width={700} height={700} alt='scholarships-image' className=' md:w-1/2 w-full h-[300px] rounded-md object-cover hover:translate-y-1' />
                 <div className=' flex flex-col gap-3 md:w-1/2'>
                 <Link href={`/dashboard/scholarships/${item.id}`} className=' hover:text-yellow-600 font-semibold'> {item.title}</Link>
                 <div className=' flex flex-row gap-2 items-center'>

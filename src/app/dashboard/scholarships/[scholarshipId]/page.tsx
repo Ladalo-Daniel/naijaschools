@@ -1,7 +1,7 @@
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import React from 'react'
-import ScholarshipDetailComponent from './ScholarshipDetailComponent'
+import ScholarshipDetailComponent from './components/ScholarshipDetailComponent'
 import { getScholarshipById } from '@/supabase/scholarships'
 
 type Props = {
