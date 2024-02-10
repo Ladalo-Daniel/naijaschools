@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card'
 import { ScholarshipList } from '@/supabase/scholarships'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowLeft, ArrowRight, Calendar, Tag, UserIcon } from 'lucide-react'
 import { shortMultiFormatDateString } from '@/lib/utils'
 import ProcessedScholarship from './ProcessedScholarship'
@@ -11,6 +11,7 @@ import EditScholarship from './EditScholarship'
 import DeleteScholarship from './DeleteScholarship'
 import { User } from '@/supabase/user'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
  function ScholarshipReal({scholarships, profile}: {scholarships: ScholarshipList, profile: User}) {
 
@@ -30,6 +31,44 @@ import { Button } from '@/components/ui/button'
   const handlePrev = () =>{
     setCurrentPage(currentPage - 1)
   }
+
+
+
+  // const [currentPage, setCurrentPage] = useState(3);
+  // const scholarshipsPerPage = 2;
+
+  // const startIndex = (currentPage - 1) * scholarshipsPerPage;
+  // const endIndex = startIndex + scholarshipsPerPage;
+  // const currentScholarships = scholarships.slice(startIndex, endIndex);
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   const page = parseInt(router.query?.page as string) || 1;
+  //   setCurrentPage(page);
+  // }, [router.query?.page]);
+
+  // const handleNext = () => {
+  //   const nextPage = currentPage + 1;
+  //   updatePageInUrl(nextPage);
+  // };
+
+  // const handlePrev = () => {
+  //   const prevPage = currentPage - 1;
+  //   updatePageInUrl(prevPage);
+  // };
+
+  // const updatePageInUrl = (page) => {
+  //   if (router) {
+  //     router.push({
+  //       pathname: router.pathname,
+  //       query: { ...router.query, page: page },
+  //     });
+  //     setCurrentPage(page);
+  //   }
+  // };
+
+
 
   
 
