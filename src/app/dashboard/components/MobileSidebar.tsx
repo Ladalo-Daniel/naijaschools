@@ -33,6 +33,7 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
                 alt='Naijaschools logo'
                 className='w-6 h-6 mr-14'
               />
+              <span>Naijaschools</span>
             </Link>
           </div>
           </SheetTitle>
