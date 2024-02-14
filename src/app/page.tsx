@@ -13,6 +13,7 @@ import ImageGallery from "../components/home/ImageGallery";
 import Pro_IntroSection from "@/components/home/Pro_IntroSection";
 import Pro_Quiz from "@/components/home/features/Pro_Quiz";
 import Pro_FeatureSection from "@/components/home/features/Pro_FeatureSection";
+import WhatsAppBot from "@/components/WhatsAppBot";
 
 export default async function Home() {
 
@@ -29,6 +30,7 @@ export default async function Home() {
       </Suspense>
       <FooterSection />
     </div>
+    <WhatsAppBot />
     </div>
   )
 }
