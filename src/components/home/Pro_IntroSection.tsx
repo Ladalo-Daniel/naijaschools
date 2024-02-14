@@ -9,7 +9,7 @@ type Pro_IntroProps = {}
 const Pro_IntroSection: React.FC<Pro_IntroProps> = () => {
   return (
     <MaxWrapper className='flex py-20 flex-col gap-3 max-w-7xl'>
-        <div className="flex md:flex-row justify-between gap-4 flex-col-reverse">
+        <div className="flex md:flex-row justify-between gap-4 flex-col">
             <div className="flex flex-col gap-3 flex-1">
                 <h2 className="text-3xl py-3">Welcome to Naijaschools, your ultimate encyclopedia of knowledge!</h2>
 
