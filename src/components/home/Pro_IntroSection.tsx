@@ -19,8 +19,16 @@ const Pro_IntroSection: React.FC<Pro_IntroProps> = () => {
                     className='w-fit hover:transition-all hover:opacity-60 hover:animate-in mt-10' 
                     as={Link} 
                     href='/dashboard' size='lg' variant='solid' color='primary'>Get Started</Button>
+                <Image
+                    src="/images/home-pic4.jpg"
+                    width={500}
+                    height={500}
+                    quality={100}
+                    alt='Gif of welcome'
+                    className='rounded-lg mt-5' 
+                />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 flex flex-col gap-2">
                 <Image
                     src={'/svg/welcome.svg'}
                     width={500}
@@ -29,6 +37,13 @@ const Pro_IntroSection: React.FC<Pro_IntroProps> = () => {
                     alt='Gif of welcome'
                     className='' 
                 />
+                <div className=' flex flex-col gap-2'>
+                <h2 className="text-3xl py-3">Naijaschools, your intellectual compass navigating the academic seas!</h2>
+
+                <p className="tracking-tighter py-3 text-muted-foreground">Dive into the vast expanse of Naijaschools, where knowledge reigns supreme and academic enlightenment is our guiding principle. We are your trusted harbor, offering a treasure trove of information
+                </p>
+
+                </div>
             </div>
         </div>
     </MaxWrapper>
