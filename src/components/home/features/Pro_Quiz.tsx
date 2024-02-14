@@ -19,7 +19,7 @@ const Pro_Quiz: React.FC<Pro_QuizProps> = () => {
                 <Button 
                     className='w-fit hover:transition-all hover:opacity-60 hover:animate-in mt-10' 
                     as={Link} 
-                    href='/dashboard/quiz' 
+                    href='/dashboard/s/quiz' 
                     size='lg' 
                     variant='bordered' 
                     color='primary' 
