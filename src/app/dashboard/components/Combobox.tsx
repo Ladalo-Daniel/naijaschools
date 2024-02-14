@@ -33,7 +33,7 @@ import { InstitutionList } from "@/supabase/institutions"
 
 export function ComboboxForm({ institutions, form }: {
     institutions: InstitutionList,
-    form: UseFormReturn<z.infer<typeof userFormSchema>>,
+    form: any,
 }) {
 
   return (

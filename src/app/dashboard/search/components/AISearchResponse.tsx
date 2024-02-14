@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import useGetAISearchResponse from '@/app/chats/useGetAISearchResponse'
+import useGetAISearchResponse from '@/app/ai_chats/actions/useGetAISearchResponse'
 import { Button } from '@nextui-org/button'
 import MarkdownPreview from '@/components/shared/MarkdownPreview'
 import { toast } from 'sonner'

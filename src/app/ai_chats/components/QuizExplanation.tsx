@@ -1,4 +1,4 @@
-import MarkdownPreview from '@/components/shared/MarkdownPreview'
+import ChatMarkdown from '@/components/shared/ChatMarkdown'
 import { Alert } from '@/components/ui/alert'
 import { Button } from '@nextui-org/button'
 import { SendHorizonal, Sparkle } from 'lucide-react'
@@ -20,7 +20,7 @@ const QuizExplanation = ({ response, isGetting, handleGetQuizExplanation,aiRes, 
                     <Sparkle size={18} className={'animate-spin text-primary'} />
                     <span className="text-primary">Naijaschools AI</span>
                 </div>
-                <MarkdownPreview content={response} />
+                <ChatMarkdown content={response} />
             </Alert>
         )
     }

@@ -1,5 +1,5 @@
+import { getQuizExplanation } from "@/app/api/chat/route"
 import { QUERY_KEYS } from "@/lib/react-query/utils"
-import { getQuizExplanation } from "@/openai"
 import { useMutation } from "@tanstack/react-query"
 
 export const useGetQuizExplanation = () => {

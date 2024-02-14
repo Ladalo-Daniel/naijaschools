@@ -68,10 +68,8 @@ export default function AccountForm({ session, isUpdate, profile, isDashboard, i
     updateProfile({...values, userId: user?.id || "", avatar: values.avatar, onboarded: true}, {
       onSuccess: () => {
         isDashboard ? router.refresh() : router.push("/dashboard")
-      },
-      onSettled: () => {
         form.reset()
-      }
+      },
     })
   }
   isUpdating ? toast.loading("Updating profile...") : null

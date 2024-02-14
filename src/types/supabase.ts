@@ -260,7 +260,7 @@ export interface Database {
           faculty: string | null
           id: number
           image_url: string | null
-          institutions: number | null
+          institution: number | null
           summary: string | null
           title: string | null
           updated_at: string | null
@@ -272,7 +272,7 @@ export interface Database {
           faculty?: string | null
           id?: number
           image_url?: string | null
-          institutions?: number | null
+          institution?: number | null
           summary?: string | null
           title?: string | null
           updated_at?: string | null
@@ -284,7 +284,7 @@ export interface Database {
           faculty?: string | null
           id?: number
           image_url?: string | null
-          institutions?: number | null
+          institution?: number | null
           summary?: string | null
           title?: string | null
           updated_at?: string | null
