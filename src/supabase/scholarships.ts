@@ -58,6 +58,25 @@ export async function getScholarshipById(id: string) {
 
 }
 
+export async function getScholarshipByRange(startIndex:number, endIndex:number){
+    
+const { data, error } = await supabaseClient
+.from('scholarships')
+.select('*')
+.order("updated_at", {
+    ascending: false
+ })
+ .order("created_at", {
+    ascending: false
+ })
+.range(startIndex, endIndex)
+
+if(error) throw error
+
+return {data, error}
+        
+}
+
 
 export async function createUpdateScholarship(
     {

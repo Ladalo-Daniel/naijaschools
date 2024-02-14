@@ -3,7 +3,7 @@ import BackButton from '@/components/shared/BackButton'
 import React from 'react'
 import CreateScholarshipForm from './components/CreateScholarshipForm'
 import { getUserSession } from '@/supabase/session'
-import { getScholarships } from '@/supabase/scholarships'
+import { getScholarshipByRange, getScholarships } from '@/supabase/scholarships'
 import ScholarshipReal from './components/ScholarshipReal'
 import { getProfile } from '@/supabase/user'
 import BackToTopButton from '../learn/components/BackToTopButton'
@@ -15,7 +15,7 @@ const ScholarshipPage = async () => {
   const profile = await getProfile()
 
 
-  const {data: scholarships} = await getScholarships()
+  const {data: scholarships} = await getScholarshipByRange(0, 99)
 
   return (
     <MaxWrapper className='max-w-7xl flex-1 bg-background'>
