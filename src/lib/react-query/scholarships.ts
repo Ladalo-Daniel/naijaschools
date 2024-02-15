@@ -1,4 +1,4 @@
-import { createUpdateScholarship, getScholarshipById, getScholarshipByTag } from "@/supabase/scholarships"
+import { createUpdateScholarship, getScholarshipById, getScholarshipByRange, getScholarshipByTag } from "@/supabase/scholarships"
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { QUERY_KEYS } from "./utils"
@@ -50,6 +50,15 @@ export const useGetScholarshipByTag = (tag: string) => {
     return useQuery({
         queryKey: [QUERY_KEYS.get_scholarships],
         queryFn: () => getScholarshipByTag(tag),
+        enabled: true
+    })
+}
+
+
+export const useGetScholarshipByRange = (startIndex:number, endIndex:number) => {
+    return useQuery({
+        queryKey: [QUERY_KEYS.get_scholarships],
+        queryFn: () => getScholarshipByRange(startIndex, endIndex),
         enabled: true
     })
 }

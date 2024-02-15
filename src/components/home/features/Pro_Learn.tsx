@@ -25,8 +25,16 @@ const Pro_Learn: React.FC<Pro_LearnProps> = () => {
                     color='primary' 
                     endContent={<ArrowRight size={15} />}
                 >Get Started</Button>
+                <Image
+                    src="/images/home-pic1.jpg"
+                    width={500}
+                    height={500}
+                    quality={100}
+                    alt=''
+                    className=' rounded-lg mt-5' 
+                />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 flex flex-col">
                 <Image
                     src={'/svg/learn.svg'}
                     width={500}
@@ -35,6 +43,8 @@ const Pro_Learn: React.FC<Pro_LearnProps> = () => {
                     alt=''
                     className='' 
                 />
+                <p className="tracking-tighter py-1 text-muted-foreground">Dive into the depths of our virtual ocean, where the currents of knowledge flow seamlessly, carrying with them the insights, resources, and guidance needed to conquer the academic challenges that lie ahead.
+                </p>
             </div>
         </div>
     </MaxWrapper>
