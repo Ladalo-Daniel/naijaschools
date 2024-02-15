@@ -2,7 +2,12 @@ import { Card } from "@nextui-org/card";
 import AuthForm from "../auth-form";
 import { getUserSession } from "@/supabase/session";
 import { redirect } from "next/navigation";
-import GoogleSigninButton from "../GoogleSigninButton";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sigin up | Login into Naijaschools",
+  description: "Sign up or login to Naijaschools to get started."
+}
 
 export default async function Home() {
   const session = await getUserSession()

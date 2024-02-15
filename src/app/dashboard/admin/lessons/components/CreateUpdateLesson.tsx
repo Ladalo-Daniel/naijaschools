@@ -25,14 +25,15 @@ import { faculties } from '@/lib/faculties'
 import { ComboboxForm } from '@/app/dashboard/components/Combobox'
 import { useGetInstitutions } from '@/lib/react-query'
 import { InstitutionList } from '@/supabase/institutions'
+import MiniLoader from './MiniLoader'
 
 interface CreateUpdateLessonProps {
     lesson?: Lesson,
+    institutions: InstitutionList
 }
 
-const CreateUpdateLesson: React.FC<CreateUpdateLessonProps> = ({lesson}) => {
+const CreateUpdateLesson: React.FC<CreateUpdateLessonProps> = ({lesson, institutions}) => {
   const { mutateAsync: createUpdateLesson, isPending } = useCreateUpdateLesson()
-  const { data: institutions } = useGetInstitutions()
   
   const form = useForm<z.infer<typeof LessonSchema>>({
     resolver: zodResolver(LessonSchema),
@@ -40,10 +41,10 @@ const CreateUpdateLesson: React.FC<CreateUpdateLessonProps> = ({lesson}) => {
         title: lesson?.title ? lesson?.title : '',
         content: lesson?.content || '',
         summary: lesson?.summary || '',
-        course: lesson?.course as unknown as string || '',
+        course: '23',
         faculty: lesson?.faculty || '',
         image_url: lesson?.image_url || '',
-        institution: lesson?.institution as unknown as string || '',
+        institution: lesson?.institution?.toString() || '',
     },
   })
   
@@ -65,6 +66,33 @@ const CreateUpdateLesson: React.FC<CreateUpdateLessonProps> = ({lesson}) => {
     <div>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <ComboboxForm institutions={institutions as InstitutionList} form={form} />
+
+        <FormField
+          control={form.control}
+          name="faculty"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Faculty</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a valid faculty." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {
+                    faculties.map(f => (
+                      <SelectItem value={f} key={f}>{f}</SelectItem>
+                    ))
+                  }
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
         control={form.control}
         name="title"
@@ -104,34 +132,7 @@ const CreateUpdateLesson: React.FC<CreateUpdateLessonProps> = ({lesson}) => {
             </FormItem>
         )}
         />
-
-        <ComboboxForm institutions={institutions?.data as InstitutionList} form={form} />
-
-        <FormField
-          control={form.control}
-          name="faculty"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Faculty</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a valid faculty." />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {
-                    faculties.map(f => (
-                      <SelectItem value={f} key={f}>{f}</SelectItem>
-                    ))
-                  }
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button isLoading={isPending} className="" disabled={!form.formState.isValid} type="submit" variant="bordered" color="primary">{isPending ? "Update" : "Submit"}</Button>
+        <Button isLoading={isPending} className="" type="submit" variant="bordered" color="primary">{isPending ? "Update" : "Submit"}</Button>
       </form>
     </Form>
     </div>

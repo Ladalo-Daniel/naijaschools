@@ -71,7 +71,7 @@ export function ComboboxForm({ institutions, form }: {
                     />
                     <CommandEmpty>No Institution found.</CommandEmpty>
                     <CommandGroup>
-                      {institutions.map((institution) => (
+                      {institutions?.map((institution) => (
                         <CommandItem
                           value={institution.id.toString()}
                           key={institution.id}
@@ -94,9 +94,6 @@ export function ComboboxForm({ institutions, form }: {
                   </Command>
                 </PopoverContent>
               </Popover>
-              <FormDescription>
-                This is the institution that will be used in the dashboard and for filtering courses tailored to your taste.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
