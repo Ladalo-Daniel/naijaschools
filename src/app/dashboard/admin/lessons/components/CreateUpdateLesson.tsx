@@ -26,6 +26,7 @@ import { ComboboxForm } from '@/app/dashboard/components/Combobox'
 import { useGetInstitutions } from '@/lib/react-query'
 import { InstitutionList } from '@/supabase/institutions'
 import MiniLoader from '../../../../../components/MiniLoader'
+import RichTextEditor from '@/components/shared/RichTextEditor'
 
 interface CreateUpdateLessonProps {
     lesson?: Lesson,
@@ -123,10 +124,11 @@ const CreateUpdateLesson: React.FC<CreateUpdateLessonProps> = ({lesson, institut
         control={form.control}
         name="summary"
         render={({ field }) => (
-            <FormItem>
+          <FormItem>
             <FormLabel>Summary</FormLabel>
             <FormControl>
                 <Textarea placeholder="summary" className="resize-y min-h-unit-5" {...field} />
+              {/* <RichTextEditor onChange={field.onChange} value={form.getValues("summary") || ''} /> */}
             </FormControl> 
             <FormMessage />
             </FormItem>

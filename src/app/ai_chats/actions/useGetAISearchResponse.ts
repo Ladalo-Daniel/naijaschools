@@ -1,6 +1,6 @@
-import { getAISearchResponse } from "@/app/api/chat/route"
 import { QUERY_KEYS } from "@/lib/react-query/utils"
 import { useMutation } from "@tanstack/react-query"
+import { getAISearchResponse } from "./ai_backend"
 
 const useGetAISearchResponse = () => {
   return useMutation({
