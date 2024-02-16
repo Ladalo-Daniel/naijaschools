@@ -25,7 +25,7 @@ import { faculties } from '@/lib/faculties'
 import { ComboboxForm } from '@/app/dashboard/components/Combobox'
 import { useGetInstitutions } from '@/lib/react-query'
 import { InstitutionList } from '@/supabase/institutions'
-import MiniLoader from './MiniLoader'
+import MiniLoader from '../../../../../components/MiniLoader'
 
 interface CreateUpdateLessonProps {
     lesson?: Lesson,

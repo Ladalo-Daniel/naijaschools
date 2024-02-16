@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import MaxWrapper from '@/components/MaxWrapper'
 import BackButton from '@/components/shared/BackButton'
 import LessonComponent from './components/LessonComponent'
-import MiniLoader from './components/MiniLoader'
+import MiniLoader from '../../../../components/MiniLoader'
 
 export const metadata: Metadata = {
   title: "Manage lessons",

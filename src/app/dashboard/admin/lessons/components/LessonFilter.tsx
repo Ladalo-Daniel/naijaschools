@@ -6,7 +6,7 @@ import { query_string } from './utils/query_string'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { faculties } from '@/lib/faculties'
 import { useGetCourseByQuery, useGetInstitutions } from '@/lib/react-query'
-import MiniLoader from './MiniLoader'
+import MiniLoader from '../../../../../components/MiniLoader'
 import { InstitutionList } from '@/supabase/institutions'
 
 interface LessonFilterProps {
