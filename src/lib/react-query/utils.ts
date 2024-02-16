@@ -42,4 +42,6 @@ export enum QUERY_KEYS {
     delete_bookmark = "delete_bookmark",
     create_bookmark = "create_bookmark",
     get_bookmarks = "get_bookmarks",
+
+    create_update_lesson_data = "create_update_lesson_data",
 } 

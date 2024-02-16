@@ -1,5 +1,5 @@
-import QuizExplanation from '@/app/chats/QuizExplanation'
-import { useGetQuizExplanation } from '@/app/chats/useGetQuizExplanation'
+import QuizExplanation from '@/app/ai_chats/components/QuizExplanation'
+import { useGetQuizExplanation } from '@/app/ai_chats/actions/useGetQuizExplanation'
 import { Button } from '@/components/ui/button'
 import { QuizQuestion, QuizQuestionList } from '@/supabase/quiz'
 import { RadioGroup } from '@nextui-org/radio'

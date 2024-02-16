@@ -1,6 +1,6 @@
 import { QUERY_KEYS } from "@/lib/react-query/utils"
-import { getQuizExplanation } from "@/openai"
 import { useMutation } from "@tanstack/react-query"
+import { getQuizExplanation } from "./ai_backend"
 
 export const useGetQuizExplanation = () => {
     return useMutation({

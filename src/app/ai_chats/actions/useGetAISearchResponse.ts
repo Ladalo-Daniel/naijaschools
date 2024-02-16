@@ -1,6 +1,6 @@
 import { QUERY_KEYS } from "@/lib/react-query/utils"
-import { getAISearchResponse } from "@/openai"
 import { useMutation } from "@tanstack/react-query"
+import { getAISearchResponse } from "./ai_backend"
 
 const useGetAISearchResponse = () => {
   return useMutation({

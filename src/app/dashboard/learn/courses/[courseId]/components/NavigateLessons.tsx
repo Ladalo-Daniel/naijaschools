@@ -9,6 +9,7 @@ import React, { useState } from 'react'
 import NavigateLessonItem from './NavigateLessonItem'
 import { Menu } from 'lucide-react'
 import { learn_urls } from '@/app/dashboard/urls'
+import { Button } from '@nextui-org/button'
 
 interface NavigateLessonsProps {
     lessons: LessonList,
@@ -21,8 +22,8 @@ const NavigateLessons: React.FC<NavigateLessonsProps> = ({ lessons, course }) =>
   return (
     <div className=''>
         <Sheet open={sheetOpen} onOpenChange={setSheet}>
-            <SheetTrigger asChild className='w-14 h-14 flex items-center cursor-pointer justify-center rounded-full hover:bg-secondary hover:transition-all'>
-                <Menu size={15} className='w-8 h-8'/>
+            <SheetTrigger asChild className=' flex items-center cursor-pointer justify-center rounded-full hover:bg-secondary hover:transition-all'>
+                <Button isIconOnly variant='faded' size='sm'><Menu size={18}/></Button>
             </SheetTrigger>
           <SheetContent side={'right'} className='flex flex-col gap-3 flex-1 max-sm:w-full min-w-[280px]'>
             <h2 className='py-2 text-[18px] text-primary hover:transition-all'>{course?.name} ({course?.code})</h2>
