@@ -29,6 +29,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
       }
   }, [])
 
+
   // console.log(page)
 
   const scholarshipsPerPage = 3

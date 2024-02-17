@@ -139,6 +139,12 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: red;
   }
+  .custom-scrollba::-webkit-scrollbar {
+    background: rgb(240, 80, 44);
+    width: 5px;
+    height: 5px;
+    border-radius:50%;
+  }
 
   .leftsidebar {
     @apply hidden md:flex px-6 pb-10 flex-col justify-between min-w-[270px] overflow-auto;
