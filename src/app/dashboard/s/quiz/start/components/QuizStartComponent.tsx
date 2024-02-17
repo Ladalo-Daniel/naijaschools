@@ -11,6 +11,7 @@ import SelectInstitutionAutoComplete from '@/app/dashboard/questions/components/
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import GeneralSkeleton from '@/app/dashboard/components/skeletons/GeneralSkeleton'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const QuizStartComponent = ({ institutions, institution_id}: { institutions: InstitutionList, institution_id?: string | number}) => {
     const searchParams = useSearchParams()
@@ -32,7 +33,7 @@ const QuizStartComponent = ({ institutions, institution_id}: { institutions: Ins
                 <Image
                     src={'/svg/hi_smooth.svg'}
                     width={500}
-                    height={400}
+                    height={250}
                     quality={100}
                     alt='Gif of hi'
                     className='' 
@@ -46,6 +47,10 @@ const QuizStartComponent = ({ institutions, institution_id}: { institutions: Ins
                     </AlertDescription>
                 </Alert>
                 <AutoComplete courses={courses?.data as CourseList} institutionId={institutionId} />
+
+                <section className="p">
+                    <p>Didn&#39;t find the course you are looking for? <Link href="/dashboard/s/courses" className="text-primary">Click here</Link>.</p>
+                </section>
             </div>
         ) : (
             <div className='flex flex-col gap-3'>
