@@ -55,6 +55,7 @@
     "@types/chart.js": "^2.9.41",
     "@types/lodash": "^4.14.202",
     "ai": "^2.2.31",
+    "axios": "^1.6.7",
     "canvas-confetti": "^1.9.2",
     "chart.js": "^4.4.1",
     "class-variance-authority": "^0.7.0",
