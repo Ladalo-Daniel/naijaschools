@@ -1,9 +1,7 @@
-'use server'
-
 import { Configuration, OpenAIApi } from 'openai-edge'
 
 const config = new Configuration({
-  apiKey: process.env.NEXT_OPENAI_API_KEY!,
+  apiKey: process.env.NEXT_OPENAI_API_KEY! || "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",
 })
 const openai = new OpenAIApi(config)
 
