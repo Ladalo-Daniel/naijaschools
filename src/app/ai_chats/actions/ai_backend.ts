@@ -21,9 +21,7 @@ export async function getQuizExplanation(message: string) {
 ],
     model: 'gpt-3.5-turbo',
   })
-  // const stream = OpenAIStream(response)
-
-  // return new StreamingTextResponse(stream)
+  
   return response.text()
 }
 
@@ -37,8 +35,5 @@ export async function getAISearchResponse(query: string) {
     model: 'gpt-3.5-turbo',
   })
 
-  // const stream = OpenAIStream(response)
-
-  // return new StreamingTextResponse(stream)
   return response.text()
 }
