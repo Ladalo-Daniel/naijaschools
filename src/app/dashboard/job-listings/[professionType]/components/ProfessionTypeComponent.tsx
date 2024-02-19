@@ -63,10 +63,6 @@ function ProfessionTypeComponent() {
          )
       }
 
-      if(error){
-        return  new Error(error)
-      }
-
       const filteredData = selectedState ? data.filter((d:Job) => d.job_city === selectedState) : data;
 
 
