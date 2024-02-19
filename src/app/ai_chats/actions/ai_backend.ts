@@ -1,9 +1,6 @@
 'use server'
 
 import { Configuration, OpenAIApi } from 'openai-edge'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { chat } from '@/app/dashboard/chat/types'
-import { NextResponse } from 'next/server'
 
 const config = new Configuration({
   apiKey: process.env.NEXT_OPENAI_API_KEY!,
@@ -21,7 +18,7 @@ export async function getQuizExplanation(message: string) {
 ],
     model: 'gpt-3.5-turbo',
   })
-  
+
   return response.text()
 }
 
