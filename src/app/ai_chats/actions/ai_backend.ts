@@ -1,12 +1,7 @@
-'use server'
-
 import { Configuration, OpenAIApi } from 'openai-edge'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { chat } from '@/app/dashboard/chat/types'
-import { NextResponse } from 'next/server'
 
 const config = new Configuration({
-  apiKey: process.env.NEXT_OPENAI_API_KEY!,
+  apiKey: process.env.NEXT_OPENAI_API_KEY! || "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",
 })
 const openai = new OpenAIApi(config)
 
@@ -21,9 +16,7 @@ export async function getQuizExplanation(message: string) {
 ],
     model: 'gpt-3.5-turbo',
   })
-  // const stream = OpenAIStream(response)
 
-  // return new StreamingTextResponse(stream)
   return response.text()
 }
 
@@ -37,8 +30,5 @@ export async function getAISearchResponse(query: string) {
     model: 'gpt-3.5-turbo',
   })
 
-  // const stream = OpenAIStream(response)
-
-  // return new StreamingTextResponse(stream)
   return response.text()
 }

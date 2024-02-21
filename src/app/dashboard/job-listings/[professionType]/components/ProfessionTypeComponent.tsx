@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { shortMultiFormatDateString } from '@/lib/utils';
 import { statesAndCapitalsNigeria } from '@/lib/faculties';
 import { Button } from '@/components/ui/button';
+import Error from '@/components/Error';
 
 
 interface Job {
@@ -63,8 +64,11 @@ function ProfessionTypeComponent() {
          )
       }
 
-      const filteredData = selectedState ? data.filter((d:Job) => d.job_city === selectedState) : data;
+      if(error){
+        return  <Error />
+      }
 
+      const filteredData = selectedState ? data.filter((d:Job) => d.job_city === selectedState) : data;
 
   return (
     <div className=' flex flex-col md:flex-row gap-5'>
