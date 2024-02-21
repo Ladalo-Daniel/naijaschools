@@ -24,7 +24,7 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
         <SheetHeader className='flex flex-col flex-1 items-start pt-0 mt-0'>
           <SheetTitle>
           <div className="justify-between md:hidden items-center gap-4 my-2.5">
-            <Link href={'/'} passHref>
+            <Link href={'/'} passHref className="flex justify-between gap-3 items-center">
               <Image 
                 src={'/logos/logo.png'}
                 width={500}
@@ -46,7 +46,7 @@ const MobileSidebar = ({ profile }: { profile?: User }) => {
                 "bg-primary text-green-50 shadow-sm transition-all": isRootRouteActive && link.href.startsWith('/dashboard/institutions') || path === link.href,
                 "hidden": !(profile?.role === "admin" || profile?.role === "staff") && link.hidden,
                 })}>
-                    {link.icon}
+                    <link.icon size={18} />
                     <span>{link.tooltip}</span>
                 </Link>
             </SheetClose>

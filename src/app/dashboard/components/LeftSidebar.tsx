@@ -26,7 +26,7 @@ const LeftSidebar = ({ profile }: { profile?: User }) => {
               "bg-primary text-green-50 shadow-sm transition-all": isRootRouteActive && link.href.startsWith('/dashboard/posts') || path === link.href,
               "hidden": !(profile?.role === "admin" || profile?.role === "staff") && link.hidden,
             })}>
-              {link.icon}
+              <link.icon size={18} />
               <span>{link.tooltip}</span>
           </Link>
           ))}

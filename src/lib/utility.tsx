@@ -1,5 +1,5 @@
 import React from "react"
-import { Book, BookAIcon, BookCheckIcon, BookIcon, Bookmark, BookmarkCheck, Building2, CircuitBoard, LayoutDashboardIcon, LucideUsers2, Medal, PersonStandingIcon, Plus, PodcastIcon, Settings, Settings2, Sparkle, User, User2, Users, Users2Icon } from 'lucide-react'
+import { Book, BookAIcon, BookCheckIcon, BookIcon, Bookmark, BookmarkCheck, Building2, CircuitBoard, LayoutDashboardIcon, LucideIcon, LucideUsers2, Medal, PersonStandingIcon, Plus, PodcastIcon, Settings, Settings2, Sparkle, User, User2, Users, Users2Icon } from 'lucide-react'
 import { getProfile } from "@/supabase/user"
 import { QuestionMarkIcon } from "@radix-ui/react-icons"
 
@@ -10,126 +10,126 @@ async function hideRolesRoute() {
 
 export const side_bar_links: {
     href: string,
-    icon: React.JSX.Element,
-    activeIcon?: React.JSX.Element,
+    icon: LucideIcon,
+    activeIcon?: LucideIcon,
     tooltip: string,
     hidden?: boolean
   }[] = [
     {
       href: "/dashboard",
-      icon: <LayoutDashboardIcon size={18}/>,
-      activeIcon: <LayoutDashboardIcon size={18} />,
+      icon: LayoutDashboardIcon,
+      activeIcon: LayoutDashboardIcon,
       tooltip: "Dashboard",
     },
     {
       href: "/dashboard/posts",
-      icon: <PodcastIcon size={18}/>,
-      activeIcon: <PodcastIcon size={18} />,
+      icon: PodcastIcon,
+      activeIcon: PodcastIcon,
       tooltip: "Posts",
     },
     {
       href: "/dashboard/profile",
-      icon: <User size={18} />,
-      activeIcon: <User2 size={18} />,
+      icon: User,
+      activeIcon: User2,
       tooltip: "Profile",
     },
     {
       href: "/dashboard/institutions",
-      icon: <Building2 size={18} />,
-      activeIcon: <Building2 size={18} />,
+      icon: Building2,
+      activeIcon: Building2,
       tooltip: "Institutions",
       hidden: true,
     },
     {
       href: "/dashboard/courses",
-      icon: <BookIcon size={18} />,
-      activeIcon: <BookIcon size={18} />,
+      icon: BookIcon,
+      activeIcon: BookIcon,
       tooltip: "Courses",
       hidden: true
     },
     {
       href: "/dashboard/chat",
-      icon: <Sparkle className="animate-spin" size={18} />,
-      activeIcon: <Sparkle size={18} />,
+      icon: Sparkle,
+      activeIcon: Sparkle,
       tooltip: "AI Chat",
     },
     {
       href: "/dashboard/s/quiz",
-      icon: <BookCheckIcon size={18} />,
-      activeIcon: <BookCheckIcon size={18} />,
+      icon: BookCheckIcon,
+      activeIcon: BookCheckIcon,
       tooltip: "Quiz",
     },
     {
       href: "/dashboard/bookmarks",
-      icon: <Bookmark size={18} />,
-      activeIcon: <BookmarkCheck size={18} />,
+      icon: Bookmark,
+      activeIcon: BookmarkCheck,
       tooltip: "Bookmarks",
     },
     {
       href: "/dashboard/settings",
-      icon: <Settings2 size={18}/>,
-      activeIcon: <Settings2 size={18} />,
+      icon: Settings2,
+      activeIcon: Settings2,
       tooltip: "Settings",
     },
     {
       href: "/dashboard/learn",
-      icon: <CircuitBoard size={18}/>,
+      icon: CircuitBoard,
       tooltip: "Learn",
     },
     {
       href: "/dashboard/scholarships",
-      icon: <Medal size={18}/>,
+      icon: Medal,
       tooltip: "Scholarships",
     },
     {
       href: "/dashboard/job-listings",
-      icon: <PersonStandingIcon size={18} />,
-      activeIcon: <Users2Icon size={18} />,
+      icon: PersonStandingIcon,
+      activeIcon: Users2Icon,
       tooltip: "Jobs",
       hidden: true
     },
     {
       href: "/dashboard/students",
-      icon: <LucideUsers2 size={18} />,
-      activeIcon: <Users2Icon size={18} />,
+      icon: LucideUsers2,
+      activeIcon: Users2Icon,
       tooltip: "Students",
       hidden: true
     },
     {
       href: "/dashboard/teachers",
-      icon: <Users2Icon size={18} />,
-      activeIcon: <Users2Icon size={18} />,
+      icon: Users2Icon,
+      activeIcon: Users2Icon,
       tooltip: "Teachers",
       hidden: true,
     },
     {
       href: "/dashboard/questions",
-      icon: <QuestionMarkIcon width={18} />,
-      activeIcon: <QuestionMarkIcon width={18} />,
+      icon: QuestionMarkIcon,
+      activeIcon: QuestionMarkIcon,
       tooltip: "Questions",
       hidden: true
     },
     {
       href: "/dashboard/community",
-      icon: <Users2Icon size={18} />,
-      activeIcon: <Users2Icon size={18} />,
+      icon: Users2Icon,
+      activeIcon: Users2Icon,
       tooltip: "Community",
       hidden: true
     },
     {
       href: "/dashboard/create-article",
-      icon: <Plus size={18} />,
+      icon: Plus,
       tooltip: "Create Article",
       hidden: true
     },
     {
       href: "/articles",
-      icon: <Book size={18} />,
+      icon: Book,
       tooltip: "Articles",
     },
     {
       href: "/dashboard/articles",
-      icon: <BookAIcon size={18} />,
+      icon: BookAIcon,
       tooltip: "Articles (admin)",
       hidden: true
     },
