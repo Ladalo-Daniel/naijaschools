@@ -1,7 +1,6 @@
 import React from "react"
-import { Book, BookAIcon, BookCheckIcon, BookIcon, Bookmark, BookmarkCheck, Building2, CircuitBoard, LayoutDashboardIcon, LucideIcon, LucideUsers2, Medal, PersonStandingIcon, Plus, PodcastIcon, Settings, Settings2, Sparkle, User, User2, Users, Users2Icon } from 'lucide-react'
+import { Book, BookAIcon, BookCheckIcon, BookIcon, Bookmark, BookmarkCheck, Brain, BrainCircuit, Building2, CircuitBoard, LayoutDashboardIcon, LucideIcon, LucideUsers2, Medal, PersonStandingIcon, Plus, PodcastIcon, Settings, Settings2, Sparkle, User, User2, Users, Users2Icon } from 'lucide-react'
 import { getProfile } from "@/supabase/user"
-import { QuestionMarkIcon } from "@radix-ui/react-icons"
 
 async function hideRolesRoute() {
   const profile = await getProfile()
@@ -104,8 +103,8 @@ export const side_bar_links: {
     },
     {
       href: "/dashboard/questions",
-      icon: QuestionMarkIcon,
-      activeIcon: QuestionMarkIcon,
+      icon: BrainCircuit,
+      activeIcon: BrainCircuit,
       tooltip: "Questions",
       hidden: true
     },
