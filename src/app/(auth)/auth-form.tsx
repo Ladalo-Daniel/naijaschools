@@ -17,9 +17,9 @@ export default function AuthForm() {
         extend: false,
 
         className: {
-          button: "w-full bg-secondary text-foreground hover:bg-primary my-4 flex items-center gap-2 justify-center rounded-md transition-all p-4 space-y-4 mt-2 mb-2 block text-accent shadow border-none",
+          button: "w-full bg-secondary text-foreground hover:bg-primary my-4 flex items-center gap-2 justify-center rounded-md transition-all py-2.5 space-y-4 mt-2 mb-2 block text-accent shadow border-none",
           label: "block space-y-4 text-muted-foreground mb-1 font-bold text-xl",
-          input: "p-4 ring rounded-md shadow focus:ring-primary mt-2 transition-all mb-2 w-full",
+          input: "p-2 py-2.5 ring rounded-md shadow focus:ring-primary mt-2 transition-all mb-2 w-full",
           container: "flex flex-col gap-4 bg-background",
           message: "p-4 rounded-md bg-green-100 border border-green-500 shadow text-green-700 mt-2 w-full",
           anchor: buttonVariants({variant: "link"})
