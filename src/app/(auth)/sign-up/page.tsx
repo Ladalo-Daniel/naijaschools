@@ -3,6 +3,7 @@ import AuthForm from "../auth-form";
 import { getUserSession } from "@/supabase/session";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Sigin up | Login into Naijaschools",
@@ -16,13 +17,15 @@ export default async function Home() {
     <section className="w-full h-full min-h-screen flex "
     >
       <div className="flex-1 hidden md:block"
-        style={{
-          backgroundImage: "radial-gradient(#333, #444, #555)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
-      />
+        >
+          <Image
+            src={'/images/home-pic3.jpg'}
+            height={1000}
+            width={1000}
+            alt="Sign Up BG"
+            className="min-h-screen w-full object-cover"
+          />
+        </div>
       <div className="flex flex-1 mx-auto bg-gradient justify-center items-center min-h-screen w-full p-4 backdrop:fill-transparent backdrop-filter transition-all"
       >
         <Card className="p-8 flex flex-col gap-6 bg-background shadow-none">
