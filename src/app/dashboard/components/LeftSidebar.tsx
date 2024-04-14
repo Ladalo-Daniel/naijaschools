@@ -20,13 +20,13 @@ const LeftSidebar = ({ profile }: { profile?: User }) => {
         <Image src={'/logos/logo.png'} width={30} height={30} alt="logo" />
         <h2 className="text-muted-foreground hidden md:block text-2xl -mt-2">Naijaschools</h2>
       </Link>
-        <div className='flex flex-col gap-6 overflow-auto custom-scrollbar w-full p-2'>
+        <div className='flex flex-col gap-2 overflow-auto custom-scrollbar w-full p-2'>
           {side_bar_links.map(link => (
-            <Link key={link.tooltip} href={link.href} className={cn("flex items-center hover:bg-gray-500 hover:text-gray-50 transition-all gap-2 p-2 rounded-md", {
-              "bg-primary text-green-50 shadow-sm transition-all": isRootRouteActive && link.href.startsWith('/dashboard/posts') || path === link.href,
+            <Link key={link.tooltip} href={link.href} className={cn("flex items-center hover:bg-gray-500 hover:text-gray-50 transition-all gap-2 p-2 py-5 rounded-sm", {
+              "bg-gray-700 text-green-50 shadow-sm transition-all": isRootRouteActive && link.href.startsWith('/dashboard/posts') || path === link.href,
               "hidden": !(profile?.role === "admin" || profile?.role === "staff") && link.hidden,
             })}>
-              <link.icon size={18} />
+              <link.icon size={24} />
               <span>{link.tooltip}</span>
           </Link>
           ))}

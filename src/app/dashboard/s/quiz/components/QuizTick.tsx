@@ -30,7 +30,7 @@ const QuizTick = ({
             <div className="py-4">
                 <h2 className="text-xl">Summary Attempts</h2>
             </div>
-            <div className='flex flex-wrap gap-1 items-center'>
+            <div className='flex flex-wrap gap-1 items-center overfloy-y min-h-[90vh]'>
                 {
                     questions.map((q, index) => {
                         const answered = Boolean(userAnswers[q.id])
